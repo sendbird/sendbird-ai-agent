@@ -151,10 +151,10 @@ Since apps may allow users to switch themes manually or follow the device's sett
 
 ### Deauthentication
 
-When the user logs out of your app, dauthenticate the SDK to clear session data and disconnect:
+When the user logs out of your app, deauthenticate the SDK to clear session data and disconnect:
 
 ```kotlin
-SendbirdAIAgent.dauthenticate()
+SendbirdAIAgent.deauthenticate()
 ```
 
 
