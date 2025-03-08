@@ -142,7 +142,7 @@ startActivity(ConversationActivity.newIntent(this@MainActivity, "your_ai_agent_i
 
 ### Updating SDK Theme
 
-You can update the SDK’s color scheme to match your app's theme:
+You can update the SDK's color scheme to match your app's theme:
 ```kotlin
 SendbirdAIAgent.setTheme(theme) // Options: AIAgentThemeMode.Dark, AIAgentThemeMode.Light
 ```
