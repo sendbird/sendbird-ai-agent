@@ -35,7 +35,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
 }
 ```
-4. Then, click the Sync button to apply all changes.
+4. Then, click 'Sync Now' in the Gradle toolbar to apply all changes..
 
 ### Initialize SDK
 To properly integrate and initialize Sendbird AI-Agent in your Android project, add the following code to your `Application` class file:
@@ -123,7 +123,7 @@ To start a conversation, a **AI Agent ID issued from the dashboard is required**
 The SDK provides an `AIAgentLauncher` view, which can be added to any application screen via XML or programmatically.
 - When the screen containing the **Launcher** is launched, call the `init()` function of `AIAgentLauncher` to specify which ai agent to communicate with.
 ```xml
-<com.example.AIAgentLauncher
+<com.sendbird.sdk.aiagent.ui.widget.AIAgentLauncher
     android:id="@+id/aiAgentLauncher"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
