@@ -7,6 +7,7 @@ The minimum requirements for AI Agent for Android are the following.
 - Android 5.0 (API level 21) or higher
 - Java 8 or higher
 - Android Gradle plugin 8.0.0 or higher
+- Android ViewBinding enabled
 
 ## Project setup
 
@@ -35,7 +36,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
 }
 ```
-4. Then, click the Sync button to apply all changes.
+4. Then, click 'Sync Now' in the Gradle toolbar to apply all changes.
 
 ### Initialize SDK
 To properly integrate and initialize Sendbird AI-Agent in your Android project, add the following code to your `Application` class file:
@@ -123,7 +124,7 @@ To start a conversation, a **AI Agent ID issued from the dashboard is required**
 The SDK provides an `AIAgentLauncher` view, which can be added to any application screen via XML or programmatically.
 - When the screen containing the **Launcher** is launched, call the `init()` function of `AIAgentLauncher` to specify which ai agent to communicate with.
 ```xml
-<com.example.AIAgentLauncher
+<com.sendbird.sdk.aiagent.ui.widget.AIAgentLauncher
     android:id="@+id/aiAgentLauncher"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
@@ -142,7 +143,7 @@ startActivity(ConversationActivity.newIntent(this@MainActivity, "your_ai_agent_i
 
 ### Updating SDK Theme
 
-You can update the SDK’s color scheme to match your app's theme:
+You can update the SDK's color scheme to match your app's theme:
 ```kotlin
 SendbirdAIAgent.setTheme(theme) // Options: AIAgentThemeMode.Dark, AIAgentThemeMode.Light
 ```
@@ -151,10 +152,10 @@ Since apps may allow users to switch themes manually or follow the device's sett
 
 ### Deauthentication
 
-When the user logs out of your app, dauthenticate the SDK to clear session data and disconnect:
+When the user logs out of your app, deauthenticate the SDK to clear session data and disconnect:
 
 ```kotlin
-SendbirdAIAgent.dauthenticate()
+SendbirdAIAgent.deauthenticate()
 ```
 
 
