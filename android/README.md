@@ -36,7 +36,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
 }
 ```
-4. Then, click 'Sync Now' in the Gradle toolbar to apply all changes..
+4. Then, click 'Sync Now' in the Gradle toolbar to apply all changes.
 
 ### Initialize SDK
 To properly integrate and initialize Sendbird AI-Agent in your Android project, add the following code to your `Application` class file:
