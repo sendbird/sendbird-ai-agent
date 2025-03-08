@@ -69,7 +69,7 @@ SendbirdAIAgent.updateSessionInfo(
 Handle session-related events by implementing `AIAgentSessionDelegate`:
 
 ```swift
-public protocol AIAgentSessionDelegate {
+public protocol AIAgentSessionDelegate: AnyObject {
     func sessionTokenDidRequire(
         successCompletion success: @escaping (String?) -> Void,
         failCompletion fail: @escaping () -> Void
