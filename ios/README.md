@@ -27,7 +27,9 @@ Before integrating the SDK, ensure you meet all prerequisites:
 Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
 
 ```swift
-let params = SendbirdAIAgent.InitializeParams()
+let params = SendbirdAIAgent.InitializeParams(
+    locale: Locale.current
+)
 
 SendbirdAIAgent.initialize(
     appId: appId,
@@ -67,7 +69,7 @@ SendbirdAIAgent.updateSessionInfo(
 Handle session-related events by implementing `AIAgentSessionDelegate`:
 
 ```swift
-public protocol AIAgentSessionDelegate: NSObject {
+public protocol AIAgentSessionDelegate {
     func sessionTokenDidRequire(
         successCompletion success: @escaping (String?) -> Void,
         failCompletion fail: @escaping () -> Void
@@ -130,12 +132,6 @@ SendbirdAIAgent.startLauncher(
     botId: self.botId,
     options: options
 )
-```
-
-To hide the launcher:
-
-```swift
-SendbirdAIAgent.stopLauncher(botId: self.botId)
 ```
 
 ### Updating SDK Theme
