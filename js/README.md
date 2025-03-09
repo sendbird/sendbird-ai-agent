@@ -15,7 +15,7 @@ The **Sendbird AI Agent** allows seamless integration of chatbot features into y
 Add the SDK to your web page by importing it as a module:
 ```html
 <script type="module">
-    import loadAIAgent from "https://aiagent.sendbird.com/orgs/netflix/index.js";
+    import loadAIAgent from "https://aiagent.sendbird.com/orgs/<org_name>/index.js";
 </script>
 ```
 
