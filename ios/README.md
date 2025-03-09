@@ -7,7 +7,6 @@ The **Sendbird AI Agent** allows seamless integration of chatbot features into y
   - [Prerequisites][def]
   - [Getting Started][def]
   - [Running Your Application][def]
-  - [Session Management][def]
   - [Advanced Features][def]
 
 ## Prerequisites
@@ -85,7 +84,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
         func sessionDidHaveError(_ error: Error)
     }
     ```
-- ### Launching Chat Views
+- ### Launching Messenger
 
     The SDK provides two ways to display the chat view:
 
