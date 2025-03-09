@@ -5,7 +5,7 @@
 The minimum requirements for AI Agent for Android are the following.
 
 - Android 5.0 (API level 21) or higher
-- Java 8 or higher
+- Java 11 or higher
 - Android Gradle plugin 8.0.0 or higher
 - Android ViewBinding enabled
 
@@ -23,12 +23,14 @@ plugins {
 
 android {
     buildFeatures {
-        viewBinding = true // Make sure to enable viewBinding.
+        viewBinding = true
     }
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
