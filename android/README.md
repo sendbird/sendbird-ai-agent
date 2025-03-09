@@ -24,33 +24,45 @@ The minimum requirements for AI Agent for Android are the following.
 - ### Project Setup
 
   - #### Configuring the repository and adding dependency
-    1. Download `ai-agent-android.aar` file linked [here]()
-    2. Create and add `libs` folder on your project.
-    3. Add the dependency to your `build.gradle.kts` (Module) file:
-    ```kotlin
-    plugins {
-        id("com.android.application")
-        id("org.jetbrains.kotlin.android")
-    }
+    1. Add the following to your `settings.gradle.kts` (Project Settings) file:
 
-    android {
-        buildFeatures {
-            viewBinding = true
-        }
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
-        }
-        kotlinOptions {
-            jvmTarget = "11"
-        }
-    }
+       ```kotlin
+       dependencyResolutionManagement {
+           repositories {
+               maven { setUrl("https://jitpack.io") }
+               maven { setUrl("https://repo.sendbird.com/public/maven") }
+           }
+       }
+       ```
+           >       **Note:** You should be using Gradle 6.8 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
 
-    dependencies {
-        implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
-    }
-    ```
-    4. Then, click 'Sync Now' in the Gradle toolbar to apply all changes.
+    2. Add the dependency to your `build.gradle.kts` (Module) file:
+
+       ```kotlin
+       plugins {
+           id("com.android.application")
+           id("org.jetbrains.kotlin.android")
+       }
+      
+       android {
+           buildFeatures {
+               viewBinding = true
+           }
+           compileOptions {
+               sourceCompatibility = JavaVersion.VERSION_11
+               targetCompatibility = JavaVersion.VERSION_11
+           }
+           kotlinOptions {
+               jvmTarget = "11"
+           }
+       }
+      
+       dependencies {
+           implementation("com.sendbird.sdk:ai-agent:1.+")
+       }
+       ```
+
+    3. Then, click **'Sync Now'** in the Gradle toolbar to apply all changes.
 
 - ### Initialization
     To properly integrate and initialize Sendbird AI-Agent in your Android project, add the following code to your `Application` class file:
