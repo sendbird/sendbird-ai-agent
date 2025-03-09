@@ -81,7 +81,7 @@ await aiAgent.initialize();
         aiAgentId: 'AI_AGENT_ID',
         // Use Conversation component to display only the messenger without the launcher
         customMainComponent: (coreModule) => (props) => (
-            <coreModule.AgentProviderContainer>
+            <coreModule.AgentProviderContainer {...props}>
                 <coreModule.Conversation {...props} />
             </coreModule.AgentProviderContainer>
         ),
