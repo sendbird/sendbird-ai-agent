@@ -58,7 +58,7 @@ The minimum requirements for AI Agent for Android are the following.
        }
       
        dependencies {
-           implementation("com.sendbird.sdk:ai-agent:1.+")~~~~~~~~
+           implementation("com.sendbird.sdk:ai-agent:1.+")
        }
        ```
 
