@@ -1,4 +1,4 @@
-# Sendbird AI Agent SDK for Web
+[# Sendbird AI Agent SDK for Web
 
 The Sendbird AI Agent SDK allows seamless integration of chatbot features into your web application. Below are the steps to initialize and utilize the SDK effectively.
 
@@ -106,3 +106,4 @@ await aiAgent.updateSession({
 // Cleanup on logout
 aiAgent.destroy();
 ```
+](https://github.com/sendbird/sendbird-ai-agent/pull/8)
