@@ -4,10 +4,11 @@ iOS / Android / JS
 
 The **Sendbird AI Agent** allows seamless integration of chatbot features into your iOS application. Follow the steps below to initialize and utilize the SDK effectively.
 
-  - [Prerequisites][def]
-  - [Getting Started][def]
-  - [Running Your Application][def]
-  - [Advanced Features][def]
+- [Sendbird AI Agent Quick Start Guide (iOS)](#sendbird-ai-agent-quick-start-guide-ios)
+  - [Prerequisites](#prerequisites)
+  - [Getting Started](#getting-started)
+  - [Running Your Application](#running-your-application)
+  - [Advanced Features](#advanced-features)
 
 ## Prerequisites
 
