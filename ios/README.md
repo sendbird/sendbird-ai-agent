@@ -1,6 +1,14 @@
-# Sendbird AI Agent SDK
+iOS / Android / JS
 
-The **Sendbird AI Agent SDK** allows seamless integration of chatbot features into your iOS application. Follow the steps below to initialize and utilize the SDK effectively.
+# Sendbird AI Agent Quick Start Guide (iOS)
+
+The **Sendbird AI Agent** allows seamless integration of chatbot features into your iOS application. Follow the steps below to initialize and utilize the SDK effectively.
+
+  - [Prerequisites][def]
+  - [Getting Started][def]
+  - [Running Your Application][def]
+  - [Session Management][def]
+  - [Advanced Features][def]
 
 ## Prerequisites
 
@@ -12,144 +20,141 @@ Before integrating the SDK, ensure you meet all prerequisites:
 
 ## Getting Started
 
-### Project Setup
+- ### Project Setup
 
-1. In **Xcode**, select `File > Add Packages`.
-2. Add **SendbirdAIAgent** into your package repository using the following URL:
+  1. In **Xcode**, select `File > Add Packages`.
+  2. Add **SendbirdAIAgent** into your package repository using the following URL:
     
-    ```
-    https://github.com/sendbird/sendbird-ai-agent-ios.git
-    ```
-3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
+     ```
+     https://github.com/sendbird/sendbird-ai-agent-ios.git
+     ```
+  3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
 
-## Initialization
+- ### Initialization
 
-Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
+  Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
 
-```swift
-let params = SendbirdAIAgent.InitializeParams(
-    locale: Locale.current
-)
+    ```swift
+    let params = SendbirdAIAgent.InitializeParams(
+        locale: Locale.current
+    )
 
-SendbirdAIAgent.initialize(
-    appId: appId,
-    params: params
-) { [weak self] result in
-    guard let self = self else { return }
+    SendbirdAIAgent.initialize(
+        appId: appId,
+        params: params
+    ) { [weak self] result in
+        guard let self = self else { return }
 
-    switch result {
-    case .failure(let error):
-        // Handle initialization error
-        break
-    case .success:
-        // SDK initialized successfully
-        break
+        switch result {
+        case .success:
+            // SDK initialized successfully
+            break
+        case .failure(let error):
+            // Handle initialization error
+            break
+        }
     }
-}
-```
-
-## Session Management
-
-### Updating Session Information
-
-Update the session information to ensure proper session management:
-
-```swift
-SendbirdAIAgent.updateSessionInfo(
-    with: SendbirdAIAgent.UserSessionInfo(
-        userId: userId,
-        sessionToken: sessionToken,
-        sessionHandler: self
-    )
-)
-```
-
-### Implementing Session Delegate
-
-Handle session-related events by implementing `AIAgentSessionDelegate`:
-
-```swift
-public protocol AIAgentSessionDelegate: AnyObject {
-    func sessionTokenDidRequire(
-        successCompletion success: @escaping (String?) -> Void,
-        failCompletion fail: @escaping () -> Void
-    )
-    
-    func sessionWasClosed()
-    func sessionWasRefreshed()
-    func sessionDidHaveError(_ error: Error)
-}
-```
+    ```
 
 ## Running Your Application
 
-### Launching Chat Views
+- ### Setup User Session
+  User sessions **require** periodic token reissuance for security purposes, so the following session management is necessary.
+    #### 1. Updating Session Information
+    Update the session information to ensure proper session management:
+    ```swift
+    SendbirdAIAgent.updateSessionInfo(
+        with: SendbirdAIAgent.UserSessionInfo(
+            userId: userId,
+            sessionToken: sessionToken,
+            sessionDelegate: self
+        )
+    )
+    ```
+    #### 2.Implementing Session Delegate
+    Handle session-related events by implementing `AIAgentSessionDelegate`:
+    ```swift
+    public protocol AIAgentSessionDelegate: AnyObject {
+        func sessionTokenDidRequire(
+            successCompletion success: @escaping (String?) -> Void,
+            failCompletion fail: @escaping () -> Void
+        )
+        
+        func sessionWasClosed()
+        func sessionWasRefreshed()
+        func sessionDidHaveError(_ error: Error)
+    }
+    ```
+- ### Launching Chat Views
 
-The SDK provides two ways to display the chat view:
+    The SDK provides two ways to display the chat view:
 
-#### 1. Launcher Mode (Floating Button)
+    #### 1. Launcher Mode (Floating Button)
 
-Display a floating launcher button:
+    Display a floating launcher button:
 
-```swift
-SendbirdAIAgent.startLauncher(
-    aiAgentId: self.aiAgentId,
-    options: SBALauncherLayoutOptions()
-)
-```
+    ```swift
+    SendbirdAIAgent.startLauncher(
+        aiAgentId: self.aiAgentId,
+        options: SBALauncherLayoutOptions()
+    )
+    ```
 
-To hide the launcher:
+    To hide the launcher:
 
-```swift
-SendbirdAIAgent.stopLauncher(botId: self.botId)
-```
+    ```swift
+    SendbirdAIAgent.stopLauncher(botId: self.botId)
+    ```
 
-#### 2. ViewController Presentation Mode
+    #### 2. ViewController Presentation Mode
 
-Present the chat view as a modal:
+    Present the chat view as a modal:
 
-```swift
-SendbirdAIAgent.startConversation(botId: self.botId3)
-```
+    ```swift
+    SendbirdAIAgent.startConversation(botId: self.botId3)
+    ```
 
 ## Advanced Features
 
-### Customizing Launcher Mode
+- ### Customizing Launcher Mode
 
-Modify the floating launcher button’s behavior and appearance:
+    Modify the floating launcher button’s behavior and appearance:
 
-```swift
-let options = LauncherLayoutOptions(
-    parentView: nil, // Attaches to the window if nil
-    position: .trailingBottom,
-    margin: .default,
-    spacing: 12,
-    overlayLauncher: false,
-    useSafeArea: true
-)
+    ```swift
+    let options = LauncherLayoutOptions(
+        parentView: nil, // Attaches to the window if nil
+        position: .trailingBottom,
+        margin: .default,
+        spacing: 12,
+        overlayLauncher: false,
+        useSafeArea: true
+    )
 
-SendbirdAIAgent.startLauncher(
-    botId: self.botId,
-    options: options
-)
-```
+    SendbirdAIAgent.startLauncher(
+        botId: self.botId,
+        options: options
+    )
+    ```
 
-### Updating SDK Theme
+- ### Updating SDK Theme
 
-You can customize the SDK’s color scheme:
+    You can customize the SDK’s color scheme:
 
-```swift
-SendbirdAIAgent.update(colorScheme: .light) // Options: .dark, .light
-```
+    ```swift
+    SendbirdAIAgent.update(colorScheme: .light) // Options: .dark, .light
+    ```
 
-Since apps may allow users to switch themes manually or follow device settings, explicitly call this function when needed.
+    Since apps may allow users to switch themes manually or follow device settings, explicitly call this function when needed.
 
-### Deauthentication
+- ### Deauthentication
 
-When a user logs out, deauthenticate the SDK to clear session data:
+    When a user logs out, deauthenticate the SDK to clear session data:
 
-```swift
-SendbirdAIAgent.deauthenticate { [weak self] in
-    // Perform post-deauthentication actions
-}
-```
+    ```swift
+    SendbirdAIAgent.deauthenticate { [weak self] in
+        // Perform post-deauthentication actions
+    }
+    ```
+
+
+[def]: #prerequisites
