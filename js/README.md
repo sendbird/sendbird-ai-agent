@@ -6,10 +6,12 @@ The Sendbird AI Agent SDK allows seamless integration of chatbot features into y
 
 ## Prerequisites
 
-Add the SDK to your web page by including the following script tag:
+Add the SDK to your web page by importing it as a module:
 
 ```html
-<script src="https://aiagent.sendbird.com/loader/v0/index.js"></script>
+<script type="module">
+  import loadAIAgent from "https://aiagent.sendbird.com/orgs/netflix/index.js";
+</script>
 ```
 
 
@@ -17,15 +19,13 @@ Add the SDK to your web page by including the following script tag:
 
 Initialize the SDK by providing the app ID and configuration parameters:
 
-```html
-<script>
-const loader = new AIAgentLoader({
+```javascript
+const loader = await loadAIAgent({
   appId: 'YOUR_APP_ID',
   aiAgentId: 'YOUR_BOT_ID',
 });
 
 await loader.initialize();
-</script>
 ```
 
 ---
@@ -69,15 +69,15 @@ const loader = new AIAgentLoader({
 
 ## Launching Chat Views
 
-The SDK automatically handles the chat view display. You can customize the container by providing an ID:
+The SDK automatically handles the chat view display:
 
-```html
-<script>
-const loader = new AIAgentLoader({
+```javascript
+const loader = await loadAIAgent({
   appId: 'YOUR_APP_ID',
   aiAgentId: 'YOUR_AI_AGENT_ID',
 });
-</script>
+
+await loader.initialize();
 ```
 
 To update the configurations:
@@ -111,7 +111,7 @@ Here's a complete example showing various SDK operations:
 
 ```javascript
 // Initialize
-const loader = new AIAgentLoader({
+const loader = await loadAIAgent({
   appId: 'initial_app_id',
   aiAgentId: 'initial_ai_agent_id',
 });
