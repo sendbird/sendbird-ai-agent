@@ -78,20 +78,20 @@ await aiAgent.initialize();
 - ### Display the conversation view without the launcher 
     ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
     ```javascript
-    const loader = await loadAIAgent({
+    const aiAgent = await loadAIAgent({
         appId: 'APP_ID',
         aiAgentId: 'AI_AGENT_ID',
         // Use Conversation component to display only the messenger without the launcher
         customMainComponent: (coreModule) => (props) => (
             <coreModule.AgentProviderContainer {...props}>
-                <coreModule.Conversation {...props} />
+                <coreModule.Conversation />
             </coreModule.AgentProviderContainer>
         ),
     });
     ```
 - ### Cleanup on logout
     It is not specifically required on the web, but if needed, please run it as shown below.
-    ```
+    ```javascript
     aiAgent.destroy();
     ```
 
