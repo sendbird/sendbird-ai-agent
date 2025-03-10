@@ -1,4 +1,4 @@
-iOS / Android / JS
+[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / **Android** / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/README.md)
 
 # Sendbird AI Agent Quick Start Guide (Android)
 
@@ -145,6 +145,7 @@ The minimum requirements for AI Agent for Android are the following.
     To start a conversation, a **AI Agent ID issued from the dashboard is required**.
 
 1. #### Using the Launcher
+    ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
     The SDK provides an `AIAgentLauncher` view, which can be added to any application screen via XML or programmatically.
     - When the screen containing the **Launcher** is launched, call the `init()` function of `AIAgentLauncher` to specify which ai agent to communicate with.
         ```xml
@@ -158,6 +159,7 @@ The minimum requirements for AI Agent for Android are the following.
         ```
 
 2. #### Opening the AI Agent Conversation Channel in Full-Screen Mode
+    ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
     You can open a **full-screen conversation** by starting an `Activity`.  
     When launching the activity, provide the **AI Agent ID** to specify which ai agent to communicate with.
     ```kotlin
