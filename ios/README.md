@@ -90,7 +90,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     The SDK provides two ways to display the chat view:
 
     #### 1. Launcher Mode (Floating Button)
-
+    ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
     Display a floating launcher button:
 
     ```swift
@@ -107,7 +107,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     ```
 
     #### 2. ViewController Presentation Mode
-
+    ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
     Present the chat view as a modal:
 
     ```swift
