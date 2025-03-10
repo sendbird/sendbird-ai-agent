@@ -1,4 +1,4 @@
-iOS / Android / JS
+**iOS** / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/README.md)
 
 # Sendbird AI Agent Quick Start Guide (iOS)
 
