@@ -1,4 +1,4 @@
-iOS / Android / JS
+[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / **JS**
 
 # Sendbird AI Agent Quick Start Guide (JS)
 
@@ -51,6 +51,7 @@ await aiAgent.initialize();
     ```
 
 - ### Launching Messenger
+  ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
   The SDK automatically handles the messenger display:
 
     ```javascript
@@ -75,6 +76,7 @@ await aiAgent.initialize();
 
 ## Advanced Features
 - ### Display the conversation view without the launcher 
+    ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
     ```javascript
     const loader = await loadAIAgent({
         appId: 'APP_ID',
