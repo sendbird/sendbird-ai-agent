@@ -12,7 +12,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
     - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
     - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
   - [Running your application](#running-your-application)
-    - [Manage sessions](#manage-sessions)
+    - [Manage user sessions](#manage-user-sessions)
     - [Handle session expiration](#handle-session-expiration)
     - [Launch the messenger](#launch-the-messenger)
   - [Advanced features](#advanced-features)
@@ -150,7 +150,7 @@ To properly integrate and initialize Sendbird AI Agent in your Android project, 
 
 Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
 
-### Manage sessions
+### Manage user sessions
     
 To use the SDK, session information is required.  
 Before using `AIAgentMessenger`, you must set the session information for the application user issued by Sendbird.
@@ -199,14 +199,14 @@ Follow the code below to refresh and provide a new session token in the session 
 
 Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.  
 
-There are two ways to do this:
+There are two ways to display the messenger:
     
-1. Using the messenger launcher button
+1. Using the launcher button
 2. Opening the conversation channel in full-screen mode
 
 >__Note__: Replace `your_ai_agent_id` with your AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
 
-#### 1. Using the messenger launcher button
+#### 1. Using the launcher button
 
 ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
 
