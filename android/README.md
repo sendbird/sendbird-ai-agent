@@ -49,7 +49,7 @@ Quickly install and initalize the AI Agent SDK by following the steps below.
 
 ![ai-agent-android-new-project](https://github.com/user-attachments/assets/3507e758-476a-4118-a3ae-9980103f83f1)
 
-3. Give your project a name. Accept all other defauls, including the langauge as `Kotlin` and the minimum SDK as `API 21: Android 5.0 (Lollipop)` and click **Finish**.
+3. Give your project a name. Accept all other defaults, including the language as `Kotlin` and the minimum SDK as `API 21: Android 5.0 (Lollipop)` and click **Finish**.
 
 ![ai-agent-android-new-project-settings](https://github.com/user-attachments/assets/9b9808fa-70c5-4a52-ab77-2d2c1638cc23)
 
