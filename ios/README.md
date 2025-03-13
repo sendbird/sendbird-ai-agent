@@ -1,36 +1,67 @@
 **iOS** / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/README.md)
 
-# Sendbird AI Agent Quick Start Guide (iOS)
+# Sendbird AI Agent Quickstart guide (iOS)
 
-The **Sendbird AI Agent** allows seamless integration of chatbot features into your iOS application. Follow the steps below to initialize and utilize the SDK effectively.
+The **Sendbird AI Agent Messenger** allows seamless integration of chatbot features into your iOS application. Follow the steps below to initialize and utilize the SDK effectively.
 
-- [Sendbird AI Agent Quick Start Guide (iOS)](#sendbird-ai-agent-quick-start-guide-ios)
+- [Sendbird AI Agent Quickstart guide (iOS)](#sendbird-ai-agent-quickstart-guide-ios)
+  - [Requirements](#requirements)
   - [Prerequisites](#prerequisites)
-  - [Getting Started](#getting-started)
-  - [Running Your Application](#running-your-application)
-  - [Advanced Features](#advanced-features)
+  - [Getting started](#getting-started)
+    - [Step 1. Create a new project](#step-1-create-a-new-project)
+    - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
+    - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
+  - [Running your application](#running-your-application)
+    - [Manage user sessions](#manage-user-sessions)
+    - [Launch the messenger](#launch-the-messenger)
+  - [Advanced features](#advanced-features)
+    - [Update SDK theme](#update-sdk-theme)
+    - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
 
-## Prerequisites
+## Requirements
 
-Before integrating the SDK, ensure you meet all prerequisites:
+The minimum requirements for AI Agent for iOS are the following.
 
 - Xcode 15.0 or later
 - Swift Package Manager (SPM) support
-- A valid Sendbird AI Agent App ID (available from the Sendbird Dashboard)
+
+## Prerequisites
+
+Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
+<br><br/>
+You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
+
+![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
+
+---
 
 ## Getting Started
 
-- ### Project Setup
+Quickly install and initialize the AI Agent SDK by following the steps below.
 
-  1. In **Xcode**, select `File > Add Packages`.
-  2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
+### Step 1. Create a new project
+
+1. Open Xcode.
+2. Choose **File > New > Projec**.
+3. Select **iOS** as the platform and **App** as the template.
+
+![ai-agent-swiftui-tutorial-create-project](https://github.com/user-attachments/assets/d864fcf1-ddf2-4f42-9913-447ff8ab874f)
+
+![aiagent-ios-project-options](https://github.com/user-attachments/assets/13f7b8c9-396b-4cc1-ba49-0339db2ddfc9)
+
+
+### Step 2. Install AI Agent SDK
+
+1. In **Xcode**, select **File > Add Package Dependencies**.
+2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
     
      ```
      https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
      ```
-  3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
+    
+3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
 
-- ### Initialization
+### Step 3. Initialize AI Agent SDK
 
   Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
 
@@ -56,12 +87,20 @@ Before integrating the SDK, ensure you meet all prerequisites:
     }
     ```
 
-## Running Your Application
+---
 
-- ### Setup User Session
-  User sessions **require** periodic token reissuance for security purposes, so the following session management is necessary.
-    #### 1. Updating Session Information
-    Update the session information to ensure proper session management:
+## Running your application
+
+Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
+
+### Manage user sessions
+
+User sessions require periodic token reissuance for security purposes, so the following session management is necessary.
+
+#### 1. Updating session information
+
+Update the session information to ensure proper session management:
+    
     ```swift
     AIAgentMessenger.updateSessionInfo(
         with: AIAgentMessenger.UserSessionInfo(
@@ -71,8 +110,11 @@ Before integrating the SDK, ensure you meet all prerequisites:
         )
     )
     ```
-    #### 2.Implementing Session Delegate
-    Handle session-related events by implementing `AIAgentSessionDelegate`:
+    
+#### 2.Implementing session delegate
+
+Handle session-related events by implementing `AIAgentSessionDelegate`:
+    
     ```swift
     public protocol AIAgentSessionDelegate: AnyObject {
         func sessionTokenDidRequire(
@@ -85,13 +127,21 @@ Before integrating the SDK, ensure you meet all prerequisites:
         func sessionDidHaveError(_ error: Error)
     }
     ```
-- ### Launching Messenger
+    
+### Launch the messenger
 
-    The SDK provides two ways to display the chat view:
+Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
 
-    #### 1. Launcher Mode (Floating Button)
-    ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
-    Display a floating launcher button:
+There are two ways to display the chat view:
+
+1. Using the launcher button
+2. Opening the conversation channel in presentation mode
+
+#### 1. Using the launcher button
+
+![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
+
+Display a floating launcher button:
 
     ```swift
     AIAgentMessenger.attachLauncher(
@@ -100,25 +150,31 @@ Before integrating the SDK, ensure you meet all prerequisites:
     )
     ```
 
-    To hide the launcher:
+To hide the launcher:
 
     ```swift
     AIAgentMessenger.detachLauncher(botId: self.botId)
     ```
 
-    #### 2. ViewController Presentation Mode
-    ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
-    Present the chat view as a modal:
+#### 2. Opening the conversation channel in presentation mode
+
+![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
+    
+Present the chat view as a modal:
 
     ```swift
     AIAgentMessenger.presentConversation(botId: self.botId3)
     ```
 
-## Advanced Features
+---
 
-- ### Customizing Launcher Mode
+## Advanced features
 
-    Modify the floating launcher button’s behavior and appearance:
+The following are available advanced features.
+
+### Customize launcher mode
+
+You can modify the floating launcher button’s behavior and appearance as shown below.
 
     ```swift
     let options = LauncherLayoutOptions(
@@ -136,19 +192,18 @@ Before integrating the SDK, ensure you meet all prerequisites:
     )
     ```
 
-- ### Updating SDK Theme
+### Update SDK Theme
 
-    You can customize the SDK’s color scheme:
+You can customize the SDK’s color scheme to match your app's theme as shown below.
 
     ```swift
     AIAgentMessenger.update(colorScheme: .light) // Options: .dark, .light
     ```
+Since apps may allow users to switch themes manually or follow device settings, theme updates need to be explicitly called.
 
-    Since apps may allow users to switch themes manually or follow device settings, explicitly call this function when needed.
+### Deauthenticate and clear session
 
-- ### Deauthentication
-
-    When a user logs out, deauthenticate the SDK to clear session data:
+When a user logs out, de-authenticate the SDK to clear session data and disconnect.
 
     ```swift
     AIAgentMessenger.deauthenticate { [weak self] in
