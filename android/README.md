@@ -7,9 +7,17 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 - [Sendbird AI Agent Quickstart guide (Android)](#sendbird-ai-agent-quickstart-guide-android)
   - [Requirements](#requirements)
   - [Prerequisites](#prerequisites)
-  - [Getting Started](#getting-started)
-  - [Running Your Application](#running-your-application)
-  - [Advanced Features](#advanced-features)
+  - [Getting started](#getting-started)
+    - [Step 1. Create a new project](#step-1-create-a-new-project)
+    - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
+    - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
+  - [Running your application](#running-your-application)
+    - [Manage sessions](#manage-sessions)
+    - [Handle session expiration](#handle-session-expiration)
+    - [Launch the messenger](#launch-the-messenger)
+  - [Advanced features](#advanced-features)
+    - [Update SDK theme](#update-sdk-theme)
+    - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
 
 ## Requirements
 
@@ -30,10 +38,13 @@ You can find it under the **Channels** > **Messenger** menu on the Sendbird Dash
 
 ---
 
-## Getting Started
+## Getting started
+
+Quickly install and initalize the AI Agent SDK by following the steps below.
+
 ### Step 1. Create a new project
 
-1. In Android Studio, create a new project (File > New > New Project...)
+1. In Android Studio, create a new project (**File > New > New Project...**).
 2. Select **Empty Activity** and click **Next**.
 
 ![ai-agent-android-new-project](https://github.com/user-attachments/assets/3507e758-476a-4118-a3ae-9980103f83f1)
@@ -139,7 +150,7 @@ To properly integrate and initialize Sendbird AI Agent in your Android project, 
 
 Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
 
-### Session management
+### Manage sessions
     
 To use the SDK, session information is required.  
 Before using `AIAgentMessenger`, you must set the session information for the application user issued by Sendbird.
@@ -157,12 +168,12 @@ If the user is already logged in, the session should be registered immediately a
         AIAgentMessenger.updateSessionInfo(userSessionInfo)
         ```
      
-### Handling session expiration
+### Handle session expiration
 
 When registering a session information, the provided session handler must handle the case where the session information expires.  
 Follow the code below to refresh and provide a new session token in the session handler callback.
 
-#### How to Handle Session Expiration:
+#### How to handle session expiration:
      
 1. Detect session expiration in the session handler callback.
 2. Request a new session token from the server.
@@ -184,19 +195,25 @@ Follow the code below to refresh and provide a new session token in the session 
         }
         ```
 
-### Launching Messenger
-    Once the authentication information has been successfully registered, you can start a conversation with the ai agent.  
+### Launch the messenger
 
-    There are two ways to initiate a conversation:
-    1. Using the **Launcher**
-    2. Opening the ai agent conversation channel in **full-screen mode**
+Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.  
 
-    To start a conversation, a **AI Agent ID issued from the dashboard is required**.
+There are two ways to do this:
+    
+1. Using the messenger launcher button
+2. Opening the conversation channel in full-screen mode
 
-#### 1. Using the Launcher
-    ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
-    The SDK provides a `MessengerLauncher` view, which can be added to any application screen via XML or programmatically.
-    - When the screen containing the **Launcher** is launched, call the `init()` function of `MessengerLauncher` to specify which ai agent to communicate with.
+>__Note__: Replace `your_ai_agent_id` with your AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
+
+#### 1. Using the messenger launcher button
+
+![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
+
+The SDK provides a `MessengerLauncher` view, which can be added to any application screen via XML or programmatically.
+    
+When the screen containing the meesenger is launched, call the `init()` function of `MessengerLauncher` to specify which ai agent to communicate with.
+    
         ```xml
         <com.sendbird.sdk.aiagent.messenger.ui.widget.MessengerLauncher
             android:id="@+id/messengerLauncher"
@@ -207,29 +224,36 @@ Follow the code below to refresh and provide a new session token in the session 
         messengerLauncher.init(aiAgentId = "your_ai_agent_id")
         ```
 
-#### 2. Opening the AI Agent Conversation Channel in Full-Screen Mode
-    ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
-    You can open a **full-screen conversation** by starting an `Activity`.  
-    When launching the activity, provide the **AI Agent ID** to specify which ai agent to communicate with.
+#### 2. Opening the conversation channel in full-screen mode
+
+![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
+    
+You can open a full-screen conversation by starting an `Activity`.  
+    
     ```kotlin
     startActivity(ConversationActivity.newIntent(context, "your_ai_agent_id"))
     ```
 
-## Advanced Features
+---
 
-### Updating SDK Theme
+## Advanced features
 
-    You can update the SDK's color scheme to match your app's theme:
+THe following are available advanced features.
+
+### Update SDK theme
+
+You can update the SDK's color scheme to match your app's theme as shown below.
+    
     ```kotlin
     AIAgentMessenger.setThemeMode(themeMode) // Options: ThemeMode.Dark, ThemeMode.Light
     ```
 
-    Since apps may allow users to switch themes manually or follow the device's settings, theme updates need to be explicitly called.
+  Since apps may allow users to switch themes manually or follow the device's settings, theme updates need to be explicitly called.
 
 
-### Deauthentication
+### Deauthenticate and clear session
 
-    When the user logs out of your app, de-authenticate the SDK to clear session data and disconnect:
+When the user logs out of your app, de-authenticate the SDK to clear session data and disconnect.
 
     ```kotlin
     AIAgentMessenger.deauthenticate()
