@@ -238,7 +238,7 @@ You can open a full-screen conversation by starting an `Activity`.
 
 ## Advanced features
 
-THe following are available advanced features.
+The following are available advanced features.
 
 ### Update SDK theme
 
