@@ -23,10 +23,10 @@ Before integrating the SDK, ensure you meet all prerequisites:
 - ### Project Setup
 
   1. In **Xcode**, select `File > Add Packages`.
-  2. Add **SendbirdAIAgent** into your package repository using the following URL:
+  2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
     
      ```
-     https://github.com/sendbird/sendbird-ai-agent-ios.git
+     https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
      ```
   3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
 
@@ -35,11 +35,11 @@ Before integrating the SDK, ensure you meet all prerequisites:
   Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
 
     ```swift
-    let params = SendbirdAIAgent.InitializeParams(
+    let params = AIAgentMessenger.InitializeParams(
         locale: Locale.current
     )
 
-    SendbirdAIAgent.initialize(
+    AIAgentMessenger.initialize(
         appId: appId,
         params: params
     ) { [weak self] result in
@@ -63,8 +63,8 @@ Before integrating the SDK, ensure you meet all prerequisites:
     #### 1. Updating Session Information
     Update the session information to ensure proper session management:
     ```swift
-    SendbirdAIAgent.updateSessionInfo(
-        with: SendbirdAIAgent.UserSessionInfo(
+    AIAgentMessenger.updateSessionInfo(
+        with: AIAgentMessenger.UserSessionInfo(
             userId: userId,
             sessionToken: sessionToken,
             sessionDelegate: self
@@ -72,9 +72,9 @@ Before integrating the SDK, ensure you meet all prerequisites:
     )
     ```
     #### 2.Implementing Session Delegate
-    Handle session-related events by implementing `AIAgentSessionDelegate`:
+    Handle session-related events by implementing `AIAgentMessengerSessionDelegate`:
     ```swift
-    public protocol AIAgentSessionDelegate: AnyObject {
+    public protocol AIAgentMessengerSessionDelegate: AnyObject {
         func sessionTokenDidRequire(
             successCompletion success: @escaping (String?) -> Void,
             failCompletion fail: @escaping () -> Void
@@ -94,7 +94,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     Display a floating launcher button:
 
     ```swift
-    SendbirdAIAgent.startLauncher(
+    AIAgentMessenger.attachLauncher(
         aiAgentId: self.aiAgentId,
         options: SBALauncherLayoutOptions()
     )
@@ -103,7 +103,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     To hide the launcher:
 
     ```swift
-    SendbirdAIAgent.stopLauncher(botId: self.botId)
+    AIAgentMessenger.detachLauncher(botId: self.botId)
     ```
 
     #### 2. ViewController Presentation Mode
@@ -111,7 +111,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     Present the chat view as a modal:
 
     ```swift
-    SendbirdAIAgent.startConversation(botId: self.botId3)
+    AIAgentMessenger.presentConversation(botId: self.botId3)
     ```
 
 ## Advanced Features
@@ -130,7 +130,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
         useSafeArea: true
     )
 
-    SendbirdAIAgent.startLauncher(
+    AIAgentMessenger.attachLauncher(
         botId: self.botId,
         options: options
     )
@@ -141,7 +141,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     You can customize the SDK’s color scheme:
 
     ```swift
-    SendbirdAIAgent.update(colorScheme: .light) // Options: .dark, .light
+    AIAgentMessenger.update(colorScheme: .light) // Options: .dark, .light
     ```
 
     Since apps may allow users to switch themes manually or follow device settings, explicitly call this function when needed.
@@ -151,7 +151,7 @@ Before integrating the SDK, ensure you meet all prerequisites:
     When a user logs out, deauthenticate the SDK to clear session data:
 
     ```swift
-    SendbirdAIAgent.deauthenticate { [weak self] in
+    AIAgentMessenger.deauthenticate { [weak self] in
         // Perform post-deauthentication actions
     }
     ```
