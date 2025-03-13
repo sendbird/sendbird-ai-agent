@@ -72,9 +72,9 @@ Before integrating the SDK, ensure you meet all prerequisites:
     )
     ```
     #### 2.Implementing Session Delegate
-    Handle session-related events by implementing `AIAgentMessengerSessionDelegate`:
+    Handle session-related events by implementing `AIAgentSessionDelegate`:
     ```swift
-    public protocol AIAgentMessengerSessionDelegate: AnyObject {
+    public protocol AIAgentSessionDelegate: AnyObject {
         func sessionTokenDidRequire(
             successCompletion success: @escaping (String?) -> Void,
             failCompletion fail: @escaping () -> Void
