@@ -2,7 +2,7 @@
 
 # Sendbird AI Agent Quick Start Guide (Android)
 
-The **Sendbird AI Agent** allows seamless integration of chatbot features into your Android application. Follow the steps below to initialize and utilize the SDK effectively.
+The **Sendbird AI Agent Messenger** allows seamless integration of chatbot features into your Android application. Follow the steps below to initialize and utilize the SDK effectively.
 
 - [Sendbird AI Agent Quick Start Guide (Android)](#sendbird-ai-agent-quick-start-guide-android)
   - [Prerequisites](#prerequisites)
@@ -34,7 +34,7 @@ The minimum requirements for AI Agent for Android are the following.
            }
        }
        ```
-           >       **Note:** You should be using Gradle 6.8 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
+       > **Note:** You should be using Gradle 6.8 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
 
     2. Add the dependency to your `build.gradle.kts` (Module) file:
 
@@ -73,10 +73,10 @@ The minimum requirements for AI Agent for Android are the following.
         override fun onCreate() {
             ...
 
-            SendbirdAIAgent.initialize(AIAgentInitParams(
+            AIAgentMessenger.initialize(MessengerInitParams(
                 context = applicationContext,
                 appId = APP_ID,
-                theme = AIAgentThemeMode.Light,
+                theme = ThemeMode.Light,
                 initForeground = false,
                 initResultHandler = this
             ))
@@ -100,7 +100,7 @@ The minimum requirements for AI Agent for Android are the following.
 
 - ### Session Management
     To use the SDK, **session information is required**.  
-    Before using `AIAgent`, you must set the session information for the **application user issued by Sendbird**.
+    Before using `AIAgent Messenger`, you must set the session information for the **application user issued by Sendbird**.
 
   - #### When to Set the Session Information:
     1. **Upon Initial Login:**  
@@ -109,7 +109,7 @@ The minimum requirements for AI Agent for Android are the following.
     If the user is already logged in, the session should be registered **immediately after SDK initialization**.
         ```kotlin
         val userSessionInfo = UserSessionInfo(userId, authToken, AbstractSessionHandler())
-        SendbirdAIAgent.updateSessionInfo(userSessionInfo)
+        AIAgentMessenger.updateSessionInfo(userSessionInfo)
         ```
    - #### Handling Session Expiration
         When registering a session information, the provided **session handler** must handle the case where the session information expires.  
@@ -146,16 +146,16 @@ The minimum requirements for AI Agent for Android are the following.
 
 1. #### Using the Launcher
     ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
-    The SDK provides an `AIAgentLauncher` view, which can be added to any application screen via XML or programmatically.
-    - When the screen containing the **Launcher** is launched, call the `init()` function of `AIAgentLauncher` to specify which ai agent to communicate with.
+    The SDK provides a `MessengerLauncher` view, which can be added to any application screen via XML or programmatically.
+    - When the screen containing the **Launcher** is launched, call the `init()` function of `MessengerLauncher` to specify which ai agent to communicate with.
         ```xml
-        <com.sendbird.sdk.aiagent.ui.widget.AIAgentLauncher
-            android:id="@+id/aiAgentLauncher"
+        <com.sendbird.sdk.aiagent.messenger.ui.widget.MessengerLauncher
+            android:id="@+id/messengerLauncher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         ```
         ```kotlin
-        aiAgentLauncher.init(aiAgentId = "your_ai_agent_id")
+        messengerLauncher.init(aiAgentId = "your_ai_agent_id")
         ```
 
 2. #### Opening the AI Agent Conversation Channel in Full-Screen Mode
@@ -163,7 +163,7 @@ The minimum requirements for AI Agent for Android are the following.
     You can open a **full-screen conversation** by starting an `Activity`.  
     When launching the activity, provide the **AI Agent ID** to specify which ai agent to communicate with.
     ```kotlin
-    startActivity(ConversationActivity.newIntent(this@MainActivity, "your_ai_agent_id"))
+    startActivity(ConversationActivity.newIntent(context, "your_ai_agent_id"))
     ```
 
 ## Advanced Features
@@ -172,16 +172,16 @@ The minimum requirements for AI Agent for Android are the following.
 
     You can update the SDK's color scheme to match your app's theme:
     ```kotlin
-    SendbirdAIAgent.setTheme(theme) // Options: AIAgentThemeMode.Dark, AIAgentThemeMode.Light
+    AIAgentMessenger.setThemeMode(themeMode) // Options: ThemeMode.Dark, ThemeMode.Light
     ```
 
     Since apps may allow users to switch themes manually or follow the device's settings, theme updates need to be explicitly called.
 
 - ### Deauthentication
 
-    When the user logs out of your app, deauthenticate the SDK to clear session data and disconnect:
+    When the user logs out of your app, de-authenticate the SDK to clear session data and disconnect:
 
     ```kotlin
-    SendbirdAIAgent.deauthenticate()
+    AIAgentMessenger.deauthenticate()
     ```
     
