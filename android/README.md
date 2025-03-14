@@ -45,13 +45,13 @@ Quickly install and initalize the AI Agent SDK by following the steps below.
 ### Step 1. Create a new project
 
 1. In Android Studio, create a new project (**File > New > New Project...**).
-2. Select **Empty Activity** and click **Next**.
+2. Select **Empty Views Activity** and click **Next**.
 
-![ai-agent-android-new-project](https://github.com/user-attachments/assets/3507e758-476a-4118-a3ae-9980103f83f1)
+![ai-agent-android-empty-activity](https://github.com/user-attachments/assets/d34eee4c-36e4-441b-8b72-3a7c3592bece)
 
 3. Give your project a name. Accept all other defaults, including the language as `Kotlin` and the minimum SDK as `API 21: Android 5.0 (Lollipop)` and click **Finish**.
 
-![ai-agent-android-new-project-settings](https://github.com/user-attachments/assets/9b9808fa-70c5-4a52-ab77-2d2c1638cc23)
+![ai-agent-android-new-project](https://github.com/user-attachments/assets/630ceccf-d2db-4edb-bb93-109770965a13)
 
 ### Step 2. Install AI Agent SDK
 
@@ -69,7 +69,7 @@ Add the following to your `settings.gradle.kts` (Project Settings) file:
            }
        }
        ```
-       **Note:** You should be using Gradle 6.8 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
+       **Note:** You should be using Gradle 8.0 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
 
 #### Adding dependency
 
