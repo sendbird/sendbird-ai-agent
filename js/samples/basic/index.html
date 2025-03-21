@@ -150,12 +150,13 @@ function closeAgent() {
 await messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',
-  // Use Conversation component to display only the messenger without the launcher
-  customMainComponent: ({ messenger }) => (props) => (
-    <messenger.AgentProviderContainer {...props}>
-        <messenger.Conversation />
-    </messenger.AgentProviderContainer>
-  ),
+  // Use ConversationList component to display only the conversation list UI without the messenger
+  // And you can access to the AI Agent Messenger and React instance via first argument
+  customMainComponent: ({ messenger, react }) => (props) => {
+    return react.createElement(messenger.AgentProviderContainer, props, [
+      react.createElement(messenger.ConversationList),
+    ]);
+  }
 });
 </textarea>
                           </div>
