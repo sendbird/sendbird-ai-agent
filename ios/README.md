@@ -30,7 +30,7 @@ The minimum requirements for AI Agent for iOS are the following.
 
 Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
+You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.보
 
 ![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
 
@@ -66,27 +66,28 @@ Quickly install and initialize the AI Agent SDK by following the steps below.
 
   Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
 
-    ```swift
-    let params = AIAgentMessenger.InitializeParams(
-        locale: Locale.current
-    )
 
-    AIAgentMessenger.initialize(
-        appId: appId,
-        params: params
-    ) { [weak self] result in
-        guard let self = self else { return }
+```swift
+let params = AIAgentMessenger.InitializeParams(
+    locale: Locale.current
+)
 
-        switch result {
-        case .success:
-            // SDK initialized successfully
-            break
-        case .failure(let error):
-            // Handle initialization error
-            break
-        }
+AIAgentMessenger.initialize(
+    appId: appId,
+    params: params
+) { [weak self] result in
+    guard let self = self else { return }
+
+    switch result {
+    case .success:
+        // SDK initialized successfully
+        break
+    case .failure(let error):
+        // Handle initialization error
+        break
     }
-    ```
+}
+```
 
 ---
 
@@ -102,32 +103,32 @@ User sessions require periodic token reissuance for security purposes, so the fo
 
 Update the session information to ensure proper session management:
     
-    ```swift
-    AIAgentMessenger.updateSessionInfo(
-        with: AIAgentMessenger.UserSessionInfo(
-            userId: userId,
-            sessionToken: sessionToken,
-            sessionDelegate: self
-        )
+```swift
+AIAgentMessenger.updateSessionInfo(
+    with: AIAgentMessenger.UserSessionInfo(
+        userId: userId,
+        sessionToken: sessionToken,
+        sessionDelegate: self
     )
-    ```
+)
+```
     
 #### 2.Implementing session delegate
 
 Handle session-related events by implementing `AIAgentSessionDelegate`:
     
-    ```swift
-    public protocol AIAgentSessionDelegate: AnyObject {
-        func sessionTokenDidRequire(
-            successCompletion success: @escaping (String?) -> Void,
-            failCompletion fail: @escaping () -> Void
-        )
-        
-        func sessionWasClosed()
-        func sessionWasRefreshed()
-        func sessionDidHaveError(_ error: Error)
-    }
-    ```
+```swift
+public protocol AIAgentSessionDelegate: AnyObject {
+    func sessionTokenDidRequire(
+        successCompletion success: @escaping (String?) -> Void,
+        failCompletion fail: @escaping () -> Void
+    )
+    
+    func sessionWasClosed()
+    func sessionWasRefreshed()
+    func sessionDidHaveError(_ error: Error)
+}
+```
     
 ### Launch the messenger
 
@@ -144,18 +145,18 @@ There are two ways to display the chat view:
 
 Display a floating launcher button:
 
-    ```swift
-    AIAgentMessenger.attachLauncher(
-        aiAgentId: self.aiAgentId,
-        options: SBALauncherLayoutOptions()
-    )
-    ```
+```swift
+AIAgentMessenger.attachLauncher(
+    aiAgentId: self.aiAgentId,
+    options: SBALauncherLayoutOptions()
+)
+```
 
 To hide the launcher:
 
-    ```swift
-    AIAgentMessenger.detachLauncher(botId: self.botId)
-    ```
+```swift
+AIAgentMessenger.detachLauncher(botId: self.botId)
+```
 
 #### 2. Opening the conversation channel in presentation mode
 
@@ -163,9 +164,9 @@ To hide the launcher:
     
 Present the chat view as a modal:
 
-    ```swift
-    AIAgentMessenger.presentConversation(botId: self.botId3)
-    ```
+```swift
+AIAgentMessenger.presentConversation(botId: self.botId3)
+```
 
 ---
 
@@ -177,40 +178,40 @@ The following are available advanced features.
 
 You can modify the floating launcher button’s behavior and appearance as shown below.
 
-    ```swift
-    let options = LauncherLayoutOptions(
-        parentView: nil, // Attaches to the window if nil
-        position: .trailingBottom,
-        margin: .default,
-        spacing: 12,
-        overlayLauncher: false,
-        useSafeArea: true
-    )
+```swift
+let options = LauncherLayoutOptions(
+    parentView: nil, // Attaches to the window if nil
+    position: .trailingBottom,
+    margin: .default,
+    spacing: 12,
+    overlayLauncher: false,
+    useSafeArea: true
+)
 
-    AIAgentMessenger.attachLauncher(
-        botId: self.botId,
-        options: options
-    )
-    ```
+AIAgentMessenger.attachLauncher(
+    botId: self.botId,
+    options: options
+)
+```
 
 ### Update SDK Theme
 
 You can customize the SDK’s color scheme to match your app's theme as shown below.
 
-    ```swift
-    AIAgentMessenger.update(colorScheme: .light) // Options: .dark, .light
-    ```
+```swift
+AIAgentMessenger.update(colorScheme: .light) // Options: .dark, .light
+```
 Since apps may allow users to switch themes manually or follow device settings, theme updates need to be explicitly called.
 
 ### Deauthenticate and clear session
 
 When a user logs out, de-authenticate the SDK to clear session data and disconnect.
 
-    ```swift
-    AIAgentMessenger.deauthenticate { [weak self] in
-        // Perform post-deauthentication actions
-    }
-    ```
+```swift
+AIAgentMessenger.deauthenticate { [weak self] in
+    // Perform post-deauthentication actions
+}
+```
 
 ### Passing context object to Agent
 
@@ -220,13 +221,13 @@ This allows for a more personalized and context-aware interaction experience.
 
 > Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
 
-    ```swift
-    AIAgentMessenger.config.messenger.country = "KR"
-    AIAgentMessenger.config.messenger.language = "ko"
-    AIAgentMessenger.config.messenger.aiContext = [
-        "nickname": "Damon",
-        "birthday": "19860408"
-    ]
-    ````
+```swift
+AIAgentMessenger.config.messenger.country = "KR"
+AIAgentMessenger.config.messenger.language = "ko"
+AIAgentMessenger.config.messenger.aiContext = [
+    "nickname": "Damon",
+    "birthday": "19860408"
+]
+```
 
 [def]: #prerequisites
