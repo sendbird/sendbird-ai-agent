@@ -36,7 +36,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```html
 <script type="module">
-    import { loadMessenger } from "https://aiagent.sendbird.com/orgs/<org_name>/index.js";
+    import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
 </script>
 ```
 
@@ -62,7 +62,7 @@ For proper user session management, you can update the session information using
 
     ```javascript
     // Update entire session configuration
-    await messenger.updateUserSession({
+    messenger.updateUserSession({
         userId: 'new_user_id',
         authToken: 'new_auth_token',
         // this callback should handle session token refresh:
@@ -85,7 +85,7 @@ To launch and display the messenger, implement the code below:
 
     ```javascript
     const messenger = await loadMessenger();
-    await messenger.initialize({
+    messenger.initialize({
         appId: 'YOUR_APP_ID',
         aiAgentId: 'YOUR_AI_AGENT_ID',
     });
@@ -94,11 +94,11 @@ To launch and display the messenger, implement the code below:
 The messenger view can be programmatically controlled using the `open()` and `close()` methods:
 
     ```javascript
-    // Open the messenger view automatically after 1 second after initialized
-    await messenger.initialize({ appId, aiAgentId });
-    setTimeout(() => {
+    // Open the messenger view automatically after after initialized
+    messenger.initialize({ appId, aiAgentId });
+    messenger.onLoad(() => {
         messenger.open();
-    }, 1000);
+    });
 
     // Close the messenger view by clicking a button
     <button onClick={() => messenger.close()}>Close</button>
@@ -108,7 +108,7 @@ To update the configurations:
 
     ```javascript
     // Update configuration
-    await messenger.updateConfig({
+    messenger.updateConfig({
         appId: 'NEW_APP_ID',
         aiAgentId: 'NEW_BOT_ID',
         // ... other config options
@@ -126,16 +126,19 @@ The following are available advanced features.
 ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
 
     ```javascript
-    const messenger = await loadMessenger();
-    await messenger.initialize({
+    const messenger = await loadMessenger({
+      // Use Conversation component to display only the messenger without the launcher
+      customMainComponent: ({ messenger, react }) => {
+        return (props) => {
+          return react.createElement(messenger.AgentProviderContainer, props, [
+            react.createElement(messenger.Conversation),
+          ]);
+        };
+      }
+    });
+    messenger.initialize({
         appId: 'APP_ID',
         aiAgentId: 'AI_AGENT_ID',
-        // Use Conversation component to display only the messenger without the launcher
-        customMainComponent: (coreModule) => (props) => (
-            <coreModule.AgentProviderContainer {...props}>
-                <coreModule.Conversation />
-            </coreModule.AgentProviderContainer>
-        ),
     });
     ```
 
