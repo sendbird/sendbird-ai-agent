@@ -44,7 +44,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```javascript
 const messenger = await loadMessenger();
-await messenger.initialize({
+messenger.initialize({
     appId: 'YOUR_APP_ID',
     aiAgentId: 'YOUR_BOT_ID',
 });
