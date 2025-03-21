@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feat/AA-1920
   workflow_dispatch:
 
 permissions:
