@@ -61,43 +61,42 @@ Install AI Agent SDK for Android using Gradle by following the steps below.
 
 Add the following to your `settings.gradle.kts` (Project Settings) file:
 
-       ```kotlin
-       dependencyResolutionManagement {
-           repositories {
-               maven { setUrl("https://jitpack.io") }
-               maven { setUrl("https://repo.sendbird.com/public/maven") }
-           }
-       }
-       ```
-       **Note:** You should be using Gradle 8.0 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        maven { setUrl("https://repo.sendbird.com/public/maven") }
+    }
+}
+```
+**Note:** You should be using Gradle 8.0 or higher. You can check the `gradle-wrapper.properties` file in your project to see the version of Gradle you are using.
 
 #### Adding dependency
 
 Add the dependency to your `build.gradle.kts` (Module) file:
 
-       ```kotlin
-       plugins {
-           id("com.android.application")
-           id("org.jetbrains.kotlin.android")
-       }
-      
-       android {
-           buildFeatures {
-               viewBinding = true
-           }
-           compileOptions {
-               sourceCompatibility = JavaVersion.VERSION_11
-               targetCompatibility = JavaVersion.VERSION_11
-           }
-           kotlinOptions {
-               jvmTarget = "11"
-           }
-       }
-      
-       dependencies {
-           implementation("com.sendbird.sdk:ai-agent:1.+")
-       }
-       ```
+```kotlin
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
+
+android {
+    buildFeatures {
+        viewBinding = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+dependencies {
+    implementation("com.sendbird.sdk:ai-agent-messenger:1.+")
+}
+```
 
 Then, click **'Sync Now'** in the Gradle toolbar to apply all changes.
 
@@ -105,35 +104,50 @@ Then, click **'Sync Now'** in the Gradle toolbar to apply all changes.
 
 To properly integrate and initialize Sendbird AI Agent in your Android project, [create](#how-to-create-the-application-file) and add the following code to your `Application` class file.
 
-    ```kotlin
-    internal const val APP_ID = "YOUR_APP_ID"
+```kotlin
+import android.app.Application
+import com.sendbird.android.exception.SendbirdException
+import com.sendbird.sdk.aiagent.messenger.AIAgentMessenger
+import com.sendbird.sdk.aiagent.messenger.consts.MessengerThemeMode
+import com.sendbird.sdk.aiagent.messenger.interfaces.MessengerInitResultHandler
+import com.sendbird.sdk.aiagent.messenger.model.MessengerInitParams
 
-    class AgentApplication : Application(), InitResultHandler {
-        override fun onCreate() {
-            ...
+internal const val APP_ID = "YOUR_APP_ID"
 
-            AIAgentMessenger.initialize(MessengerInitParams(
-                context = applicationContext,
-                appId = APP_ID,
-                theme = ThemeMode.Light,
-                initForeground = false,
-                initResultHandler = this
-            ))
-        }
-
-        override fun onInitSuccess() {
-            // SDK initialized successfully
-        }
-
-        override fun onInitFailure(e: SendbirdException) {
-            // Handle initialization error
-        }
-
-        override fun onMigrationStarted() {
-            // Migration started
-        }
+class AgentApplication : Application(), MessengerInitResultHandler {
+    override fun onCreate() {
+        super.onCreate()
+        AIAgentMessenger.initialize(MessengerInitParams(
+            context = applicationContext,
+            appId = APP_ID,
+            theme = MessengerThemeMode.Light,
+            initForeground = false,
+            initResultHandler = this
+        ))
     }
-    ```
+
+    override fun onInitSuccess() {
+        // SDK initialized successfully
+        // You need to call `AIAgentMessenger.updateSessionInfo()` here if user session info already exists.
+    }
+
+    override fun onInitFailure(e: SendbirdException) {
+        // Handle initialization error
+    }
+
+    override fun onMigrationStarted() {
+        // Migration started
+    }
+}
+```
+
+To ensure that your `AgentApplication` class is used as the application class, you need to register it in the AndroidManifest.xml file.
+```xml
+<application
+    android:name=".AgentApplication"
+>
+</application>
+```
 
 #### How to create the Application file
 
@@ -163,10 +177,11 @@ Since there is no session information for the user at the first login, it should
 2. **For already logged-in users:**  
 If the user is already logged in, the session should be registered immediately after SDK initialization.
 
-        ```kotlin
-        val userSessionInfo = UserSessionInfo(userId, authToken, AbstractSessionHandler())
-        AIAgentMessenger.updateSessionInfo(userSessionInfo)
-        ```
+    ```kotlin
+    val userSessionInfo = UserSessionInfo(userId, authToken, AbstractSessionHandler())
+    AIAgentMessenger.updateSessionInfo(userSessionInfo)
+    ```
+    > SessionHandler is the handler used when a session expires or needs to be renewed. See [next guide](#handle-session-expiration) for instructions on how to use it.
      
 ### Handle session expiration
 
@@ -179,25 +194,29 @@ Follow the code below to refresh and provide a new session token in the session 
 2. Request a new session token from the server.
 3. Update the SDK with the new session token.
    
-        ```kotlin
-        class AbstractSessionHandler : AIAgentSessionHandler() {
-            override fun onSessionClosed() {
-                // go to login page
-            }
+    ```kotlin
+    class AbstractSessionHandler : AIAgentSessionHandler() {
+        override fun onSessionClosed() {
+            // go to login page
+        }
 
-            override fun onSessionTokenRequired(sessionTokenRequester: SessionTokenRequester) {
-                // Request a new session token from the server
-                fetchNewSessionToken { newToken ->
-                    // Update the SDK with the new session token
-                    sessionTokenRequester.onSuccess(newToken)
-                }
+        override fun onSessionTokenRequired(sessionTokenRequester: SessionTokenRequester) {
+            // Request a new session token from the server
+            fetchNewSessionToken { newToken ->
+                // Update the SDK with the new session token
+                sessionTokenRequester.onSuccess(newToken)
             }
         }
-        ```
+    }
+    ```
 
 ### Launch the messenger
 
-Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.  
+#### Before You Start
+- Was `onInitSuccess` received via MessengerInitResultHandler after invoking `AIAgentMessenger.initialize()`?
+- `AIAgentMessenger.updateSessionInfo()` been called with the user session information
+
+Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
 
 There are two ways to display the messenger:
     
@@ -213,16 +232,18 @@ There are two ways to display the messenger:
 The SDK provides a `MessengerLauncher` view, which can be added to any application screen via XML or programmatically.
     
 When the screen containing the meesenger is launched, call the `init()` function of `MessengerLauncher` to specify which ai agent to communicate with.
+
+> Note: The messenger can be used only after the initialize of AIAgentMessenger has finished. Use it after receiving `onInitSuccess` from the `MessengerInitResultHandler`.
     
-        ```xml
-        <com.sendbird.sdk.aiagent.messenger.ui.widget.MessengerLauncher
-            android:id="@+id/messengerLauncher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        ```
-        ```kotlin
-        messengerLauncher.init(aiAgentId = "your_ai_agent_id")
-        ```
+```xml
+<com.sendbird.sdk.aiagent.messenger.ui.widget.MessengerLauncher
+    android:id="@+id/messengerLauncher"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+```
+```kotlin
+messengerLauncher.init(aiAgentId = "your_ai_agent_id")
+```
 
 #### 2. Opening the conversation channel in full-screen mode
 
@@ -230,9 +251,9 @@ When the screen containing the meesenger is launched, call the `init()` function
     
 You can open a full-screen conversation by starting an `Activity`.  
     
-    ```kotlin
-    startActivity(ConversationActivity.newIntent(context, "your_ai_agent_id"))
-    ```
+```kotlin
+startActivity(ConversationActivity.newIntent(context, "your_ai_agent_id"))
+```
 
 ---
 
@@ -244,9 +265,9 @@ The following are available advanced features.
 
 You can update the SDK's color scheme to match your app's theme as shown below.
     
-    ```kotlin
-    AIAgentMessenger.setThemeMode(themeMode) // Options: ThemeMode.Dark, ThemeMode.Light
-    ```
+```kotlin
+AIAgentMessenger.setThemeMode(themeMode) // Options: MessengerThemeMode.Dark, MessengerThemeMode.Light
+```
 
   Since apps may allow users to switch themes manually or follow the device's settings, theme updates need to be explicitly called.
 
@@ -255,7 +276,7 @@ You can update the SDK's color scheme to match your app's theme as shown below.
 
 When the user logs out of your app, de-authenticate the SDK to clear session data and disconnect.
 
-    ```kotlin
-    AIAgentMessenger.deauthenticate()
-    ```
+```kotlin
+AIAgentMessenger.deauthenticate()
+```
     
