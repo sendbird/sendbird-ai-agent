@@ -17,6 +17,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
   - [Advanced features](#advanced-features)
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
+    - [Passing context object to Agent](#passing-context-object-to-agent)
 
 ## Requirements
 
@@ -211,5 +212,21 @@ When a user logs out, de-authenticate the SDK to clear session data and disconne
     }
     ```
 
+### Passing context object to Agent
+
+You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses. 
+
+This allows for a more personalized and context-aware interaction experience.
+
+> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
+
+    ```swift
+    AIAgentMessenger.config.messenger.country = "KR"
+    AIAgentMessenger.config.messenger.language = "ko"
+    AIAgentMessenger.config.messenger.aiContext = [
+        "nickname": "Damon",
+        "birthday": "19860408"
+    ]
+    ````
 
 [def]: #prerequisites
