@@ -30,7 +30,7 @@ The minimum requirements for AI Agent for iOS are the following.
 
 Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.보
+You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
 
 ![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
 
