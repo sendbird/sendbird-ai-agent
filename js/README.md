@@ -6,13 +6,13 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 
 - [Sendbird AI Agent Quickstart guide (JS)](#sendbird-ai-agent-quickstart-guide-js)
   - [Prerequisites](#prerequisites)
-  - [Getting started](#getting-started)
+  - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
     - [Step 2. Initialize AI Agent SDK](#step-2-initialize-ai-agent-sdk)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
     - [Launch the messenger](#launch-the-messenger)
-  - [Advanced features](#advanced-features)
+  - [Advanced Features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
 
@@ -36,7 +36,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```html
 <script type="module">
-    import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+    import { loadMessenger } from "https://aiagent.stg.sendbirdtest.com/orgs/default/index.js";
 </script>
 ```
 
@@ -44,7 +44,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```javascript
 const messenger = await loadMessenger();
-await messenger.initialize({
+messenger.initialize({
     appId: 'YOUR_APP_ID',
     aiAgentId: 'YOUR_BOT_ID',
 });
@@ -130,9 +130,9 @@ The following are available advanced features.
       // Use Conversation component to display only the messenger without the launcher
       customMainComponent: ({ messenger, react }) => {
         return (props) => {
-          return react.createElement(messenger.AgentProviderContainer, props, [
-            react.createElement(messenger.Conversation),
-          ]);
+            return react.createElement(messenger.AgentProviderContainer, props, [
+                react.createElement(messenger.Conversation),
+            ]);
         };
       }
     });
