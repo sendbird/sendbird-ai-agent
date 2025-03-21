@@ -155,8 +155,8 @@ To ensure that your `AgentApplication` class is used as the application class, y
 2. In the left side bar, locate the **app** module.
 3. Right-click on the java or kotlin folder (depending on the language of your project).
 4. Select **New > Kotlin File/Class**.
-5. In the dialog that appears, select **Class** and anme it `Application`.
-6. Then, add the code above to your `Application.kt` file.
+5. In the dialog that appears, select **Class** and name it `AgentApplication`.
+6. Then, add the code above to your `AgentApplication.kt` file.
    
 ---
 
