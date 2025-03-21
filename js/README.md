@@ -94,7 +94,7 @@ To launch and display the messenger, implement the code below:
 The messenger view can be programmatically controlled using the `open()` and `close()` methods:
 
     ```javascript
-    // Open the messenger view automatically after after initialized
+    // Open the messenger view automatically after initialized
     messenger.initialize({ appId, aiAgentId });
     messenger.onLoad(() => {
         messenger.open();
