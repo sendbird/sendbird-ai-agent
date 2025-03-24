@@ -160,9 +160,7 @@ await messenger.initialize({
 });
 </textarea>
                           </div>
-                          <button id="renderConversationListBtn" class="mt-3 inline-flex items-center rounded-md bg-[#742ddd] px-3 py-2 text-sm text-white shadow-sm hover:bg-[#6211c8]">
-                            Open Conversation List
-                          </button>
+                          <div id="conversation-list-container"></div>
                         </div>
                       </div>
                     </div>
@@ -195,7 +193,8 @@ await messenger.initialize({
 
     <!-- Live Demo -->
     <script type="module">
-      import { loadMessenger } from 'https://aiagent.stg.sendbirdtest.com/orgs/default/index.js';
+      // import { loadMessenger } from 'https://aiagent.stg.sendbirdtest.com/orgs/default/index.js';
+      import { loadMessenger } from 'http://localhost:8080/default/index.js';
 
       const messenger = await loadMessenger();
       await messenger.initialize({
@@ -239,22 +238,47 @@ await messenger.initialize({
         messenger.close();
       });
 
-      document.getElementById('renderConversationListBtn').addEventListener('click', async () => {
-        messenger.destroy();
-        const conversationListMessenger = await loadMessenger({
-          customMainComponent: ({ messenger, react }) => (props) => {
-            return react.createElement(messenger.AgentProviderContainer, props, [
-              react.createElement(messenger.ConversationList),
-            ]);
-          }
-        });
-        await conversationListMessenger.initialize({
-          appId: import.meta.env.VITE_APP_ID,
-          aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
-          customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,
-          customWebSocketHost: import.meta.env.VITE_CUSTOM_WS_HOST,
-          rootElement: document.getElementById('messenger-container'),
-        });
+      const conversationListMessenger = await loadMessenger({
+        customMainComponent: ({ messenger, react }) => (props) => {
+          react.useEffect(() => {
+            const observer = new MutationObserver((mutations) => {
+              const agentEntry = document.getElementById('sb-agent-entry');
+              if (agentEntry) {
+                agentEntry.style.setProperty('width', '100%', 'important');
+                agentEntry.style.setProperty('height', '100%', 'important');
+                observer.disconnect();
+              }
+            });
+
+            observer.observe(document.body, {
+              childList: true,
+              subtree: true
+            });
+
+            return () => observer.disconnect();
+          }, []);
+
+          return react.createElement('div',
+          {
+            style: {
+              width: '300px',
+              height: '500px',
+              border: '1px solid #ccc',
+              marginTop: '20px',
+            }
+          }, react.createElement(messenger.AgentProviderContainer, props, [
+            react.createElement(messenger.ConversationList),
+          ]));
+        },
+        containerId: 'conversation-list-container',
+        useShadowDOM: false,
+      });
+
+      await conversationListMessenger.initialize({
+        appId: import.meta.env.VITE_APP_ID,
+        aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
+        customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,
+        customWebSocketHost: import.meta.env.VITE_CUSTOM_WS_HOST,
       });
     </script>
   </body>
