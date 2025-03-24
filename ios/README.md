@@ -68,6 +68,10 @@ Quickly install and initialize the AI Agent SDK by following the steps below.
 
 
 ```swift
+// Import the SDK
+import SendbirdAIAgentMessenger
+
+// Initialize the SDK
 let params = AIAgentMessenger.InitializeParams(
     locale: Locale.current
 )
