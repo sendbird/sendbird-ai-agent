@@ -1,6 +1,5 @@
+import { loadMessengerSDK } from '@/utils/loadMessengerSDK';
 import { useEffect, useRef } from 'react';
-
-import { loadMessengerSDK } from '../../utils/loadMessengerSDK';
 
 export const ConversationListDisplay = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -10,16 +9,17 @@ export const ConversationListDisplay = () => {
       try {
         const loadMessenger = await loadMessengerSDK();
         const conversationListMessenger = await loadMessenger({
-          /** @ts-ignore */
           customMainComponent:
+            /** @ts-ignore */
             ({ messenger }) =>
-            (props) => {
-              return (
-                <messenger.AgentProviderContainer {...props}>
-                  <messenger.ConversationList />
-                </messenger.AgentProviderContainer>
-              );
-            },
+              /** @ts-ignore */
+              (props) => {
+                return (
+                  <messenger.AgentProviderContainer {...props}>
+                    <messenger.ConversationList />
+                  </messenger.AgentProviderContainer>
+                );
+              },
           containerId: containerRef.current?.id,
           useShadowDOM: false,
         });

@@ -1,7 +1,8 @@
-import { CODE_SAMPLES } from '../../constants/codeSamples';
-import { Button } from '../ui/Button';
-import { CodeEditor } from '../ui/CodeEditor';
-import { Section } from '../ui/Section';
+import { Button } from '@/components/ui/Button';
+import { CodeEditor } from '@/components/ui/CodeEditor';
+import { Section } from '@/components/ui/Section';
+import { CODE_SAMPLES } from '@/constants/codeSamples';
+
 import { ConversationListDisplay } from './ConversationListDisplay';
 
 interface Props {

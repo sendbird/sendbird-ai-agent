@@ -1,6 +1,6 @@
-import { CODE_SAMPLES } from '../../constants/codeSamples';
-import { CodeEditor } from '../ui/CodeEditor';
-import { Section } from '../ui/Section';
+import { CodeEditor } from '@/components/ui/CodeEditor';
+import { Section } from '@/components/ui/Section';
+import { CODE_SAMPLES } from '@/constants/codeSamples';
 
 export const GettingStarted = () => (
   <div className="border-b border-gray-200 pb-6">

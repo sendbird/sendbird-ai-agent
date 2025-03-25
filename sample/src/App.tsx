@@ -1,9 +1,8 @@
+import { AdvancedFeatures } from '@/components/sections/AdvancedFeatures';
+import { GettingStarted } from '@/components/sections/GettingStarted';
+import { MessengerInstance } from '@/types';
+import { loadMessengerSDK } from '@/utils/loadMessengerSDK';
 import { useEffect, useRef } from 'react';
-
-import { AdvancedFeatures } from './components/sections/AdvancedFeatures';
-import { GettingStarted } from './components/sections/GettingStarted';
-import { MessengerInstance } from './types';
-import { loadMessengerSDK } from './utils/loadMessengerSDK';
 
 export const App = () => {
   const messengerRef = useRef<MessengerInstance | null>(null);
@@ -22,9 +21,9 @@ export const App = () => {
 
         messengerRef.current = messengerInstance;
 
-        setTimeout(() => {
+        messengerInstance.onLoad(() => {
           messengerInstance.open();
-        }, 1000);
+        });
       } catch (error) {
         console.error('Failed to initialize messenger:', error);
       }
@@ -33,8 +32,8 @@ export const App = () => {
     initializeMessenger();
   }, []);
 
-  const handleUpdateConfig = async () => {
-    await messengerRef.current?.updateConfig({
+  const handleUpdateConfig = () => {
+    messengerRef.current?.updateConfig({
       appId: import.meta.env.VITE_NEW_APP_ID,
       aiAgentId: import.meta.env.VITE_NEW_AI_AGENT_ID,
       customApiHost: import.meta.env.VITE_NEW_CUSTOM_API_HOST,
@@ -42,8 +41,8 @@ export const App = () => {
     });
   };
 
-  const handleUpdateSession = async () => {
-    await messengerRef.current?.updateUserSession({
+  const handleUpdateSession = () => {
+    messengerRef.current?.updateUserSession({
       userId: import.meta.env.VITE_NEW_USER_ID,
       authToken: import.meta.env.VITE_NEW_USER_AUTH_TOKEN,
       onSessionTokenRequest: async () => import.meta.env.VITE_NEW_USER_AUTH_TOKEN,

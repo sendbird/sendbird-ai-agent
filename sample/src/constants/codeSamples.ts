@@ -4,7 +4,7 @@ export const CODE_SAMPLES = {
 </script>`,
 
   initialize: `const messenger = await loadMessenger();
-messenger.initialize({
+await messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',
 });
