@@ -6,8 +6,8 @@ export const GettingStarted = () => (
   <div className="border-b border-gray-200 pb-6">
     <h2 className="text-2xl font-bold leading-6 text-gray-900">Getting Started</h2>
     <p className="mb-6 mt-3 text-base text-gray-500">
-      This guide demonstrates how to integrate the AI Agent Messenger using vanilla JavaScript, making it easy to
-      implement in any browser environment without additional dependencies.
+      This guide demonstrates how to integrate the AI Agent Messenger using JavaScript, making it easy to implement in
+      any browser environment without additional dependencies.
     </p>
 
     <Section
