@@ -24,7 +24,7 @@ export const ConversationListDisplay = () => {
           useShadowDOM: false,
         });
 
-        await conversationListMessenger.initialize({
+        conversationListMessenger.initialize({
           appId: import.meta.env.VITE_APP_ID,
           aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
           customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,

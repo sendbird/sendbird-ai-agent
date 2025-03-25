@@ -12,7 +12,7 @@ export const App = () => {
       try {
         const loadMessenger = await loadMessengerSDK();
         const messengerInstance = await loadMessenger();
-        await messengerInstance.initialize({
+        messengerInstance.initialize({
           appId: import.meta.env.VITE_APP_ID,
           aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
           customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,
