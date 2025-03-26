@@ -1,7 +1,7 @@
 export interface MessengerInstance {
-  initialize: (config: any) => Promise<void>;
+  initialize: (config: any) => void;
   open: () => void;
   close: () => void;
-  updateConfig: (config: any) => Promise<void>;
-  updateUserSession: (session: any) => Promise<void>;
+  updateConfig: (config: any) => void;
+  updateUserSession: (session: any) => void;
 }
