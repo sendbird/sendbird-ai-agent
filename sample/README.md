@@ -23,5 +23,3 @@ pnpm dev
 ```
 
 The application will be available at `http://localhost:5173`
-
-

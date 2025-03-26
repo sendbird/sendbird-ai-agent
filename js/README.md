@@ -6,13 +6,13 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 
 - [Sendbird AI Agent Quickstart guide (JS)](#sendbird-ai-agent-quickstart-guide-js)
   - [Prerequisites](#prerequisites)
-  - [Getting Started](#getting-started)
+  - [Getting started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
     - [Step 2. Initialize AI Agent SDK](#step-2-initialize-ai-agent-sdk)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
     - [Launch the messenger](#launch-the-messenger)
-  - [Advanced Features](#advanced-features)
+  - [Advanced features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
 
