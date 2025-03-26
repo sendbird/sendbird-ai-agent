@@ -41,21 +41,7 @@ function closeAgent() {
   customDisplay: `messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',
-  // Access the AI Agent Messenger components through the first argument
-  customMainComponent: ({ messenger }) => (props) => {
-    return (
-      <messenger.AgentProviderContainer {...props}>
-        <messenger.ConversationList />
-      </messenger.AgentProviderContainer>
-    );
-  }
-});
-
-// For environments that don't support JSX,
-// you can use the React instance from the first argument to create UI components:
-messenger.initialize({
-  appId: 'APP_ID',
-  aiAgentId: 'AI_AGENT_ID',
+  // Access the AI Agent Messenger components and React instance through the first argument
   customMainComponent: ({ messenger, react }) => (props) => {
     return react.createElement(messenger.AgentProviderContainer, props, [
       react.createElement(messenger.ConversationList),
