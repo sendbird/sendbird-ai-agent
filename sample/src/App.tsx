@@ -15,8 +15,6 @@ export const App = () => {
         messengerInstance.initialize({
           appId: import.meta.env.VITE_APP_ID,
           aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
-          customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,
-          customWebSocketHost: import.meta.env.VITE_CUSTOM_WS_HOST,
         });
 
         messengerRef.current = messengerInstance;
@@ -36,8 +34,6 @@ export const App = () => {
     messengerRef.current?.updateConfig({
       appId: import.meta.env.VITE_NEW_APP_ID,
       aiAgentId: import.meta.env.VITE_NEW_AI_AGENT_ID,
-      customApiHost: import.meta.env.VITE_NEW_CUSTOM_API_HOST,
-      customWebSocketHost: import.meta.env.VITE_NEW_CUSTOM_WS_HOST,
     });
   };
 
