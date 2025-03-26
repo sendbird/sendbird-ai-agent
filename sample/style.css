@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@config "./tailwind.config.ts";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cm-editor {
+  height: auto;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+}
+
+@layer utilities {
+  #sb-agent-entry {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
