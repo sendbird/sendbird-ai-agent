@@ -1,6 +1,6 @@
-# AI Agent Messenger Sample - Basic
+# AI Agent Messenger Sample
 
-A basic example demonstrating how to integrate the AI Agent Messenger into a web application without any additional dependencies.
+An interactive web guide demonstrating how to integrate the AI Agent Messenger into a web application. This web application serves as both a demonstration and a step-by-step guide for implementation without any additional dependencies.
 
 ## Prerequisites
 
