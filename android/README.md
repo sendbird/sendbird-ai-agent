@@ -229,21 +229,32 @@ There are two ways to display the messenger:
 
 ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
 
-The SDK provides a `MessengerLauncher` view, which can be added to any application screen via XML or programmatically.
-    
-When the screen containing the meesenger is launched, call the `init()` function of `MessengerLauncher` to specify which ai agent to communicate with.
+The SDK provides the `MessengerLauncher` view, which can be easily attached to your application's root view programmatically without directly adding it to XML layouts.
 
-> Note: The messenger can be used only after the initialize of AIAgentMessenger has finished. Use it after receiving `onInitSuccess` from the `MessengerInitResultHandler`.
-    
-```xml
-<com.sendbird.sdk.aiagent.messenger.ui.widget.MessengerLauncher
-    android:id="@+id/messengerLauncher"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-```
+To add the MessengerLauncher to your screen, simply call the `attach()` function of `MessengerLauncher`, specifying the AI agent ID and configuration parameters:
+
 ```kotlin
-messengerLauncher.init(aiAgentId = "your_ai_agent_id")
+val params = LauncherLayoutParams(
+    LaunchMode.ANCHORED,
+    LauncherMargin(12, 12, 12, 12),
+    LauncherLocation.BOTTOM_END
+)
+
+MessengerLauncher(context).attach(context, aiAgentId = "your_ai_agent_id", params = params)
 ```
+
+- `LauncherLayoutParams` allows you to configure the MessengerLauncher’s behavior and appearance:
+    - **`launchMode`**:
+        - `EXPANDED`: Opens the messenger in full-screen mode with predefined margins.
+        - `ANCHORED`: Opens the messenger anchored near the launcher button, with adjustable positioning.
+
+    - **`margin`**: Defines the margin around the launcher button itself (does not affect the messenger window).
+
+    - **`location`**: Determines which corner of the screen the launcher will appear in. Available options are:
+        - `TOP_START`
+        - `TOP_END`
+        - `BOTTOM_START`
+        - `BOTTOM_END`
 
 #### 2. Opening the conversation channel in full-screen mode
 
