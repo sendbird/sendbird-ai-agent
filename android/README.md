@@ -240,7 +240,7 @@ val params = LauncherLayoutParams(
     LauncherLocation.BOTTOM_END
 )
 
-MessengerLauncher(context).attach(context, aiAgentId = "your_ai_agent_id", params = params)
+MessengerLauncher(this, it, params).attach()
 ```
 
 - `LauncherLayoutParams` allows you to configure the MessengerLauncher’s behavior and appearance:
@@ -280,7 +280,7 @@ You can update the SDK's color scheme to match your app's theme as shown below.
 AIAgentMessenger.setThemeMode(themeMode) // Options: MessengerThemeMode.Dark, MessengerThemeMode.Light
 ```
 
-  Since apps may allow users to switch themes manually or follow the device's settings, theme updates need to be explicitly called.
+Since apps may allow users to switch themes manually or follow the device's settings, theme updates need to be explicitly called.
 
 
 ### Deauthenticate and clear session
@@ -290,4 +290,24 @@ When the user logs out of your app, de-authenticate the SDK to clear session dat
 ```kotlin
 AIAgentMessenger.deauthenticate()
 ```
-    
+
+
+### Passing context object to Agent
+
+You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.
+
+This allows for a more personalized and context-aware interaction experience.
+
+> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
+
+```kotlin
+AIAgentMessenger.metadata.message.contextObject.put("key1", "value1")
+AIAgentMessenger.metadata.message.contextObject.putAll(
+    mapOf(
+        "key1" to "value1",
+        "key2" to "value2"
+    )
+)
+AIAgentMessenger.metadata.message.contextObject.remove("key1")
+AIAgentMessenger.metadata.message.contextObject.clear()
+```
