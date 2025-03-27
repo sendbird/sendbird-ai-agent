@@ -18,6 +18,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
   - [Advanced features](#advanced-features)
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
+    - [Passing context object to Agent](#passing-context-object-to-agent)
 
 ## Requirements
 
@@ -294,13 +295,16 @@ AIAgentMessenger.deauthenticate()
 
 ### Passing context object to Agent
 
-You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.
+You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses. 
 
 This allows for a more personalized and context-aware interaction experience.
 
 > Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
 
 ```kotlin
+AIAgentMessenger.metadata.language = "en-US" // default: Locale.getDefault().toLanguageTag()
+AIAgentMessenger.metadata.countryCode = "US" // default: Locale.getDefault().country
+
 AIAgentMessenger.metadata.message.contextObject.put("key1", "value1")
 AIAgentMessenger.metadata.message.contextObject.putAll(
     mapOf(
