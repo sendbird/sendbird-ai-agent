@@ -226,12 +226,13 @@ This allows for a more personalized and context-aware interaction experience.
 > Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
 
 ```swift
-AIAgentMessenger.config.messenger.country = "KR"
-AIAgentMessenger.config.messenger.language = "ko"
-AIAgentMessenger.config.messenger.aiContext = [
-    "nickname": "Damon",
-    "birthday": "19860408"
-]
+AIAgentMessenger.metadata.language = "en-US" // default: Locale.preferredLanguages.first
+AIAgentMessenger.metadata.countryCode = "US" // default: Locale.current.regionCode
+
+AIAgentMessenger.metadata.message.contextObject = ["key1": "value1", "key2": "value2"]
+AIAgentMessenger.metadata.message.contextObject["key1"] = "value1"
+AIAgentMessenger.metadata.message.contextObject.removeValue(forKey: "key1")
+AIAgentMessenger.metadata.message.contextObject.removeAll()
 ```
 
 [def]: #prerequisites
