@@ -240,7 +240,7 @@ val params = LauncherLayoutParams(
     LauncherLocation.BOTTOM_END
 )
 
-MessengerLauncher(context).attach(context, aiAgentId = "your_ai_agent_id", params = params)
+MessengerLauncher(this, it, params).attach()
 ```
 
 - `LauncherLayoutParams` allows you to configure the MessengerLauncher’s behavior and appearance:
