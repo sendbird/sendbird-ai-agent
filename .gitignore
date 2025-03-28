@@ -2,3 +2,4 @@
 **/dist
 **/.vite
 **/deps
+.idea
