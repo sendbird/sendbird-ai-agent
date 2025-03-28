@@ -45,6 +45,28 @@ export const App = () => {
     });
   };
 
+  const handleUpdateLocale = () => {
+    if (!messengerRef.current) return;
+
+    messengerRef.current.updateMetadata({
+      language: 'ko-KR',
+      countryCode: 'KR',
+    });
+  };
+
+  const handleUpdateMetadata = () => {
+    if (!messengerRef.current) return;
+
+    messengerRef.current.updateMetadata({
+      message: {
+        contextObject: {
+          userPreference: 'technical',
+          customerTier: 'premium',
+        },
+      },
+    });
+  };
+
   return (
     <div className="min-h-full">
       <header className="bg-white shadow">
@@ -59,6 +81,8 @@ export const App = () => {
           <AdvancedFeatures
             onUpdateConfig={handleUpdateConfig}
             onUpdateSession={handleUpdateSession}
+            onUpdateMetadata={handleUpdateMetadata}
+            onUpdateLocale={handleUpdateLocale}
             onOpen={() => messengerRef.current?.open()}
             onClose={() => messengerRef.current?.close()}
           />
