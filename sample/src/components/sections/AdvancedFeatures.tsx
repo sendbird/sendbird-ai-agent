@@ -37,14 +37,14 @@ export function AdvancedFeatures({
         <Section title="Switch Application" description="Change to a different application configuration.">
           <CodeEditor value={CODE_SAMPLES.updateConfig} language="javascript" />
           <Button onClick={configUpdate.withUpdateStatus(onUpdateConfig)}>
-            {configUpdate.isUpdated ? 'Updated!' : 'Update Config'}
+            {configUpdate.getDisplayText('Update Config')}
           </Button>
         </Section>
 
         <Section title="User Authentication" description="Set up user authentication for personalized experience.">
           <CodeEditor value={CODE_SAMPLES.updateSession} language="javascript" />
           <Button onClick={sessionUpdate.withUpdateStatus(onUpdateSession)}>
-            {sessionUpdate.isUpdated ? 'Updated!' : 'Update Session'}
+            {sessionUpdate.getDisplayText('Update Session')}
           </Button>
         </Section>
 
@@ -70,13 +70,13 @@ export function AdvancedFeatures({
         >
           <CodeEditor value={CODE_SAMPLES.contextObject_locale} language="javascript" />
           <Button onClick={localeUpdate.withUpdateStatus(onUpdateLocale)}>
-            {localeUpdate.isUpdated ? 'Updated!' : 'Update Locale Settings'}
+            {localeUpdate.getDisplayText('Update Locale Settings')}
           </Button>
         </Section>
         <Section description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings.">
           <CodeEditor value={CODE_SAMPLES.contextObject_message} language="javascript" />
           <Button onClick={metadataUpdate.withUpdateStatus(onUpdateMetadata)}>
-            {metadataUpdate.isUpdated ? 'Updated!' : 'Update Message Metadata'}
+            {metadataUpdate.getDisplayText('Update Message Metadata')}
           </Button>
         </Section>
       </div>

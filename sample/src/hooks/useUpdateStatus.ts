@@ -17,5 +17,7 @@ export function useUpdateStatus() {
     };
   }, []);
 
-  return { isUpdated, withUpdateStatus };
+  const getDisplayText = (originalText: string) => (isUpdated ? 'Updated!' : originalText);
+
+  return { withUpdateStatus, getDisplayText };
 }
