@@ -3,6 +3,7 @@ import { CodeEditor } from '@/components/ui/CodeEditor';
 import { Section } from '@/components/ui/Section';
 import { CODE_SAMPLES } from '@/constants/codeSamples';
 import { useScrollIntoView } from '@/hooks/useScrollIntoView';
+import { useUpdateStatus } from '@/hooks/useUpdateStatus';
 
 import { ConversationListDisplay } from './ConversationListDisplay';
 
@@ -24,6 +25,10 @@ export function AdvancedFeatures({
   onUpdateLocale,
 }: Props) {
   useScrollIntoView();
+  const configUpdate = useUpdateStatus();
+  const sessionUpdate = useUpdateStatus();
+  const localeUpdate = useUpdateStatus();
+  const metadataUpdate = useUpdateStatus();
 
   return (
     <div className="pt-6">
@@ -31,12 +36,16 @@ export function AdvancedFeatures({
       <div className="space-y-8">
         <Section title="Switch Application" description="Change to a different application configuration.">
           <CodeEditor value={CODE_SAMPLES.updateConfig} language="javascript" />
-          <Button onClick={onUpdateConfig}>Update Config</Button>
+          <Button onClick={configUpdate.withUpdateStatus(onUpdateConfig)}>
+            {configUpdate.isUpdated ? 'Updated!' : 'Update Config'}
+          </Button>
         </Section>
 
         <Section title="User Authentication" description="Set up user authentication for personalized experience.">
           <CodeEditor value={CODE_SAMPLES.updateSession} language="javascript" />
-          <Button onClick={onUpdateSession}>Update Session</Button>
+          <Button onClick={sessionUpdate.withUpdateStatus(onUpdateSession)}>
+            {sessionUpdate.isUpdated ? 'Updated!' : 'Update Session'}
+          </Button>
         </Section>
 
         <Section
@@ -60,11 +69,15 @@ export function AdvancedFeatures({
           description="Set language and country code preferences to localize AI Agent interactions."
         >
           <CodeEditor value={CODE_SAMPLES.contextObject_locale} language="javascript" />
-          <Button onClick={onUpdateLocale}>Update Locale Settings</Button>
+          <Button onClick={localeUpdate.withUpdateStatus(onUpdateLocale)}>
+            {localeUpdate.isUpdated ? 'Updated!' : 'Update Locale Settings'}
+          </Button>
         </Section>
         <Section description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings.">
           <CodeEditor value={CODE_SAMPLES.contextObject_message} language="javascript" />
-          <Button onClick={onUpdateMetadata}>Update Message Metadata</Button>
+          <Button onClick={metadataUpdate.withUpdateStatus(onUpdateMetadata)}>
+            {metadataUpdate.isUpdated ? 'Updated!' : 'Update Message Metadata'}
+          </Button>
         </Section>
       </div>
     </div>
