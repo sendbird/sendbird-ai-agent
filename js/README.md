@@ -158,15 +158,6 @@ This allows for a more personalized and context-aware interaction experience.
 
 > Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
 
-
-### Passing context object to Agent
-
-You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.
-
-This allows for a more personalized and context-aware interaction experience.
-
-> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
-
 ```javascript
 // Metadata can be updated incrementally using updateMetadata().
 // Top-level key-value pairs are merged across multiple calls.
