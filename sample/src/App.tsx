@@ -45,18 +45,25 @@ export const App = () => {
     });
   };
 
-  const handleUpdateMetadata = () => {
+  const handleUpdateLocale = () => {
     if (!messengerRef.current) return;
-
-    const contextObject = {
-      previousProduct: 'productA',
-      previousProductPrice: '100000',
-    };
 
     messengerRef.current.updateMetadata({
       language: 'ko-KR',
       countryCode: 'KR',
-      message: { contextObject },
+    });
+  };
+
+  const handleUpdateMetadata = () => {
+    if (!messengerRef.current) return;
+
+    messengerRef.current.updateMetadata({
+      message: {
+        contextObject: {
+          userPreference: 'technical',
+          customerTier: 'premium',
+        },
+      },
     });
   };
 
@@ -75,6 +82,7 @@ export const App = () => {
             onUpdateConfig={handleUpdateConfig}
             onUpdateSession={handleUpdateSession}
             onUpdateMetadata={handleUpdateMetadata}
+            onUpdateLocale={handleUpdateLocale}
             onOpen={() => messengerRef.current?.open()}
             onClose={() => messengerRef.current?.close()}
           />

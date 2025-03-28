@@ -9,12 +9,20 @@ import { ConversationListDisplay } from './ConversationListDisplay';
 interface Props {
   onUpdateConfig: () => void;
   onUpdateSession: () => void;
+  onUpdateLocale: () => void;
+  onUpdateMetadata: () => void;
   onOpen: () => void;
   onClose: () => void;
-  onUpdateMetadata: () => void;
 }
 
-export function AdvancedFeatures({ onUpdateConfig, onUpdateSession, onOpen, onClose, onUpdateMetadata }: Props) {
+export function AdvancedFeatures({
+  onUpdateConfig,
+  onUpdateSession,
+  onOpen,
+  onClose,
+  onUpdateMetadata,
+  onUpdateLocale,
+}: Props) {
   useScrollIntoView();
 
   return (
@@ -31,7 +39,10 @@ export function AdvancedFeatures({ onUpdateConfig, onUpdateSession, onOpen, onCl
           <Button onClick={onUpdateSession}>Update Session</Button>
         </Section>
 
-        <Section title="Manual Controls" description="Manually control the messenger visibility.">
+        <Section
+          title="Manual Controls"
+          description="Manually control the messenger visibility using built-in control functions."
+        >
           <CodeEditor value={CODE_SAMPLES.controls} language="javascript" />
           <div className="mt-3 space-x-3">
             <Button onClick={onOpen}>Open Messenger</Button>
@@ -46,10 +57,14 @@ export function AdvancedFeatures({ onUpdateConfig, onUpdateSession, onOpen, onCl
 
         <Section
           title="Context Object"
-          description="Provide context data to guide the AI Agent for personalized responses."
+          description="Set language and country code preferences to localize AI Agent interactions."
         >
-          <CodeEditor value={CODE_SAMPLES.contextObject} language="javascript" />
-          <Button onClick={onUpdateMetadata}>Update Context</Button>
+          <CodeEditor value={CODE_SAMPLES.contextObject_locale} language="javascript" />
+          <Button onClick={onUpdateLocale}>Update Locale Settings</Button>
+        </Section>
+        <Section description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings.">
+          <CodeEditor value={CODE_SAMPLES.contextObject_message} language="javascript" />
+          <Button onClick={onUpdateMetadata}>Update Message Metadata</Button>
         </Section>
       </div>
     </div>

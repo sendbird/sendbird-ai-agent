@@ -38,7 +38,7 @@ function closeAgent() {
   messenger.close();
 }`,
 
-  contextObject: `// metadata is updated incrementally using updateMetadata().
+  contextObject_locale: `// metadata is updated incrementally using updateMetadata().
 // top-level key-value pairs are merged across multiple calls.
 
 messenger.updateMetadata({
@@ -47,9 +47,9 @@ messenger.updateMetadata({
 
 messenger.updateMetadata({
   countryCode: 'KR',
-});
+});`,
 
-const newContextObject = {
+  contextObject_message: `const newContextObject = {
   userPreference: 'technical',
   customerTier: 'premium',
 };
