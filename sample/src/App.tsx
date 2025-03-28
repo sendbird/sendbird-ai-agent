@@ -45,6 +45,21 @@ export const App = () => {
     });
   };
 
+  const handleUpdateMetadata = () => {
+    if (!messengerRef.current) return;
+
+    const contextObject = {
+      previousProduct: 'productA',
+      previousProductPrice: '100000',
+    };
+
+    messengerRef.current.updateMetadata({
+      language: 'ko-KR',
+      countryCode: 'KR',
+      message: { contextObject },
+    });
+  };
+
   return (
     <div className="min-h-full">
       <header className="bg-white shadow">
@@ -59,6 +74,7 @@ export const App = () => {
           <AdvancedFeatures
             onUpdateConfig={handleUpdateConfig}
             onUpdateSession={handleUpdateSession}
+            onUpdateMetadata={handleUpdateMetadata}
             onOpen={() => messengerRef.current?.open()}
             onClose={() => messengerRef.current?.close()}
           />

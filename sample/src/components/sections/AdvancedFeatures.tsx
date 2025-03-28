@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/Button';
 import { CodeEditor } from '@/components/ui/CodeEditor';
 import { Section } from '@/components/ui/Section';
 import { CODE_SAMPLES } from '@/constants/codeSamples';
+import { useScrollIntoView } from '@/hooks/useScrollIntoView';
 
 import { ConversationListDisplay } from './ConversationListDisplay';
 
@@ -10,9 +11,12 @@ interface Props {
   onUpdateSession: () => void;
   onOpen: () => void;
   onClose: () => void;
+  onUpdateMetadata: () => void;
 }
 
-export function AdvancedFeatures({ onUpdateConfig, onUpdateSession, onOpen, onClose }: Props) {
+export function AdvancedFeatures({ onUpdateConfig, onUpdateSession, onOpen, onClose, onUpdateMetadata }: Props) {
+  useScrollIntoView();
+
   return (
     <div className="pt-6">
       <h2 className="text-xl font-bold leading-6 text-gray-900 mb-6">Advanced Features</h2>
@@ -35,12 +39,17 @@ export function AdvancedFeatures({ onUpdateConfig, onUpdateSession, onOpen, onCl
           </div>
         </Section>
 
-        <Section
-          title="Conversation List Display"
-          description="Display conversation list in a designated area without launcher."
-        >
+        <Section title="Custom Display" description="Display conversation list in a designated area without launcher.">
           <CodeEditor value={CODE_SAMPLES.customDisplay} language="javascript" />
           <ConversationListDisplay />
+        </Section>
+
+        <Section
+          title="Context Object"
+          description="Provide context data to guide the AI Agent for personalized responses."
+        >
+          <CodeEditor value={CODE_SAMPLES.contextObject} language="javascript" />
+          <Button onClick={onUpdateMetadata}>Update Context</Button>
         </Section>
       </div>
     </div>

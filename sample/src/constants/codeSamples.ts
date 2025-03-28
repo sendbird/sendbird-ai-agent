@@ -38,6 +38,37 @@ function closeAgent() {
   messenger.close();
 }`,
 
+  contextObject: `// metadata is updated incrementally using updateMetadata().
+// top-level key-value pairs are merged across multiple calls.
+
+messenger.updateMetadata({
+  language: 'ko-KR', // default: navigator.language
+});
+
+messenger.updateMetadata({
+  countryCode: 'KR',
+});
+
+const newContextObject = {
+  userPreference: 'technical',
+  customerTier: 'premium',
+};
+messenger.updateMetadata({
+  message: { contextObject: newContextObject },
+});
+
+// updating the context with a new object replaces the previous one.
+const updatedContextObject = { userPreference: 'simple' };
+messenger.updateMetadata({
+  message: { contextObject: updatedContextObject },
+});
+
+// sending an empty object clears the context.
+const emptyContextObject = {};
+messenger.updateMetadata({
+  message: { contextObject: emptyContextObject },
+});`,
+
   customDisplay: `messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',
