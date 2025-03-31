@@ -79,4 +79,11 @@ messenger.updateMetadata({
     ]);
   }
 });`,
+
+  cleanup: `// Clear session data and disconnect from chat SDK
+// Note: The input field will be disabled immediately after disconnection
+messenger.deauthenticate();
+
+// Remove messenger UI components from DOM
+messenger.destroy();`,
 };

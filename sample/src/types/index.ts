@@ -24,4 +24,6 @@ export interface MessengerInstance {
   updateConfig: (config: MessengerConfig) => void;
   updateUserSession: (session: UserSession) => void;
   updateMetadata: (metadata: MessengerMetadata) => void;
+  deauthenticate: () => void;
+  destroy: () => void;
 }
