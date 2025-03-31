@@ -142,13 +142,22 @@ messenger.initialize({
     aiAgentId: 'AI_AGENT_ID',
 });
 ```
+
 ### Deauthenticate and clear session
 
-While it is not required, you can de-authenticate the SDK to clear session data and disconnect when a user logs out.
+The messenger provides two different methods for cleanup:
 
+1. Use `deauthenticate()` to handle user logout by clearing session data and disconnecting from the chat SDK:
+```javascript
+messenger.deauthenticate();
+```
+
+2. Use `destroy()` to remove the messenger components from the DOM:
 ```javascript
 messenger.destroy();
 ```
+
+> Note: `deauthenticate()` is used for user session management and handles the chat SDK disconnection internally. `destroy()` is used for UI cleanup, removing the rendered components from the page without affecting the session state.
 
 ### Passing context object to Agent
 
