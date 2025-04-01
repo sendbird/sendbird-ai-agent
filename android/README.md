@@ -230,7 +230,10 @@ There are two ways to display the messenger:
 
 ![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
 
-The SDK provides the `MessengerLauncher` view, which can be easily attached to your application's root view programmatically without directly adding it to XML layouts.
+The SDK provides the MessengerLauncher view, which can be easily attached to your application’s root view programmatically without directly adding it to XML layouts.
+
+> Since the SDK utilizes Fragments, make sure the context you pass to the MessengerLauncher is an instance of FragmentActivity. If you’re using standard Android components such as AppCompatActivity, there’s no need to worry, as it already inherits from FragmentActivity.
+However, if you’re using a custom or legacy activity, verify that it inherits from FragmentActivity to avoid runtime issues.
 
 To add the MessengerLauncher to your screen, simply call the `attach()` function of `MessengerLauncher`, specifying the AI agent ID and configuration parameters:
 
