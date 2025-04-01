@@ -1,23 +1,35 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
-export function useUpdateStatus() {
-  const [isUpdated, setIsUpdated] = useState(false);
+type StatusKey = string;
+type Status = 'idle' | 'updated';
 
-  const withUpdateStatus = useCallback((handler: () => void | Promise<void>) => {
-    return async () => {
+interface UpdateStatusOptions {
+  key: StatusKey;
+}
+
+export function useUpdateStatus({ key }: UpdateStatusOptions) {
+  const [status, setStatus] = useState<Record<StatusKey, Status>>({
+    [key]: 'idle',
+  });
+
+  const withUpdateStatus = <T extends (...args: any[]) => any>(fn: T) => {
+    return async (...args: Parameters<T>) => {
       try {
-        await handler();
-        setIsUpdated(true);
+        await fn(...args);
+        setStatus((prev) => ({ ...prev, [key]: 'updated' }));
+
         setTimeout(() => {
-          setIsUpdated(false);
+          setStatus((prev) => ({ ...prev, [key]: 'idle' }));
         }, 2000);
       } catch (error) {
-        console.error('Update failed:', error);
+        setStatus((prev) => ({ ...prev, [key]: 'idle' }));
+        throw error;
       }
     };
-  }, []);
+  };
 
-  const getDisplayText = (originalText: string) => (isUpdated ? 'Updated!' : originalText);
+  const getDisplayText = (originalText: string, updateText = 'Updated!') =>
+    status[key] === 'updated' ? updateText : originalText;
 
   return { withUpdateStatus, getDisplayText };
 }

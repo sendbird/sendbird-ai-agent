@@ -2,33 +2,15 @@ import { Button } from '@/components/ui/Button';
 import { CodeEditor } from '@/components/ui/CodeEditor';
 import { Section } from '@/components/ui/Section';
 import { CODE_SAMPLES } from '@/constants/codeSamples';
+import { useMessengerControls } from '@/hooks/useMessengerControls';
 import { useScrollIntoView } from '@/hooks/useScrollIntoView';
-import { useUpdateStatus } from '@/hooks/useUpdateStatus';
 
 import { ConversationListDisplay } from './ConversationListDisplay';
 
-interface Props {
-  onUpdateConfig: () => void;
-  onUpdateSession: () => void;
-  onUpdateLocale: () => void;
-  onUpdateMetadata: () => void;
-  onOpen: () => void;
-  onClose: () => void;
-}
+export function AdvancedFeatures() {
+  const actions = useMessengerControls();
 
-export function AdvancedFeatures({
-  onUpdateConfig,
-  onUpdateSession,
-  onOpen,
-  onClose,
-  onUpdateMetadata,
-  onUpdateLocale,
-}: Props) {
   useScrollIntoView();
-  const configUpdate = useUpdateStatus();
-  const sessionUpdate = useUpdateStatus();
-  const localeUpdate = useUpdateStatus();
-  const metadataUpdate = useUpdateStatus();
 
   return (
     <div className="pt-6">
@@ -36,16 +18,12 @@ export function AdvancedFeatures({
       <div className="space-y-8">
         <Section title="Switch Application" description="Change to a different application configuration.">
           <CodeEditor value={CODE_SAMPLES.updateConfig} language="javascript" />
-          <Button onClick={configUpdate.withUpdateStatus(onUpdateConfig)}>
-            {configUpdate.getDisplayText('Update Config')}
-          </Button>
+          <Button onClick={actions.config.execute}>{actions.config.getDisplayText('Update Config')}</Button>
         </Section>
 
         <Section title="User Authentication" description="Set up user authentication for personalized experience.">
           <CodeEditor value={CODE_SAMPLES.updateSession} language="javascript" />
-          <Button onClick={sessionUpdate.withUpdateStatus(onUpdateSession)}>
-            {sessionUpdate.getDisplayText('Update Session')}
-          </Button>
+          <Button onClick={actions.session.execute}>{actions.session.getDisplayText('Update Session')}</Button>
         </Section>
 
         <Section
@@ -54,8 +32,8 @@ export function AdvancedFeatures({
         >
           <CodeEditor value={CODE_SAMPLES.controls} language="javascript" />
           <div className="mt-3 space-x-3">
-            <Button onClick={onOpen}>Open Messenger</Button>
-            <Button onClick={onClose}>Close Messenger</Button>
+            <Button onClick={actions.open.execute}>Open Messenger</Button>
+            <Button onClick={actions.close.execute}>Close Messenger</Button>
           </div>
         </Section>
 
@@ -69,15 +47,25 @@ export function AdvancedFeatures({
           description="Set language and country code preferences to localize AI Agent interactions."
         >
           <CodeEditor value={CODE_SAMPLES.contextObject_locale} language="javascript" />
-          <Button onClick={localeUpdate.withUpdateStatus(onUpdateLocale)}>
-            {localeUpdate.getDisplayText('Update Locale Settings')}
-          </Button>
+          <Button onClick={actions.locale.execute}>{actions.locale.getDisplayText('Update Locale Settings')}</Button>
         </Section>
         <Section description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings.">
           <CodeEditor value={CODE_SAMPLES.contextObject_message} language="javascript" />
-          <Button onClick={metadataUpdate.withUpdateStatus(onUpdateMetadata)}>
-            {metadataUpdate.getDisplayText('Update Message Metadata')}
+          <Button onClick={actions.metadata.execute}>
+            {actions.metadata.getDisplayText('Update Message Metadata')}
           </Button>
+        </Section>
+
+        <Section title="Cleanup" description="Methods for cleaning up messenger resources and session data.">
+          <CodeEditor value={CODE_SAMPLES.cleanup} language="javascript" />
+          <div className="mt-3 space-x-3">
+            <Button onClick={actions.cleanup.deauthenticate.execute}>
+              {actions.cleanup.deauthenticate.getDisplayText('Deauthenticate')}
+            </Button>
+            <Button onClick={actions.cleanup.destroy.execute}>
+              {actions.cleanup.destroy.getDisplayText('Destroy UI')}
+            </Button>
+          </div>
         </Section>
       </div>
     </div>
