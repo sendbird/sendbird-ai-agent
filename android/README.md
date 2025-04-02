@@ -306,7 +306,7 @@ This allows for a more personalized and context-aware interaction experience.
 
 ```kotlin
 AIAgentMessenger.metadata.language = "en-US" // default: Locale.getDefault().toLanguageTag()
-AIAgentMessenger.metadata.countryCode = "US" // default: Locale.getDefault().country
+AIAgentMessenger.metadata.countryCode = "US" // default: null
 
 AIAgentMessenger.metadata.message.contextObject.put("key1", "value1")
 AIAgentMessenger.metadata.message.contextObject.putAll(
