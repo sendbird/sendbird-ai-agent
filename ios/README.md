@@ -226,11 +226,6 @@ This allows for a more personalized and context-aware interaction experience.
 ```swift
 AIAgentMessenger.metadata.language = "en-US" // default: Locale.preferredLanguages.first
 AIAgentMessenger.metadata.countryCode = "US" // default: Locale.current.regionCode
-
-AIAgentMessenger.metadata.message.contextObject = ["key1": "value1", "key2": "value2"]
-AIAgentMessenger.metadata.message.contextObject["key1"] = "value1"
-AIAgentMessenger.metadata.message.contextObject.removeValue(forKey: "key1")
-AIAgentMessenger.metadata.message.contextObject.removeAll()
 ```
 
 [def]: #prerequisites
