@@ -97,6 +97,8 @@ AIAgentMessenger.initialize(
 
 Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
 
+> Note: Make sure to perform the following steps after the SDK has been successfully initialized. Once initialization is complete, set up the user session and launch the messenger.
+
 ### Manage user sessions
 
 User sessions require periodic token reissuance for security purposes, so the following session management is necessary.
@@ -149,15 +151,14 @@ Display a floating launcher button:
 
 ```swift
 AIAgentMessenger.attachLauncher(
-    aiAgentId: self.aiAgentId,
-    options: SBALauncherLayoutOptions()
+    aiAgentId: self.aiAgentId
 )
 ```
 
 To hide the launcher:
 
 ```swift
-AIAgentMessenger.detachLauncher(botId: self.botId)
+AIAgentMessenger.detachLauncher(aiAgentId: {AIAgentId})
 ```
 
 #### 2. Opening the conversation channel in presentation mode
@@ -167,7 +168,9 @@ AIAgentMessenger.detachLauncher(botId: self.botId)
 Present the chat view as a modal:
 
 ```swift
-AIAgentMessenger.presentConversation(botId: self.botId3)
+AIAgentMessenger.presentConversation(
+    aiAgentId: {AIAgentId}
+)
 ```
 
 ---
@@ -190,9 +193,13 @@ let options = LauncherLayoutOptions(
     useSafeArea: true
 )
 
-AIAgentMessenger.attachLauncher(
-    botId: self.botId,
+let params = LauncherSettingsParams(
     options: options
+)
+
+AIAgentMessenger.attachLauncher(
+    aiAgentId: {AIAgentId},
+    params: params
 )
 ```
 
@@ -217,15 +224,37 @@ AIAgentMessenger.deauthenticate { [weak self] in
 
 ### Passing context object to Agent
 
-You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses. 
+You can predefine customer-specific information, such as country, language, or other custom context data, to guide the AI Agent in providing faster and more accurate responses. 
 
 This allows for a more personalized and context-aware interaction experience.
 
 > Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
 
 ```swift
-AIAgentMessenger.metadata.language = "en-US" // default: Locale.preferredLanguages.first
-AIAgentMessenger.metadata.countryCode = "US" // default: Locale.current.regionCode
+// Case: Attach launcher
+let params = LauncherSettingsParams(
+    language: "en-US", // (opt)default: Locale.preferredLanguages.first
+    countryCode: "US", // (opt)default: Locale.current.regionCode
+    context: ["key": "value"], // (opt)
+    ...
+)
+AIAgentMessenger.attachLauncher(
+    aiAgentId: {AIAgentId},
+    params: params
+)
+```
+```swift
+// Case: 
+let params = ConversationSettingsParams(
+    language: "en-US", // (opt)default: Locale.preferredLanguages.first
+    countryCode: "US", // (opt)default: Locale.current.regionCode
+    context: ["key": "value"], // (opt)
+    ...
+)
+AIAgentMessenger.presentConversation(
+    aiAgentId: {AIAgentId},
+    params: params
+)
 ```
 
 [def]: #prerequisites
