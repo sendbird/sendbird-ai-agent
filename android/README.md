@@ -238,13 +238,7 @@ However, if you’re using a custom or legacy activity, verify that it inherits 
 To add the MessengerLauncher to your screen, simply call the `attach()` function of `MessengerLauncher`, specifying the AI agent ID and configuration parameters:
 
 ```kotlin
-val params = LauncherLayoutParams(
-    LaunchMode.ANCHORED,
-    LauncherMargin(12, 12, 12, 12),
-    LauncherLocation.BOTTOM_END
-)
-
-MessengerLauncher(this, it, params).attach()
+MessengerLauncher(context, "your_ai_agent_id").attach()
 ```
 
 - `LauncherLayoutParams` allows you to configure the MessengerLauncher’s behavior and appearance:
@@ -302,19 +296,36 @@ You can predefine customer-specific information such as country, language, or ot
 
 This allows for a more personalized and context-aware interaction experience.
 
-> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
+> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses. The configured context is set when the conversation starts.
+If you need to update the context during the conversation, you can use the Platform API to modify it.
 
+#### 1. Applying settings data through MessengerLauncher
 ```kotlin
-AIAgentMessenger.metadata.language = "en-US" // default: Locale.getDefault().toLanguageTag()
-AIAgentMessenger.metadata.countryCode = "US" // default: Locale.getDefault().country
-
-AIAgentMessenger.metadata.message.contextObject.put("key1", "value1")
-AIAgentMessenger.metadata.message.contextObject.putAll(
-    mapOf(
+MessengerLauncher(this, it, LauncherSettingsParams(
+    language = "en-US",
+    countryCode = "US",
+    context = mapOf(
         "key1" to "value1",
         "key2" to "value2"
     )
+)).attach()
+```
+
+#### 2. Applying settings data through full-screen conversation
+
+```kotlin
+startActivity(
+    ConversationActivity.newIntent(
+        context = context,
+        aiAgentId = aiAgentId,
+        conversationSettingsParams = ConversationSettingsParams(
+            language = "en-US",
+            countryCode = "US",
+            context = mapOf(
+                "key1" to "value1",
+                "key2" to "value2"
+            )
+        )
+    )
 )
-AIAgentMessenger.metadata.message.contextObject.remove("key1")
-AIAgentMessenger.metadata.message.contextObject.clear()
 ```
