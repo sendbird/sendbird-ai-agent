@@ -168,31 +168,31 @@ This allows for a more personalized and context-aware interaction experience.
 > Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
 
 ```javascript
-// Metadata can be updated incrementally using updateMetadata().
-// Top-level key-value pairs are merged across multiple calls.
-
-messenger.updateMetadata({
+// Language and country code can be set using updateConfig
+// These settings help personalize interactions
+messenger.updateConfig({
     language: 'en-US', // default: navigator.language
 });
 
-messenger.updateMetadata({
+messenger.updateConfig({
     countryCode: 'US',
 });
 
+// Context objects can be passed through the updateConfig method
 const newContextObject = { key1: 'value1', key2: 'value2' };
-messenger.updateMetadata({
-    message: { contextObject: newContextObject },
+messenger.updateConfig({
+    context: newContextObject,
 });
 
 // Updating context with a new object replaces the previous one.
 const removedContextObject = { key1: 'value1' };
-messenger.updateMetadata({
-    message: { contextObject: removedContextObject },
+messenger.updateConfig({
+    context: removedContextObject,
 });
 
 // Sending an empty object clears the context.
 const emptyContextObject = {};
-messenger.updateMetadata({
-    message: { contextObject: emptyContextObject },
+messenger.updateConfig({
+    context: emptyContextObject,
 });
 ```

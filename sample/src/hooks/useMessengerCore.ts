@@ -44,19 +44,17 @@ export function useMessengerCore() {
   };
 
   const updateLocale = () => {
-    messengerRef.current?.updateMetadata({
+    messengerRef.current?.updateConfig({
       language: 'ko-KR',
       countryCode: 'KR',
     });
   };
 
-  const updateMetadata = () => {
-    messengerRef.current?.updateMetadata({
-      message: {
-        contextObject: {
-          userPreference: 'technical',
-          customerTier: 'premium',
-        },
+  const updateContext = () => {
+    messengerRef.current?.updateConfig({
+      context: {
+        userPreference: 'technical',
+        customerTier: 'premium',
       },
     });
   };
@@ -70,7 +68,7 @@ export function useMessengerCore() {
     updateConfig,
     updateSession,
     updateLocale,
-    updateMetadata,
+    updateContext,
     open,
     close,
     deauthenticate,

@@ -38,35 +38,39 @@ function closeAgent() {
   messenger.close();
 }`,
 
-  contextObject_locale: `// metadata is updated incrementally using updateMetadata().
-// top-level key-value pairs are merged across multiple calls.
+  messenger_locale: `// language and country code settings for the messenger
 
-messenger.updateMetadata({
-  language: 'ko-KR', // default: navigator.language
+messenger.updateConfig({
+  // Should follow the IETF BCP 47 format.
+  // For example, "ko-KR" for Korean in South Korea or "en-US" for English in the United States. 
+  // default: navigator.language.
+  language: 'ko-KR',  
 });
 
-messenger.updateMetadata({
+messenger.updateConfig({
+  // Should follow the ISO 3166 format.
+  // For example, "KR" for South Korea or "US" for the United States.
   countryCode: 'KR',
 });`,
 
-  contextObject_message: `const newContextObject = {
+  messenger_context: `const newContextObject = {
   userPreference: 'technical',
   customerTier: 'premium',
 };
-messenger.updateMetadata({
-  message: { contextObject: newContextObject },
+messenger.updateConfig({
+  context: newContextObject,
 });
 
 // updating the context with a new object replaces the previous one.
 const updatedContextObject = { userPreference: 'simple' };
-messenger.updateMetadata({
-  message: { contextObject: updatedContextObject },
+messenger.updateConfig({
+  context: updatedContextObject,
 });
 
 // sending an empty object clears the context.
 const emptyContextObject = {};
-messenger.updateMetadata({
-  message: { contextObject: emptyContextObject },
+messenger.updateConfig({
+  context: emptyContextObject,
 });`,
 
   customDisplay: `messenger.initialize({

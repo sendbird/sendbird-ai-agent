@@ -46,11 +46,11 @@ export function AdvancedFeatures() {
           title="Context Object"
           description="Set language and country code preferences to localize AI Agent interactions."
         >
-          <CodeEditor value={CODE_SAMPLES.contextObject_locale} language="javascript" />
+          <CodeEditor value={CODE_SAMPLES.messenger_locale} language="javascript" />
           <Button onClick={actions.locale.execute}>{actions.locale.getDisplayText('Update Locale Settings')}</Button>
         </Section>
         <Section description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings.">
-          <CodeEditor value={CODE_SAMPLES.contextObject_message} language="javascript" />
+          <CodeEditor value={CODE_SAMPLES.messenger_context} language="javascript" />
           <Button onClick={actions.metadata.execute}>
             {actions.metadata.getDisplayText('Update Message Metadata')}
           </Button>

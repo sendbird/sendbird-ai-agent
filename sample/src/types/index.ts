@@ -1,6 +1,9 @@
 interface MessengerConfig {
   appId: string;
   aiAgentId: string;
+  language?: string;
+  countryCode?: string;
+  context?: Record<string, string>;
 }
 
 interface UserSession {
@@ -9,21 +12,13 @@ interface UserSession {
   onSessionTokenRequest: () => Promise<string>;
 }
 
-interface MessengerMetadata {
-  language?: string;
-  countryCode?: string;
-  message?: {
-    contextObject?: Record<string, string>;
-  };
-}
 export interface MessengerInstance {
   initialize: (config: MessengerConfig) => void;
   open: () => void;
   close: () => void;
   onLoad: (callback: () => void) => void;
-  updateConfig: (config: MessengerConfig) => void;
+  updateConfig: (config: Partial<MessengerConfig>) => void;
   updateUserSession: (session: UserSession) => void;
-  updateMetadata: (metadata: MessengerMetadata) => void;
   deauthenticate: () => void;
   destroy: () => void;
 }
