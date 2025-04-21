@@ -43,22 +43,60 @@ export function useMessengerCore() {
     });
   };
 
-  const updateLocale = () => {
-    messengerRef.current?.updateMetadata({
-      language: 'ko-KR',
-      countryCode: 'KR',
+  const updateLocale = async () => {
+    try {
+      messengerRef.current?.destroy();
+
+      const loadMessenger = await loadMessengerSDK();
+      const messengerInstance = await loadMessenger();
+      messengerInstance.initialize({
+        appId: import.meta.env.VITE_APP_ID,
+        aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
+        language: 'ko-KR',
+        countryCode: 'KR',
+        context: {
+          userPreference: 'simple',
+          customerTier: 'standard',
+        },
+      });
+
+      messengerRef.current = messengerInstance;
+      messengerInstance.onLoad(() => {
+        messengerInstance.open();
+      });
+    } catch (error) {
+      console.error('Failed to reinitialize messenger:', error);
+    }
+  };
+
+  const updateUILanguage = async () => {
+    messengerRef.current?.updateConfig({
+      language: 'ja-JP',
     });
   };
 
-  const updateMetadata = () => {
-    messengerRef.current?.updateMetadata({
-      message: {
-        contextObject: {
+  const updateContext = async () => {
+    try {
+      messengerRef.current?.destroy();
+
+      const loadMessenger = await loadMessengerSDK();
+      const messengerInstance = await loadMessenger();
+      messengerInstance.initialize({
+        appId: import.meta.env.VITE_APP_ID,
+        aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
+        context: {
           userPreference: 'technical',
           customerTier: 'premium',
         },
-      },
-    });
+      });
+
+      messengerRef.current = messengerInstance;
+      messengerInstance.onLoad(() => {
+        messengerInstance.open();
+      });
+    } catch (error) {
+      console.error('Failed to reinitialize messenger:', error);
+    }
   };
 
   const open = () => messengerRef.current?.open();
@@ -70,7 +108,8 @@ export function useMessengerCore() {
     updateConfig,
     updateSession,
     updateLocale,
-    updateMetadata,
+    updateContext,
+    updateUILanguage,
     open,
     close,
     deauthenticate,
