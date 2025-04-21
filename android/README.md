@@ -165,6 +165,8 @@ To ensure that your `AgentApplication` class is used as the application class, y
 
 Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
 
+> Note: Make sure to perform the following steps after the SDK has been successfully initialized. Once initialization is complete, set up the user session and launch the messenger.
+
 ### Manage user sessions
     
 To use the SDK, session information is required.  
