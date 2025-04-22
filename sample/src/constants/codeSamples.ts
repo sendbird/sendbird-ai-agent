@@ -53,15 +53,7 @@ messenger.initialize({
   countryCode: 'KR',
 });`,
 
-  messenger_ui_language: `// You can change the UI language at runtime
-// This won't affect the AI Agent's language capabilities
-messenger.updateConfig({
-  language: 'ja-JP', // Changes only the UI language to Japanese
-});`,
-
   messenger_context: `// IMPORTANT: Context can only be set during initialization
-// and cannot be updated using updateConfig afterward
-
 messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',
@@ -69,13 +61,6 @@ messenger.initialize({
     userPreference: 'technical',
     customerTier: 'premium'
   }
-});
-
-// To change context, you must re-initialize the messenger
-// The following will NOT update the context:
-messenger.updateConfig({
-  // This will be ignored
-  context: { userPreference: 'simple' }
 });`,
 
   customDisplay: `messenger.initialize({

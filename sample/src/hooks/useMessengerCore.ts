@@ -45,7 +45,7 @@ export function useMessengerCore() {
 
   const updateLocale = async () => {
     try {
-      messengerRef.current?.destroy();
+      messengerRef.current = null;
 
       const loadMessenger = await loadMessengerSDK();
       const messengerInstance = await loadMessenger();
@@ -54,10 +54,6 @@ export function useMessengerCore() {
         aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
         language: 'ko-KR',
         countryCode: 'KR',
-        context: {
-          userPreference: 'simple',
-          customerTier: 'standard',
-        },
       });
 
       messengerRef.current = messengerInstance;
@@ -69,15 +65,9 @@ export function useMessengerCore() {
     }
   };
 
-  const updateUILanguage = async () => {
-    messengerRef.current?.updateConfig({
-      language: 'ja-JP',
-    });
-  };
-
   const updateContext = async () => {
     try {
-      messengerRef.current?.destroy();
+      messengerRef.current = null;
 
       const loadMessenger = await loadMessengerSDK();
       const messengerInstance = await loadMessenger();
@@ -109,7 +99,6 @@ export function useMessengerCore() {
     updateSession,
     updateLocale,
     updateContext,
-    updateUILanguage,
     open,
     close,
     deauthenticate,

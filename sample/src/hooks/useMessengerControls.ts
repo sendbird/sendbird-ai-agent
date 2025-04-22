@@ -13,7 +13,6 @@ export function useMessengerControls() {
   const contextStatus = useUpdateStatus({ key: 'context' });
   const deauthenticateStatus = useUpdateStatus({ key: 'deauthenticate' });
   const destroyStatus = useUpdateStatus({ key: 'destroy' });
-  const updateUILanguageStatus = useUpdateStatus({ key: 'updateUILanguage' });
 
   return useMemo(
     () => ({
@@ -34,10 +33,6 @@ export function useMessengerControls() {
       locale: {
         execute: localeStatus.withUpdateStatus(messenger.updateLocale),
         getDisplayText: (text: string) => localeStatus.getDisplayText(text),
-      },
-      updateUILanguage: {
-        execute: updateUILanguageStatus.withUpdateStatus(messenger.updateUILanguage),
-        getDisplayText: (text: string) => updateUILanguageStatus.getDisplayText(text),
       },
       context: {
         execute: contextStatus.withUpdateStatus(messenger.updateContext),

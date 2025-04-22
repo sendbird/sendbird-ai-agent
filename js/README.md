@@ -164,10 +164,9 @@ You can predefine customer-specific information such as country, language, or ot
 
 This allows for a more personalized and context-aware interaction experience.
 
-> **Important**: These settings can only be configured during initialization and cannot be changed through `updateConfig` afterward until re-initialization.
+> **Important**: These settings can only be configured during initialization.
 
 ```javascript
-// These settings can only be set during initialization
 const messenger = await loadMessenger();
 messenger.initialize({
     appId: 'YOUR_APP_ID',
@@ -183,14 +182,3 @@ messenger.initialize({
         customerTier: 'premium'
     }
 });
-
-// Note: The following settings cannot be updated after initialization until re-initialization
-messenger.updateConfig({
-    // These will be ignored by the AI Agent (server-side)
-    language: 'ko-KR', // only update UI language setting
-    countryCode: 'KR',
-    context: {
-        userPreference: 'simple'
-    }
-});
-```

@@ -50,21 +50,11 @@ export function AdvancedFeatures() {
           <Button onClick={actions.locale.execute}>{actions.locale.getDisplayText('Try locale settings')}</Button>
         </Section>
         <Section
-          description="While initial settings affect server API requests, you can still change the UI language at runtime using updateConfig."
-        >
-          <CodeEditor value={CODE_SAMPLES.messenger_ui_language} language="javascript" />
-          <Button onClick={actions.updateUILanguage.execute}>
-            {actions.updateUILanguage.getDisplayText('Change UI language settings')}
-          </Button>
-        </Section>
-        <Section
           title="Context Object"
           description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings."
         >
           <CodeEditor value={CODE_SAMPLES.messenger_context} language="javascript" />
-          <Button onClick={actions.context.execute}>
-            {actions.context.getDisplayText('Update Context')}
-          </Button>
+          <Button onClick={actions.context.execute}>{actions.context.getDisplayText('Update Context')}</Button>
         </Section>
 
         <Section title="Cleanup" description="Methods for cleaning up messenger resources and session data.">
