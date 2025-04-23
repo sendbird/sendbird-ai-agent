@@ -10,7 +10,7 @@ export function useMessengerControls() {
   const configStatus = useUpdateStatus({ key: 'config' });
   const sessionStatus = useUpdateStatus({ key: 'session' });
   const localeStatus = useUpdateStatus({ key: 'locale' });
-  const metadataStatus = useUpdateStatus({ key: 'metadata' });
+  const contextStatus = useUpdateStatus({ key: 'context' });
   const deauthenticateStatus = useUpdateStatus({ key: 'deauthenticate' });
   const destroyStatus = useUpdateStatus({ key: 'destroy' });
 
@@ -34,9 +34,9 @@ export function useMessengerControls() {
         execute: localeStatus.withUpdateStatus(messenger.updateLocale),
         getDisplayText: (text: string) => localeStatus.getDisplayText(text),
       },
-      metadata: {
-        execute: metadataStatus.withUpdateStatus(messenger.updateMetadata),
-        getDisplayText: (text: string) => metadataStatus.getDisplayText(text),
+      context: {
+        execute: contextStatus.withUpdateStatus(messenger.updateContext),
+        getDisplayText: (text: string) => contextStatus.getDisplayText(text),
       },
       cleanup: {
         deauthenticate: {

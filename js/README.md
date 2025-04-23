@@ -19,7 +19,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
+Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
 <br><br/>
 You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
 
@@ -50,7 +50,6 @@ messenger.initialize({
     aiAgentId: 'YOUR_BOT_ID',
 });
 ```
-
 ---
 
 ## Running your application
@@ -165,34 +164,21 @@ You can predefine customer-specific information such as country, language, or ot
 
 This allows for a more personalized and context-aware interaction experience.
 
-> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
+> **Important**: These settings can only be configured during initialization.
 
 ```javascript
-// Metadata can be updated incrementally using updateMetadata().
-// Top-level key-value pairs are merged across multiple calls.
-
-messenger.updateMetadata({
-    language: 'en-US', // default: navigator.language
-});
-
-messenger.updateMetadata({
+const messenger = await loadMessenger();
+messenger.initialize({
+    appId: 'YOUR_APP_ID',
+    aiAgentId: 'YOUR_BOT_ID',
+    // Language setting (IETF BCP 47 format)
+    // default: navigator.language
+    language: 'en-US',
+    // Country code setting (ISO 3166 format)
     countryCode: 'US',
+    // Context object for the AI Agent
+    context: {
+        userPreference: 'technical',
+        customerTier: 'premium'
+    }
 });
-
-const newContextObject = { key1: 'value1', key2: 'value2' };
-messenger.updateMetadata({
-    message: { contextObject: newContextObject },
-});
-
-// Updating context with a new object replaces the previous one.
-const removedContextObject = { key1: 'value1' };
-messenger.updateMetadata({
-    message: { contextObject: removedContextObject },
-});
-
-// Sending an empty object clears the context.
-const emptyContextObject = {};
-messenger.updateMetadata({
-    message: { contextObject: emptyContextObject },
-});
-```

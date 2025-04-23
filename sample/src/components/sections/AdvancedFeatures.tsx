@@ -43,17 +43,18 @@ export function AdvancedFeatures() {
         </Section>
 
         <Section
-          title="Context Object"
-          description="Set language and country code preferences to localize AI Agent interactions."
+          title="Locale Configuration"
+          description="Configure language and country code preferences during initialization to localize AI Agent interactions."
         >
-          <CodeEditor value={CODE_SAMPLES.contextObject_locale} language="javascript" />
-          <Button onClick={actions.locale.execute}>{actions.locale.getDisplayText('Update Locale Settings')}</Button>
+          <CodeEditor value={CODE_SAMPLES.messenger_locale} language="javascript" />
+          <Button onClick={actions.locale.execute}>{actions.locale.getDisplayText('Try locale settings')}</Button>
         </Section>
-        <Section description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings.">
-          <CodeEditor value={CODE_SAMPLES.contextObject_message} language="javascript" />
-          <Button onClick={actions.metadata.execute}>
-            {actions.metadata.getDisplayText('Update Message Metadata')}
-          </Button>
+        <Section
+          title="Context Object"
+          description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings."
+        >
+          <CodeEditor value={CODE_SAMPLES.messenger_context} language="javascript" />
+          <Button onClick={actions.context.execute}>{actions.context.getDisplayText('Update Context')}</Button>
         </Section>
 
         <Section title="Cleanup" description="Methods for cleaning up messenger resources and session data.">

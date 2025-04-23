@@ -17,7 +17,7 @@ messenger.onLoad(() => {
   updateConfig: `messenger.updateConfig({
   appId: 'NEW_APP_ID',
   aiAgentId: 'NEW_AI_AGENT_ID',
-  // ... other config options
+  // Other configuration options
 });`,
 
   updateSession: `messenger.updateUserSession({
@@ -38,35 +38,29 @@ function closeAgent() {
   messenger.close();
 }`,
 
-  contextObject_locale: `// metadata is updated incrementally using updateMetadata().
-// top-level key-value pairs are merged across multiple calls.
+  messenger_locale: `// language and country code settings for the messenger
+messenger.initialize({
+  appId: 'APP_ID',
+  aiAgentId: 'AI_AGENT_ID',
 
-messenger.updateMetadata({
-  language: 'ko-KR', // default: navigator.language
-});
+  // Should follow the IETF BCP 47 format.
+  // e.g. "ko-KR" for Korean in South Korea or "en-US" for English in the United States.
+  // default: navigator.language
+  language: 'ko-KR',
 
-messenger.updateMetadata({
+  // Should follow the ISO 3166 format.
+  // e.g. "KR" for South Korea or "US" for the United States.
   countryCode: 'KR',
 });`,
 
-  contextObject_message: `const newContextObject = {
-  userPreference: 'technical',
-  customerTier: 'premium',
-};
-messenger.updateMetadata({
-  message: { contextObject: newContextObject },
-});
-
-// updating the context with a new object replaces the previous one.
-const updatedContextObject = { userPreference: 'simple' };
-messenger.updateMetadata({
-  message: { contextObject: updatedContextObject },
-});
-
-// sending an empty object clears the context.
-const emptyContextObject = {};
-messenger.updateMetadata({
-  message: { contextObject: emptyContextObject },
+  messenger_context: `// IMPORTANT: Context can only be set during initialization
+messenger.initialize({
+  appId: 'APP_ID',
+  aiAgentId: 'AI_AGENT_ID',
+  context: {
+    userPreference: 'technical',
+    customerTier: 'premium'
+  }
 });`,
 
   customDisplay: `messenger.initialize({
