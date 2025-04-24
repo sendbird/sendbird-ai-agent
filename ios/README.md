@@ -18,6 +18,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
+    - [Custom Localization (Multi-language Support)](#custom-localization-multi-language-support)
 
 ## Requirements
 
@@ -227,5 +228,9 @@ This allows for a more personalized and context-aware interaction experience.
 AIAgentMessenger.metadata.language = "en-US" // default: Locale.preferredLanguages.first
 AIAgentMessenger.metadata.countryCode = "US" // default: Locale.current.regionCode
 ```
+
+### Custom Localization (Multi-language Support)
+
+AIAgent supports adding and customizing multi languages. For more information, see [this detail page](MULTILANGUAGE.md).
 
 [def]: #prerequisites
