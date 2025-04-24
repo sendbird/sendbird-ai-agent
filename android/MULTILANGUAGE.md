@@ -9,10 +9,7 @@ This guide explains how to localize the UI strings used in the Sendbird AI Agent
 - [Overview](#overview)
 - [Default Strings Used by the SDK](#default-strings-used-by-the-sdk)
 - [How to Add Translations](#how-to-add-translations)
-- [Fallback Behavior](#fallback-behavior)
 - [Overriding SDK Strings in Your App](#overriding-sdk-strings-in-your-app)
-- [Best Practices](#best-practices)
-- [Sample Translations](#sample-translations)
 
 ---
 
