@@ -3,7 +3,7 @@ import { ReactNode, useState } from 'react';
 interface Props {
   title?: string;
   titleClassName?: string;
-  description?: string;
+  description?: ReactNode;
   descriptionClassName?: string;
   children: ReactNode;
 }

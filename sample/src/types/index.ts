@@ -1,9 +1,10 @@
-interface MessengerConfig {
+export interface MessengerConfig {
   appId: string;
   aiAgentId: string;
   language?: string;
   countryCode?: string;
   context?: Record<string, string>;
+  stringSet?: Record<string, string>;
 }
 
 interface UserSession {

@@ -1,0 +1,61 @@
+export const stringSet = {
+  // Channel - Common
+  CHANNEL_FROZEN: '频道已冻结',
+  PLACE_HOLDER__WRONG: '出现问题',
+  PLACE_HOLDER__NO_MESSAGES: '没有消息',
+  UNKNOWN__UNKNOWN_MESSAGE_TYPE: '(未知消息类型)',
+
+  // Channel - Header
+  HEADER_BUTTON__AGENT_HANDOFF: '连接客服',
+
+  // Message Input
+  MESSAGE_INPUT__PLACE_HOLDER: '请输入问题',
+  MESSAGE_INPUT__PLACE_HOLDER__WAIT_AI_AGENT_RESPONSE: '等待回复中...',
+  MESSAGE_INPUT__PLACE_HOLDER__DISABLED: '此频道不可用',
+
+  // Common UI
+  BUTTON__CANCEL: '取消',
+  BUTTON__SAVE: '保存',
+  BUTTON__OK: '确定',
+  NO_NAME: '(无名)',
+  RETRY: '重试',
+
+  // Date format
+  DATE_FORMAT__MESSAGE_LIST__DATE_SEPARATOR: 'yyyy年MM月dd日',
+  DATE_FORMAT__MESSAGE_TIMESTAMP: 'p',
+
+  // File Upload
+  FILE_UPLOAD_NOTIFICATION__COUNT_LIMIT: '一次只能上传一张图片',
+  FILE_UPLOAD_NOTIFICATION__SIZE_LIMIT: '每个文件最大 %d MB',
+
+  // File Viewer
+  FILE_VIEWER__UNSUPPORT: '不支持的消息',
+
+  // CSAT
+  CSAT_TITLE_UNSUBMITTED: '您的反馈对我们很重要',
+  CSAT_TITLE_SUBMITTED: '提交成功！',
+  CSAT_CRE_TITLE: '您的问题解决了吗？',
+  CSAT_CRE_SOLVED: '是的，谢谢！ 👍',
+  CSAT_CRE_NOT_SOLVED: '不，没有帮助。',
+  CSAT_REASON_PLACEHOLDER: '分享您的反馈',
+  CSAT_RATING_TITLE: '您如何评价您的体验？',
+  CSAT5_RATING_SCORE_1: '很差',
+  CSAT5_RATING_SCORE_2: '差',
+  CSAT5_RATING_SCORE_3: '一般',
+  CSAT5_RATING_SCORE_4: '好',
+  CSAT5_RATING_SCORE_5: '很好',
+  CSAT_SUBMIT_LABEL: '提交',
+  CSAT_SUBMISSION_EXPIRED: '很抱歉，调查期已结束。',
+
+  POWERED_BY: '提供支持',
+
+  // Conversation list
+  CONVERSATION_CLOSED_FOOTER_LABEL: '您的对话已结束',
+  START_NEW_CONVERSATION: '💬 开始新对话',
+  RETURN_TO_CONVERSATION: '💬 返回对话',
+  CONVERSATION_LIST__HEADER_TITLE: '对话历史',
+  CONVERSATION_LIST__TOPICS_FALLBACK: '无类别',
+  CONVERSATION_LIST__NO_CONVERSATIONS: '尚无对话',
+  DATE_FORMAT__CONVERSATION_LIST__LIST_ITEM_TITLE: 'yyyy/MM/dd',
+  DATE_FORMAT__CONVERSATION_LIST__LIST_ITEM_TITLE_CAPTION: 'ah:mm',
+};

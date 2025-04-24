@@ -49,6 +49,52 @@ export function AdvancedFeatures() {
           <CodeEditor value={CODE_SAMPLES.messenger_locale} language="javascript" />
           <Button onClick={actions.locale.execute}>{actions.locale.getDisplayText('Try locale settings')}</Button>
         </Section>
+
+        <Section
+          title="Localization Customization"
+          description={
+            <>
+              Customize specific strings in supported languages or add support for new languages by overriding the
+              stringSet.
+              <br />
+              Currently, Sendbird messenger supports 10 built-in languages: English (en), Korean (ko), Japanese (ja), Spanish (es),
+              French (fr), German (de), Italian (it), Portuguese (pt), Turkish (tr), and Hindi (hi).
+            </>
+          }
+        >
+          <Section
+            title="Scenario 1: Customize strings in supported languages"
+            description="Override specific UI strings in a language that Sendbird already supports. This example customizes the input placeholder and conversation list title in Spanish."
+          >
+            <CodeEditor value={CODE_SAMPLES.custom_stringset} language="javascript" />
+
+            <Button onClick={actions.custom_stringset?.execute}>
+              {actions.custom_stringset?.getDisplayText('Change messenger UI to Spanish')}
+            </Button>
+          </Section>
+
+          <Section
+            title="Scenario 2: Add support for unsupported languages"
+            description={
+              <>
+                Implement full support for a language not included in Sendbird's built-in set. This example adds complete Chinese (zh-CN) localization by providing all required string values.
+                You can find the full list of required string keys <a className='text-primary underline' href="https://github.com/sendbird/sendbird-ai-agent/blob/main/js/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk" target="_blank" rel="noopener noreferrer">here</a>.
+              </>
+            }
+          >
+            <CodeEditor value={CODE_SAMPLES.unsupported_language} language="javascript" />
+
+            <div className="mt-2 space-x-3">
+              <Button onClick={actions.unsupported_language?.execute}>
+                {actions.unsupported_language?.getDisplayText('Switch to Chinese')}
+              </Button>
+              <Button onClick={actions.switch_language_back?.execute}>
+                {actions.switch_language_back?.getDisplayText('Switch back to Spanish')}
+              </Button>
+            </div>
+          </Section>
+        </Section>
+
         <Section
           title="Context Object"
           description="Enhance AI responses by providing additional context data like user preferences and customer tiers. Send a message to see how the AI agent adapts its responses based on your context settings."
