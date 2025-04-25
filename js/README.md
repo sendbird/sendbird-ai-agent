@@ -16,6 +16,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
+    - [Localization and Language Support](#localization-and-language-support)
 
 ## Prerequisites
 
@@ -182,3 +183,15 @@ messenger.initialize({
         customerTier: 'premium'
     }
 });
+```
+
+### Localization and Language Support
+
+The SDK supports multiple languages and allows you to customize UI strings. You can:
+
+- Set the language during initialization or update it later
+- Customize specific strings in a supported language
+- Add support for languages not built into the SDK
+- Dynamically load language files as needed for better performance
+
+For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](./MULTILANGUAGE.md).

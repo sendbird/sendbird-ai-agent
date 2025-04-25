@@ -13,6 +13,9 @@ export function useMessengerControls() {
   const contextStatus = useUpdateStatus({ key: 'context' });
   const deauthenticateStatus = useUpdateStatus({ key: 'deauthenticate' });
   const destroyStatus = useUpdateStatus({ key: 'destroy' });
+  const customStringSetStatus = useUpdateStatus({ key: 'custom_stringset' });
+  const unsupportedLanguageStatus = useUpdateStatus({ key: 'unsupported_language' });
+  const switchLanguageBackStatus = useUpdateStatus({ key: 'switch_language_back' });
 
   return useMemo(
     () => ({
@@ -37,6 +40,18 @@ export function useMessengerControls() {
       context: {
         execute: contextStatus.withUpdateStatus(messenger.updateContext),
         getDisplayText: (text: string) => contextStatus.getDisplayText(text),
+      },
+      custom_stringset: {
+        execute: customStringSetStatus.withUpdateStatus(messenger.customizeSpanishStringSet),
+        getDisplayText: (text: string) => customStringSetStatus.getDisplayText(text, 'Spanish String Set Applied!'),
+      },
+      unsupported_language: {
+        execute: unsupportedLanguageStatus.withUpdateStatus(messenger.switchToChineseLanguage),
+        getDisplayText: (text: string) => unsupportedLanguageStatus.getDisplayText(text, 'Switched to Chinese!'),
+      },
+      switch_language_back: {
+        execute: switchLanguageBackStatus.withUpdateStatus(messenger.customizeSpanishStringSet),
+        getDisplayText: (text: string) => switchLanguageBackStatus.getDisplayText(text, 'Switched back to Spanish!'),
       },
       cleanup: {
         deauthenticate: {

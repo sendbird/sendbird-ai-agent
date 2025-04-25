@@ -1,31 +1,37 @@
-import { MessengerInstance } from '@/types';
+import { stringSet as cnStringSet } from '@/constants/languages/cn';
+import { MessengerConfig, MessengerInstance } from '@/types';
 import { loadMessengerSDK } from '@/utils/loadMessengerSDK';
 import { useEffect, useRef } from 'react';
 
 export function useMessengerCore() {
   const messengerRef = useRef<MessengerInstance | null>(null);
 
+  const initializeWithConfig = async (configOptions: Partial<MessengerConfig> = {}) => {
+    try {
+      messengerRef.current = null;
+
+      const loadMessenger = await loadMessengerSDK();
+      const messengerInstance = await loadMessenger();
+      messengerInstance.initialize({
+        appId: import.meta.env.VITE_APP_ID,
+        aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
+        ...configOptions,
+      });
+
+      messengerRef.current = messengerInstance;
+      messengerInstance.onLoad(() => {
+        messengerInstance.open();
+      });
+
+      return messengerInstance;
+    } catch (error) {
+      console.error('Failed to initialize messenger:', error);
+      return null;
+    }
+  };
+
   useEffect(() => {
-    const initializeMessenger = async () => {
-      try {
-        const loadMessenger = await loadMessengerSDK();
-        const messengerInstance = await loadMessenger();
-        messengerInstance.initialize({
-          appId: import.meta.env.VITE_APP_ID,
-          aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
-        });
-
-        messengerRef.current = messengerInstance;
-
-        messengerInstance.onLoad(() => {
-          messengerInstance.open();
-        });
-      } catch (error) {
-        console.error('Failed to initialize messenger:', error);
-      }
-    };
-
-    initializeMessenger();
+    initializeWithConfig();
   }, []);
 
   const updateConfig = () => {
@@ -44,49 +50,36 @@ export function useMessengerCore() {
   };
 
   const updateLocale = async () => {
-    try {
-      messengerRef.current = null;
-
-      const loadMessenger = await loadMessengerSDK();
-      const messengerInstance = await loadMessenger();
-      messengerInstance.initialize({
-        appId: import.meta.env.VITE_APP_ID,
-        aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
-        language: 'ko-KR',
-        countryCode: 'KR',
-      });
-
-      messengerRef.current = messengerInstance;
-      messengerInstance.onLoad(() => {
-        messengerInstance.open();
-      });
-    } catch (error) {
-      console.error('Failed to reinitialize messenger:', error);
-    }
+    await initializeWithConfig({
+      language: 'ko-KR',
+      countryCode: 'KR',
+    });
   };
 
   const updateContext = async () => {
-    try {
-      messengerRef.current = null;
+    await initializeWithConfig({
+      context: {
+        userPreference: 'technical',
+        customerTier: 'premium',
+      },
+    });
+  };
 
-      const loadMessenger = await loadMessengerSDK();
-      const messengerInstance = await loadMessenger();
-      messengerInstance.initialize({
-        appId: import.meta.env.VITE_APP_ID,
-        aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
-        context: {
-          userPreference: 'technical',
-          customerTier: 'premium',
-        },
-      });
+  const customizeSpanishStringSet = async () => {
+    await initializeWithConfig({
+      language: 'es-ES',
+      stringSet: {
+        MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
+        CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores',
+      },
+    });
+  };
 
-      messengerRef.current = messengerInstance;
-      messengerInstance.onLoad(() => {
-        messengerInstance.open();
-      });
-    } catch (error) {
-      console.error('Failed to reinitialize messenger:', error);
-    }
+  const switchToChineseLanguage = async () => {
+    await initializeWithConfig({
+      language: 'zh-CN',
+      stringSet: cnStringSet,
+    });
   };
 
   const open = () => messengerRef.current?.open();
@@ -99,6 +92,8 @@ export function useMessengerCore() {
     updateSession,
     updateLocale,
     updateContext,
+    customizeSpanishStringSet,
+    switchToChineseLanguage,
     open,
     close,
     deauthenticate,
