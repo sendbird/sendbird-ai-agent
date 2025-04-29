@@ -18,6 +18,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
+    - [Custom Localization (Multi-language Support)](#custom-localization-multi-language-support)
 
 ## Requirements
 
@@ -256,5 +257,9 @@ AIAgentMessenger.presentConversation(
     params: params
 )
 ```
+
+### Custom Localization (Multi-language Support)
+
+AIAgent supports adding and customizing multi languages. For more information, see [this detail page](MULTILANGUAGE.md).
 
 [def]: #prerequisites
