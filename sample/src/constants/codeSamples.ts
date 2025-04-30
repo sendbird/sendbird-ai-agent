@@ -36,7 +36,13 @@ messenger.onLoad(() => {
 
 function closeAgent() {
   messenger.close();
-}`,
+}
+
+// If you want to hide the default launcher button:
+// 1. Initialize with useShadowDOM: false to access elements
+// const messenger = await loadMessenger({ useShadowDOM: false });
+// 2. Then hide the launcher
+// document.getElementById('sb-agent-launcher').style.display = 'none';`,
 
   messenger_locale: `// language and country code settings for the messenger
 messenger.initialize({
