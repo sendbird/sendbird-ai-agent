@@ -258,6 +258,12 @@ AIAgentMessenger.presentConversation(
 )
 ```
 
+> - `language` value should follow the **IETF BCP 47** format.
+>   - For example, it might be "ko-KR" for Korean in South Korea or "en-US" for English in the United States.
+>   - See also: [List of common primary language subtags](https://en.wikipedia.org/wiki/IETF_language_tag#List_of_common_primary_language_subtags)
+> - `countryCode` value should follow the **ISO 3166** format.
+>   - For example, it might be "KR" for South Korea or "US" for the United States.
+
 ### Custom Localization (Multi-language Support)
 
 AIAgent supports adding and customizing multi languages. For more information, see [this detail page](MULTILANGUAGE.md).
