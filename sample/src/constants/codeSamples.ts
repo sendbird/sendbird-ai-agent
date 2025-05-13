@@ -1,6 +1,6 @@
 export const CODE_SAMPLES = {
   loadScript: `<script type="module">
-  import { loadMessenger } from "https://aiagent.stg.sendbirdtest.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
 </script>`,
 
   initialize: `const messenger = await loadMessenger();
