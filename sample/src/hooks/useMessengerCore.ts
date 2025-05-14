@@ -45,7 +45,7 @@ export function useMessengerCore() {
     messengerRef.current?.updateUserSession({
       userId: import.meta.env.VITE_NEW_USER_ID,
       authToken: import.meta.env.VITE_NEW_USER_AUTH_TOKEN,
-      onSessionTokenRequest: async () => import.meta.env.VITE_NEW_USER_AUTH_TOKEN,
+      onSessionTokenRequired: async (resolve) => resolve(import.meta.env.VITE_NEW_USER_AUTH_TOKEN),
     });
   };
 

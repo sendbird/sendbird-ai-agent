@@ -10,7 +10,7 @@ export interface MessengerConfig {
 interface UserSession {
   userId: string;
   authToken: string;
-  onSessionTokenRequest: () => Promise<string>;
+  onSessionTokenRequired: (resolve: (authToken: string) => void, reject: (error: Error) => void) => Promise<void>;
 }
 
 export interface MessengerInstance {

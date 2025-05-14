@@ -38,7 +38,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```html
 <script type="module">
-    import { loadMessenger } from "https://aiagent.stg.sendbirdtest.com/orgs/default/index.js";
+    import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
 </script>
 ```
 
@@ -59,18 +59,54 @@ Now that you have installed and initialized the AI Agent SDK, follow the steps b
 
 ### Manage user sessions
 
-For proper user session management, you can update the session information using the following methods.
+To properly manage user sessions, provide session information when initializing the messenger.
+```javascript
+messenger.initialize({
+    // ... Other initialization configurations
+    userSessionInfo: {
+        userId: 'user_id',
+        authToken: 'auth_token',
+        sessionHandler: {
+            // Needs to fetch a new token and pass the new token to the SDK via resolve(), or reject() if error has occurred during the fetch.
+            onSessionTokenRequired: async (resolve, reject) => {
+                try {
+                    const response = await fetch('new-token-endpoint');
+                    resolve(response.token);
+                } catch (error) {
+                    reject(error);
+                }
+            },
+            // Called when the SDK runs into an error while refreshing the session key.
+            onSessionError: (error) => {
+            },
+            // Called after SDK successfully refreshes the session key.
+            onSessionRefreshed: () => {
+            },
+            // Called when the session is explicitly closed on refresh.
+            onSessionClosed: () => {
+            },
+        }
+    }
+});
+```
+
+For updating session information at runtime, use the `updateUserSession()` method as follows:
 
 ```javascript
-// Update entire session configuration
 messenger.updateUserSession({
     userId: 'new_user_id',
     authToken: 'new_auth_token',
-    // this callback should handle session token refresh:
-    onSessionTokenRequest: async () => {
-        const response = await fetch('new-token-endpoint');
-        return response.token;
-    }
+    onSessionTokenRequired: async (resolve, reject) => {
+        try {
+            const response = await fetch('new-token-endpoint');
+            resolve(response.token);
+        } catch (error) {
+            reject(error);
+        }
+    },
+    onSessionError: (error) => { },
+    onSessionRefreshed: () => { },
+    onSessionClosed: () => { },
 });
 ```
 
