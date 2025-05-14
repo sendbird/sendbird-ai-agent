@@ -304,7 +304,7 @@ If you need to update the context during the conversation, you can use the Platf
 #### 1. Applying settings data through MessengerLauncher
 ```kotlin
 MessengerLauncher(this, it, LauncherSettingsParams(
-    language = "en-US",
+    language = "en",
     countryCode = "US",
     context = mapOf(
         "key1" to "value1",
@@ -321,7 +321,7 @@ startActivity(
         context = context,
         aiAgentId = aiAgentId,
         conversationSettingsParams = ConversationSettingsParams(
-            language = "en-US",
+            language = "en",
             countryCode = "US",
             context = mapOf(
                 "key1" to "value1",
