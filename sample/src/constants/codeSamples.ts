@@ -24,9 +24,9 @@ messenger.onLoad(() => {
   userId: 'new_user_id',
   authToken: 'new_auth_token',
   // this callback should handle session token refresh:
-  onSessionTokenRequest: async () => {
+  onSessionTokenRequired: async (resolve) => {
     const response = await fetch('new-token-endpoint');
-    return response.token;
+    resolve(response.token);
   }
 });`,
 
