@@ -234,7 +234,7 @@ This allows for a more personalized and context-aware interaction experience.
 ```swift
 // Case: Attach launcher
 let params = LauncherSettingsParams(
-    language: "en-US", // (opt)default: Locale.preferredLanguages.first
+    language: "en", // (opt)default: Locale.preferredLanguages.first
     countryCode: "US", // (opt)default: Locale.current.regionCode
     context: ["key": "value"], // (opt)
     ...
@@ -247,7 +247,7 @@ AIAgentMessenger.attachLauncher(
 ```swift
 // Case: 
 let params = ConversationSettingsParams(
-    language: "en-US", // (opt)default: Locale.preferredLanguages.first
+    language: "en", // (opt)default: Locale.preferredLanguages.first
     countryCode: "US", // (opt)default: Locale.current.regionCode
     context: ["key": "value"], // (opt)
     ...
