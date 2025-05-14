@@ -263,7 +263,7 @@ MessengerLauncher(context, "your_ai_agent_id").attach()
 You can open a full-screen conversation by starting an `Activity`.  
     
 ```kotlin
-startActivity(ConversationActivity.newIntent(context, "your_ai_agent_id"))
+startActivity(MessengerActivity.newIntentForConversation(context, "your_ai_agent_id"))
 ```
 
 ---
@@ -317,7 +317,7 @@ MessengerLauncher(this, it, LauncherSettingsParams(
 
 ```kotlin
 startActivity(
-    ConversationActivity.newIntent(
+    MessengerActivity.newIntentForConversation(
         context = context,
         aiAgentId = aiAgentId,
         conversationSettingsParams = ConversationSettingsParams(
