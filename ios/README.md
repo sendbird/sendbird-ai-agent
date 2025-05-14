@@ -185,7 +185,7 @@ The following are available advanced features.
 You can modify the floating launcher button’s behavior and appearance as shown below.
 
 ```swift
-let options = LauncherLayoutOptions(
+let options = SBALauncherLayoutOptions(
     parentView: nil, // Attaches to the window if nil
     position: .trailingBottom,
     margin: .default,
