@@ -67,7 +67,10 @@ messenger.initialize({
         userId: 'user_id',
         authToken: 'auth_token',
         sessionHandler: {
-            // Needs to fetch a new token and pass the new token to the SDK via resolve(), or reject() if error has occurred during the fetch.
+            // A new session token is required in the SDK to refresh the session.
+            // Refresh the session token and pass it onto the SDK through resolve(NEW_TOKEN).
+            // If you don't want to refresh the session, pass on a null value through resolve(null).
+            // If any error occurs while refreshing the token, let the SDK know about it through reject(error).
             onSessionTokenRequired: async (resolve, reject) => {
                 try {
                     const response = await fetch('new-token-endpoint');
@@ -76,15 +79,16 @@ messenger.initialize({
                     reject(error);
                 }
             },
-            // Called when the SDK runs into an error while refreshing the session key.
-            onSessionError: (error) => {
-            },
-            // Called after SDK successfully refreshes the session key.
-            onSessionRefreshed: () => {
-            },
-            // Called when the session is explicitly closed on refresh.
-            onSessionClosed: () => {
-            },
+            // The session refresh has been denied from the app.
+            // This event can occur if the client app doesn't explicitly refresh the token, the token is revoked, or the user is deactivated.
+            // In this case, the client app should handle the UX appropriately — such as redirecting the user to a login page or hiding/destroying the messenger.
+            onSessionClosed: () => { },
+            // OPTIONAL. No action is required.
+            // This is called when an error occurs during the session refresh.
+            onSessionError: (error) => { },
+            // OPTIONAL. No action is required.
+            // This is called when the session is refreshed.
+            onSessionRefreshed: () => { },
         }
     }
 });
@@ -104,9 +108,9 @@ messenger.updateUserSession({
             reject(error);
         }
     },
+    onSessionClosed: () => { },
     onSessionError: (error) => { },
     onSessionRefreshed: () => { },
-    onSessionClosed: () => { },
 });
 ```
 
