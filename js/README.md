@@ -68,26 +68,24 @@ messenger.initialize({
         authToken: 'auth_token',
         sessionHandler: {
             // A new session token is required in the SDK to refresh the session.
-            // Refresh the session token and pass it onto the SDK through resolve(NEW_TOKEN).
-            // If you don't want to refresh the session, pass on a null value through resolve(null).
-            // If any error occurs while refreshing the token, let the SDK know about it through reject(error).
             onSessionTokenRequired: async (resolve, reject) => {
                 try {
+                    // Refresh the session token and pass it onto the SDK through resolve(NEW_TOKEN).
+                    // If you don't want to refresh the session, pass on a null value through resolve(null).
                     const response = await fetch('new-token-endpoint');
                     resolve(response.token);
                 } catch (error) {
+                    // If any error occurs while refreshing the token, let the SDK know about it through reject(error).
                     reject(error);
                 }
             },
-            // The session refresh has been denied from the app.
+            // Called when the session refresh has been denied.
             // This event can occur if the client app doesn't explicitly refresh the token, the token is revoked, or the user is deactivated.
             // In this case, the client app should handle the UX appropriately — such as redirecting the user to a login page or hiding/destroying the messenger.
             onSessionClosed: () => { },
-            // OPTIONAL. No action is required.
-            // This is called when an error occurs during the session refresh.
+            // Optional: Called when an error occurs during session refresh.
             onSessionError: (error) => { },
-            // OPTIONAL. No action is required.
-            // This is called when the session is refreshed.
+            // Optional: Called when the session is refreshed.
             onSessionRefreshed: () => { },
         }
     }
