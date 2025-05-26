@@ -2,6 +2,10 @@
 
 This guide explains how to localize the UI strings used in the Sendbird AI Agent SDK for React to support multiple languages in your React application.
 
+> **Note:**
+> `FixedMessenger` already includes all required providers internally. You do **not** need to wrap it with `AgentProviderContainer`.
+> Use `AgentProviderContainer` only if you want to build a custom messenger UI or use only part of the module.
+
 ---
 
 ## Table of Contents
@@ -14,6 +18,9 @@ This guide explains how to localize the UI strings used in the Sendbird AI Agent
   - [Customizing Strings](#customizing-strings)
     - [Scenario 1: Customizing Strings in Supported Languages](#scenario-1-customizing-strings-in-supported-languages)
     - [Scenario 2: Adding Support for Unsupported Languages](#scenario-2-adding-support-for-unsupported-languages)
+  - [Language Switching with React](#language-switching-with-react)
+  - [Dynamic Language Loading with React](#dynamic-language-loading-with-react)
+  - [Note](#note)
   - [Default String Keys Used by the SDK](#default-string-keys-used-by-the-sdk)
   - [Implementation Examples](#implementation-examples)
 
@@ -21,7 +28,7 @@ This guide explains how to localize the UI strings used in the Sendbird AI Agent
 
 ## Overview
 
-Sendbird AI Agent SDK for React includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during component initialization or update it later using the `AgentUIProviderContainer` component.
+Sendbird AI Agent SDK for React includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during component initialization or update it later using the `FixedMessenger` props.
 
 The language setting influences both the UI text displayed in the messenger and potentially the AI Agent's responses.
 
@@ -58,44 +65,18 @@ function App() {
     <FixedMessenger
       appId="YOUR_APP_ID"
       aiAgentId="YOUR_AI_AGENT_ID"
-      // Set language in IETF BCP 47 format (e.g., "ko-KR", "en-US")
-      // Default is navigator.language if not specified
       language="ko-KR"
-      // Set country code in ISO 3166 format (e.g., "KR", "US")
       countryCode="KR"
     />
   );
 }
 ```
 
-Or update it using the `AgentUIProviderContainer`:
-
-```tsx
-import { AgentUIProviderContainer } from '@sendbird/ai-agent-messenger-react';
-
-function App() {
-  return (
-    <AgentUIProviderContainer
-      language="es-ES"
-    >
-      {/* Your messenger components */}
-    </AgentUIProviderContainer>
-  );
-}
-```
-
----
-
 ## Customizing Strings
-
-There are two scenarios where you might want to customize the strings used in the messenger UI:
 
 ### Scenario 1: Customizing Strings in Supported Languages
 
-You can override specific UI strings in a language that Sendbird already supports:
-
 ```tsx
-// Example: Customize specific strings in Spanish
 const customStringSet = {
   MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
   CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
@@ -103,25 +84,19 @@ const customStringSet = {
 
 function App() {
   return (
-    <AgentUIProviderContainer
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
       language="es-ES"
       stringSet={customStringSet}
-    >
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-      />
-    </AgentUIProviderContainer>
+    />
   );
 }
 ```
 
 ### Scenario 2: Adding Support for Unsupported Languages
 
-For languages not supported by Sendbird, you must provide a complete set of string values:
-
 ```tsx
-// Example: Add support for Chinese (zh-CN)
 const chineseStringSet = {
   CHANNEL_FROZEN: '频道已冻结',
   PLACE_HOLDER__WRONG: '出现问题',
@@ -130,18 +105,85 @@ const chineseStringSet = {
 
 function App() {
   return (
-    <AgentUIProviderContainer
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
       language="zh-CN"
       stringSet={chineseStringSet}
-    >
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-      />
-    </AgentUIProviderContainer>
+    />
   );
 }
 ```
+
+## Language Switching with React
+
+```tsx
+function App() {
+  const [language, setLanguage] = useState('en-US');
+  const [stringSet, setStringSet] = useState(undefined);
+
+  const switchLanguage = async (newLanguage: string) => {
+    if (newLanguage === 'zh-CN') {
+      const { zhStringSet } = await import('./languages/zh');
+      setStringSet(zhStringSet);
+    } else {
+      setStringSet(undefined);
+    }
+    setLanguage(newLanguage);
+  };
+
+  return (
+    <>
+      <button onClick={() => switchLanguage('zh-CN')}>Switch to Chinese</button>
+      <button onClick={() => switchLanguage('en-US')}>Switch to English</button>
+      <FixedMessenger
+        appId="YOUR_APP_ID"
+        aiAgentId="YOUR_AI_AGENT_ID"
+        language={language}
+        stringSet={stringSet}
+      />
+    </>
+  );
+}
+```
+
+## Dynamic Language Loading with React
+
+```tsx
+function App() {
+  const [language, setLanguage] = useState('en-US');
+  const [stringSet, setStringSet] = useState(undefined);
+
+  const loadLanguage = async (newLanguage: string) => {
+    let newStringSet;
+    try {
+      const module = await import(`./languages/${newLanguage}.ts`);
+      newStringSet = module.default;
+    } catch {
+      newStringSet = undefined;
+    }
+    setLanguage(newLanguage);
+    setStringSet(newStringSet);
+  };
+
+  return (
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+      language={language}
+      stringSet={stringSet}
+    />
+  );
+}
+```
+
+---
+
+## Note
+
+- **Use `FixedMessenger` standalone for most use cases.**
+- Use `AgentProviderContainer` only if you want to build a custom messenger UI or use only part of the module.
+- Do not use `AgentUIProviderContainer` directly unless you have a very special use case (e.g., dashboard/tester).
 
 ---
 
@@ -164,18 +206,16 @@ export const zhStringSet = {
 
 // App.tsx
 import { zhStringSet } from './languages/zh';
+import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 
 function App() {
   return (
-    <AgentUIProviderContainer
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
       language="zh-CN"
       stringSet={zhStringSet}
-    >
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-      />
-    </AgentUIProviderContainer>
+    />
   );
 }
 ```
@@ -198,19 +238,16 @@ function App() {
   };
 
   return (
-    <AgentUIProviderContainer
-      language={language}
-      stringSet={stringSet}
-    >
-      <div>
-        <button onClick={() => switchLanguage('zh-CN')}>Switch to Chinese</button>
-        <button onClick={() => switchLanguage('en-US')}>Switch to English</button>
-      </div>
+    <>
+      <button onClick={() => switchLanguage('zh-CN')}>Switch to Chinese</button>
+      <button onClick={() => switchLanguage('en-US')}>Switch to English</button>
       <FixedMessenger
         appId="YOUR_APP_ID"
         aiAgentId="YOUR_AI_AGENT_ID"
+        language={language}
+        stringSet={stringSet}
       />
-    </AgentUIProviderContainer>
+    </>
   );
 }
 ```
@@ -238,15 +275,12 @@ function App() {
   };
 
   return (
-    <AgentUIProviderContainer
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
       language={language}
       stringSet={stringSet}
-    >
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-      />
-    </AgentUIProviderContainer>
+    />
   );
 }
 ```

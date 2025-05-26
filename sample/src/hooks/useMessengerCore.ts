@@ -31,7 +31,16 @@ export function useMessengerCore() {
   };
 
   useEffect(() => {
+    // Initialize messenger when component mounts
     initializeWithConfig();
+
+    // Cleanup when component unmounts
+    return () => {
+      if (messengerRef.current) {
+        messengerRef.current.destroy();
+        messengerRef.current = null;
+      }
+    };
   }, []);
 
   const updateConfig = () => {

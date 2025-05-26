@@ -143,3 +143,142 @@ messenger.initialize({
   }
 });`,
 };
+
+export const REACT_CODE_SAMPLES = {
+  installation: `npm install @sendbird/ai-agent-messenger-react
+# or
+yarn add @sendbird/ai-agent-messenger-react`,
+
+  basicUsage: `import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import '@sendbird/ai-agent-messenger-react/index.css';
+
+function App() {
+  return (
+    <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />
+  );
+}`,
+
+  agentProviderUsage: `import { AgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react';
+import '@sendbird/ai-agent-messenger-react/index.css';
+
+function App() {
+  return (
+    <AgentProviderContainer appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID">
+      <Conversation />
+    </AgentProviderContainer>
+  );
+}`,
+
+  switchApplication: `// Update to different application configuration
+<FixedMessenger
+  appId="NEW_APP_ID"
+  aiAgentId="NEW_AI_AGENT_ID"
+/>`,
+
+  userAuthentication: `<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  userSessionInfo={{
+    userId: 'user_id',
+    authToken: 'auth_token',
+    sessionHandler: {
+      onSessionTokenRequired: async (resolve, reject) => {
+        try {
+          const response = await fetch('new-token-endpoint');
+          resolve(response.token);
+        } catch (error) {
+          reject(error);
+        }
+      },
+      onSessionClosed: () => { },
+      onSessionError: (error) => { },
+      onSessionRefreshed: () => { }
+    }
+  }}
+/>`,
+
+  manualControls: `function App() {
+  const [opened, setOpened] = useState(true);
+
+  return (
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+      state={{ opened, setOpened }}
+      enableCloseConversationButton
+    />
+  );
+}`,
+
+  customDisplay: `import { AgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react';
+
+function App() {
+  return (
+    <div style={{ height: '400px', border: '1px solid #ccc' }}>
+      <AgentProviderContainer
+        appId="YOUR_APP_ID"
+        aiAgentId="YOUR_AI_AGENT_ID"
+      >
+        <Conversation />
+      </AgentProviderContainer>
+    </div>
+  );
+}`,
+
+  localeConfiguration: `<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="ko-KR"
+  countryCode="KR"
+/>`,
+
+  customStringSet: `<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="es-ES"
+  stringSet={{
+    MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
+    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
+  }}
+/>`,
+
+  unsupportedLanguage: `<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="zh-CN"
+  stringSet={{
+    MESSAGE_INPUT__PLACE_HOLDER: '问我任何问题！',
+    CONVERSATION_LIST__HEADER_TITLE: '以前的对话列表',
+    // ... complete Chinese string set
+  }}
+/>`,
+
+  contextObject: `<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  context={{
+    userPreference: 'technical',
+    customerTier: 'premium'
+  }}
+/>`,
+
+  cleanup: `// Component cleanup is handled automatically by React
+// when the component unmounts, but you can also
+// control the messenger state manually:
+
+function App() {
+  const [messengerKey, setMessengerKey] = useState(0);
+
+  const resetMessenger = () => {
+    setMessengerKey(prev => prev + 1); // Force remount
+  };
+
+  return (
+    <FixedMessenger
+      key={messengerKey}
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+    />
+  );
+}`,
+};

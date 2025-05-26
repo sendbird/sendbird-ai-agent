@@ -5,17 +5,28 @@ import CodeMirror from '@uiw/react-codemirror';
 
 interface Props {
   value: string;
-  language: 'javascript' | 'html';
+  language: 'javascript' | 'tsx' | 'html' | 'bash';
 }
 
 export function CodeEditor({ value, language }: Props) {
-  const extensions = language === 'javascript' ? [javascript()] : [html()];
+  const getExtensions = () => {
+    switch (language) {
+      case 'javascript':
+      case 'tsx':
+        return [javascript({ jsx: true, typescript: true })];
+      case 'html':
+        return [html()];
+      case 'bash':
+      default:
+        return []; // Use plain text for bash
+    }
+  };
 
   return (
     <CodeMirror
       value={value}
       theme={dracula}
-      extensions={extensions}
+      extensions={getExtensions()}
       readOnly
       height="auto"
       basicSetup={{
