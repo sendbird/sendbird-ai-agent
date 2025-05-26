@@ -1,11 +1,5 @@
 # Sendbird AI Agent SDK Localization Guide (React)
 
-This guide explains how to localize the UI strings used in the Sendbird AI Agent SDK for React to support multiple languages in your React application.
-
-> **Note:**
-> `FixedMessenger` already includes all required providers internally. You do **not** need to wrap it with `AgentProviderContainer`.
-> Use `AgentProviderContainer` only if you want to build a custom messenger UI or use only part of the module.
-
 ---
 
 ## Table of Contents
@@ -77,42 +71,51 @@ function App() {
 ### Scenario 1: Customizing Strings in Supported Languages
 
 ```tsx
-const customStringSet = {
-  MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
-  CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
-};
-
-function App() {
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      language="es-ES"
-      stringSet={customStringSet}
-    />
-  );
-}
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="es-ES"
+  // You can still customize certain stringSet keys even in supported language
+  stringSet={{
+    MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
+    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
+  }}
+/>
 ```
 
 ### Scenario 2: Adding Support for Unsupported Languages
 
 ```tsx
-const chineseStringSet = {
-  CHANNEL_FROZEN: '频道已冻结',
-  PLACE_HOLDER__WRONG: '出现问题',
-  // ... all other required strings
-};
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="zh-CN"
+  // All stringSet keys for unsupported languages must be provided
+  stringSet={{
+    // Channel - Common
+    CHANNEL_FROZEN: '频道已冻结',
+    PLACE_HOLDER__WRONG: '出现问题',
+    PLACE_HOLDER__NO_MESSAGES: '没有消息',
+    UNKNOWN__UNKNOWN_MESSAGE_TYPE: '(未知消息类型)',
 
-function App() {
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      language="zh-CN"
-      stringSet={chineseStringSet}
-    />
-  );
-}
+    // Channel - Header
+    HEADER_BUTTON__AGENT_HANDOFF: '连接客服',
+
+    // Message Input
+    MESSAGE_INPUT__PLACE_HOLDER: '请输入问题',
+    MESSAGE_INPUT__PLACE_HOLDER__WAIT_AI_AGENT_RESPONSE: '等待回复中...',
+    MESSAGE_INPUT__PLACE_HOLDER__DISABLED: '此频道不可用',
+
+    // Common UI
+    BUTTON__CANCEL: '取消',
+    BUTTON__SAVE: '保存',
+    BUTTON__OK: '确定',
+    NO_NAME: '(无名)',
+    RETRY: '重试',
+
+    // ... other string key-value pairs
+  }}
+/>
 ```
 
 ## Language Switching with React

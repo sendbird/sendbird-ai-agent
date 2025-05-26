@@ -4,32 +4,25 @@
 
 The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot features into your React application.
 
-## Component Overview
-
-The React SDK provides two main approaches for integration:
-
-- **`FixedMessenger`**: A predefined UI toolkit that renders a launcher button and messenger interface at a fixed position (bottom-right corner) on your website. This is the quickest way to add AI Agent functionality with minimal setup.
-
-- **`AgentProviderContainer`**: A provider component that gives you access to individual UI modules and allows for custom messenger implementations. Use this when you want to customize the UI, integrate specific components into your existing interface, or build a completely custom messenger experience.
-
-> **Note:**
-> `FixedMessenger` already includes all required providers internally. You do **not** need to wrap it with `AgentProviderContainer`.
-> Use `AgentProviderContainer` only if you want to build a custom messenger UI or use only part of the module.
-
 - [Sendbird AI Agent Quickstart guide (React)](#sendbird-ai-agent-quickstart-guide-react)
-  - [Component Overview](#component-overview)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
     - [Step 2. Initialize AI Agent SDK](#step-2-initialize-ai-agent-sdk)
+  - [Component Overview](#component-overview)
+    - [FixedMessenger vs AgentProviderContainer](#fixedmessenger-vs-agentprovidercontainer)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
     - [Launch the messenger](#launch-the-messenger)
   - [Advanced Features](#advanced-features)
-    - [Customizing Message Components](#customizing-message-components)
-    - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
+    - [Switch Application](#switch-application)
+    - [User Authentication](#user-authentication)
+    - [Manual Controls](#manual-controls)
+    - [Custom Display](#custom-display)
+    - [Locale Configuration](#locale-configuration)
+    - [Localization Customization](#localization-customization)
     - [Passing context object to Agent](#passing-context-object-to-agent)
-    - [Localization and Language Support](#localization-and-language-support)
+    - [Cleanup](#cleanup)
 
 ## Prerequisites
 
@@ -93,6 +86,25 @@ function App() {
 
 ---
 
+## Component Overview
+
+### FixedMessenger vs AgentProviderContainer
+
+**FixedMessenger:**
+- Complete UI toolkit with launcher and messenger
+- Fixed position (bottom-right corner)
+- Includes all necessary providers internally
+- Recommended for most use cases
+- Use standalone without additional providers
+
+**AgentProviderContainer:**
+- Provider component for custom UI implementations
+- Allows building custom messenger interfaces
+- Use when you need specific UI layouts or custom components
+- Must be combined with conversation components like `<Conversation />`
+
+---
+
 ## Running your application
 
 Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
@@ -148,65 +160,149 @@ function App() {
 
 ## Advanced Features
 
-### Customizing Message Components
+### Switch Application
 
-If you want to build a custom messenger UI or use only part of the module, use `AgentProviderContainer`:
+Update to different application configuration:
 
 ```tsx
-import { AgentProviderContainer, IncomingMessageLayout } from '@sendbird/ai-agent-messenger-react';
+// Update to different application configuration
+<FixedMessenger
+  appId="NEW_APP_ID"
+  aiAgentId="NEW_AI_AGENT_ID"
+/>
+```
 
-function CustomMessage() {
-  const { Template: IncomingTemplate, components } = IncomingMessageLayout.useContext();
+### User Authentication
 
-  const messageProps = {
-    messageType: 'user',
-    message: 'AI agent response will appear here.',
-    createdAt: Date.now(),
-    sender: { nickname: 'AI agent' },
-    groupType: 'single',
-    isBotMessage: true,
-  };
+Provide user session information for authenticated experiences:
 
-  return (
-    <IncomingTemplate
-      {...messageProps}
-      messageType="file"
-      file={{
-        type: 'image/jpg',
-        url: 'https://picsum.photos/200/300',
-      }}
-    />
-  );
-}
+```tsx
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  userSessionInfo={{
+    userId: 'user_id',
+    authToken: 'auth_token',
+    sessionHandler: {
+      onSessionTokenRequired: async (resolve, reject) => {
+        try {
+          const response = await fetch('new-token-endpoint');
+          resolve(response.token);
+        } catch (error) {
+          reject(error);
+        }
+      },
+      onSessionClosed: () => { },
+      onSessionError: (error) => { },
+      onSessionRefreshed: () => { }
+    }
+  }}
+/>
+```
 
+### Manual Controls
+
+Control messenger state programmatically:
+
+```tsx
 function App() {
+  const [opened, setOpened] = useState(true);
+
   return (
-    <AgentProviderContainer appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID">
-      <CustomMessage />
-    </AgentProviderContainer>
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+      state={{ opened, setOpened }}
+      enableCloseConversationButton
+    />
   );
 }
 ```
 
-### Deauthenticate and clear session
+### Custom Display
+
+Build custom messenger UI using AgentProviderContainer:
 
 ```tsx
-import { FixedMessenger, useMessenger } from '@sendbird/ai-agent-messenger-react';
+import { AgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react';
 
 function App() {
-  const messenger = useMessenger();
-
-  const handleLogout = () => {
-    messenger.deauthenticate();
-  };
-
   return (
-    <>
-      <button onClick={handleLogout}>Logout</button>
-      <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />
-    </>
+    <div style={{ height: '400px', border: '1px solid #ccc' }}>
+      <AgentProviderContainer
+        appId="YOUR_APP_ID"
+        aiAgentId="YOUR_AI_AGENT_ID"
+      >
+        <Conversation />
+      </AgentProviderContainer>
+    </div>
   );
 }
+```
+
+### Locale Configuration
+
+Set language and country code:
+
+```tsx
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="ko-KR"
+  countryCode="KR"
+/>
+```
+
+### Localization Customization
+
+**Scenario 1: Customizing Strings in Supported Languages**
+
+```tsx
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="es-ES"
+  // You can still customize certain stringSet keys even in supported language
+  stringSet={{
+    MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
+    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
+  }}
+/>
+```
+
+**Scenario 2: Adding Support for Unsupported Languages**
+
+```tsx
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  language="zh-CN"
+  // All stringSet keys for unsupported languages must be provided
+  stringSet={{
+    // Channel - Common
+    CHANNEL_FROZEN: '频道已冻结',
+    PLACE_HOLDER__WRONG: '出现问题',
+    PLACE_HOLDER__NO_MESSAGES: '没有消息',
+    UNKNOWN__UNKNOWN_MESSAGE_TYPE: '(未知消息类型)',
+
+    // Channel - Header
+    HEADER_BUTTON__AGENT_HANDOFF: '连接客服',
+
+    // Message Input
+    MESSAGE_INPUT__PLACE_HOLDER: '请输入问题',
+    MESSAGE_INPUT__PLACE_HOLDER__WAIT_AI_AGENT_RESPONSE: '等待回复中...',
+    MESSAGE_INPUT__PLACE_HOLDER__DISABLED: '此频道不可用',
+
+    // Common UI
+    BUTTON__CANCEL: '取消',
+    BUTTON__SAVE: '保存',
+    BUTTON__OK: '确定',
+    NO_NAME: '(无名)',
+    RETRY: '重试',
+
+    // ... other string key-value pairs
+  }}
+/>
 ```
 
 ### Passing context object to Agent
@@ -217,8 +313,6 @@ You can provide context information to guide the AI Agent:
 <FixedMessenger
   appId="YOUR_APP_ID"
   aiAgentId="YOUR_AI_AGENT_ID"
-  language="en-US"
-  countryCode="US"
   context={{
     userPreference: 'technical',
     customerTier: 'premium'
@@ -226,13 +320,30 @@ You can provide context information to guide the AI Agent:
 />
 ```
 
-### Localization and Language Support
+### Cleanup
 
-The SDK supports multiple languages and allows you to customize UI strings. You can:
+Component cleanup is handled automatically by React when the component unmounts, but you can also control the messenger state manually:
 
-- Set the language during initialization
-- Customize specific strings in supported languages
-- Add support for additional languages
-- Dynamically load language files
+```tsx
+// Component cleanup is handled automatically by React
+// when the component unmounts, but you can also
+// control the messenger state manually:
+
+function App() {
+  const [messengerKey, setMessengerKey] = useState(0);
+
+  const resetMessenger = () => {
+    setMessengerKey(prev => prev + 1); // Force remount
+  };
+
+  return (
+    <FixedMessenger
+      key={messengerKey}
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+    />
+  );
+}
+```
 
 For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](./MULTILANGUAGE.md).
