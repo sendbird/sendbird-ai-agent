@@ -1,0 +1,6 @@
+# SPA routing for Sendbird AI Agent sample app
+/react-example /index.html 200
+/cdn-example /index.html 200
+
+# Fallback for any other routes
+/* /index.html 200

@@ -1,16 +1,10 @@
 import { CdnExample } from '@/components/sections/cdnExample/index';
 import { ReactExample } from '@/components/sections/reactExample';
-import { useState } from 'react';
-
-const TABS = [
-  { key: 'react', label: 'React (npm)' },
-  { key: 'cdn', label: 'CDN' },
-] as const;
-
-type TabKey = (typeof TABS)[number]['key'];
+import { TABS, type TabKey } from '@/constants/tabs';
+import { useTabNavigation } from '@/hooks/useTabNavigation';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<TabKey>('react');
+  const { activeTab, handleTabChange } = useTabNavigation();
 
   return (
     <div className="min-h-full">
@@ -25,10 +19,10 @@ export function App() {
         <div className="mb-6">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
-              {TABS.map(({ key, label }) => (
+              {Object.entries(TABS).map(([key, { label }]) => (
                 <button
                   key={key}
-                  onClick={() => setActiveTab(key)}
+                  onClick={() => handleTabChange(key as TabKey)}
                   className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm ${
                     activeTab === key
                       ? 'border-indigo-500 text-indigo-600'
