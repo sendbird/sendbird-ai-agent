@@ -64,7 +64,7 @@ export const AdvancedFeatures = () => {
           title="Custom Display"
           description="Use AgentProviderContainer with individual UI components like Conversation and ConversationList to create custom messenger implementations. This approach allows you to integrate the messenger into specific areas of your application rather than using the fixed-position launcher."
         >
-          <CodeEditor value={REACT_CODE_SAMPLES.customDisplay} language="tsx" />
+          <CodeEditor value={REACT_CODE_SAMPLES.customDisplay} language="tsx" collapsible />
           <div className="mt-4 flex gap-4">
             {/* Display Conversation view only */}
             <div>
@@ -154,7 +154,7 @@ export const AdvancedFeatures = () => {
               </>
             }
           >
-            <CodeEditor value={REACT_CODE_SAMPLES.unsupportedLanguage} language="tsx" />
+            <CodeEditor value={REACT_CODE_SAMPLES.unsupportedLanguage} language="tsx" collapsible />
             <div className="mt-2 space-x-3">
               <Button onClick={() => loadLanguageStringSet('zh-CN')}>
                 {appConfig.currentLanguage === 'zh-CN' && appConfig.customStringSet
