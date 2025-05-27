@@ -13,10 +13,8 @@
     - [Scenario 1: Customizing Strings in Supported Languages](#scenario-1-customizing-strings-in-supported-languages)
     - [Scenario 2: Adding Support for Unsupported Languages](#scenario-2-adding-support-for-unsupported-languages)
   - [Language Switching with React](#language-switching-with-react)
-  - [Dynamic Language Loading with React](#dynamic-language-loading-with-react)
-  - [Note](#note)
+  - [Organizing \& Loading Language Files](#organizing--loading-language-files)
   - [Default String Keys Used by the SDK](#default-string-keys-used-by-the-sdk)
-  - [Implementation Examples](#implementation-examples)
 
 ---
 
@@ -150,7 +148,29 @@ function App() {
 }
 ```
 
-## Dynamic Language Loading with React
+## Organizing & Loading Language Files
+
+```tsx
+// languages/zh.ts
+export default {
+  CHANNEL_FROZEN: '频道已冻结',
+  PLACE_HOLDER__WRONG: '出现问题',
+  PLACE_HOLDER__NO_MESSAGES: '没有消息',
+  UNKNOWN__UNKNOWN_MESSAGE_TYPE: '(未知消息类型)',
+  HEADER_BUTTON__AGENT_HANDOFF: '连接客服',
+  MESSAGE_INPUT__PLACE_HOLDER: '请输入问题',
+  MESSAGE_INPUT__PLACE_HOLDER__WAIT_AI_AGENT_RESPONSE: '等待回复中...',
+  MESSAGE_INPUT__PLACE_HOLDER__DISABLED: '此频道不可用',
+  BUTTON__CANCEL: '取消',
+  BUTTON__SAVE: '保存',
+  BUTTON__OK: '确定',
+  NO_NAME: '(无名)',
+  RETRY: '重试',
+  // ... other string key-value pairs
+};
+```
+
+**Dynamic Loading Implementation (Recommended):**
 
 ```tsx
 function App() {
@@ -159,57 +179,42 @@ function App() {
 
   const loadLanguage = async (newLanguage: string) => {
     let newStringSet;
+
     try {
+      // Dynamic import only loads the file when needed
       const module = await import(`./languages/${newLanguage}.ts`);
       newStringSet = module.default;
     } catch {
+      // Fallback to default strings for supported languages
       newStringSet = undefined;
     }
+
     setLanguage(newLanguage);
     setStringSet(newStringSet);
   };
 
   return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      language={language}
-      stringSet={stringSet}
-    />
+    <>
+      <button onClick={() => loadLanguage('zh')}>中文</button>
+      <button onClick={() => loadLanguage('ja')}>日本語</button>
+      <button onClick={() => loadLanguage('en-US')}>English</button>
+
+      <FixedMessenger
+        appId="YOUR_APP_ID"
+        aiAgentId="YOUR_AI_AGENT_ID"
+        language={language}
+        stringSet={stringSet}
+      />
+    </>
   );
 }
 ```
 
----
-
-## Note
-
-- **Use `FixedMessenger` standalone for most use cases.**
-- Use `AgentProviderContainer` only if you want to build a custom messenger UI or use only part of the module.
-- Do not use `AgentUIProviderContainer` directly unless you have a very special use case (e.g., dashboard/tester).
-
----
-
-## Default String Keys Used by the SDK
-
-The string keys remain the same as the JavaScript version. Please refer to the [JavaScript version's string keys](#default-string-keys-used-by-the-sdk) for the complete list.
-
----
-
-## Implementation Examples
-
-**Best Practice for Organizing Language Files:**
+**Alternative: Static Import (Not Recommended for Multiple Languages):**
 
 ```tsx
-// languages/zh.ts
-export const zhStringSet = {
-  CHANNEL_FROZEN: '频道已冻结',
-  // ... all other strings
-};
-
-// App.tsx
+// Only use this approach if you need just one additional language
 import { zhStringSet } from './languages/zh';
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 
 function App() {
   return (
@@ -223,69 +228,8 @@ function App() {
 }
 ```
 
-**Language Switching with React:**
+---
 
-```tsx
-function App() {
-  const [language, setLanguage] = useState('en-US');
-  const [stringSet, setStringSet] = useState(undefined);
+## Default String Keys Used by the SDK
 
-  const switchLanguage = async (newLanguage: string) => {
-    if (newLanguage === 'zh-CN') {
-      const { zhStringSet } = await import('./languages/zh');
-      setStringSet(zhStringSet);
-    } else {
-      setStringSet(undefined);
-    }
-    setLanguage(newLanguage);
-  };
-
-  return (
-    <>
-      <button onClick={() => switchLanguage('zh-CN')}>Switch to Chinese</button>
-      <button onClick={() => switchLanguage('en-US')}>Switch to English</button>
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-        language={language}
-        stringSet={stringSet}
-      />
-    </>
-  );
-}
-```
-
-**Dynamic Language Loading with React:**
-
-```tsx
-function App() {
-  const [language, setLanguage] = useState('en-US');
-  const [stringSet, setStringSet] = useState(undefined);
-
-  const loadLanguage = async (newLanguage: string) => {
-    let newStringSet;
-
-    try {
-      const module = await import(`./languages/${newLanguage}.ts`);
-      newStringSet = module.default;
-    } catch {
-      // Fallback to default strings for supported languages
-      newStringSet = undefined;
-    }
-
-    setLanguage(newLanguage);
-    setStringSet(newStringSet);
-  };
-
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      language={language}
-      stringSet={stringSet}
-    />
-  );
-}
-```
-
-This approach ensures efficient loading of language resources while maintaining a clean and maintainable codebase in your React application.
+The string keys remain the same as the JavaScript version. Please refer to the [JavaScript version's string keys](../js/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk) for the complete list.

@@ -13,7 +13,6 @@ The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot
     - [FixedMessenger vs AgentProviderContainer](#fixedmessenger-vs-agentprovidercontainer)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
-    - [Launch the messenger](#launch-the-messenger)
   - [Advanced Features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
@@ -113,6 +112,21 @@ function App() {
 
 Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
 
+To launch and display the messenger, implement the code below:
+
+> **Note:** Replace `YOUR_APP_ID` and `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how to do so, refer to the [prerequisites](#prerequisites) section.
+
+```tsx
+function App() {
+  return (
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+    />
+  );
+}
+```
+
 ### Manage user sessions
 
 To properly manage user sessions, provide session information when initializing the messenger:
@@ -141,22 +155,6 @@ To properly manage user sessions, provide session information when initializing 
 />
 ```
 
-### Launch the messenger
-
-To launch and display the messenger, implement the code below:
-
-> **Note:** Replace `YOUR_APP_ID` and `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how to do so, refer to the [prerequisites](#prerequisites) section.
-
-```tsx
-function App() {
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-    />
-  );
-}
-```
 
 The messenger view can be programmatically controlled using the `state` prop:
 
