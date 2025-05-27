@@ -4,6 +4,7 @@ import { Section } from '@/components/ui/Section';
 import { CODE_SAMPLES } from '@/constants/codeSamples';
 import { useMessengerControls } from '@/hooks/useMessengerControls';
 import { useScrollIntoView } from '@/hooks/useScrollIntoView';
+import { useEffect } from 'react';
 
 import { ConversationListDisplay } from './ConversationListDisplay';
 
@@ -11,6 +12,14 @@ export function AdvancedFeatures() {
   const actions = useMessengerControls();
 
   useScrollIntoView();
+
+  // Cleanup CDN messenger when component unmounts
+  useEffect(() => {
+    return () => {
+      // Destroy the CDN messenger instance when switching to React tab
+      actions.cleanup.destroy.execute();
+    };
+  }, [actions.cleanup.destroy]);
 
   return (
     <div className="pt-6">
@@ -57,8 +66,8 @@ export function AdvancedFeatures() {
               Customize specific strings in supported languages or add support for new languages by overriding the
               stringSet.
               <br />
-              Currently, Sendbird messenger supports 10 built-in languages: English (en), Korean (ko), Japanese (ja), Spanish (es),
-              French (fr), German (de), Italian (it), Portuguese (pt), Turkish (tr), and Hindi (hi).
+              Currently, Sendbird messenger supports 10 built-in languages: English (en), Korean (ko), Japanese (ja),
+              Spanish (es), French (fr), German (de), Italian (it), Portuguese (pt), Turkish (tr), and Hindi (hi).
             </>
           }
         >
@@ -77,8 +86,18 @@ export function AdvancedFeatures() {
             title="Scenario 2: Add support for unsupported languages"
             description={
               <>
-                Implement full support for a language not included in Sendbird's built-in set. This example adds complete Chinese (zh-CN) localization by providing all required string values.
-                You can find the full list of required string keys <a className='text-primary underline' href="https://github.com/sendbird/sendbird-ai-agent/blob/main/js/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk" target="_blank" rel="noopener noreferrer">here</a>.
+                Implement full support for a language not included in Sendbird's built-in set. This example adds
+                complete Chinese (zh-CN) localization by providing all required string values. You can find the full
+                list of required string keys{' '}
+                <a
+                  className="text-primary underline"
+                  href="https://github.com/sendbird/sendbird-ai-agent/blob/main/js/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
+                .
               </>
             }
           >
