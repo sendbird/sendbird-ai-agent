@@ -10,6 +10,13 @@ export const CdnExample = () => {
           This example demonstrates how to integrate the AI Agent Messenger into your web application using the CDN
           script. This method requires no build process and works directly in any browser environment.
         </p>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <p className="text-sm text-amber-800">
+            <strong>Note:</strong> CDN integration offers quick setup but has limited customization options compared to
+            the React npm package. For advanced UI customization, component-level control, and TypeScript support,
+            consider using the React integration method.
+          </p>
+        </div>
       </div>
 
       <GettingStarted />

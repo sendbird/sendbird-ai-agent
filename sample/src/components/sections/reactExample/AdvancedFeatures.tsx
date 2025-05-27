@@ -3,51 +3,31 @@ import { CodeEditor } from '@/components/ui/CodeEditor';
 import { Section } from '@/components/ui/Section';
 import { REACT_CODE_SAMPLES } from '@/constants/codeSamples';
 import { useReactMessengerState } from '@/hooks/useReactMessengerState.tsx';
+import { createCommonMessengerProps } from '@/utils/messengerProps';
 
-import { AgentProviderContainer, Conversation, IncomingMessageLayout } from '@sendbird/ai-agent-messenger-react';
+import {
+  AgentProviderContainer,
+  Conversation,
+  ConversationList,
+  IncomingMessageLayout,
+} from '@sendbird/ai-agent-messenger-react';
 
-const CustomMessageExample = () => {
-  const { components } = IncomingMessageLayout.useContext();
+import { CustomMessageComponents } from './CustomMessageComponents';
 
-  const messageProps = {
-    messageType: 'user' as const,
-    message: 'This is a customized message layout using MessageBody component.',
-    createdAt: Date.now(),
-    sender: { nickname: 'AI Agent' },
-    groupType: 'single' as const,
-    isBotMessage: true,
-  };
+// Reusable MessengerContainer component with shared props
+const MessengerContainer = ({ children, keyPrefix }: { children: React.ReactNode; keyPrefix: string }) => {
+  const { appConfig, getStringSet } = useReactMessengerState();
+  const commonProps = createCommonMessengerProps(appConfig, getStringSet);
 
   return (
-    <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      <div>
-        <h4 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', color: '#374151' }}>
-          Text Message with MessageBody:
-        </h4>
-        <components.MessageBody {...messageProps} />
-      </div>
-
-      <div>
-        <h4 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', color: '#374151' }}>
-          Image Message with MessageBody:
-        </h4>
-        <components.MessageBody
-          {...messageProps}
-          message="Here's an image using the MessageBody component:"
-          messageType="file"
-          file={{
-            type: 'image/jpg',
-            url: 'https://picsum.photos/200/300',
-            name: 'sample-image.jpg',
-          }}
-        />
-      </div>
-    </div>
+    <AgentProviderContainer key={`${keyPrefix}-${appConfig.messengerKey}`} {...commonProps}>
+      {children}
+    </AgentProviderContainer>
   );
 };
 
-export const ReactAdvancedFeatures = () => {
-  const { appConfig, updateAppConfig, getStringSet, loadLanguageStringSet } = useReactMessengerState();
+export const AdvancedFeatures = () => {
+  const { appConfig, updateAppConfig, loadLanguageStringSet } = useReactMessengerState();
 
   return (
     <div className="pt-6">
@@ -58,21 +38,6 @@ export const ReactAdvancedFeatures = () => {
         appearance, and integration patterns to match your application's needs.
       </p>
       <div className="space-y-8">
-        <Section title="Switch Application" description="Change to a different application configuration.">
-          <CodeEditor value={REACT_CODE_SAMPLES.switchApplication} language="tsx" />
-          <Button
-            onClick={() =>
-              updateAppConfig({
-                appId: import.meta.env.VITE_NEW_APP_ID || import.meta.env.VITE_APP_ID,
-                aiAgentId: import.meta.env.VITE_NEW_AI_AGENT_ID || import.meta.env.VITE_AI_AGENT_ID,
-                messengerKey: appConfig.messengerKey + 1,
-              })
-            }
-          >
-            {appConfig.appId === import.meta.env.VITE_APP_ID ? 'Switch Application' : 'Application Switched'}
-          </Button>
-        </Section>
-
         <Section title="User Authentication" description="Set up user authentication for personalized experience.">
           <CodeEditor value={REACT_CODE_SAMPLES.userAuthentication} language="tsx" />
           <Button
@@ -97,52 +62,33 @@ export const ReactAdvancedFeatures = () => {
 
         <Section
           title="Custom Display"
-          description="Use AgentProviderContainer with individual UI components like Conversation to create custom messenger implementations. This approach allows you to integrate the messenger into specific areas of your application rather than using the fixed-position launcher."
+          description="Use AgentProviderContainer with individual UI components like Conversation and ConversationList to create custom messenger implementations. This approach allows you to integrate the messenger into specific areas of your application rather than using the fixed-position launcher."
         >
           <CodeEditor value={REACT_CODE_SAMPLES.customDisplay} language="tsx" />
-          <div className="mt-4 w-[400px] h-[600px] border border-gray-300 rounded-lg overflow-hidden">
-            <AgentProviderContainer
-              key={`custom-${appConfig.messengerKey}`}
-              appId={appConfig.appId}
-              aiAgentId={appConfig.aiAgentId}
-              language={appConfig.currentLanguage}
-              countryCode={
-                appConfig.currentLanguage === 'ko-KR' ? 'KR' : appConfig.currentLanguage === 'zh-CN' ? 'CN' : 'US'
-              }
-              stringSet={getStringSet()}
-              context={
-                appConfig.hasContext
-                  ? {
-                      userPreference: 'technical',
-                      customerTier: 'premium',
-                    }
-                  : undefined
-              }
-              userSessionInfo={
-                appConfig.hasSession
-                  ? {
-                      userId: import.meta.env.VITE_NEW_USER_ID,
-                      authToken: import.meta.env.VITE_NEW_USER_AUTH_TOKEN,
-                      sessionHandler: {
-                        onSessionTokenRequired: async (resolve) => {
-                          resolve(import.meta.env.VITE_NEW_USER_AUTH_TOKEN);
-                        },
-                        onSessionClosed: () => {
-                          console.log('Session closed');
-                        },
-                        onSessionError: (error) => {
-                          console.error('Session error:', error);
-                        },
-                        onSessionRefreshed: () => {
-                          console.log('Session refreshed');
-                        },
-                      },
-                    }
-                  : undefined
-              }
-            >
-              <Conversation />
-            </AgentProviderContainer>
+          <div className="mt-4 flex gap-4">
+            {/* Display Conversation view only */}
+            <div>
+              <h4 className="text-sm font-bold text-gray-700 mb-2">Conversation View</h4>
+              <div className="w-[400px] h-[600px] border border-gray-300 rounded-lg overflow-hidden">
+                <MessengerContainer keyPrefix="conversation">
+                  <Conversation />
+                </MessengerContainer>
+              </div>
+            </div>
+
+            {/* Display ConversationList view only */}
+            <div className="flex-1">
+              <h4 className="text-sm font-bold text-gray-700 mb-2">ConversationList View</h4>
+              <div className="w-[400px] h-[600px] border border-gray-300 rounded-lg overflow-hidden">
+                <MessengerContainer keyPrefix="conversation-list">
+                  <ConversationList
+                    onOpenConversationView={(channelUrl, status) => {
+                      console.log('Open conversation:', channelUrl, status);
+                    }}
+                  />
+                </MessengerContainer>
+              </div>
+            </div>
           </div>
         </Section>
 
@@ -243,22 +189,31 @@ export const ReactAdvancedFeatures = () => {
 
         <Section
           title="Message Layout Customization"
-          description="Customize predefined message layouts using individual message components. This allows you to create custom message displays while leveraging Sendbird's built-in message rendering capabilities."
+          description={
+            <>
+              Customize predefined message layouts using individual message components. This allows you to create custom
+              message displays while leveraging Sendbird's built-in message rendering capabilities.
+              <br />
+              <em>
+                Note: This feature requires AgentProviderContainer. FixedMessenger does not currently support message
+                layout customization.
+              </em>
+            </>
+          }
         >
-          <CodeEditor value={REACT_CODE_SAMPLES.messageLayoutCustomization} language="tsx" />
-          <div className="mt-4 w-[400px] border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
-            <AgentProviderContainer
-              key={`message-layout-${appConfig.messengerKey}`}
-              appId={appConfig.appId}
-              aiAgentId={appConfig.aiAgentId}
-              language={appConfig.currentLanguage}
-              countryCode={
-                appConfig.currentLanguage === 'ko-KR' ? 'KR' : appConfig.currentLanguage === 'zh-CN' ? 'CN' : 'US'
-              }
-              stringSet={getStringSet()}
-            >
-              <CustomMessageExample />
-            </AgentProviderContainer>
+          <CodeEditor value={REACT_CODE_SAMPLES.messageLayoutCustomization} language="tsx" collapsible />
+
+          <div className="mt-4">
+            <div className="w-[400px] h-[600px] border border-gray-300 rounded-lg overflow-hidden">
+              <MessengerContainer keyPrefix="custom-layout">
+                <IncomingMessageLayout.SenderAvatar component={CustomMessageComponents.SenderAvatar} />
+                <IncomingMessageLayout.SenderName component={CustomMessageComponents.SenderName} />
+                <IncomingMessageLayout.MessageBody component={CustomMessageComponents.MessageBody} />
+                <IncomingMessageLayout.SentTime component={CustomMessageComponents.SentTime} />
+                <IncomingMessageLayout.SuggestedReplies component={CustomMessageComponents.SuggestedReplies} />
+                <Conversation />
+              </MessengerContainer>
+            </div>
           </div>
         </Section>
 

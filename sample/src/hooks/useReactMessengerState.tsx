@@ -1,15 +1,5 @@
+import type { AppConfig } from '@/utils/messengerProps';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-
-interface AppConfig {
-  opened: boolean;
-  currentLanguage: string;
-  hasSession: boolean;
-  hasContext: boolean;
-  messengerKey: number;
-  appId: string;
-  aiAgentId: string;
-  customStringSet: Record<string, string> | null;
-}
 
 export interface ReactMessengerState {
   appConfig: AppConfig;

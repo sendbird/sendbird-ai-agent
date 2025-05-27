@@ -2,7 +2,7 @@ import { CodeEditor } from '@/components/ui/CodeEditor';
 import { Section } from '@/components/ui/Section';
 import { REACT_CODE_SAMPLES } from '@/constants/codeSamples';
 
-export const ReactGettingStarted = () => (
+export const GettingStarted = () => (
   <div className="border-b border-gray-200 pb-6">
     <h2 className="text-2xl font-bold leading-6 text-gray-900">Getting Started</h2>
     <p className="mb-6 mt-3 text-base text-gray-500">

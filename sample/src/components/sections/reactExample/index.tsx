@@ -1,13 +1,15 @@
 import { ReactMessengerProvider, useReactMessengerState } from '@/hooks/useReactMessengerState.tsx';
+import { createCommonMessengerProps } from '@/utils/messengerProps';
 
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
-import { ReactAdvancedFeatures } from './AdvancedFeatures';
-import { ReactGettingStarted } from './GettingStarted';
+import { AdvancedFeatures } from './AdvancedFeatures';
+import { GettingStarted } from './GettingStarted';
 
 const ReactExampleContent = () => {
   const { appConfig, updateAppConfig, getStringSet } = useReactMessengerState();
+  const commonProps = createCommonMessengerProps(appConfig, getStringSet);
 
   return (
     <div className="p-6 space-y-6">
@@ -19,51 +21,17 @@ const ReactExampleContent = () => {
         </p>
       </div>
 
-      <ReactGettingStarted />
-      <ReactAdvancedFeatures />
+      <GettingStarted />
+      <AdvancedFeatures />
 
       {/* Live Demo */}
       <FixedMessenger
         key={`messenger-${appConfig.messengerKey}`}
-        appId={appConfig.appId}
-        aiAgentId={appConfig.aiAgentId}
+        {...commonProps}
         state={{
           opened: appConfig.opened,
           setOpened: (opened: boolean) => updateAppConfig({ opened }),
         }}
-        language={appConfig.currentLanguage}
-        countryCode={appConfig.currentLanguage === 'ko-KR' ? 'KR' : appConfig.currentLanguage === 'zh-CN' ? 'CN' : 'US'}
-        stringSet={getStringSet()}
-        context={
-          appConfig.hasContext
-            ? {
-                userPreference: 'technical',
-                customerTier: 'premium',
-              }
-            : undefined
-        }
-        userSessionInfo={
-          appConfig.hasSession
-            ? {
-                userId: import.meta.env.VITE_NEW_USER_ID,
-                authToken: import.meta.env.VITE_NEW_USER_AUTH_TOKEN,
-                sessionHandler: {
-                  onSessionTokenRequired: async (resolve) => {
-                    resolve(import.meta.env.VITE_NEW_USER_AUTH_TOKEN);
-                  },
-                  onSessionClosed: () => {
-                    console.log('Session closed');
-                  },
-                  onSessionError: (error) => {
-                    console.error('Session error:', error);
-                  },
-                  onSessionRefreshed: () => {
-                    console.log('Session refreshed');
-                  },
-                },
-              }
-            : undefined
-        }
       />
     </div>
   );
