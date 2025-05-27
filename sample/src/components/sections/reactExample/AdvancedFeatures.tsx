@@ -4,7 +4,47 @@ import { Section } from '@/components/ui/Section';
 import { REACT_CODE_SAMPLES } from '@/constants/codeSamples';
 import { useReactMessengerState } from '@/hooks/useReactMessengerState.tsx';
 
-import { AgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react';
+import { AgentProviderContainer, Conversation, IncomingMessageLayout } from '@sendbird/ai-agent-messenger-react';
+
+const CustomMessageExample = () => {
+  const { components } = IncomingMessageLayout.useContext();
+
+  const messageProps = {
+    messageType: 'user' as const,
+    message: 'This is a customized message layout using MessageBody component.',
+    createdAt: Date.now(),
+    sender: { nickname: 'AI Agent' },
+    groupType: 'single' as const,
+    isBotMessage: true,
+  };
+
+  return (
+    <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div>
+        <h4 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', color: '#374151' }}>
+          Text Message with MessageBody:
+        </h4>
+        <components.MessageBody {...messageProps} />
+      </div>
+
+      <div>
+        <h4 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', color: '#374151' }}>
+          Image Message with MessageBody:
+        </h4>
+        <components.MessageBody
+          {...messageProps}
+          message="Here's an image using the MessageBody component:"
+          messageType="file"
+          file={{
+            type: 'image/jpg',
+            url: 'https://picsum.photos/200/300',
+            name: 'sample-image.jpg',
+          }}
+        />
+      </div>
+    </div>
+  );
+};
 
 export const ReactAdvancedFeatures = () => {
   const { appConfig, updateAppConfig, getStringSet, loadLanguageStringSet } = useReactMessengerState();
@@ -199,6 +239,27 @@ export const ReactAdvancedFeatures = () => {
           >
             {appConfig.hasContext ? 'Remove Context' : 'Add Context'}
           </Button>
+        </Section>
+
+        <Section
+          title="Message Layout Customization"
+          description="Customize predefined message layouts using individual message components. This allows you to create custom message displays while leveraging Sendbird's built-in message rendering capabilities."
+        >
+          <CodeEditor value={REACT_CODE_SAMPLES.messageLayoutCustomization} language="tsx" />
+          <div className="mt-4 w-[400px] border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
+            <AgentProviderContainer
+              key={`message-layout-${appConfig.messengerKey}`}
+              appId={appConfig.appId}
+              aiAgentId={appConfig.aiAgentId}
+              language={appConfig.currentLanguage}
+              countryCode={
+                appConfig.currentLanguage === 'ko-KR' ? 'KR' : appConfig.currentLanguage === 'zh-CN' ? 'CN' : 'US'
+              }
+              stringSet={getStringSet()}
+            >
+              <CustomMessageExample />
+            </AgentProviderContainer>
+          </div>
         </Section>
 
         <Section

@@ -301,4 +301,46 @@ function App() {
     />
   );
 }`,
+
+  messageLayoutCustomization: `import { AgentProviderContainer, IncomingMessageLayout } from '@sendbird/ai-agent-messenger-react';
+
+function CustomMessageExample() {
+  const { Template: IncomingTemplate, components } = IncomingMessageLayout.useContext();
+
+  const messageProps = {
+    messageType: 'user',
+    message: 'This is a customized message layout.',
+    createdAt: Date.now(),
+    sender: { nickname: 'AI Agent' },
+    groupType: 'single',
+    isBotMessage: true,
+  };
+
+  return (
+    <div style={{ padding: '16px', backgroundColor: '#f8f8f8', borderRadius: '8px' }}>
+      {/* Using MessageBody component for custom layout */}
+      <components.MessageBody {...messageProps} />
+
+      {/* Using MessageBody with image */}
+      <components.MessageBody
+        {...messageProps}
+        messageType="file"
+        file={{
+          type: 'image/jpg',
+          url: 'https://picsum.photos/200/300',
+        }}
+      />
+    </div>
+  );
+}
+
+function App() {
+  // This feature requires AgentProviderContainer currently
+  // FixedMessenger does not support message layout customization
+  return (
+    <AgentProviderContainer appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID">
+      <CustomMessageExample />
+    </AgentProviderContainer>
+  );
+}`,
 };
