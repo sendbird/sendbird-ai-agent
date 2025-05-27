@@ -15,7 +15,7 @@ const ReactExampleContent = () => {
         <h2 className="text-2xl font-bold leading-6 text-gray-900">React (npm) Integration</h2>
         <p className="mb-6 mt-3 text-base text-gray-500">
           This example demonstrates how to integrate the AI Agent Messenger into your React application using the npm
-          package. This method provides type safety, better tree-shaking, and seamless integration with your React build
+          package. This method provides type safety, and seamless integration with your React build
           process.
         </p>
       </div>

@@ -15,14 +15,10 @@ The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot
     - [Manage user sessions](#manage-user-sessions)
     - [Launch the messenger](#launch-the-messenger)
   - [Advanced Features](#advanced-features)
-    - [Switch Application](#switch-application)
-    - [User Authentication](#user-authentication)
-    - [Manual Controls](#manual-controls)
-    - [Custom Display](#custom-display)
-    - [Locale Configuration](#locale-configuration)
-    - [Localization Customization](#localization-customization)
+    - [Display messenger without launcher button](#display-messenger-without-launcher-button)
+    - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
-    - [Cleanup](#cleanup)
+    - [Localization and Language Support](#localization-and-language-support)
 
 ## Prerequisites
 
@@ -139,7 +135,22 @@ To properly manage user sessions, provide session information when initializing 
 
 ### Launch the messenger
 
-The messenger can be controlled using the `state` prop:
+To launch and display the messenger, implement the code below:
+
+> **Note:** Replace `YOUR_APP_ID` and `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how to do so, refer to the [prerequisites](#prerequisites) section.
+
+```tsx
+function App() {
+  return (
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+    />
+  );
+}
+```
+
+The messenger view can be programmatically controlled using the `state` prop:
 
 ```tsx
 function App() {
@@ -150,7 +161,6 @@ function App() {
       appId="YOUR_APP_ID"
       aiAgentId="YOUR_AI_AGENT_ID"
       state={{ opened, setOpened }}
-      enableCloseConversationButton
     />
   );
 }
@@ -160,66 +170,9 @@ function App() {
 
 ## Advanced Features
 
-### Switch Application
+The following are available advanced features.
 
-Update to different application configuration:
-
-```tsx
-// Update to different application configuration
-<FixedMessenger
-  appId="NEW_APP_ID"
-  aiAgentId="NEW_AI_AGENT_ID"
-/>
-```
-
-### User Authentication
-
-Provide user session information for authenticated experiences:
-
-```tsx
-<FixedMessenger
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  userSessionInfo={{
-    userId: 'user_id',
-    authToken: 'auth_token',
-    sessionHandler: {
-      onSessionTokenRequired: async (resolve, reject) => {
-        try {
-          const response = await fetch('new-token-endpoint');
-          resolve(response.token);
-        } catch (error) {
-          reject(error);
-        }
-      },
-      onSessionClosed: () => { },
-      onSessionError: (error) => { },
-      onSessionRefreshed: () => { }
-    }
-  }}
-/>
-```
-
-### Manual Controls
-
-Control messenger state programmatically:
-
-```tsx
-function App() {
-  const [opened, setOpened] = useState(true);
-
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      state={{ opened, setOpened }}
-      enableCloseConversationButton
-    />
-  );
-}
-```
-
-### Custom Display
+### Display messenger without launcher button
 
 Build custom messenger UI using AgentProviderContainer:
 
@@ -240,95 +193,11 @@ function App() {
 }
 ```
 
-### Locale Configuration
-
-Set language and country code:
-
-```tsx
-<FixedMessenger
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  language="ko-KR"
-  countryCode="KR"
-/>
-```
-
-### Localization Customization
-
-**Scenario 1: Customizing Strings in Supported Languages**
-
-```tsx
-<FixedMessenger
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  language="es-ES"
-  // You can still customize certain stringSet keys even in supported language
-  stringSet={{
-    MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
-    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
-  }}
-/>
-```
-
-**Scenario 2: Adding Support for Unsupported Languages**
-
-```tsx
-<FixedMessenger
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  language="zh-CN"
-  // All stringSet keys for unsupported languages must be provided
-  stringSet={{
-    // Channel - Common
-    CHANNEL_FROZEN: '频道已冻结',
-    PLACE_HOLDER__WRONG: '出现问题',
-    PLACE_HOLDER__NO_MESSAGES: '没有消息',
-    UNKNOWN__UNKNOWN_MESSAGE_TYPE: '(未知消息类型)',
-
-    // Channel - Header
-    HEADER_BUTTON__AGENT_HANDOFF: '连接客服',
-
-    // Message Input
-    MESSAGE_INPUT__PLACE_HOLDER: '请输入问题',
-    MESSAGE_INPUT__PLACE_HOLDER__WAIT_AI_AGENT_RESPONSE: '等待回复中...',
-    MESSAGE_INPUT__PLACE_HOLDER__DISABLED: '此频道不可用',
-
-    // Common UI
-    BUTTON__CANCEL: '取消',
-    BUTTON__SAVE: '保存',
-    BUTTON__OK: '确定',
-    NO_NAME: '(无名)',
-    RETRY: '重试',
-
-    // ... other string key-value pairs
-  }}
-/>
-```
-
-### Passing context object to Agent
-
-You can provide context information to guide the AI Agent:
-
-```tsx
-<FixedMessenger
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  context={{
-    userPreference: 'technical',
-    customerTier: 'premium'
-  }}
-/>
-```
-
-### Cleanup
+### Deauthenticate and clear session
 
 Component cleanup is handled automatically by React when the component unmounts, but you can also control the messenger state manually:
 
 ```tsx
-// Component cleanup is handled automatically by React
-// when the component unmounts, but you can also
-// control the messenger state manually:
-
 function App() {
   const [messengerKey, setMessengerKey] = useState(0);
 
@@ -345,5 +214,39 @@ function App() {
   );
 }
 ```
+
+### Passing context object to Agent
+
+You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.
+
+This allows for a more personalized and context-aware interaction experience.
+
+> **Important**: These settings can only be configured during initialization.
+
+```tsx
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  // Language setting (IETF BCP 47 format)
+  // default: navigator.language
+  language="en-US"
+  // Country code setting (ISO 3166 format)
+  countryCode="US"
+  // Context object for the AI Agent
+  context={{
+    userPreference: 'technical',
+    customerTier: 'premium'
+  }}
+/>
+```
+
+### Localization and Language Support
+
+The SDK supports multiple languages and allows you to customize UI strings. You can:
+
+- Set the language during initialization
+- Customize specific strings in supported languages
+- Add support for additional languages
+- Dynamically load language files
 
 For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](./MULTILANGUAGE.md).

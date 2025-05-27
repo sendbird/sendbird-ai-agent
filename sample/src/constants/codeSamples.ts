@@ -205,7 +205,6 @@ function App() {
       appId="YOUR_APP_ID"
       aiAgentId="YOUR_AI_AGENT_ID"
       state={{ opened, setOpened }}
-      enableCloseConversationButton
     />
   );
 }`,
