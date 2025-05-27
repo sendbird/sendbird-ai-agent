@@ -166,9 +166,12 @@ messenger.initialize({
 };
 
 export const REACT_CODE_SAMPLES = {
-  installation: `npm install @sendbird/ai-agent-messenger-react
+  installation: `npm install @sendbird/ai-agent-messenger-react @sendbird/chat styled-components
 # or
-yarn add @sendbird/ai-agent-messenger-react`,
+yarn add @sendbird/ai-agent-messenger-react @sendbird/chat styled-components
+
+# Note: Modern npm versions automatically install peer dependencies,
+# but explicitly installing them ensures compatibility and avoids potential version conflicts.`,
 
   basicUsage: `import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';

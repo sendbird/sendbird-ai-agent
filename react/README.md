@@ -28,6 +28,12 @@ You can find it under the **Channels** > **Messenger** menu on the Sendbird Dash
 
 ![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
 
+**System Requirements:**
+- React >=18.0.0
+- React DOM >=18.0.0
+- @sendbird/chat >=4.0.0
+- styled-components >=5.0.0
+
 ---
 
 ## Getting Started
@@ -36,13 +42,15 @@ Quickly install and initialize the AI Agent SDK by following the steps below.
 
 ### Step 1. Install AI Agent SDK
 
-Install the package using npm or yarn:
+Install the package with its peer dependencies using npm or yarn:
 
 ```bash
-npm install @sendbird/ai-agent-messenger-react
+npm install @sendbird/ai-agent-messenger-react @sendbird/chat styled-components
 # or
-yarn add @sendbird/ai-agent-messenger-react
+yarn add @sendbird/ai-agent-messenger-react @sendbird/chat styled-components
 ```
+
+> **Note:** Modern npm versions automatically install peer dependencies, but explicitly installing them ensures compatibility and avoids potential version conflicts.
 
 ### Step 2. Initialize AI Agent SDK
 
