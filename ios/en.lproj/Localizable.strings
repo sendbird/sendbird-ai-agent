@@ -90,4 +90,5 @@
 // MARK: - CONVERSATION LIST
 "SBA_ConversationList_Header_headerTitle" = "Conversation history";
 "SBA_ConversationList_List_defaultTopic" = "No category";
-"SBA_ConversationList_Footer_actionTitle" = "💬 Return to conversation";
+"SBA_ConversationList_Footer_actionTitle" = "💬 Start a new conversation";
+"SBA_ConversationList_Footer_actionInactiveTitle" = "💬 Return to conversation";
