@@ -14,6 +14,9 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
     - [Launch the messenger](#launch-the-messenger)
+  - [Push Notifications](#push-notifications)
+    - [Register for push notifications](#register-for-push-notifications)
+    - [Unregister for push notifications](#unregister-for-push-notifications)
   - [Advanced features](#advanced-features)
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
@@ -172,6 +175,40 @@ Present the chat view as a modal:
 AIAgentMessenger.presentConversation(
     aiAgentId: {AIAgentId}
 )
+```
+
+---
+
+## Push Notifications
+
+### Register for push notifications
+
+[Push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) are a type of notification sent to your user's device when a client app is running in the background. Push notifications for the client app will contain a payload created by Sendbird and be delivered through APNs. Sendbird server will communicate with APNs whenever needed and APNs will send a push notification to the client app on iOS devices. In order to use this feature, you need to register the user's device token to Sendbird server through the AppDelegate.
+
+> Note : APNs should be set up in advance in order to send push notifications.
+
+```swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    AIAgentMessenger.registerPush(deviceToken: deviceToken) { (success) in
+
+    }
+}
+```
+
+### Unregister for push notifications
+
+You should unregister a user's device token from Sendbird server if you don’t want to send [push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) to the user.
+
+```swift
+// If you want to unregister the current device only, call this method.
+AIAgentMessenger.unregisterPushToken { (success) in
+
+}
+
+// If you want to unregister all devices of the user, call this method.
+AIAgentMessenger.unregisterAllPushToken { (success) in
+
+}
 ```
 
 ---
