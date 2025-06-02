@@ -1,58 +1,34 @@
 # Sendbird AI Agent
 
-**Sendbird AI Agent** is an enterprise-grade, omnichannel AI solution designed to revolutionize customer service.
-Unlike traditional chatbots, Sendbird AI Agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
+**Update: Added new Discussion Form Templates**
 
-## Features
+## Summary of Change
 
-- **Omnichannel Support**: Integrates with SMS, email, WhatsApp, in-app chat, web, and social messaging platforms, ensuring your AI agent is always available where your customers are. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
+New predefined templates for GitHub Discussions have been added under `.github/DISCUSSION_TEMPLATE/`. These templates help standardize how users create new discussions for customizations, initial routes, conversations, conversation lists, and launchers across iOS, Android, and JS platforms. This improvement aims to unify and guide community contributions and support requests, making the process more efficient and consistent.
 
-- **Contextual Understanding**: Maintains conversation context across channels, allowing the AI agent to pick up the conversation exactly where the customer left off.
+## Details
 
-- **Proactive Engagement**: Anticipates customer needs and initiates conversations on preferred channels before issues arise.
+- **What’s new:**
+  - Added the following discussion templates:
+    - `.github/DISCUSSION_TEMPLATE/common.yml`
+    - `.github/DISCUSSION_TEMPLATE/conversation-list.yml`
+    - `.github/DISCUSSION_TEMPLATE/conversation.yml`
+    - `.github/DISCUSSION_TEMPLATE/initial-route.yml`
+    - `.github/DISCUSSION_TEMPLATE/launcher.yml`
+- **Why:**
+  - These templates provide a unified structure for submitting customization guides, code snippets, version information, references, and screenshots for different parts of the Sendbird AI Agent across supported platforms.
+- **How to use:**
+  - When opening a new discussion in the repository, select the appropriate template for your topic. Fill out the required fields for summary, guide, and any other requested information.
 
-- **Unified Customer Insights**: Transforms omnichannel conversations into unified customer insights to inform smarter business decisions. ([sendbird.com](https://sendbird.com/?utm_source=chatgpt.com))
+## Documentation Impact
 
-- **Seamless Integrations**: Connects with customer support software like Salesforce, Zendesk, Notion, and Google Drive, allowing the AI agent to be trained using your existing content. ([sendbird.com](https://sendbird.com/ai-agent/builder?utm_source=chatgpt.com))
-
-## Getting Started
-
-To integrate Sendbird AI Agent into your application, follow these steps:
-
-1. **Create a Sendbird Account**: Sign up at [Sendbird Dashboard](https://dashboard.sendbird.com/).
-
-2. **Set Up Your Application**: Create a new application in the dashboard to obtain your Application ID.
-
-3. **Configure AI Agent**: In the dashboard, navigate to the AI Agent section to create and configure your AI agent, obtaining the necessary Agent ID.
-
-4. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Sendbird AI Agent SDK into your application.
-
-5. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
-
-## Repository Structure
-
-This repository contains platform-specific implementations of the Sendbird AI Agent:
-
-- **iOS**: Located in the `ios` directory, this includes the Swift Package Manager (SPM) compatible SDK for integrating the AI agent into iOS applications.
-
-- **Android**: Located in the `android` directory, this includes the necessary components for Android integration.
-
-- **Web**: Located in the `js` directory, this includes JavaScript components for web integration.
-
-Each platform-specific directory contains its own README with detailed integration instructions.
-
-## Documentation
-
-For comprehensive documentation, including API references and advanced configuration options, visit the [Sendbird Documentation](https://sendbird.com/docs).
-
-## Support
-
-If you encounter any issues or have questions, please open an issue in this repository or contact [Sendbird Support](https://sendbird.com/contact).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+- This change primarily affects contributors and users creating Discussions. It does not impact the API reference or SDK usage, but it does improve the documentation workflow and support interaction.
+- For more details, see [PR #71](https://github.com/sendbird/sendbird-ai-agent/pull/71) and the new `.github/DISCUSSION_TEMPLATE/` directory.
 
 ---
 
-For more information on Sendbird's AI Agent platform and its capabilities, visit the [official website](https://sendbird.com/ai-agent).
+_This update is based on the merged PR [#71: Added Discussion forms](https://github.com/sendbird/sendbird-ai-agent/pull/71) by @tezpark._
+
+---
+
+For more information about Sendbird AI Agent, visit the [official documentation](https://sendbird.com/docs) or [GitHub repository](https://github.com/sendbird/sendbird-ai-agent).
