@@ -2,22 +2,17 @@ title: "How to custom... "
 labels: ["🎨 Initial route"]
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Explain the customization summary
-
   - type: textarea
     id: versions
     attributes:
       label: Versions
       description: "가이드를 작성할때 사용한 SDK 버전 정보를 입력해주세요. 버전 정보가 추가되면 주석을 해제주세요"
       value: |
-        <!-- iOS Version (don't remove this comment) -->
-        <!--[![Languages](https://img.shields.io/badge/Swift-FA7343?style=flat-square&logo=swift&logoColor=white)![Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)](https://github.com/sendbird/sendbird-ai-agent-messenger-ios/releases)-->
-        <!-- Android Version (don't remove this comment) -->
-        <!--[![Languages](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white)![Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)]()-->
-        <!-- JS Version (don't remove this comment) -->
+        <!-- iOS Version -->
+        <!--[![Languages](https://img.shields.io/badge/Swift-FA7343?style=flat-square&logo=swift&logoColor=white)![Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)](https://github.com/sendbird/sendbird-ai-agent-messenger-ios/releases)-->  
+        <!-- Android Version -->
+        <!--[![Languages](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white)![Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)]()-->  
+        <!-- JS Version -->
         <!--[![Languages](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)![Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)]()-->
     validations:
       required: false

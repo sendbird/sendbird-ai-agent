@@ -2,11 +2,6 @@ title: "How to custom... "
 labels: ["🎨 Conversation"]
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Explain the customization summary
-
   - type: textarea
     id: versions
     attributes:
