@@ -1,308 +1,220 @@
-**iOS** / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/README.md)
-
-# Sendbird AI Agent Quickstart guide (iOS)
-
-The **Sendbird AI Agent Messenger** allows seamless integration of chatbot features into your iOS application. Follow the steps below to initialize and utilize the SDK effectively.
-
-- [Sendbird AI Agent Quickstart guide (iOS)](#sendbird-ai-agent-quickstart-guide-ios)
-  - [Requirements](#requirements)
-  - [Prerequisites](#prerequisites)
-  - [Getting started](#getting-started)
-    - [Step 1. Create a new project](#step-1-create-a-new-project)
-    - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
-    - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
-  - [Running your application](#running-your-application)
-    - [Manage user sessions](#manage-user-sessions)
-    - [Launch the messenger](#launch-the-messenger)
-  - [Push Notifications](#push-notifications)
-    - [Register for push notifications](#register-for-push-notifications)
-    - [Unregister for push notifications](#unregister-for-push-notifications)
-  - [Advanced features](#advanced-features)
-    - [Update SDK theme](#update-sdk-theme)
-    - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
-    - [Passing context object to Agent](#passing-context-object-to-agent)
-    - [Custom Localization (Multi-language Support)](#custom-localization-multi-language-support)
-
-## Requirements
-
-The minimum requirements for AI Agent for iOS are the following.
-
-- Xcode 16.0 or later
-- Swift Package Manager (SPM) support
-
-## Prerequisites
-
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
-<br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
-
-![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
-
----
-
-## Getting Started
-
-Quickly install and initialize the AI Agent SDK by following the steps below.
-
-### Step 1. Create a new project
-
-1. Open Xcode.
-2. Choose **File > New > Projec**.
-3. Select **iOS** as the platform and **App** as the template.
-
-![ai-agent-swiftui-tutorial-create-project](https://github.com/user-attachments/assets/d864fcf1-ddf2-4f42-9913-447ff8ab874f)
-
-![aiagent-ios-project-options](https://github.com/user-attachments/assets/13f7b8c9-396b-4cc1-ba49-0339db2ddfc9)
-
-
-### Step 2. Install AI Agent SDK
-
-1. In **Xcode**, select **File > Add Package Dependencies**.
-2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
-    
-     ```
-     https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
-     ```
-    
-3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
-
-### Step 3. Initialize AI Agent SDK
-
-  Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
-
-
-```swift
-// Import the SDK
-import SendbirdAIAgentMessenger
-
-// Initialize the SDK
-let params = AIAgentMessenger.InitializeParams()
-
-AIAgentMessenger.initialize(
-    appId: appId,
-    params: params
-) { [weak self] result in
-    guard let self = self else { return }
-
-    switch result {
-    case .success:
-        // SDK initialized successfully
-        break
-    case .failure(let error):
-        // Handle initialization error
-        break
-    }
-}
-```
-
----
-
-## Running your application
-
-Now that you have installed and initialized the AI Agent SDK, follow the steps below to run your application.
-
-> Note: Make sure to perform the following steps after the SDK has been successfully initialized. Once initialization is complete, set up the user session and launch the messenger.
-
-### Manage user sessions
-
-User sessions require periodic token reissuance for security purposes, so the following session management is necessary.
-
-#### 1. Updating session information
-
-Update the session information to ensure proper session management:
-    
-```swift
-AIAgentMessenger.updateSessionInfo(
-    with: AIAgentMessenger.UserSessionInfo(
-        userId: userId,
-        sessionToken: sessionToken,
-        sessionDelegate: self
-    )
-)
-```
-    
-#### 2.Implementing session delegate
-
-Handle session-related events by implementing `AIAgentSessionDelegate`:
-    
-```swift
-public protocol AIAgentSessionDelegate: AnyObject {
-    func sessionTokenDidRequire(
-        successCompletion success: @escaping (String?) -> Void,
-        failCompletion fail: @escaping () -> Void
-    )
-    
-    func sessionWasClosed()
-    func sessionWasRefreshed()
-    func sessionDidHaveError(_ error: Error)
-}
-```
-    
-### Launch the messenger
-
-Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
-
-There are two ways to display the chat view:
-
-1. Using the launcher button
-2. Opening the conversation channel in presentation mode
-
-#### 1. Using the launcher button
-
-![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
-
-Display a floating launcher button:
-
-```swift
-AIAgentMessenger.attachLauncher(
-    aiAgentId: self.aiAgentId
-)
-```
-
-To hide the launcher:
-
-```swift
-AIAgentMessenger.detachLauncher(aiAgentId: {AIAgentId})
-```
-
-#### 2. Opening the conversation channel in presentation mode
-
-![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
-    
-Present the chat view as a modal:
-
-```swift
-AIAgentMessenger.presentConversation(
-    aiAgentId: {AIAgentId}
-)
-```
-
----
-
-## Push Notifications
-
-### Register for push notifications
-
-[Push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) are a type of notification sent to your user's device when a client app is running in the background. Push notifications for the client app will contain a payload created by Sendbird and be delivered through APNs. Sendbird server will communicate with APNs whenever needed and APNs will send a push notification to the client app on iOS devices. In order to use this feature, you need to register the user's device token to Sendbird server through the AppDelegate.
-
-> Note : APNs should be set up in advance in order to send push notifications.
-
-```swift
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    AIAgentMessenger.registerPush(deviceToken: deviceToken) { (success) in
-
-    }
-}
-```
-
-### Unregister for push notifications
-
-You should unregister a user's device token from Sendbird server if you don’t want to send [push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) to the user.
-
-```swift
-// If you want to unregister the current device only, call this method.
-AIAgentMessenger.unregisterPushToken { (success) in
-
-}
-
-// If you want to unregister all devices of the user, call this method.
-AIAgentMessenger.unregisterAllPushToken { (success) in
-
-}
-```
-
----
-
-## Advanced features
-
-The following are available advanced features.
-
-### Customize launcher mode
-
-You can modify the floating launcher button’s behavior and appearance as shown below.
-
-```swift
-let options = SBALauncherLayoutOptions(
-    parentView: nil, // Attaches to the window if nil
-    position: .trailingBottom,
-    margin: .default,
-    spacing: 12,
-    overlayLauncher: false,
-    useSafeArea: true
-)
-
-let params = LauncherSettingsParams(
-    options: options
-)
-
-AIAgentMessenger.attachLauncher(
-    aiAgentId: {AIAgentId},
-    params: params
-)
-```
-
-### Update SDK Theme
-
-You can customize the SDK’s color scheme to match your app's theme as shown below.
-
-```swift
-AIAgentMessenger.update(colorScheme: .light) // Options: .dark, .light
-```
-Since apps may allow users to switch themes manually or follow device settings, theme updates need to be explicitly called.
-
-### Deauthenticate and clear session
-
-When a user logs out, de-authenticate the SDK to clear session data and disconnect.
-
-```swift
-AIAgentMessenger.deauthenticate { [weak self] in
-    // Perform post-deauthentication actions
-}
-```
-
-### Passing context object to Agent
-
-You can predefine customer-specific information, such as country, language, or other custom context data, to guide the AI Agent in providing faster and more accurate responses. 
-
-This allows for a more personalized and context-aware interaction experience.
-
-> Once the contexts are set, they will be used throughout the conversation to provide personalized and context-aware responses.
-
-```swift
-// Case: Attach launcher
-let params = LauncherSettingsParams(
-    language: "en", // (opt)default: Locale.preferredLanguages.first
-    countryCode: "US", // (opt)default: Locale.current.regionCode
-    context: ["key": "value"], // (opt)
-    ...
-)
-AIAgentMessenger.attachLauncher(
-    aiAgentId: {AIAgentId},
-    params: params
-)
-```
-```swift
-// Case: 
-let params = ConversationSettingsParams(
-    language: "en", // (opt)default: Locale.preferredLanguages.first
-    countryCode: "US", // (opt)default: Locale.current.regionCode
-    context: ["key": "value"], // (opt)
-    ...
-)
-AIAgentMessenger.presentConversation(
-    aiAgentId: {AIAgentId},
-    params: params
-)
-```
-
-> - `language` value should follow the **IETF BCP 47** format.
->   - For example, it might be "ko-KR" for Korean in South Korea or "en-US" for English in the United States.
->   - See also: [List of common primary language subtags](https://en.wikipedia.org/wiki/IETF_language_tag#List_of_common_primary_language_subtags)
-> - `countryCode` value should follow the **ISO 3166** format.
->   - For example, it might be "KR" for South Korea or "US" for the United States.
-
-### Custom Localization (Multi-language Support)
-
-AIAgent supports adding and customizing multi languages. For more information, see [this detail page](MULTILANGUAGE.md).
-
-[def]: #prerequisites
+KippT1MqKiAvIFtBbmRyb2lkXShodHRwczovL2dpdGh1Yi5jb20vc2VuZGJp
+cmQvc2VuZGJpcmQtYWktYWdlbnQvYmxvYi9tYWluL2FuZHJvaWQvUkVBRE1F
+Lm1kKSAvIFtKU10oaHR0cHM6Ly9naXRodWIuY29tL3NlbmRiaXJkL3NlbmRi
+aXJkLWFpLWFnZW50L2Jsb2IvbWFpbi9qcy9SRUFETUUubWQpCgojIFNlbmRi
+aXJkIEFJIEFnZW50IFF1aWNrc3RhcnQgZ3VpZGUgKGlPUykKClRoZSAqKlNl
+bmRiaXJkIEFJIEFnZW50IE1lc3NlbmdlcioqIGFsbG93cyBzZWFtbGVzcyBp
+bnRlZ3JhdGlvbiBvZiBjaGF0Ym90IGZlYXR1cmVzIGludG8geW91ciBpT1Mg
+YXBwbGljYXRpb24uIEZvbGxvdyB0aGUgc3RlcHMgYmVsb3cgdG8gaW5pdGlh
+bGl6ZSBhbmQgdXRpbGl6ZSB0aGUgU0RLIGVmZmVjdGl2ZWx5LgoKLSBbU2Vu
+ZGJpcmQgQUkgQWdlbnQgUXVpY2tzdGFydCBndWlkZSAoaU9TKV0oI3NlbmRi
+aXJkLWFpLWFnZW50LXF1aWNrc3RhcnQtZ3VpZGUtaW9zKQogIC0gW1JlcXVp
+cmVtZW50c10oI3JlcXVpcmVtZW50cykKICAtIFtQcmVyZXF1aXNpdGVzXSgj
+cHJlcmVxdWlzaXRlcykKICAtIFtHZXR0aW5nIHN0YXJ0ZWRdKCNnZXR0aW5n
+LXN0YXJ0ZWQpCiAgICAtIFtTdGVwIDEuIENyZWF0ZSBhIG5ldyBwcm9qZWN0
+XSgjc3RlcC0xLWNyZWF0ZS1hLW5ldy1wcm9qZWN0KQogICAgLSBbU3RlcCAy
+LiBJbnN0YWxsIEFJIEFnZW50IFNES10oI3N0ZXAtMi1pbnN0YWxsLWFpLWFn
+ZW50LXNkaykKICAgIC0gW1N0ZXAgMy4gSW5pdGlhbGl6ZSBBSSBBZ2VudCBT
+REtdKCNzdGVwLTMtaW5pdGlhbGl6ZS1haS1hZ2VudC1zZGspCiAgLSBbUnVu
+bmluZyB5b3VyIGFwcGxpY2F0aW9uXSgjcnVubmluZy15b3VyLWFwcGxpY2F0
+aW9uKQogICAgLSBbTWFuYWdlIHVzZXIgc2Vzc2lvbnNdKCNtYW5hZ2UtdXNl
+ci1zZXNzaW9ucykKICAgIC0gW0xhdW5jaCB0aGUgbWVzc2VuZ2VyXSgjbGF1
+bmNoLXRoZS1tZXNzZW5nZXIpCiAgLSBbUHVzaCBOb3RpZmljYXRpb25zXSgj
+cHVzaC1ub3RpZmljYXRpb25zKQogICAgLSBbUmVnaXN0ZXIgZm9yIHB1c2gg
+bm90aWZpY2F0aW9uc10oI3JlZ2lzdGVyLWZvci1wdXNoLW5vdGlmaWNhdGlv
+bnMpCiAgICAtIFtVbnJlZ2lzdGVyIGZvciBwdXNoIG5vdGlmaWNhdGlvbnNd
+KCN1bnJlZ2lzdGVyLWZvci1wdXNoLW5vdGlmaWNhdGlvbnMpCiAgLSBbQWR2
+YW5jZWQgZmVhdHVyZXNdKCNhZHZhbmNlZC1mZWF0dXJlcykKICAgIC0gW1Vw
+ZGF0ZSBTREsgdGhlbWVdKCN1cGRhdGUtc2RrLXRoZW1lKQogICAgLSBbRGVh
+dXRoZW50aWNhdGUgYW5kIGNsZWFyIHNlc3Npb25dKCNkZWF1dGhlbnRpY2F0
+ZS1hbmQtY2xlYXItc2Vzc2lvbikKICAgIC0gW1Bhc3NpbmcgY29udGV4dCBv
+YmplY3QgdG8gQWdlbnRdKCNwYXNzaW5nLWNvbnRleHQtb2JqZWN0LXRvLWFn
+ZW50KQogICAgLSBbQ3VzdG9tIExvY2FsaXphdGlvbiAoTXVsdGktbGFuZ3Vh
+Z2UgU3VwcG9ydCldKCNjdXN0b20tbG9jYWxpemF0aW9uLW11bHRpLWxhbmd1
+YWdlLXN1cHBvcnQpCgojIyBSZXF1aXJlbWVudHMKClRoZSBtaW5pbXVtIHJl
+cXVpcmVtZW50cyBmb3IgQUkgQWdlbnQgZm9yIGlPUyBhcmUgdGhlIGZvbGxv
+d2luZy4KCi0gWGNvZGUgMTYuMCBvciBsYXRlcgotIFN3aWZ0IFBhY2thZ2Ug
+TWFuYWdlciAoU1BNKSBzdXBwb3J0CgojIyBQcmVyZXF1aXNpdGVzCgpCZWZv
+cmUgeW91IHN0YXJ0LCB5b3UnbGwgbmVlZCB5b3VyIFNlbmRiaXJkICoqQXBw
+bGljYXRpb24gSUQqKiBhbmQgKipBSSBBZ2VudCBJRCoqLiAKPGJyPjxici8+
+CllvdSBjYW4gZmluZCBpdCB1bmRlciB0aGUgKipDaGFubmVscyoqID4gKipN
+ZXNzZW5nZXIqKiBtZW51IG9uIHRoZSBTZW5kYmlyZCBEYXNoYm9hcmQuCgoh
+W2FpLWFnZW50LWFwcC1pZC1hZ2VudC1pZF0oaHR0cHM6Ly9naXRodWIuY29t
+L3VzZXItYXR0YWNobWVudHMvYXNzZXRzLzM3ZDI4NzNlLWYzNWQtNDVkZC05
+N2NjLTNkN2M3ZTYzOGEwYykKCi0tLQoKIyMgR2V0dGluZyBTdGFydGVkCgpR
+dWlja2x5IGluc3RhbGwgYW5kIGluaXRpYWxpemUgdGhlIEFJIEFnZW50IFNE
+SyBieSBmb2xsb3dpbmcgdGhlIHN0ZXBzIGJlbG93LgoKIyMjIFN0ZXAgMS4g
+Q3JlYXRlIGEgbmV3IHByb2plY3QKCjEuIE9wZW4gWGNvZGUuCjIuIENob29z
+ZSAqKkZpbGUgPiBOZXcgPiBQcm9qZWN0KiouCjMuIFNlbGVjdCAqKmlPUyoq
+IGFzIHRoZSBwbGF0Zm9ybSBhbmQgKipBcHAqKiBhcyB0aGUgdGVtcGxhdGUu
+CgohW2FpLWFnZW50LXN3aWZ0dWktdHV0b3JpYWwtY3JlYXRlLXByb2plY3Rd
+KGh0dHBzOi8vZ2l0aHViLmNvbS91c2VyLWF0dGFjaG1lbnRzL2Fzc2V0cy9k
+ODY0ZmNmMS1kZGYyLTRmNDItOTkxMy00NDdmZjhhYjg3NGYpCgohW2FpaWdl
+bnQtaW9zLXByb2plY3Qtb3B0aW9uc10oaHR0cHM6Ly9naXRodWIuY29tL3Vz
+ZXItYXR0YWNobWVudHMvYXNzZXRzLzEzZjdiOGM5LTM5NmItNGNjMS1iYTQ5
+LTAzMzlkYjJkZGZjOSkKCgojIyMgU3RlcCAyLiBJbnN0YWxsIEFJIEFnZW50
+U0RLCgoxLiBJbiAqKlhjb2RlKiosIHNlbGVjdCAqKkZpbGUgPiBBZGQgUGFj
+a2FnZSBEZXBlbmRlbmNpZXMqKi4KMi4gQWRkICoqU2VuZGJpcmRBSUFnZW50
+TWVzc2VuZ2VyKiogaW50byB5b3VyIHBhY2thZ2UgcmVwb3NpdG9yeSB1c2lu
+ZyB0aGUgZm9sbG93aW5nIFVSTDoKICAgIAogICAgIGBgYAogICAgIGh0dHBz
+Oi8vZ2l0aHViLmNvbS9zZW5kYmlyZC9zZW5kYmlyZC1haS1hZ2VudC1tZXNz
+ZW5nZXItaW9zLmdpdAogICAgIGBgYAogICAgCjMuIFNldCB0aGUgKipEZXBl
+bmRlbmN5IFJ1bGUqKiB0byAqKkJyYW5jaCoqIGFuZCB1c2UgdGhlIHByb3Zp
+ZGVkIGJyYW5jaCBuYW1lLgoKIyMjIFN0ZXAgMy4gSW5pdGlhbGl6ZSBBSSBB
+Z2VudCBTREsKCiAgSW5pdGlhbGl6ZSB0aGUgU0RLIGJ5IHByb3ZpZGluZyB0
+aGUgKiphcHBJZCoqIChnZW5lcmF0ZWQgdmlhIERhc2hib2FyZCkgYW5kIGNv
+bmZpZ3VyYXRpb24gcGFyYW1ldGVyczoKCgpgYGBzd2lmdAovLyBJbXBvcnQg
+dGhlIFNESwppbXBvcnQgU2VuZGJpcmRBSUFnZW50TWVzc2VuZ2VyCgovLyBJ
+bml0aWFsaXplIHRoZSBTREsKbGV0IHBhcmFtcyA9IEFJQWdlbnRNZXNzZW5n
+ZXIuSW5pdGlhbGl6ZVBhcmFtcygpCgpBSUFnZW50TWVzc2VuZ2VyLmluaXRp
+YWxpemUoCiAgICBhcHBJZDogYXBwSWQsCiAgICBwYXJhbXM6IHBhcmFtcwop
+IHsgW3dlYWsgc2VsZl0gcmVzdWx0IGluCiAgICBndWFyZCBsZXQgc2VsZiA9
+IHNlbGYgZWxzZSB7IHJldHVybiB9CgogICAgc3dpdGNoIHJlc3VsdCB7CiAg
+ICBjYXNlIC5zdWNjZXNzOgogICAgICAgIC8vIFNESyBpbml0aWFsaXplZCBz
+dWNjZXNzZnVsbHkKICAgICAgICBicmVhawogICAgY2FzZSAuZmFpbHVyZShs
+ZXQgZXJyb3IpOgogICAgICAgIC8vIEhhbmRsZSBpbml0aWFsaXphdGlvbiBl
+cnJvcgogICAgICAgIGJyZWFrCiAgICB9Cn0KYGBgCgotLS0KCiMjIFJ1bm5p
+bmcgeW91ciBhcHBsaWNhdGlvbgoKTm93IHRoYXQgeW91IGhhdmUgaW5zdGFs
+bGVkIGFuZCBpbml0aWFsaXplZCB0aGUgQUkgQWdlbnQgU0RLLCBmb2xsb3cg
+dGhlIHN0ZXBzIGJlbG93IHRvIHJ1biB5b3VyIGFwcGxpY2F0aW9uLgoKPiBO
+b3RlOiBNYWtlIHN1cmUgdG8gcGVyZm9ybSB0aGUgZm9sbG93aW5nIHN0ZXBz
+IGFmdGVyIHRoZSBTREsgaGFzIGJlZW4gc3VjY2Vzc2Z1bGx5IGluaXRpYWxp
+emVkLiBPbmNlIGluaXRpYWxpemF0aW9uIGlzIGNvbXBsZXRlLCBzZXQgdXAg
+dGhlIHVzZXIgc2Vzc2lvbiBhbmQgbGF1bmNoIHRoZSBtZXNzZW5nZXIuCgoj
+IyMgTWFuYWdlIHVzZXIgc2Vzc2lvbnMKClVzZXIgc2Vzc2lvbnMgcmVxdWly
+ZSBwZXJpb2RpYyB0b2tlbiByZWlzc3VhbmNlIGZvciBzZWN1cml0eSBwdXJw
+b3Nlcywgc28gdGhlIGZvbGxvd2luZyBzZXNzaW9uIG1hbmFnZW1lbnQgaXMg
+bmVjZXNzYXJ5LgoKIyMjIyAxLiBVcGRhdGluZyBzZXNzaW9uIGluZm9ybWF0
+aW9uCgpVcGRhdGUgdGhlIHNlc3Npb24gaW5mb3JtYXRpb24gdG8gZW5zdXJl
+IHByb3BlciBzZXNzaW9uIG1hbmFnZW1lbnQ6CiAgICAKYGBgc3dpZnQKQUlB
+Z2VudE1lc3Nlbmdlci51cGRhdGVTZXNzaW9uSW5mbygKICAgIHdpdGg6IEFJ
+QWdlbnRNZXNzZW5nZXIuVXNlclNlc3Npb25JbmZvKAogICAgICAgIHVzZXJJ
+ZDogdXNlcklkLAogICAgICAgIHNlc3Npb25Ub2tlbjogc2Vzc2lvblRva2Vu
+LAogICAgICAgIHNlc3Npb25EZWxlZ2F0ZTogc2VsZgogICAgKQopCmBgYAog
+ICAgCiMjIyMgMi5JbXBsZW1lbnRpbmcgc2Vzc2lvbiBkZWxlZ2F0ZQoKSGFu
+ZGxlIHNlc3Npb24tcmVsYXRlZCBldmVudHMgYnkgaW1wbGVtZW50aW5nIGBB
+SUFnZW50U2Vzc2lvbkRlbGVnYXRlYDoKICAgIApgYGBzd2lmdApwdWJsaWMg
+cHJvdG9jb2wgQUlBZ2VudFNlc3Npb25EZWxlZ2F0ZTogQW55T2JqZWN0IHsK
+ICAgIGZ1bmMgc2Vzc2lvblRva2VuRGlkUmVxdWlyZSgKICAgICAgICBzdWNj
+ZXNzQ29tcGxldGlvbiBzdWNjZXNzOiBAZXNjYXBpbmcgKFN0cmluZz8pIC0+
+IFZvaWQsCiAgICAgICAgZmFpbENvbXBsZXRpb24gZmFpbDogQGVzY2FwaW5n
+ICgpIC0+IFZvaWQKICAgICkKICAgIAogICAgZnVuYyBzZXNzaW9uV2FzQ2xv
+c2VkKCkKICAgIGZ1bmMgc2Vzc2lvbldhc1JlZnJlc2hlZCgpCiAgICBmdW5j
+IHNlc3Npb25EaWRIYXZlRXJyb3IoXyBlcnJvcjogRXJyb3IpCn0KYGBgCiAg
+ICAKIyMjIExhdW5jaCB0aGUgbWVzc2VuZ2VyCgpPbmNlIHRoZSBhdXRoZW50
+aWNhdGlvbiBpbmZvcm1hdGlvbiBoYXMgYmVlbiBzdWNjZXNzZnVsbHkgcmVn
+aXN0ZXJlZCwgeW91IGNhbiBsYXVuY2ggdGhlIG1lc3NlbmdlciB0byBzdGFy
+dCBhIGNvbnZlcnNhdGlvbiB3aXRoIHRoZSBhaSBhZ2VudC4KClRoZXJlIGFy
+ZSB0d28gd2F5cyB0byBkaXNwbGF5IHRoZSBjaGF0IHZpZXc6CgoxLiBVc2lu
+ZyB0aGUgbGF1bmNoZXIgYnV0dG9uCjIuIE9wZW5pbmcgdGhlIGNvbnZlcnNh
+dGlvbiBjaGFubmVsIGluIHByZXNlbnRhdGlvbiBtb2RlCgojIyMjIDEuIFVz
+aW5nIHRoZSBsYXVuY2hlciBidXR0b24KCiFbSW1hZ2VdKGh0dHBzOi8vZ2l0
+aHViLmNvbS91c2VyLWF0dGFjaG1lbnRzL2Fzc2V0cy83NGVlYThkMC1hOTg0
+LTRmYjktOWMzNS0yOTliNmIzNWIyODMpCgpEaXNwbGF5IGEgZmxvYXRpbmcg
+bGF1bmNoZXIgYnV0dG9uOgoKYGBgc3dpZnQKQUlBZ2VudE1lc3Nlbmdlci5h
+dHRhY2hMYXVuY2hlcigKICAgIGFpQWdlbnRJZDogc2VsZi5haUFnZW50SWQK
+KQpgYGAKClRvIGhpZGUgdGhlIGxhdW5jaGVyOgoKYGBgc3dpZnQKQUlBZ2Vu
+dE1lc3Nlbmdlci5kZXRhY2hMYXVuY2hlcihhaUFnZW50SWQ6IHtBSUFnZW50
+SWR9KQpgYGAKCiMjIyMgMi4gT3BlbmluZyB0aGUgY29udmVyc2F0aW9uIGNo
+YW5uZWwgaW4gcHJlc2VudGF0aW9uIG1vZGUKCiFbSW1hZ2VdKGh0dHBzOi8v
+Z2l0aHViLmNvbS91c2VyLWF0dGFjaG1lbnRzL2Fzc2V0cy8zNDhjY2FkMS1l
+YzlhLTQ4NTEtOTMyNC0wODRlYWY1NjllMzQpCiAgICAKUHJlc2VudCB0aGUg
+Y2hhdCB2aWV3IGFzIGEgbW9kYWw6CgpgYGBzd2lmdApBSUFnZW50TWVzc2Vu
+Z2VyLnByZXNlbnRDb252ZXJzYXRpb24oCiAgICBhaUFnZW50SWQ6IHtBSUFn
+ZW50SWR9CikKYGBgCgotLS0KCiMjIFB1c2ggTm90aWZpY2F0aW9ucwoKIyMj
+IFJlZ2lzdGVyIGZvciBwdXNoIG5vdGlmaWNhdGlvbnMKCltQdXNoIG5vdGlm
+aWNhdGlvbnNdKGh0dHBzOi8vc2VuZGJpcmQuY29tL2RvY3MvY2hhdC9zZGsv
+djQvaW9zL3B1c2gtbm90aWZpY2F0aW9ucy9vdmVydmlldy1wdXNoLW5vdGlm
+aWNhdGlvbnMpIGFyZSBhIHR5cGUgb2Ygbm90aWZpY2F0aW9uIHNlbnQgdG8g
+eW91ciB1c2VyJ3MgZGV2aWNlIHdoZW4gYSBjbGllbnQgYXBwIGlzIHJ1bm5p
+bmcgaW4gdGhlIGJhY2tncm91bmQuIFB1c2ggbm90aWZpY2F0aW9ucyBmb3Ig
+dGhlIGNsaWVudCBhcHAgd2lsbCBjb250YWluIGEgcGF5bG9hZCBjcmVhdGVk
+IGJ5IFNlbmRiaXJkIGFuZCBiZSBkZWxpdmVyZWQgdGhyb3VnaCBBUE5zLiBT
+ZW5kYmlyZCBzZXJ2ZXIgd2lsbCBjb21tdW5pY2F0ZSB3aXRoIEFQTnMgd2hl
+bmV2ZXIgbmVlZGVkIGFuZCBBUE5zIHdpbGwgc2VuZCBhIHB1c2ggbm90aWZp
+Y2F0aW9uIHRvIHRoZSBjbGllbnQgYXBwIG9uIGlPUyBkZXZpY2VzLiBJbiBv
+cmRlciB0byB1c2UgdGhpcyBmZWF0dXJlLCB5b3UgbmVlZCB0byByZWdpc3Rl
+ciB0aGUgdXNlcidzIGRldmljZSB0b2tlbiB0byBTZW5kYmlyZCBzZXJ2ZXIg
+dGhyb3VnaCB0aGUgQXBwRGVsZWdhdGUuCgo+IE5vdGUgOiBBUE5zIHNob3Vs
+ZCBiZSBzZXQgdXAgaW4gYWR2YW5jZSBpbiBvcmRlciB0byBzZW5kIHB1c2gg
+bm90aWZpY2F0aW9ucy4KCmBgYHN3aWZ0CmZ1bmMgYXBwbGljYXRpb24oXyBh
+cHBsaWNhdGlvbjogVUlBcHBsaWNhdGlvbiwgZGlkUmVnaXN0ZXJGb3JSZW1v
+dGVOb3RpZmljYXRpb25zV2l0aERldmljZVRva2VuIGRldmljZVRva2VuOiBE
+YXRhKSB7CiAgICBBSUFnZW50TWVzc2VuZ2VyLnJlZ2lzdGVyUHVzaChkZXZp
+Y2VUb2tlbjogZGV2aWNlVG9rZW4pIHsgKHN1Y2Nlc3MpIGluCgogICAgfQp9
+CmBgYAoKIyMjIFVucmVnaXN0ZXIgZm9yIHB1c2ggbm90aWZpY2F0aW9ucwoK
+WW91IHNob3VsZCB1bnJlZ2lzdGVyIGEgdXNlcidzIGRldmljZSB0b2tlbiBm
+cm9tIFNlbmRiaXJkIHNlcnZlciBpZiB5b3UgZG9u4oCZdCB3YW50IHRvIHNl
+bmQgW3B1c2ggbm90aWZpY2F0aW9uc10oaHR0cHM6Ly9zZW5kYmlyZC5jb20v
+ZG9jcy9jaGF0L3Nkay92NC9pb3MvcHVzaC1ub3RpZmljYXRpb25zL292ZXJ2
+aWV3LXB1c2gtbm90aWZpY2F0aW9ucykgdG8gdGhlIHVzZXIuCgpgYGBzd2lm
+dAovLyBJZiB5b3Ugd2FudCB0byB1bnJlZ2lzdGVyIHRoZSBjdXJyZW50IGRl
+dmljZSBvbmx5LCBjYWxsIHRoaXMgbWV0aG9kLgpBSUFnZW50TWVzc2VuZ2Vy
+LnVucmVnaXN0ZXJQdXNoVG9rZW4geyAoc3VjY2VzcykgaW4KCn0KCi8vIElm
+IHlvdSB3YW50IHRvIHVucmVnaXN0ZXIgYWxsIGRldmljZXMgb2YgdGhlIHVz
+ZXIsIGNhbGwgdGhpcyBtZXRob2QuCkFJQWdlbnRNZXNzZW5nZXIudW5yZWdp
+c3RlckFsbFB1c2hUb2tlbiB7IChzdWNjZXNzKSBpbgoKfQpgYGAKCi0tLQoK
+IyMgQWR2YW5jZWQgZmVhdHVyZXMKClRoZSBmb2xsb3dpbmcgYXJlIGF2YWls
+YWJsZSBhZHZhbmNlZCBmZWF0dXJlcy4KCiMjIyBDdXN0b21pemUgbGF1bmNo
+ZXIgbW9kZQoKWW91IGNhbiBtb2RpZnkgdGhlIGZsb2F0aW5nIGxhdW5jaGVy
+IGJ1dHRvbuKAmXMgYmVoYXZpb3IgYW5kIGFwcGVhcmFuY2UgYXMgc2hvd24g
+YmVsb3cuCgpgYGBzd2lmdApsZXQgb3B0aW9ucyA9IFNCQUxhdW5jaGVyTGF5
+b3V0T3B0aW9ucygKICAgIHBhcmVudFZpZXc6IG5pbCwgLy8gQXR0YWNoZXMg
+dG8gdGhlIHdpbmRvdyBpZiBuaWwKICAgIHBvc2l0aW9uOiAudHJhaWxpbmdC
+b3R0b20sCiAgICBtYXJnaW46IC5kZWZhdWx0LAogICAgc3BhY2luZzogMTIs
+CiAgICBvdmVybGF5TGF1bmNoZXI6IGZhbHNlLAogICAgdXNlU2FmZUFyZWE6
+IHRydWUKKQoKbGV0IHBhcmFtcyA9IExhdW5jaGVyU2V0dGluZ3NQYXJhbXMo
+CiAgICBvcHRpb25zOiBvcHRpb25zCikKCkFJQWdlbnRNZXNzZW5nZXIuYXR0
+YWNoTGF1bmNoZXIoCiAgICBhaUFnZW50SWQ6IHtBSUFnZW50SWR9LAogICAg
+cGFyYW1zOiBwYXJhbXMKKQpgYGAKCiMjIyBVcGRhdGUgU0RLIFRoZW1lCgpZ
+b3UgY2FuIGN1c3RvbWl6ZSB0aGUgU0RL4oCZcyBjb2xvciBzY2hlbWUgdG8g
+bWF0Y2ggeW91ciBhcHAncyB0aGVtZSBhcyBzaG93biBiZWxvdy4KCmBgYHN3
+aWZ0CkFJQWdlbnRNZXNzZW5nZXIudXBkYXRlKGNvbG9yU2NoZW1lOiAubGln
+aHQpIC8vIE9wdGlvbnM6IC5kYXJrLCAubGlnaHQKYGBgClNpbmNlIGFwcHMg
+bWF5IGFsbG93IHVzZXJzIHRvIHN3aXRjaCB0aGVtZXMgbWFudWFsbHkgb3Ig
+Zm9sbG93IGRldmljZSBzZXR0aW5ncywgdGhlbWUgdXBkYXRlcyBuZWVkIHRv
+IGJlIGV4cGxpY2l0bHkgY2FsbGVkLgoKIyMjIERlYXV0aGVudGljYXRlIGFu
+ZCBjbGVhciBzZXNzaW9uCgpXaGVuIGEgdXNlciBsb2dzIG91dCwgZGUtYXV0
+aGVudGljYXRlIHRoZSBTREsgdG8gY2xlYXIgc2Vzc2lvbiBkYXRhIGFuZCBk
+aXNjb25uZWN0LgoKYGBgc3dpZnQKQUlBZ2VudE1lc3Nlbmdlci5kZWF1dGhl
+bnRpY2F0ZSB7IFt3ZWFrIHNlbGZdIGluCiAgICAvLyBQZXJmb3JtIHBvc3Qt
+ZGVhdXRoZW50aWNhdGlvbiBhY3Rpb25zCn0KYGBgCgojIyMgUGFzc2luZyBj
+b250ZXh0IG9iamVjdCB0byBBZ2VudAoKWW91IGNhbiBwcmVkZWZpbmUgY3Vz
+dG9tZXItc3BlY2lmaWMgaW5mb3JtYXRpb24sIHN1Y2ggYXMgY291bnRyeSwg
+bGFuZ3VhZ2UsIG9yIG90aGVyIGN1c3RvbSBjb250ZXh0IGRhdGEsIHRvIGd1
+aWRlIHRoZSBBSUFnZW50IGluIHByb3ZpZGluZyBmYXN0ZXIgYW5kIG1vcmUg
+YWNjdXJhdGUgcmVzcG9uc2VzLiAgCgpUaGlzIGFsbG93cyBmb3IgYSBtb3Jl
+IHBlcnNvbmFsaXplZCBhbmQgY29udGV4dC1hd2FyZSBpbnRlcmFjdGlvbiBl
+eHBlcmllbmNlLgoKPiBPbmNlIHRoZSBjb250ZXh0cyBhcmUgc2V0LCB0aGV5
+IHdpbGwgYmUgdXNlZCB0aHJvdWdob3V0IHRoZSBjb252ZXJzYXRpb24gdG8g
+cHJvdmlkZSBwZXJzb25hbGl6ZWQgYW5kIGNvbnRleHQtYXdhcmUgcmVzcG9u
+c2VzLgoKYGBgc3dpZnQKLy8gQ2FzZTogQXR0YWNoIGxhdW5jaGVyCmxldCBw
+YXJhbXMgPSBMYXVuY2hlclNldHRpbmdzUGFyYW1zKAogICAgbGFuZ3VhZ2U6
+ICJlbiIsIC8vIChvcHQpZGVmYXVsdDogTG9jYWxlLnByZWZlcnJlZExhbmd1
+YWdlcy5maXJzdAogICAgY291bnRyeUNvZGU6ICJVUyIsIC8vIChvcHQpZGVm
+YXVsdDogTG9jYWxlLmN1cnJlbnQucmVnaW9uQ29kZQogICAgY29udGV4dDog
+WyJrZXkiOiAidmFsdWUiXSwgLy8gKG9wdCkKICAgIC4uLgopCkFJQWdlbnRN
+ZXNzZW5nZXIuYXR0YWNoTGF1bmNoZXIoCiAgICBhaUFnZW50SWQ6IHtBSUFn
+ZW50SWR9LAogICAgcGFyYW1zOiBwYXJhbXMKKQpgYGAKYGBgc3dpZnQKLy8g
+Q2FzZTogCmxldCBwYXJhbXMgPSBDb252ZXJzYXRpb25TZXR0aW5nc1BhcmFt
+cygKICAgIGxhbmd1YWdlOiAiZW4iLCAvLyAob3B0KWRlZmF1bHQ6IExvY2Fs
+ZS5wcmVmZXJyZWRMYW5ndWFnZXMuZmlyc3QKICAgIGNvdW50cnlDb2RlOiAi
+VVMiLCAvLyAob3B0KWRlZmF1bHQ6IExvY2FsZS5jdXJyZW50LnJlZ2lvbkNv
+ZGUKICAgIGNvbnRleHQ6IFsia2V5IjogInZhbHVlIl0sIC8vIChvcHQpCiAg
+ICAuLi4KKQpBSUFnZW50TWVzc2VuZ2VyLnByZXNlbnRDb252ZXJzYXRpb24o
+CiAgICBhaUFnZW50SWQ6IHtBSUFnZW50SWR9LAogICAgcGFyYW1zOiBwYXJh
+bXMKKQpgYGAKCj4gLSBgbGFuZ3VhZ2VgIHZhbHVlIHNob3VsZCBmb2xsb3cg
+dGhlICoqSUVURiBCQ1AgNDcqKiBmb3JtYXQuCj4gICAtIEZvciBleGFtcGxl
+LCBpdCBtaWdodCBiZSAia28tS1IiIGZvciBLb3JlYW4gaW4gU291dGggS29y
+ZWEgb3IgImVuLVVTIiBmb3IgRW5nbGlzaCBpbiB0aGUgVW5pdGVkIFN0YXRl
+cy4KPiAgIC0gU2VlIGFsc286IFtMaXN0IG9mIGNvbW1vbiBwcmltYXJ5IGxh
+bmd1YWdlIHN1YnRhZ3NdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtp
+L0lFVEZfbGFuZ3VhZ2VfdGFnI0xpc3Rfb2ZfY29tbW9uX3ByaW1hcnlfbGFu
+Z3VhZ2Vfc3VidGFncykKPiAtIGBjb3VudHJ5Q29kZWAgdmFsdWUgc2hvdWxk
+IGZvbGxvdyB0aGUgKipJU08gMzE2NioqIGZvcm1hdC4KPiAgIC0gRm9yIGV4
+YW1wbGUsIGl0IG1pZ2h0IGJlICJLUiIgZm9yIFNvdXRoIEtvcmVhIG9yICJV
+UyIgZm9yIHRoZSBVbml0ZWQgU3RhdGVzLgoKIyMjIEN1c3RvbSBMb2NhbGl6
+YXRpb24gKE11bHRpLWxhbmd1YWdlIFN1cHBvcnQpCgpBSUFnZW50IHN1cHBv
+cnRzIGFkZGluZyBhbmQgY3VzdG9taXppbmcgbXVsdGkgbGFuZ3VhZ2VzLiBG
+b3IgbW9yZSBpbmZvcm1hdGlvbiwgc2VlIFt0aGlzIGRldGFpbCBwYWdlXShN
+VUxUSUxBTkdVQUdFLm1kKS4KCltkZWZdOiAjcHJlcmVxdWlzaXRlcwo=
