@@ -1,0 +1,92 @@
+title: "How to custom... "
+labels: ["🎨 launcher"]
+
+body:
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: "가이드를 작성할때 사용한 SDK 버전 정보를 입력해주세요. 버전 정보가 추가되면 주석을 해제주세요"
+      value: >
+        [![iOS Languages](https://img.shields.io/badge/Swift-FA7343?style=flat-square&logo=swift&logoColor=white)![iOS Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)](https://github.com/sendbird/sendbird-ai-agent-messenger-ios/releases)  
+        [![Android Languages](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white)![Android Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)]()  
+        [![JS Languages](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)![JS Version](https://img.shields.io/badge/1.0.0-grey.svg?style=flat-square)]()
+    validations:
+      required: false
+  
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: "Please provide a short description of what customization it is."
+    validations:
+      required: true
+  
+  - type: textarea
+    id: guide-snippet
+    attributes:
+      label: Guide & Snippet
+      description: "Customization 가이드와 스니펫을 넣어주세요. 플랫폼별 섹션에 입력하세요.(먼저 작성하는 플랫폼은 자신의 플랫폼만 채우고 나머지는 제거하지 마세요)"
+      value: |
+        <details>
+        <summary>iOS</summary>
+        
+        #### Header
+
+        - Description
+        
+        ```swift
+           // code block
+        ```
+        
+        </details>
+
+        <details>
+        <summary>Android</summary>
+        
+        #### Header
+
+        - Description
+        
+        ```kotlin
+           // code block
+        ```
+        
+        </details>
+
+        <details>
+        <summary>JS</summary>
+        
+        #### Header
+
+        - Description
+        
+        ```js
+           // code block
+        ```
+        
+        </details>
+    validations:
+      required: false
+
+  - type: input
+    id: reference
+    attributes:
+      label: Reference
+      description: "참고할만한 link 가 있으면 추가하세요"
+      placeholder: "- [TITLE](Link)"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: "스크린샷이 있다면 추가해주세요"
+      placeholder: |
+        |**As-is**|**To-be**|
+        |---|---|
+        |<img src="" width="50%" height="50%" />|<img src="" width="50%" height="50%" />|
+    validations:
+      required: false
+
