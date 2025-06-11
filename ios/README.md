@@ -1,4 +1,4 @@
-**iOS** / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/README.md)
+**iOS** / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
 
 # Sendbird AI Agent Quickstart guide (iOS)
 
@@ -7,18 +7,23 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 - [Sendbird AI Agent Quickstart guide (iOS)](#sendbird-ai-agent-quickstart-guide-ios)
   - [Requirements](#requirements)
   - [Prerequisites](#prerequisites)
-  - [Getting started](#getting-started)
+  - [Getting Started](#getting-started)
     - [Step 1. Create a new project](#step-1-create-a-new-project)
     - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
     - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
+      - [1. Updating session information](#1-updating-session-information)
+      - [2.Implementing session delegate](#2implementing-session-delegate)
     - [Launch the messenger](#launch-the-messenger)
+      - [1. Using the launcher button](#1-using-the-launcher-button)
+      - [2. Opening the conversation channel in presentation mode](#2-opening-the-conversation-channel-in-presentation-mode)
   - [Push Notifications](#push-notifications)
     - [Register for push notifications](#register-for-push-notifications)
     - [Unregister for push notifications](#unregister-for-push-notifications)
   - [Advanced features](#advanced-features)
-    - [Update SDK theme](#update-sdk-theme)
+    - [Customize launcher mode](#customize-launcher-mode)
+    - [Update SDK Theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
     - [Custom Localization (Multi-language Support)](#custom-localization-multi-language-support)
@@ -32,7 +37,7 @@ The minimum requirements for AI Agent for iOS are the following.
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
+Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
 <br><br/>
 You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
 
@@ -59,11 +64,11 @@ Quickly install and initialize the AI Agent SDK by following the steps below.
 
 1. In **Xcode**, select **File > Add Package Dependencies**.
 2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
-    
+
      ```
      https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
      ```
-    
+
 3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
 
 ### Step 3. Initialize AI Agent SDK
@@ -110,7 +115,7 @@ User sessions require periodic token reissuance for security purposes, so the fo
 #### 1. Updating session information
 
 Update the session information to ensure proper session management:
-    
+
 ```swift
 AIAgentMessenger.updateSessionInfo(
     with: AIAgentMessenger.UserSessionInfo(
@@ -120,24 +125,24 @@ AIAgentMessenger.updateSessionInfo(
     )
 )
 ```
-    
+
 #### 2.Implementing session delegate
 
 Handle session-related events by implementing `AIAgentSessionDelegate`:
-    
+
 ```swift
 public protocol AIAgentSessionDelegate: AnyObject {
     func sessionTokenDidRequire(
         successCompletion success: @escaping (String?) -> Void,
         failCompletion fail: @escaping () -> Void
     )
-    
+
     func sessionWasClosed()
     func sessionWasRefreshed()
     func sessionDidHaveError(_ error: Error)
 }
 ```
-    
+
 ### Launch the messenger
 
 Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
@@ -168,7 +173,7 @@ AIAgentMessenger.detachLauncher(aiAgentId: {AIAgentId})
 #### 2. Opening the conversation channel in presentation mode
 
 ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
-    
+
 Present the chat view as a modal:
 
 ```swift
@@ -262,7 +267,7 @@ AIAgentMessenger.deauthenticate { [weak self] in
 
 ### Passing context object to Agent
 
-You can predefine customer-specific information, such as country, language, or other custom context data, to guide the AI Agent in providing faster and more accurate responses. 
+You can predefine customer-specific information, such as country, language, or other custom context data, to guide the AI Agent in providing faster and more accurate responses.
 
 This allows for a more personalized and context-aware interaction experience.
 
@@ -282,7 +287,7 @@ AIAgentMessenger.attachLauncher(
 )
 ```
 ```swift
-// Case: 
+// Case:
 let params = ConversationSettingsParams(
     language: "en", // (opt)default: Locale.preferredLanguages.first
     countryCode: "US", // (opt)default: Locale.current.regionCode

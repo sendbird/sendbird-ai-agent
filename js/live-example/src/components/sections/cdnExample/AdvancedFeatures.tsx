@@ -91,7 +91,7 @@ export function AdvancedFeatures() {
                 list of required string keys{' '}
                 <a
                   className="text-primary underline"
-                  href="https://github.com/sendbird/sendbird-ai-agent/blob/main/js/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk"
+                  href="https://github.com/sendbird/sendbird-ai-agent/blob/main/js/cdn/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
