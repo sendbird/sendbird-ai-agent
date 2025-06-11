@@ -19,7 +19,7 @@ export function AdvancedFeatures() {
       // Destroy the CDN messenger instance when switching to React tab
       actions.cleanup.destroy.execute();
     };
-  }, [actions.cleanup.destroy]);
+  }, []);
 
   return (
     <div className="pt-6">
