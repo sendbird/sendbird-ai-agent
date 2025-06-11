@@ -1,33 +1,35 @@
-# Changelog: sendbird-ai-agent (Last 24h)
+## New features
 
-## Major Changes
+### React SDK quickstart and localization guides
 
-### 1. Directory Restructure for JS & React
-- **PR #75** ([chore/restructure-js-dir](https://github.com/sendbird/sendbird-ai-agent/pull/75))
-- Applied a new directory structure for JavaScript and React codebases.
-- Moved `js/README.md` and `js/MULTILANGUAGE.md` to `js/cdn/` and created a new `react/` directory with its own `README.md` and `MULTILANGUAGE.md`.
-- Added a new React SDK quickstart guide and localization guide.
-- Updated sample code and dependency files (`sample/package.json`, `pnpm-lock.yaml`) to include `@sendbird/ai-agent-messenger-react`.
-- Refactored sample app structure for better modularity between CDN and React integrations.
-- **Files affected:**  
-  - Many files moved from `js/` and `sample/` to new locations under `js/cdn/`, `js/live-example/`, and `react/`.
-  - New files: `react/README.md`, `react/MULTILANGUAGE.md`, `sample/src/components/sections/reactExample/`, etc.
+We’ve introduced a dedicated documentation set for integrating Sendbird AI Agent with React. This includes a comprehensive quickstart guide and a detailed localization guide, making it easier than ever to embed the AI Agent Messenger into your React applications. The new guides cover installation, advanced features, and customization for both the predefined UI (FixedMessenger) and custom UI integrations.
 
-### 2. Update JS Resource Link
-- **Commit:** [f94bfcf](https://github.com/sendbird/sendbird-ai-agent/commit/f94bfcfeb38aaf15de20973e30bf45968289f186)
-- Updated resource links in documentation to reflect new directory structure.
+Developers can now quickly get started with the React SDK, leverage advanced features, and localize the messenger experience for global audiences.
 
-### 3. Add React SDK Documentation and Examples
-- **Commit:** [5c6bc28](https://github.com/sendbird/sendbird-ai-agent/commit/5c6bc2819c849d7614c85a40c164988fc87b7ad5)
-- Added comprehensive React integration examples, advanced features, and code samples.
-- Improved code organization and modularity for both React and CDN sample apps.
+## Improvements
 
----
+* Refactored the documentation and directory structure for JavaScript and React integrations, separating CDN and React sample apps for clarity
 
-## Summary of Impact
+* Updated all resource links in documentation to reflect the new directory structure
 
-- **Developers**: Easier onboarding for React and JS SDKs, clearer documentation, and improved sample structure.
-- **Docs**: New React-specific guides and localization docs.
-- **Codebase**: Refactored to better separate CDN and React integrations, added modular code samples, improved cleanup and context features.
+* Enhanced sample code and examples to better demonstrate advanced features and real-world integration patterns
 
----
+* Improved cleanup and context management in sample applications to help developers avoid common pitfalls
+
+## Fixes
+
+* Fixed broken links and outdated references in documentation after the directory restructure
+
+## Behind the scenes
+
+* Migrated JavaScript documentation and code samples to a new `js/cdn/` directory
+
+* Created a new `react/` directory with its own `README.md` and `MULTILANGUAGE.md` for React-specific docs
+
+* Updated `sample/package.json` and `pnpm-lock.yaml` to include the new React SDK dependency
+
+* Refactored and modularized sample app components to support both CDN and React integration paths
+
+* Improved code cleanup logic for messenger instances in React and CDN demos
+
+* Updated internal code samples to match the latest SDK API and best practices
