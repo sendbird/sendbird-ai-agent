@@ -1,4 +1,4 @@
-[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / **Android** / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/README.md)
+[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / **Android** / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
 
 # Sendbird AI Agent Quickstart guide (Android)
 
@@ -10,15 +10,25 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
   - [Getting started](#getting-started)
     - [Step 1. Create a new project](#step-1-create-a-new-project)
     - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
+      - [Configuring repository](#configuring-repository)
+      - [Adding dependency](#adding-dependency)
     - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
+      - [How to create the Application file](#how-to-create-the-application-file)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
+      - [When to set the session information:](#when-to-set-the-session-information)
     - [Handle session expiration](#handle-session-expiration)
+      - [How to handle session expiration:](#how-to-handle-session-expiration)
     - [Launch the messenger](#launch-the-messenger)
+      - [Before You Start](#before-you-start)
+      - [1. Using the launcher button](#1-using-the-launcher-button)
+      - [2. Opening the conversation channel in full-screen mode](#2-opening-the-conversation-channel-in-full-screen-mode)
   - [Advanced features](#advanced-features)
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
+      - [1. Applying settings data through MessengerLauncher](#1-applying-settings-data-through-messengerlauncher)
+      - [2. Applying settings data through full-screen conversation](#2-applying-settings-data-through-full-screen-conversation)
 
 ## Requirements
 
@@ -31,7 +41,7 @@ The minimum requirements for AI Agent for Android are the following.
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**. 
+Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
 <br><br/>
 You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
 
@@ -158,7 +168,7 @@ To ensure that your `AgentApplication` class is used as the application class, y
 4. Select **New > Kotlin File/Class**.
 5. In the dialog that appears, select **Class** and name it `AgentApplication`.
 6. Then, add the code above to your `AgentApplication.kt` file.
-   
+
 ---
 
 ## Running your application
@@ -168,16 +178,16 @@ Now that you have installed and initialized the AI Agent SDK, follow the steps b
 > Note: Make sure to perform the following steps after the SDK has been successfully initialized. Once initialization is complete, set up the user session and launch the messenger.
 
 ### Manage user sessions
-    
-To use the SDK, session information is required.  
+
+To use the SDK, session information is required.
 Before using `AIAgentMessenger`, you must set the session information for the application user issued by Sendbird.
 
 #### When to set the session information:
-  
-1. **Upon initial login:**  
+
+1. **Upon initial login:**
 Since there is no session information for the user at the first login, it should be set immediately after app login.
 
-2. **For already logged-in users:**  
+2. **For already logged-in users:**
 If the user is already logged in, the session should be registered immediately after SDK initialization.
 
     ```kotlin
@@ -185,18 +195,18 @@ If the user is already logged in, the session should be registered immediately a
     AIAgentMessenger.updateSessionInfo(userSessionInfo)
     ```
     > SessionHandler is the handler used when a session expires or needs to be renewed. See [next guide](#handle-session-expiration) for instructions on how to use it.
-     
+
 ### Handle session expiration
 
-When registering a session information, the provided session handler must handle the case where the session information expires.  
+When registering a session information, the provided session handler must handle the case where the session information expires.
 Follow the code below to refresh and provide a new session token in the session handler callback.
 
 #### How to handle session expiration:
-     
+
 1. Detect session expiration in the session handler callback.
 2. Request a new session token from the server.
 3. Update the SDK with the new session token.
-   
+
     ```kotlin
     class AbstractSessionHandler : AIAgentSessionHandler() {
         override fun onSessionClosed() {
@@ -222,7 +232,7 @@ Follow the code below to refresh and provide a new session token in the session 
 Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
 
 There are two ways to display the messenger:
-    
+
 1. Using the launcher button
 2. Opening the conversation channel in full-screen mode
 
@@ -259,9 +269,9 @@ MessengerLauncher(context, "your_ai_agent_id").attach()
 #### 2. Opening the conversation channel in full-screen mode
 
 ![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
-    
-You can open a full-screen conversation by starting an `Activity`.  
-    
+
+You can open a full-screen conversation by starting an `Activity`.
+
 ```kotlin
 startActivity(MessengerActivity.newIntentForConversation(context, "your_ai_agent_id"))
 ```
@@ -275,7 +285,7 @@ The following are available advanced features.
 ### Update SDK theme
 
 You can update the SDK's color scheme to match your app's theme as shown below.
-    
+
 ```kotlin
 AIAgentMessenger.setThemeMode(themeMode) // Options: MessengerThemeMode.Dark, MessengerThemeMode.Light
 ```
@@ -294,7 +304,7 @@ AIAgentMessenger.deauthenticate()
 
 ### Passing context object to Agent
 
-You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses. 
+You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.
 
 This allows for a more personalized and context-aware interaction experience.
 
