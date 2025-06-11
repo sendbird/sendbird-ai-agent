@@ -24,7 +24,7 @@
     "@tailwindcss/vite": "^4.0.15",
     "@uiw/codemirror-theme-dracula": "^4.23.10",
     "@uiw/react-codemirror": "^4.21.21",
-    "@sendbird/ai-agent-messenger-react": "./sendbird-ai-agent-messenger-react-1.0.0.tgz",
+    "@sendbird/ai-agent-messenger-react": "1.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.15",
