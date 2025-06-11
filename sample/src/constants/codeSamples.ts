@@ -69,37 +69,16 @@ messenger.initialize({
   }
 });`,
 
-  customDisplay: `import { AgentProviderContainer, Conversation, ConversationList } from '@sendbird/ai-agent-messenger-react';
-
-function App() {
-  return (
-    <div style={{ display: 'flex', gap: '16px' }}>
-      {/* Display Conversation view only */}
-      <div style={{ width: '400px', height: '600px', border: '1px solid #ccc' }}>
-        <AgentProviderContainer
-          appId="YOUR_APP_ID"
-          aiAgentId="YOUR_AI_AGENT_ID"
-        >
-          <Conversation />
-        </AgentProviderContainer>
-      </div>
-
-      {/* Display ConversationList view only */}
-      <div style={{ width: '400px', height: '600px', border: '1px solid #ccc' }}>
-        <AgentProviderContainer
-          appId="YOUR_APP_ID"
-          aiAgentId="YOUR_AI_AGENT_ID"
-        >
-          <ConversationList
-            onOpenConversationView={(channelUrl, status) => {
-              console.log('Open conversation:', channelUrl, status);
-            }}
-          />
-        </AgentProviderContainer>
-      </div>
-    </div>
-  );
-}`,
+  customDisplay: `messenger.initialize({
+  appId: 'APP_ID',
+  aiAgentId: 'AI_AGENT_ID',
+  // Access the AI Agent Messenger components and React instance through the first argument
+  customMainComponent: ({ messenger, react }) => (props) => {
+    return react.createElement(messenger.AgentProviderContainer, props, [
+      react.createElement(messenger.ConversationList),
+    ]);
+  }
+});`,
 
   cleanup: `// Clear session data and disconnect from chat SDK
 // Note: The input field will be disabled immediately after disconnection
