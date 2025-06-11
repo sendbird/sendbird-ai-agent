@@ -30,7 +30,7 @@ You can find it under the **Channels** > **Messenger** menu on the Sendbird Dash
 **System Requirements:**
 - React >=18.0.0
 - React DOM >=18.0.0
-- @sendbird/chat >=4.0.0
+- @sendbird/chat ^4.19.0
 - styled-components >=5.0.0
 
 ---
