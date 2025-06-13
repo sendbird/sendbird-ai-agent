@@ -32,7 +32,8 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 
 The minimum requirements for AI Agent for iOS are the following.
 
-- Xcode 16.0 or later
+- Swift 5.9.2 or later
+- Xcode 16.3 or later
 - Swift Package Manager (SPM) support
 
 ## Prerequisites
