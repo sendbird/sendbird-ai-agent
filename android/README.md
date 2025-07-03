@@ -272,7 +272,7 @@ startActivity(MessengerActivity.newIntentForConversation(context, "your_ai_agent
 
 For more details, refer to the [Push notifications](https://sendbird.com/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications) page on our official documentation.
 
-### Register for Push Notifications
+### Register for push notifications
 
 To receive push notifications from Sendbird, register the device token by setting up a custom `FirebaseMessagingService`.  
 Call the following method after login:
