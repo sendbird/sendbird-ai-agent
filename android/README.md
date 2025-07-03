@@ -23,6 +23,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
       - [Before You Start](#before-you-start)
       - [1. Using the launcher button](#1-using-the-launcher-button)
       - [2. Opening the conversation channel in full-screen mode](#2-opening-the-conversation-channel-in-full-screen-mode)
+    - [Push notifications for Android](#push-notifications-for-android)
   - [Advanced features](#advanced-features)
     - [Update SDK theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
@@ -278,11 +279,11 @@ startActivity(MessengerActivity.newIntentForConversation(context, "your_ai_agent
 
 ---
 
-## Push notifications for Android
+### Push notifications for Android
 
 For more details, refer to the [Push notifications](https://sendbird.com/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications) page on our official documentation.
 
-### Register for push notifications
+#### Register for push notifications
 
 To receive push notifications from Sendbird, register the device token by setting up a custom `FirebaseMessagingService`.  
 Call the following method after login:
@@ -292,7 +293,7 @@ SendbirdPushHelper.registerHandler(MyFirebaseMessagingService())
 ```
 This will register the FCM token and automatically send it to the Sendbird server.
 
-### Unregister for Push Notifications
+#### Unregister for Push Notifications
 
 To stop receiving push notifications:
 
@@ -301,7 +302,7 @@ SendbirdPushHelper.unregisterHandler()
 ```
 This is typically used on logout or when push notifications should be disabled.
 
-### Handling Push Notifications
+#### Handling Push Notifications
 
 Sendbird push payloads will be delivered via FCM and include a sendbird field in the RemoteMessage data.
 
