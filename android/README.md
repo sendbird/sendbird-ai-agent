@@ -271,7 +271,6 @@ startActivity(MessengerActivity.newIntentForConversation(context, "your_ai_agent
 ## Push Notifications (Android)
 
 For more details, refer to the [Push notifications](https://sendbird.com/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications) page on our official documentation.
-[https://sendbird.com/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications](https://sendbird.com/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications)
 
 ### Register for Push Notifications
 
