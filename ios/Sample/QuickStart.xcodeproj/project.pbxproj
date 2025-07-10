@@ -1,0 +1,686 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05EF3B883F179441278AD591 /* SendbirdAIAgentMessenger in Frameworks */ = {isa = PBXBuildFile; productRef = 691283789AB5ADF115CAE086 /* SendbirdAIAgentMessenger */; };
+		1F04F2DF6D87D1B0F8818CF5 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE063DDC7D9B81FE0ABF9B62 /* UIViewController+Extension.swift */; };
+		1F5102365BF756B2470B6498 /* SampleTestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088C54604D112AE304A65EEE /* SampleTestInfo.swift */; };
+		31D0C4C787EFEB38C932A0CB /* AIAgentStarterKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1271FEC45D71CDF362CB26 /* AIAgentStarterKit.swift */; };
+		3816E55E2430D6172FA671CB /* ExtendedSDKBridge+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7ABA0DE26D4AE60EBB708 /* ExtendedSDKBridge+Common.swift */; };
+		3935460ED22DFA8F656B1E07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4E20B9C1F1ED5A41FF3054 /* Assets.xcassets */; };
+		3A31069E7E11B0CCE365B140 /* AIAgentStarterKit+OptionalFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E342FCD112E18686E791A5 /* AIAgentStarterKit+OptionalFeatures.swift */; };
+		48B8EC5BAB2F8F2E2C97A23D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B6689974C44EA060F592DE /* NotificationService.swift */; };
+		491882A89011C21A8C7846A3 /* AIAgentStarterKit+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C535A638D67260BFBD876A /* AIAgentStarterKit+Concurrency.swift */; };
+		4F1494838C93649C48013487 /* SampleAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AA92E0DCCB9C37FC6A894E9 /* SampleAssets.xcassets */; };
+		5D11526AF6F69CF11AE900D2 /* AIAgentStarterKit+Customize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8C823A3DA666A6A5282FD /* AIAgentStarterKit+Customize.swift */; };
+		6070A3E658A7A9FA041847B4 /* ExtendedSDKBridge+DeskSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F9619256C952A79374176D /* ExtendedSDKBridge+DeskSDK.swift */; };
+		67EEFCB3685189CA91447B1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C95882B9025D2EC6E3A6F68 /* Main.storyboard */; };
+		7B81B3F39800009FB2F9A6D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD25C27DBD40C011BE5FA1A3 /* LaunchScreen.storyboard */; };
+		7C71E7DA9216F9F86D741BB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA91801860324BF877C2336 /* AppDelegate.swift */; };
+		812695A5C4C90FF7E4A3AB9B /* AIAgentStarterKit+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7036E74B93599B2C6902A6 /* AIAgentStarterKit+Utils.swift */; };
+		86EC93CA51BEB68AF7312F70 /* ExtendedSDKBridge+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C5A09D614DDB39BE743B /* ExtendedSDKBridge+UIKit.swift */; };
+		9D89ABC8DB85D4C3F426E347 /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BD5090BE228A912E78D3193F /* Splash */; };
+		A41581E47D6F1E1336A9CF7E /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00E5DFE587D87520B0909B68 /* MarkdownUI */; };
+		A5B4456ED545348FC3E7A084 /* ExtendedSDKBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8BFB011EB64C4DE076D77E /* ExtendedSDKBridge.swift */; };
+		C1761DEEDB4CB13BBDA9D9F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD615656F26260F609F3E19B /* ViewController.swift */; };
+		DF4E553ADFAE538E35089963 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D418B3D75969A462EC6516A /* ViewController.xib */; };
+		E9134545B3A6C96D0326C579 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B18CA8B590809EF2D58F4937 /* UserNotifications.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		07F01935FF9C6D0A891C857A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		088C54604D112AE304A65EEE /* SampleTestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTestInfo.swift; sourceTree = "<group>"; };
+		26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A1271FEC45D71CDF362CB26 /* AIAgentStarterKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAgentStarterKit.swift; sourceTree = "<group>"; };
+		2A7036E74B93599B2C6902A6 /* AIAgentStarterKit+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+Utils.swift"; sourceTree = "<group>"; };
+		2AA92E0DCCB9C37FC6A894E9 /* SampleAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SampleAssets.xcassets; sourceTree = "<group>"; };
+		306450A7F711E55CAAF1B6A6 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
+		4615C5A09D614DDB39BE743B /* ExtendedSDKBridge+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedSDKBridge+UIKit.swift"; sourceTree = "<group>"; };
+		46F9619256C952A79374176D /* ExtendedSDKBridge+DeskSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedSDKBridge+DeskSDK.swift"; sourceTree = "<group>"; };
+		504F1132070E1B91DFDF8DBA /* QuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54738A17EFAA5A55C27FCBA3 /* QuickStart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickStart.entitlements; sourceTree = "<group>"; };
+		5ED7ABA0DE26D4AE60EBB708 /* ExtendedSDKBridge+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedSDKBridge+Common.swift"; sourceTree = "<group>"; };
+		6AA91801860324BF877C2336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6D418B3D75969A462EC6516A /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		6D8BFB011EB64C4DE076D77E /* ExtendedSDKBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedSDKBridge.swift; sourceTree = "<group>"; };
+		8C60F8E6393C98AB92CE0EFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A1E34AFFACDC0DC121B4FF23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A2B6689974C44EA060F592DE /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		AD4E20B9C1F1ED5A41FF3054 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD615656F26260F609F3E19B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B18CA8B590809EF2D58F4937 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		CE063DDC7D9B81FE0ABF9B62 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		E4E342FCD112E18686E791A5 /* AIAgentStarterKit+OptionalFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+OptionalFeatures.swift"; sourceTree = "<group>"; };
+		EBF8C823A3DA666A6A5282FD /* AIAgentStarterKit+Customize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+Customize.swift"; sourceTree = "<group>"; };
+		F1C535A638D67260BFBD876A /* AIAgentStarterKit+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+Concurrency.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C3FCACD28911CB9FA630BDE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EF3B883F179441278AD591 /* SendbirdAIAgentMessenger in Frameworks */,
+				A41581E47D6F1E1336A9CF7E /* MarkdownUI in Frameworks */,
+				9D89ABC8DB85D4C3F426E347 /* Splash in Frameworks */,
+				E9134545B3A6C96D0326C579 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B0653278AD1D8CFF0B5B8F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				504F1132070E1B91DFDF8DBA /* QuickStart.app */,
+				26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2354F861590FE3C54C5ED30E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2A7036E74B93599B2C6902A6 /* AIAgentStarterKit+Utils.swift */,
+				CE063DDC7D9B81FE0ABF9B62 /* UIViewController+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		32416E08674EA616F09E9EAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B18CA8B590809EF2D58F4937 /* UserNotifications.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6706FA635E64B8742A7073C9 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				AD615656F26260F609F3E19B /* ViewController.swift */,
+				6D418B3D75969A462EC6516A /* ViewController.xib */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		67852089506478566285B82D /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				07F01935FF9C6D0A891C857A /* Info.plist */,
+				306450A7F711E55CAAF1B6A6 /* NotificationService.entitlements */,
+				A2B6689974C44EA060F592DE /* NotificationService.swift */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		77A90A160A1B249C81152D9E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD4E20B9C1F1ED5A41FF3054 /* Assets.xcassets */,
+				AD25C27DBD40C011BE5FA1A3 /* LaunchScreen.storyboard */,
+				2C95882B9025D2EC6E3A6F68 /* Main.storyboard */,
+				2AA92E0DCCB9C37FC6A894E9 /* SampleAssets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		78CF1B79B64228A7F0DEAEBB /* QuickStart */ = {
+			isa = PBXGroup;
+			children = (
+				6AA91801860324BF877C2336 /* AppDelegate.swift */,
+				54738A17EFAA5A55C27FCBA3 /* QuickStart.entitlements */,
+				98CF6DE9A08CEAD352D0ADE5 /* AIAgentStarterKit */,
+				2354F861590FE3C54C5ED30E /* Extension */,
+				6706FA635E64B8742A7073C9 /* MainViews */,
+				77A90A160A1B249C81152D9E /* Resources */,
+			);
+			path = QuickStart;
+			sourceTree = "<group>";
+		};
+		8D9F4DD795C1C923CB15CF48 = {
+			isa = PBXGroup;
+			children = (
+				67852089506478566285B82D /* NotificationService */,
+				78CF1B79B64228A7F0DEAEBB /* QuickStart */,
+				32416E08674EA616F09E9EAC /* Frameworks */,
+				1B0653278AD1D8CFF0B5B8F6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		98CF6DE9A08CEAD352D0ADE5 /* AIAgentStarterKit */ = {
+			isa = PBXGroup;
+			children = (
+				2A1271FEC45D71CDF362CB26 /* AIAgentStarterKit.swift */,
+				F1C535A638D67260BFBD876A /* AIAgentStarterKit+Concurrency.swift */,
+				EBF8C823A3DA666A6A5282FD /* AIAgentStarterKit+Customize.swift */,
+				E4E342FCD112E18686E791A5 /* AIAgentStarterKit+OptionalFeatures.swift */,
+				088C54604D112AE304A65EEE /* SampleTestInfo.swift */,
+				FA40607B986F7054B1A3D050 /* ExtendedSDK */,
+			);
+			path = AIAgentStarterKit;
+			sourceTree = "<group>";
+		};
+		FA40607B986F7054B1A3D050 /* ExtendedSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6D8BFB011EB64C4DE076D77E /* ExtendedSDKBridge.swift */,
+				5ED7ABA0DE26D4AE60EBB708 /* ExtendedSDKBridge+Common.swift */,
+				46F9619256C952A79374176D /* ExtendedSDKBridge+DeskSDK.swift */,
+				4615C5A09D614DDB39BE743B /* ExtendedSDKBridge+UIKit.swift */,
+			);
+			path = ExtendedSDK;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8FC66CB764B9B97C95E00B1F /* QuickStart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E56547A5474ED0995ADC96A0 /* Build configuration list for PBXNativeTarget "QuickStart" */;
+			buildPhases = (
+				B45BF28486364B0447788092 /* Sources */,
+				92A4DB74BDD0F6F5EA6F5B38 /* Resources */,
+				C3FCACD28911CB9FA630BDE1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickStart;
+			packageProductDependencies = (
+				691283789AB5ADF115CAE086 /* SendbirdAIAgentMessenger */,
+				00E5DFE587D87520B0909B68 /* MarkdownUI */,
+				BD5090BE228A912E78D3193F /* Splash */,
+			);
+			productName = QuickStart;
+			productReference = 504F1132070E1B91DFDF8DBA /* QuickStart.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B681577BB72BB55817BE43E6 /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67EE380F530AE0E9A227A123 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				924EB604A2BC8E9ED746F24E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F2D84C08194A453C686D4F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					8FC66CB764B9B97C95E00B1F = {
+						DevelopmentTeam = RM4A5PXTUX;
+						ProvisioningStyle = Automatic;
+					};
+					B681577BB72BB55817BE43E6 = {
+						DevelopmentTeam = RM4A5PXTUX;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8861DA78869735219C78A80B /* Build configuration list for PBXProject "QuickStart" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8D9F4DD795C1C923CB15CF48;
+			packageReferences = (
+				5CCBF23D620C7F61876E356B /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */,
+				675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */,
+			);
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B681577BB72BB55817BE43E6 /* NotificationService */,
+				8FC66CB764B9B97C95E00B1F /* QuickStart */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92A4DB74BDD0F6F5EA6F5B38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3935460ED22DFA8F656B1E07 /* Assets.xcassets in Resources */,
+				7B81B3F39800009FB2F9A6D2 /* LaunchScreen.storyboard in Resources */,
+				67EEFCB3685189CA91447B1F /* Main.storyboard in Resources */,
+				4F1494838C93649C48013487 /* SampleAssets.xcassets in Resources */,
+				DF4E553ADFAE538E35089963 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		924EB604A2BC8E9ED746F24E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48B8EC5BAB2F8F2E2C97A23D /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B45BF28486364B0447788092 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				491882A89011C21A8C7846A3 /* AIAgentStarterKit+Concurrency.swift in Sources */,
+				5D11526AF6F69CF11AE900D2 /* AIAgentStarterKit+Customize.swift in Sources */,
+				3A31069E7E11B0CCE365B140 /* AIAgentStarterKit+OptionalFeatures.swift in Sources */,
+				812695A5C4C90FF7E4A3AB9B /* AIAgentStarterKit+Utils.swift in Sources */,
+				31D0C4C787EFEB38C932A0CB /* AIAgentStarterKit.swift in Sources */,
+				7C71E7DA9216F9F86D741BB4 /* AppDelegate.swift in Sources */,
+				3816E55E2430D6172FA671CB /* ExtendedSDKBridge+Common.swift in Sources */,
+				6070A3E658A7A9FA041847B4 /* ExtendedSDKBridge+DeskSDK.swift in Sources */,
+				86EC93CA51BEB68AF7312F70 /* ExtendedSDKBridge+UIKit.swift in Sources */,
+				A5B4456ED545348FC3E7A084 /* ExtendedSDKBridge.swift in Sources */,
+				1F5102365BF756B2470B6498 /* SampleTestInfo.swift in Sources */,
+				1F04F2DF6D87D1B0F8818CF5 /* UIViewController+Extension.swift in Sources */,
+				C1761DEEDB4CB13BBDA9D9F6 /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2C95882B9025D2EC6E3A6F68 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C60F8E6393C98AB92CE0EFF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AD25C27DBD40C011BE5FA1A3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E34AFFACDC0DC121B4FF23 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8182DA66E3DAC314D386C2B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_CODE_COVERAGE = NO;
+				CODE_SIGN_ENTITLEMENTS = QuickStart/QuickStart.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RM4A5PXTUX;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				INFOPLIST_FILE = QuickStart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LLVM_LTO = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sendbird.aiagent.sample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_PACKAGE_NAME = SendbirdInternal;
+				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
+				SWIFT_VERSION = 5.10;
+				Swift_COMPILATION_MODE = wholemodule;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		91EA7336925FCC000EE2F94B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CODE_SIGN_ENTITLEMENTS = QuickStart/QuickStart.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = RM4A5PXTUX;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = QuickStart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sendbird.aiagent.sample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PACKAGE_NAME = SendbirdInternal;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C4382ED4A04CBB7AFD8077C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C907156FBB5694DC82D01DA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D9B8D25F2B72CE41184A81DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_CODE_COVERAGE = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RM4A5PXTUX;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LLVM_LTO = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sendbird.aiagent.sample.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_PACKAGE_NAME = SendbirdInternal;
+				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
+				SWIFT_VERSION = 5.10;
+				Swift_COMPILATION_MODE = wholemodule;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F2CD40F0F2CBF0D88E98E3D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = RM4A5PXTUX;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sendbird.aiagent.sample.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PACKAGE_NAME = SendbirdInternal;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		67EE380F530AE0E9A227A123 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2CD40F0F2CBF0D88E98E3D4 /* Debug */,
+				D9B8D25F2B72CE41184A81DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8861DA78869735219C78A80B /* Build configuration list for PBXProject "QuickStart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C907156FBB5694DC82D01DA0 /* Debug */,
+				C4382ED4A04CBB7AFD8077C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E56547A5474ED0995ADC96A0 /* Build configuration list for PBXNativeTarget "QuickStart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91EA7336925FCC000EE2F94B /* Debug */,
+				8182DA66E3DAC314D386C2B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5CCBF23D620C7F61876E356B /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
+		675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Splash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.16.0;
+			};
+		};
+		802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sendbird/sendbird-ai-agent-messenger-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00E5DFE587D87520B0909B68 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CCBF23D620C7F61876E356B /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+		691283789AB5ADF115CAE086 /* SendbirdAIAgentMessenger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */;
+			productName = SendbirdAIAgentMessenger;
+		};
+		BD5090BE228A912E78D3193F /* Splash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */;
+			productName = Splash;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 7F2D84C08194A453C686D4F4 /* Project object */;
+}
