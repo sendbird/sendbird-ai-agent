@@ -127,6 +127,23 @@ function App() {
 }
 ```
 
+### FixedMessenger styles
+When using the fixed messenger, `FixedMssenger.Steyle` allows you to customize its appearance and positioning:
+  - `margin`: Defines the margin around the fixed messenger and its launcher.
+  - `launcherSize`: Defines the size of the launcher button in pixels (width and height are equal).
+  - `position`: Determines which corner of the screen the launcher will appear in. Available options are: `start-top`, `start-bottom`, `end-top` and `end-bottom`.
+
+```tsx
+function App() {
+  return (
+    <FixedMessenger>
+      <FixedMessenger.Style position={'start-bottom'} launcherSize={32} margin={{ start:0, end:0, bottom:0, top:0 }} />
+    </FixedMessenger>
+  );
+}
+```
+
+
 ### Manage user sessions
 
 To properly manage user sessions, provide session information when initializing the messenger:
