@@ -128,7 +128,7 @@ function App() {
 ```
 
 ### FixedMessenger styles
-When using the fixed messenger, `FixedMssenger.Steyle` allows you to customize its appearance and positioning:
+When using the fixed messenger, `FixedMssenger.Style` allows you to customize its appearance and positioning:
   - `margin`: Defines the margin around the fixed messenger and its launcher.
   - `launcherSize`: Defines the size of the launcher button in pixels (width and height are equal).
   - `position`: Determines which corner of the screen the launcher will appear in. Available options are: `start-top`, `start-bottom`, `end-top` and `end-bottom`.
