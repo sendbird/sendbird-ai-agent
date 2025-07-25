@@ -189,7 +189,7 @@ function App() {
 }
 ```
 
-
+---
 
 ## Advanced Features
 
