@@ -3,13 +3,17 @@ import { useEffect, useState } from 'react';
 
 const DEFAULT_TAB: TabKey = 'react';
 
+const TAB_PATHS: Record<string, TabKey> = Object.fromEntries(
+  Object.entries(TABS).map(([key, { path }]) => [path, key as TabKey]),
+);
+
 export function useTabNavigation() {
   const [activeTab, setActiveTab] = useState<TabKey>(DEFAULT_TAB);
 
   // Initialize tab from URL pathname
   useEffect(() => {
     const pathname = window.location.pathname;
-    const matchingTabKey = Object.keys(TABS).find((key) => TABS[key as TabKey].path === pathname) as TabKey | undefined;
+    const matchingTabKey = TAB_PATHS[pathname];
 
     if (matchingTabKey) {
       setActiveTab(matchingTabKey);
@@ -26,15 +30,8 @@ export function useTabNavigation() {
   useEffect(() => {
     const handlePopState = () => {
       const pathname = window.location.pathname;
-      const matchingTabKey = Object.keys(TABS).find((key) => TABS[key as TabKey].path === pathname) as
-        | TabKey
-        | undefined;
-
-      if (matchingTabKey) {
-        setActiveTab(matchingTabKey);
-      } else {
-        setActiveTab(DEFAULT_TAB);
-      }
+      const tabKey = TAB_PATHS[pathname] || DEFAULT_TAB;
+      setActiveTab(tabKey);
     };
 
     window.addEventListener('popstate', handlePopState);
