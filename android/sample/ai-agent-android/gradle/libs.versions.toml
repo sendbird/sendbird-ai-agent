@@ -1,0 +1,87 @@
+[versions]
+agp = "8.5.2"
+glide = "4.16.0"
+kotlin = "1.7.20"
+coreKtx = "1.9.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.6.1"
+material = "1.5.0"
+lifecycleViewModelKtx = "2.5.1"
+lifecycleRuntimeKtx = "2.5.1"
+activityKtx = "1.6.1"
+fragmentKtx = "1.5.5"
+sdkKtlint = "0.50.0"
+sdkDokkaVersion = "1.9.20"
+sdkBinaryCompatibilityValidator = "0.16.0"
+googleService = "4.4.2"
+firebaseMessagingKtx = "24.1.1"
+
+sdkSendbirdKtx = "4.27.1"
+sdkSendbird = "4.27.2"
+sdkSendbirdAuth = "1.0.7"
+sdkSendbirdMessageTemplate = "1.1.0"
+kotlinSerializationJson = "1.3.2"
+activity = "1.6.1"
+constraintlayout = "2.2.0"
+recyclerview = "1.3.2"
+markwon = "4.6.2"
+kotlinBom = "1.8.0"
+sdkUikit = "3.23.0"
+sdkAiAgentMessenger = "0.9.5"
+sdkDesk = "1.1.6"
+sdkMockk = "1.13.4"
+sdkKotest ="5.6.0"
+sdkKotlinxCoroutines = "1.7.1"
+androidxRules = "1.5.0"
+sdkJunit4 = "4.13.2"
+sdkRobolectric = "4.13"
+testCoreKtx = "1.5.0"
+
+[libraries]
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+sdk-sendbird-ktx = { group = "com.sendbird.sdk", name = "sendbird-chat-ktx", version.ref = "sdkSendbirdKtx" }
+sdk-sendbird = { group = "com.sendbird.sdk", name = "sendbird-chat", version.ref = "sdkSendbird" }
+sdk-sendbird-auth = { group = "com.sendbird.sdk", name = "sendbird-auth", version.ref = "sdkSendbirdAuth" }
+sdk-sendbird-message-template = { group = "com.sendbird.sdk", name = "message-template", version.ref = "sdkSendbirdMessageTemplate" }
+sdk-sendbird-uikit = { group = "com.sendbird.sdk", name = "uikit", version.ref = "sdkUikit" }
+sdk-sendbird-aiagent-messenger = { group = "com.sendbird.sdk", name = "ai-agent-messenger", version.ref = "sdkAiAgentMessenger" }
+sdk-sendbird-desk = { group = "com.sendbird.sdk", name = "sendbird-desk-android-sdk", version.ref = "sdkDesk" }
+noties-markwon = { group = "io.noties.markwon", name = "core", version.ref = "markwon" }
+noties-markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwon" }
+sdk-pinterest-ktlint = { group = "com.pinterest", name = "ktlint", version.ref = "sdkKtlint" }
+
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewModelKtx" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlinBom" }
+sdk-mockk = { group = "io.mockk", name = "mockk", version.ref = "sdkMockk" }
+sdk-kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "sdkKotest" }
+sdk-junit4 = { group = "junit", name = "junit", version.ref = "sdkJunit4" }
+sdk-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "sdkKotlinxCoroutines" }
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxRules" }
+sdk-robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "sdkRobolectric" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "testCoreKtx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sdk-dokka = { id = "org.jetbrains.dokka", version.ref = "sdkDokkaVersion" }
+sdk-binary-compatibility-validator = { id = 'org.jetbrains.kotlinx.binary-compatibility-validator', version.ref = "sdkBinaryCompatibilityValidator" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleService" }
