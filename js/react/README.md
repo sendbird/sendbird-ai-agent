@@ -59,7 +59,7 @@ The React SDK provides two main approaches for integration:
 
 **Option 1: FixedMessenger (Recommended for quick setup)**
 
-FixedMessenger provides a predefined UI toolkit with launcher and messenger at fixed position (bottom-right
+FixedMessenger provides a predefined UI toolkit with launcher and messenger at fixed position (bottom-right):
 ```tsx
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
