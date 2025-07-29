@@ -14,6 +14,14 @@ messenger.onLoad(() => {
   messenger.open();
 });`,
 
+  customHosts: `// If needed, you can specify custom hosts
+messenger.initialize({
+  appId: 'APP_ID',
+  aiAgentId: 'AI_AGENT_ID',
+  customApiHost: 'https://your-proxy-api.example.com',
+  customWebSocketHost: 'wss://your-proxy-websocket.example.com'
+});`,
+
   updateConfig: `messenger.updateConfig({
   appId: 'NEW_APP_ID',
   aiAgentId: 'NEW_AI_AGENT_ID',
@@ -171,6 +179,24 @@ function App() {
     </AgentProviderContainer>
   );
 }`,
+
+  customHosts: `// If needed, you can specify custom hosts
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  customApiHost="https://your-proxy-api.example.com"
+  customWebSocketHost="wss://your-proxy-websocket.example.com"
+/>
+
+// Or with AgentProviderContainer
+<AgentProviderContainer
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  customApiHost="https://your-proxy-api.example.com"
+  customWebSocketHost="wss://your-proxy-websocket.example.com"
+>
+  <Conversation />
+</AgentProviderContainer>`,
 
   userAuthentication: `<FixedMessenger
   appId="YOUR_APP_ID"

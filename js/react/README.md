@@ -9,9 +9,11 @@ The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
     - [Step 2. Initialize AI Agent SDK](#step-2-initialize-ai-agent-sdk)
+      - [Custom Host Configuration](#custom-host-configuration)
   - [Component Overview](#component-overview)
     - [FixedMessenger vs AgentProviderContainer](#fixedmessenger-vs-agentprovidercontainer)
   - [Running your application](#running-your-application)
+    - [FixedMessenger styles](#fixedmessenger-styles)
     - [Manage user sessions](#manage-user-sessions)
   - [Advanced Features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
@@ -58,7 +60,6 @@ The React SDK provides two main approaches for integration:
 **Option 1: FixedMessenger (Recommended for quick setup)**
 
 FixedMessenger provides a predefined UI toolkit with launcher and messenger at fixed position (bottom-right):
-
 ```tsx
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
@@ -86,6 +87,34 @@ function App() {
   );
 }
 ```
+
+#### Custom Host Configuration
+
+If needed, you can specify custom API and WebSocket hosts:
+
+```tsx
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  customApiHost="https://your-proxy-api.example.com"
+  customWebSocketHost="wss://your-proxy-websocket.example.com"
+/>
+```
+
+Similarly, when using `AgentProviderContainer`:
+
+```tsx
+<AgentProviderContainer
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  customApiHost="https://your-proxy-api.example.com"
+  customWebSocketHost="wss://your-proxy-websocket.example.com"
+>
+  <Conversation />
+</AgentProviderContainer>
+```
+
+Both properties are optional and only need to be configured if required.
 
 ---
 

@@ -52,6 +52,13 @@ export function AdvancedFeatures() {
         </Section>
 
         <Section
+          title="Custom Host Configuration"
+          description="Configure custom API and WebSocket hosts for proxy support or custom server endpoints."
+        >
+          <CodeEditor value={CODE_SAMPLES.customHosts} language="javascript" />
+        </Section>
+
+        <Section
           title="Locale Configuration"
           description="Configure language and country code preferences during initialization to localize AI Agent interactions."
         >
