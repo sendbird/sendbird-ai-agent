@@ -93,6 +93,13 @@ export const AdvancedFeatures = () => {
         </Section>
 
         <Section
+          title="Custom Host Configuration"
+          description="Configure custom API and WebSocket hosts for proxy support or custom server endpoints."
+        >
+          <CodeEditor value={REACT_CODE_SAMPLES.customHosts} language="tsx" />
+        </Section>
+
+        <Section
           title="Locale Configuration"
           description="Configure language and country code preferences during initialization to localize AI Agent interactions."
         >

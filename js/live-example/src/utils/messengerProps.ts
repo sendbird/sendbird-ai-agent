@@ -21,6 +21,8 @@ export function createCommonMessengerProps(
     language: appConfig.currentLanguage,
     countryCode: getCountryCodeFromLanguage(appConfig.currentLanguage),
     stringSet: getStringSet(),
+    customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,
+    customWebSocketHost: import.meta.env.VITE_CUSTOM_WS_HOST,
     context: appConfig.hasContext
       ? {
           userPreference: 'technical',

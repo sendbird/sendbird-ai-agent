@@ -9,6 +9,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
     - [Step 2. Initialize AI Agent SDK](#step-2-initialize-ai-agent-sdk)
+      - [Custom Host Configuration](#custom-host-configuration)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
     - [Launch the messenger](#launch-the-messenger)
@@ -51,6 +52,22 @@ messenger.initialize({
     aiAgentId: 'YOUR_BOT_ID',
 });
 ```
+
+#### Custom Host Configuration
+
+If needed, you can specify custom API and WebSocket hosts during initialization:
+
+```javascript
+messenger.initialize({
+    appId: 'YOUR_APP_ID',
+    aiAgentId: 'YOUR_BOT_ID',
+    customApiHost: 'https://your-proxy-api.example.com',
+    customWebSocketHost: 'wss://your-proxy-websocket.example.com'
+});
+```
+
+Both parameters are optional and only need to be configured if required.
+
 ---
 
 ## Running your application

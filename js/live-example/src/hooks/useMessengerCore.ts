@@ -15,6 +15,8 @@ export function useMessengerCore() {
       messengerInstance.initialize({
         appId: import.meta.env.VITE_APP_ID,
         aiAgentId: import.meta.env.VITE_AI_AGENT_ID,
+        customApiHost: import.meta.env.VITE_CUSTOM_API_HOST,
+        customWebSocketHost: import.meta.env.VITE_CUSTOM_WS_HOST,
         ...configOptions,
       });
 

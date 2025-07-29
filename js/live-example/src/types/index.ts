@@ -5,6 +5,8 @@ export interface MessengerConfig {
   countryCode?: string;
   context?: Record<string, string>;
   stringSet?: Record<string, string>;
+  customApiHost?: string;
+  customWebSocketHost?: string;
 }
 
 interface UserSession {
