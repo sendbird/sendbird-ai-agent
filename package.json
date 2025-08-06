@@ -10,6 +10,14 @@
     "dev:cdn": "cd js/cdn/sample && npm run dev",
     "build:react": "cd js/react/sample && npm run build",
     "build:cdn": "cd js/cdn/sample && npm run build",
-    "build:samples": "npm run build:react && npm run build:cdn"
+    "build:samples": "npm run build:react && npm run build:cdn",
+    "test": "playwright test",
+    "test:react": "cd js/react/sample && npm run test",
+    "test:cdn": "cd js/cdn/sample && npm run test",
+    "test:unit": "npm run test:react && npm run test:cdn",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
   }
 }

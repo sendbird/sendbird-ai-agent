@@ -4,11 +4,14 @@ This is a basic React application demonstrating how to integrate the Sendbird AI
 
 ## Features
 
-- React + TypeScript + Vite setup
+- React + TypeScript + Vite + Tailwind CSS setup
+- Latest version of AI Agent Messenger React package
 - Basic AI Agent Messenger integration
 - User authentication example
 - Context configuration example
 - Manual messenger controls
+- Unit tests with Vitest
+- Environment variable best practices
 
 ## Getting Started
 
@@ -22,13 +25,34 @@ npm install
 npm run dev
 ```
 
-3. Open your browser and navigate to the provided URL (usually http://localhost:5173)
+3. Open your browser and navigate to http://localhost:5173
 
 ## Usage
 
 - Click "Open Messenger" to open the AI agent chat
 - Enable "Use authenticated session" to test with user authentication
 - Enable "Include context" to provide additional context to the AI agent
+
+## Environment Variables (Best Practice)
+
+For production use, create a `.env` file with:
+```
+VITE_APP_ID=your_app_id
+VITE_AI_AGENT_ID=your_ai_agent_id
+```
+
+Then update `src/App.tsx` to use:
+```typescript
+const APP_ID = import.meta.env.VITE_APP_ID
+const AI_AGENT_ID = import.meta.env.VITE_AI_AGENT_ID
+```
+
+## Testing
+
+Run unit tests:
+```bash
+npm run test
+```
 
 ## Build for Production
 

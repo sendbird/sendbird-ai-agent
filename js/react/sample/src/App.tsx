@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react'
 import '@sendbird/ai-agent-messenger-react/index.css'
-import './App.css'
 
-// Configuration from live example
+// Best practice: Load these from environment variables
+// For local development, create a .env file with:
+// VITE_APP_ID=your_app_id
+// VITE_AI_AGENT_ID=your_ai_agent_id
+// Then use: import.meta.env.VITE_APP_ID
 const APP_ID = 'E86A36B6-1C6D-4ED7-8C3B-4BC996C07A1C'
 const AI_AGENT_ID = '4ebf8a55-6c08-4e78-aef5-2f67c4a7c1f1'
 
@@ -39,37 +42,46 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        <h1>Sendbird AI Agent React Sample</h1>
-        <p className="description">
+      <div className="max-w-2xl mx-auto p-5 text-center">
+        <h1 className="text-5xl font-bold leading-tight mb-2 text-gray-900 dark:text-white">
+          Sendbird AI Agent React Sample
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
           This is a basic React application demonstrating how to integrate the Sendbird AI Agent Messenger.
         </p>
         
-        <div className="controls">
-          <button onClick={() => setOpened(!opened)}>
+        <div className="flex flex-col items-center gap-4 mb-8">
+          <button 
+            onClick={() => setOpened(!opened)}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors"
+          >
             {opened ? 'Close' : 'Open'} Messenger
           </button>
-          <label>
+          <label className="flex items-center gap-2 text-sm cursor-pointer">
             <input 
               type="checkbox" 
               checked={hasSession}
               onChange={(e) => setHasSession(e.target.checked)}
+              className="rounded"
             />
-            Use authenticated session
+            <span>Use authenticated session</span>
           </label>
-          <label>
+          <label className="flex items-center gap-2 text-sm cursor-pointer">
             <input 
               type="checkbox" 
               checked={hasContext}
               onChange={(e) => setHasContext(e.target.checked)}
+              className="rounded"
             />
-            Include context
+            <span>Include context</span>
           </label>
         </div>
 
-        <div className="info">
-          <h3>How to use:</h3>
-          <ul>
+        <div className="text-left bg-gray-50 dark:bg-gray-800 p-5 rounded-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-900 dark:text-white mt-0 mb-3">
+            How to use:
+          </h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
             <li>Click "Open Messenger" to open the AI agent chat</li>
             <li>Enable "Use authenticated session" to test with user authentication</li>
             <li>Enable "Include context" to provide additional context to the AI agent</li>
