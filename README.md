@@ -44,10 +44,10 @@ This repository contains platform-specific implementations and customer guides f
 
 ### JavaScript Sample Projects
 
-The `js/sample/` directory contains ready-to-run sample projects:
+Each JavaScript platform directory contains a ready-to-run sample project:
 
-- **`js/sample/react/`**: Vite + TypeScript + React sample with full AI Agent integration
-- **`js/sample/cdn/`**: Vite + Vanilla JavaScript sample using CDN integration
+- **`js/react/sample/`**: Vite + TypeScript + React sample with full AI Agent integration
+- **`js/cdn/sample/`**: Vite + Vanilla JavaScript sample using CDN integration
 
 Both samples demonstrate:
 - Basic AI Agent Messenger integration
@@ -57,7 +57,7 @@ Both samples demonstrate:
 
 To run the samples locally:
 ```bash
-cd js/sample/react    # or js/sample/cdn
+cd js/react/sample    # or js/cdn/sample
 npm install
 npm run dev
 ```

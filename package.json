@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "install:react": "cd js/sample/react && npm install",
-    "install:cdn": "cd js/sample/cdn && npm install",
+    "install:react": "cd js/react/sample && npm install",
+    "install:cdn": "cd js/cdn/sample && npm install",
     "install:samples": "npm run install:react && npm run install:cdn",
-    "dev:react": "cd js/sample/react && npm run dev",
-    "dev:cdn": "cd js/sample/cdn && npm run dev",
-    "build:react": "cd js/sample/react && npm run build",
-    "build:cdn": "cd js/sample/cdn && npm run build",
+    "dev:react": "cd js/react/sample && npm run dev",
+    "dev:cdn": "cd js/cdn/sample && npm run dev",
+    "build:react": "cd js/react/sample && npm run build",
+    "build:cdn": "cd js/cdn/sample && npm run build",
     "build:samples": "npm run build:react && npm run build:cdn"
   }
 }
