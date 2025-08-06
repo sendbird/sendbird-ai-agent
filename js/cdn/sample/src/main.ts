@@ -1,23 +1,63 @@
-// Configuration from live example
+// Best practice: Load these from environment variables
+// For local development, create a .env file with:
+// VITE_APP_ID=your_app_id
+// VITE_AI_AGENT_ID=your_ai_agent_id
+// Then use: import.meta.env.VITE_APP_ID
 const APP_ID = 'E86A36B6-1C6D-4ED7-8C3B-4BC996C07A1C';
 const AI_AGENT_ID = '4ebf8a55-6c08-4e78-aef5-2f67c4a7c1f1';
 
+// Type definitions for the CDN messenger
+interface MessengerConfig {
+  appId: string;
+  aiAgentId: string;
+  language: string;
+  countryCode: string;
+  context?: {
+    userPreference: string;
+    customerTier: string;
+  };
+}
+
+interface UserSessionInfo {
+  userId: string;
+  authToken: string;
+  onSessionTokenRequired: (resolve: (token: string) => void) => Promise<void>;
+  onSessionClosed: () => void;
+  onSessionError: (error: unknown) => void;
+  onSessionRefreshed: () => void;
+}
+
+interface Messenger {
+  initialize: (config: MessengerConfig) => Promise<void>;
+  updateConfig: (config: MessengerConfig) => Promise<void>;
+  updateUserSession: (sessionInfo: UserSessionInfo) => Promise<void>;
+  open: () => void;
+  close: () => void;
+  onLoad: (callback: () => void) => void;
+}
+
 // Load messenger from CDN
-async function loadMessenger() {
-  const { loadMessenger } = await import('https://aiagent.sendbird.com/orgs/default/index.js');
-  return loadMessenger();
+async function loadMessenger(): Promise<Messenger> {
+  try {
+    // @ts-ignore - Dynamic import from CDN
+    const module = await import('https://aiagent.sendbird.com/orgs/default/index.js') as any;
+    return module.loadMessenger();
+  } catch (error) {
+    console.error('Failed to load messenger from CDN:', error);
+    throw error;
+  }
 }
 
 // Application state
-let messenger = null;
+let messenger: Messenger | null = null;
 let isOpened = false;
 let hasSession = false;
 let hasContext = false;
 
 // UI elements
-const toggleButton = document.getElementById('toggleMessenger');
-const sessionToggle = document.getElementById('sessionToggle');
-const contextToggle = document.getElementById('contextToggle');
+const toggleButton = document.getElementById('toggleMessenger') as HTMLButtonElement;
+const sessionToggle = document.getElementById('sessionToggle') as HTMLInputElement;
+const contextToggle = document.getElementById('contextToggle') as HTMLInputElement;
 
 // Initialize messenger
 async function initializeMessenger() {
@@ -51,7 +91,7 @@ async function updateMessengerConfig() {
   if (!messenger) return;
 
   try {
-    const config = {
+    const config: MessengerConfig = {
       appId: APP_ID,
       aiAgentId: AI_AGENT_ID,
       language: 'en-US',
@@ -116,13 +156,15 @@ function toggleMessenger() {
 toggleButton.addEventListener('click', toggleMessenger);
 
 sessionToggle.addEventListener('change', (e) => {
-  hasSession = e.target.checked;
+  const target = e.target as HTMLInputElement;
+  hasSession = target.checked;
   updateMessengerConfig();
   console.log('Session toggled:', hasSession);
 });
 
 contextToggle.addEventListener('change', (e) => {
-  hasContext = e.target.checked;
+  const target = e.target as HTMLInputElement;
+  hasContext = target.checked;
   updateMessengerConfig();
   console.log('Context toggled:', hasContext);
 });
@@ -132,3 +174,4 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Page loaded, initializing messenger...');
   initializeMessenger();
 });
+
