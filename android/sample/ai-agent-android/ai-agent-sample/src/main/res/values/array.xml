@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sb_regions">
+        <item>@string/sample_region_production</item>
+        <item>@string/sample_region_no1</item>
+        <item>@string/sample_region_no2</item>
+        <item>@string/sample_region_no3</item>
+        <item>@string/sample_region_no4</item>
+        <item>@string/sample_region_no5</item>
+        <item>@string/sample_region_no6</item>
+    </string-array>
+</resources>
