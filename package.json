@@ -1,0 +1,15 @@
+{
+  "name": "sendbird-ai-agent-samples",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "install:react": "cd js/sample/react && npm install",
+    "install:cdn": "cd js/sample/cdn && npm install",
+    "install:samples": "npm run install:react && npm run install:cdn",
+    "dev:react": "cd js/sample/react && npm run dev",
+    "dev:cdn": "cd js/sample/cdn && npm run dev",
+    "build:react": "cd js/sample/react && npm run build",
+    "build:cdn": "cd js/sample/cdn && npm run build",
+    "build:samples": "npm run build:react && npm run build:cdn"
+  }
+}
