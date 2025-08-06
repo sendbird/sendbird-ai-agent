@@ -322,25 +322,6 @@ function App() {
   }}
 />`,
 
-  cleanup: `// Component cleanup is handled automatically by React
-// when the component unmounts, but you can also
-// control the messenger state manually:
-
-function App() {
-  const [messengerKey, setMessengerKey] = useState(0);
-
-  const resetMessenger = () => {
-    setMessengerKey(prev => prev + 1); // Force remount
-  };
-
-  return (
-    <FixedMessenger
-      key={messengerKey}
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-    />
-  );
-}`,
 
   messageLayoutCustomization: `import { AgentProviderContainer, Conversation, IncomingMessageLayout } from '@sendbird/ai-agent-messenger-react';
 import { useState } from 'react';

@@ -224,21 +224,6 @@ export const AdvancedFeatures = () => {
           </div>
         </Section>
 
-        <Section
-          title="Cleanup"
-          description="Methods for cleaning up messenger resources and forcing component remount."
-        >
-          <CodeEditor value={REACT_CODE_SAMPLES.cleanup} language="tsx" />
-          <Button
-            onClick={() =>
-              updateAppConfig({
-                messengerKey: appConfig.messengerKey + 1,
-              })
-            }
-          >
-            Reset Messenger
-          </Button>
-        </Section>
       </div>
     </div>
   );
