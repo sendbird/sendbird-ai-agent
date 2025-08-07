@@ -19,14 +19,14 @@ test.describe('React Sample - Messenger Mounting', () => {
     // Test button toggle
     await openButton.click()
     await expect(openButton).toContainText('Close Messenger')
-    
+
     await openButton.click()
     await expect(openButton).toContainText('Open Messenger')
 
     // Test checkboxes
     await sessionCheckbox.check()
     await expect(sessionCheckbox).toBeChecked()
-    
+
     await contextCheckbox.check()
     await expect(contextCheckbox).toBeChecked()
   })
@@ -34,7 +34,7 @@ test.describe('React Sample - Messenger Mounting', () => {
   test('should render AI Agent Messenger component in DOM', async ({ page }) => {
     // Wait for the page to load completely
     await page.waitForLoadState('networkidle')
-    
+
     // Look for Sendbird messenger container elements that should be mounted
     // The exact selectors may vary based on the AI Agent Messenger implementation
     const messengerElements = [
@@ -72,7 +72,7 @@ test.describe('React Sample - Messenger Mounting', () => {
 
   test('should not have JavaScript errors during initialization', async ({ page }) => {
     const consoleErrors: string[] = []
-    
+
     page.on('console', msg => {
       if (msg.type() === 'error') {
         consoleErrors.push(msg.text())
@@ -85,10 +85,10 @@ test.describe('React Sample - Messenger Mounting', () => {
 
     await page.goto('http://localhost:5174')
     await page.waitForLoadState('networkidle')
-    
+
     // Filter out network errors that might occur in test environment
-    const criticalErrors = consoleErrors.filter(error => 
-      !error.includes('Failed to fetch') && 
+    const criticalErrors = consoleErrors.filter(error =>
+      !error.includes('Failed to fetch') &&
       !error.includes('NetworkError') &&
       !error.includes('net::ERR_')
     )

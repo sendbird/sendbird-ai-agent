@@ -19,5 +19,3 @@
   "include": ["src/**/*", "vite.config.ts", "vitest.config.ts"],
   "exclude": ["src/__test__/**/*", "node_modules"]
 }
-
-

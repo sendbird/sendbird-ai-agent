@@ -61,5 +61,3 @@ The built files will be in the `dist` directory.
 ```bash
 npm run preview
 ```
-
-

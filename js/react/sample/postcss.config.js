@@ -3,5 +3,3 @@ export default {
     tailwindcss: {},
   },
 }
-
-

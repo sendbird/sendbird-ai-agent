@@ -38,5 +38,3 @@ describe('App', () => {
     expect(screen.getByText(/Click "Open Messenger" to open the AI agent chat/)).toBeInTheDocument()
   })
 })
-
-
