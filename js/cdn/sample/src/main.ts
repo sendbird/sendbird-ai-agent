@@ -1,8 +1,5 @@
-// Best practice: Load these from environment variables
-// For local development, create a .env file with:
-// VITE_APP_ID=your_app_id
-// VITE_AI_AGENT_ID=your_ai_agent_id
-// Then use: import.meta.env.VITE_APP_ID
+// For production, use environment variables:
+// import.meta.env.VITE_APP_ID
 const APP_ID = 'E86A36B6-1C6D-4ED7-8C3B-4BC996C07A1C';
 const AI_AGENT_ID = '4ebf8a55-6c08-4e78-aef5-2f67c4a7c1f1';
 
@@ -39,9 +36,8 @@ interface Messenger {
 // Load messenger from CDN
 async function loadMessenger(): Promise<Messenger> {
   try {
-    // @ts-ignore - Dynamic import from CDN
-    const module = await import('https://aiagent.sendbird.com/orgs/default/index.js') as any;
-    return module.loadMessenger();
+    const { loadMessenger: cdnLoadMessenger } = await import('https://aiagent.sendbird.com/orgs/default/index.js');
+    return cdnLoadMessenger();
   } catch (error) {
     console.error('Failed to load messenger from CDN:', error);
     throw error;
@@ -174,4 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Page loaded, initializing messenger...');
   initializeMessenger();
 });
+
+
 
