@@ -51,7 +51,7 @@ describe('CDN Sample Main Module', () => {
   it('should find required DOM elements', async () => {
     // Import the module to trigger initialization
     await import('../main')
-    
+
     expect(document.getElementById).toHaveBeenCalledWith('toggleMessenger')
     expect(document.getElementById).toHaveBeenCalledWith('sessionToggle')
     expect(document.getElementById).toHaveBeenCalledWith('contextToggle')
@@ -59,7 +59,7 @@ describe('CDN Sample Main Module', () => {
 
   it('should set up event listeners', async () => {
     await import('../main')
-    
+
     expect(mockButton.addEventListener).toHaveBeenCalledWith('click', expect.any(Function))
     expect(mockToggle.addEventListener).toHaveBeenCalledWith('change', expect.any(Function))
     expect(document.addEventListener).toHaveBeenCalledWith('DOMContentLoaded', expect.any(Function))
@@ -67,11 +67,9 @@ describe('CDN Sample Main Module', () => {
 
   it('should have correct configuration constants', async () => {
     const module = await import('../main')
-    
+
     // Since constants are not exported, we verify they exist through their usage
     // This test ensures the module loads without errors, confirming constants are properly defined
     expect(module).toBeDefined()
   })
 })
-
-

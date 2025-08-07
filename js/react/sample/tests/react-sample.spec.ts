@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('React Sample - Messenger Mounting', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173')
+    await page.goto('http://localhost:5174')
   })
 
   test('should load the React sample page with correct elements', async ({ page }) => {
@@ -83,7 +83,7 @@ test.describe('React Sample - Messenger Mounting', () => {
       consoleErrors.push(error.message)
     })
 
-    await page.goto('http://localhost:5173')
+    await page.goto('http://localhost:5174')
     await page.waitForLoadState('networkidle')
     
     // Filter out network errors that might occur in test environment

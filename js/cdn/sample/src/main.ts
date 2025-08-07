@@ -1,7 +1,7 @@
-// For production, use environment variables:
-// import.meta.env.VITE_APP_ID
-const APP_ID = 'E86A36B6-1C6D-4ED7-8C3B-4BC996C07A1C';
-const AI_AGENT_ID = '4ebf8a55-6c08-4e78-aef5-2f67c4a7c1f1';
+const APP_ID = import.meta.env.VITE_NEW_APP_ID;
+const AI_AGENT_ID = import.meta.env.VITE_NEW_AI_AGENT_ID;
+const USER_ID = import.meta.env.VITE_NEW_USER_ID;
+const AUTH_TOKEN = import.meta.env.VITE_NEW_USER_AUTH_TOKEN;
 
 // Type definitions for the CDN messenger
 interface MessengerConfig {
@@ -60,7 +60,7 @@ async function initializeMessenger() {
   try {
     console.log('Loading messenger...');
     messenger = await loadMessenger();
-    
+
     // Initialize with basic configuration
     await messenger.initialize({
       appId: APP_ID,
@@ -70,7 +70,7 @@ async function initializeMessenger() {
     });
 
     console.log('Messenger initialized successfully');
-    
+
     // Set up event handlers
     messenger.onLoad(() => {
       console.log('Messenger loaded');
@@ -107,11 +107,11 @@ async function updateMessengerConfig() {
     // Update session if enabled
     if (hasSession) {
       await messenger.updateUserSession({
-        userId: 'sample_user_id',
-        authToken: 'sample_auth_token',
+        userId: USER_ID,
+        authToken: AUTH_TOKEN,
         onSessionTokenRequired: async (resolve) => {
           // In a real application, fetch a new token from your server
-          resolve('sample_auth_token');
+          resolve(AUTH_TOKEN);
         },
         onSessionClosed: () => {
           console.log('Session closed');

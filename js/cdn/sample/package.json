@@ -8,9 +8,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
     "@types/node": "^20.10.0",
     "jsdom": "^23.0.0",
     "typescript": "^5.2.2",
@@ -18,5 +20,3 @@
     "vitest": "^1.0.4"
   }
 }
-
-

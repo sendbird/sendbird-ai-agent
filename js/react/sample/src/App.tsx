@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react'
 import '@sendbird/ai-agent-messenger-react/index.css'
 
-// For production, use environment variables:
-// import.meta.env.VITE_APP_ID
-const APP_ID = 'E86A36B6-1C6D-4ED7-8C3B-4BC996C07A1C'
-const AI_AGENT_ID = '4ebf8a55-6c08-4e78-aef5-2f67c4a7c1f1'
+const APP_ID = import.meta.env.VITE_NEW_APP_ID
+const AI_AGENT_ID = import.meta.env.VITE_NEW_AI_AGENT_ID
+const USER_ID = import.meta.env.VITE_NEW_USER_ID
+const AUTH_TOKEN = import.meta.env.VITE_NEW_USER_AUTH_TOKEN
 
 function App() {
   const [opened, setOpened] = useState(false)
@@ -13,12 +13,12 @@ function App() {
   const [hasContext, setHasContext] = useState(false)
 
   const userSessionInfo = hasSession ? {
-    userId: 'sample_user_id',
-    authToken: 'sample_auth_token',
+    userId: USER_ID,
+    authToken: AUTH_TOKEN,
     sessionHandler: {
       onSessionTokenRequired: async (resolve: (token: string) => void) => {
         // In a real application, fetch a new token from your server
-        resolve('sample_auth_token');
+        resolve(AUTH_TOKEN);
       },
       onSessionClosed: () => {
         console.log('Session closed');
@@ -46,17 +46,17 @@ function App() {
         <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
           This is a basic React application demonstrating how to integrate the Sendbird AI Agent Messenger.
         </p>
-        
+
         <div className="flex flex-col items-center gap-4 mb-8">
-          <button 
+          <button
             onClick={() => setOpened(!opened)}
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors"
           >
             {opened ? 'Close' : 'Open'} Messenger
           </button>
           <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               checked={hasSession}
               onChange={(e) => setHasSession(e.target.checked)}
               className="rounded"
@@ -64,8 +64,8 @@ function App() {
             <span>Use authenticated session</span>
           </label>
           <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               checked={hasContext}
               onChange={(e) => setHasContext(e.target.checked)}
               className="rounded"

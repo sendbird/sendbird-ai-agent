@@ -15,16 +15,13 @@ export default defineConfig({
     {
       name: 'react-sample',
       use: { ...devices['Desktop Chrome'] },
-      testMatch: 'tests/react-sample.spec.ts'
-    },
-    {
-      name: 'cdn-sample',
-      use: { ...devices['Desktop Chrome'] },
-      testMatch: 'tests/cdn-sample.spec.ts'
+      testMatch: '**/*.spec.ts'
     },
   ],
 
-  // Note: Manual server start required
-  // Run either: cd react/sample && npm run dev
-  // Or: cd cdn/sample && npm run dev
+  webServer: {
+    command: 'npm run dev',
+    port: 5174,
+    reuseExistingServer: !process.env.CI,
+  }
 })

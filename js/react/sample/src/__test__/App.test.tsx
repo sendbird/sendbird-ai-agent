@@ -28,8 +28,8 @@ describe('App', () => {
     render(<App />)
     const messenger = screen.getByTestId('fixed-messenger')
     expect(messenger).toBeInTheDocument()
-    expect(messenger).toHaveAttribute('data-app-id', 'E86A36B6-1C6D-4ED7-8C3B-4BC996C07A1C')
-    expect(messenger).toHaveAttribute('data-ai-agent-id', '4ebf8a55-6c08-4e78-aef5-2f67c4a7c1f1')
+    expect(messenger).toHaveAttribute('data-app-id', 'F7879BE3-A59C-4134-A04A-702A1E62A9C0')
+    expect(messenger).toHaveAttribute('data-ai-agent-id', '9ec48481-26d4-41b3-a3d7-68f20c0aeb1c')
   })
 
   it('renders usage instructions', () => {
