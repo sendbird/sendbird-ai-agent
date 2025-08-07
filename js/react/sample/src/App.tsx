@@ -1,41 +1,46 @@
-import { useState } from 'react'
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react'
-import '@sendbird/ai-agent-messenger-react/index.css'
+import { useState } from 'react';
 
-const APP_ID = import.meta.env.VITE_NEW_APP_ID
-const AI_AGENT_ID = import.meta.env.VITE_NEW_AI_AGENT_ID
-const USER_ID = import.meta.env.VITE_NEW_USER_ID
-const AUTH_TOKEN = import.meta.env.VITE_NEW_USER_AUTH_TOKEN
+import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import '@sendbird/ai-agent-messenger-react/index.css';
+
+const APP_ID = import.meta.env.VITE_NEW_APP_ID;
+const AI_AGENT_ID = import.meta.env.VITE_NEW_AI_AGENT_ID;
+const USER_ID = import.meta.env.VITE_NEW_USER_ID;
+const AUTH_TOKEN = import.meta.env.VITE_NEW_USER_AUTH_TOKEN;
 
 function App() {
-  const [opened, setOpened] = useState(false)
-  const [hasSession, setHasSession] = useState(false)
-  const [hasContext, setHasContext] = useState(false)
+  const [opened, setOpened] = useState(false);
+  const [hasSession, setHasSession] = useState(false);
+  const [hasContext, setHasContext] = useState(false);
 
-  const userSessionInfo = hasSession ? {
-    userId: USER_ID,
-    authToken: AUTH_TOKEN,
-    sessionHandler: {
-      onSessionTokenRequired: async (resolve: (token: string) => void) => {
-        // In a real application, fetch a new token from your server
-        resolve(AUTH_TOKEN);
-      },
-      onSessionClosed: () => {
-        console.log('Session closed');
-      },
-      onSessionError: (error: any) => {
-        console.error('Session error:', error);
-      },
-      onSessionRefreshed: () => {
-        console.log('Session refreshed');
-      },
-    },
-  } : undefined;
+  const userSessionInfo = hasSession
+    ? {
+        userId: USER_ID,
+        authToken: AUTH_TOKEN,
+        sessionHandler: {
+          onSessionTokenRequired: async (resolve: (token: string) => void) => {
+            // In a real application, fetch a new token from your server
+            resolve(AUTH_TOKEN);
+          },
+          onSessionClosed: () => {
+            console.log('Session closed');
+          },
+          onSessionError: (error: unknown) => {
+            console.error('Session error:', error);
+          },
+          onSessionRefreshed: () => {
+            console.log('Session refreshed');
+          },
+        },
+      }
+    : undefined;
 
-  const context = hasContext ? {
-    userPreference: 'technical',
-    customerTier: 'premium',
-  } : undefined;
+  const context = hasContext
+    ? {
+        userPreference: 'technical',
+        customerTier: 'premium',
+      }
+    : undefined;
 
   return (
     <>
@@ -75,13 +80,11 @@ function App() {
         </div>
 
         <div className="text-left bg-gray-50 dark:bg-gray-800 p-5 rounded-lg border border-gray-200 dark:border-gray-700">
-          <h3 className="font-semibold text-gray-900 dark:text-white mt-0 mb-3">
-            How to use:
-          </h3>
+          <h3 className="font-semibold text-gray-900 dark:text-white mt-0 mb-3">How to use:</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-            <li>Click "Open Messenger" to open the AI agent chat</li>
-            <li>Enable "Use authenticated session" to test with user authentication</li>
-            <li>Enable "Include context" to provide additional context to the AI agent</li>
+            <li>Click &quot;Open Messenger&quot; to open the AI agent chat</li>
+            <li>Enable &quot;Use authenticated session&quot; to test with user authentication</li>
+            <li>Enable &quot;Include context&quot; to provide additional context to the AI agent</li>
           </ul>
         </div>
       </div>
@@ -97,7 +100,7 @@ function App() {
         context={context}
       />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

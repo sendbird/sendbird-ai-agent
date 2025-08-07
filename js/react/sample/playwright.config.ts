@@ -1,7 +1,7 @@
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: './e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -10,17 +10,10 @@ export default defineConfig({
   use: {
     trace: 'on-first-retry',
   },
-
   projects: [
     {
-      name: 'react-sample',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      testMatch: 'e2e/**/*.spec.ts'
     },
   ],
-
-  webServer: {
-    command: 'pnpm dev',
-    reuseExistingServer: !process.env.CI,
-  }
-})
+});

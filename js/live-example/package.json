@@ -50,6 +50,7 @@
     "trailingComma": "all",
     "bracketSpacing": true,
     "arrowParens": "always",
+    "endOfLine": "auto",
     "plugins": [
       "@trivago/prettier-plugin-sort-imports"
     ],

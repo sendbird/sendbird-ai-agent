@@ -66,7 +66,7 @@ async function initializeMessenger() {
       appId: APP_ID,
       aiAgentId: AI_AGENT_ID,
       language: 'en-US',
-      countryCode: 'US'
+      countryCode: 'US',
     });
 
     console.log('Messenger initialized successfully');
@@ -75,7 +75,6 @@ async function initializeMessenger() {
     messenger.onLoad(() => {
       console.log('Messenger loaded');
     });
-
   } catch (error) {
     console.error('Failed to initialize messenger:', error);
     alert('Failed to initialize messenger. Please check the console for details.');
@@ -91,14 +90,14 @@ async function updateMessengerConfig() {
       appId: APP_ID,
       aiAgentId: AI_AGENT_ID,
       language: 'en-US',
-      countryCode: 'US'
+      countryCode: 'US',
     };
 
     // Add context if enabled
     if (hasContext) {
       config.context = {
         userPreference: 'technical',
-        customerTier: 'premium'
+        customerTier: 'premium',
       };
     }
 
@@ -121,10 +120,9 @@ async function updateMessengerConfig() {
         },
         onSessionRefreshed: () => {
           console.log('Session refreshed');
-        }
+        },
       });
     }
-
   } catch (error) {
     console.error('Failed to update messenger config:', error);
   }
@@ -170,6 +168,3 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Page loaded, initializing messenger...');
   initializeMessenger();
 });
-
-
-

@@ -67,5 +67,3 @@ npm run preview
 - Uses CDN script loading instead of npm packages
 - Direct DOM manipulation approach
 - Can be embedded in any HTML page
-
-
