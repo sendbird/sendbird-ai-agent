@@ -1,0 +1,57 @@
+{
+  "name": "sendbird-ai-agent-js-samples",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "description": "JavaScript samples and tests for Sendbird AI Agent",
+  "scripts": {
+    "install:samples": "pnpm install -r",
+    "dev:react": "pnpm --filter react-sample dev",
+    "dev:cdn": "pnpm --filter cdn-sample dev",
+    "build:samples": "pnpm -r build",
+    "test:samples": "pnpm -r test",
+    "test:e2e": "pnpm -r test:e2e",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --check \"**/*.{ts,tsx,js,jsx,json,html,css,md}\"",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,json,html,css,md}\""
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.1",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.2.2"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "preserve",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "auto",
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "<THIRD_PARTY_MODULES>",
+      "@sendbird[./]?",
+      "@(components|constants|types|utils)[./]?",
+      "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
+    "importOrderCaseInsensitive": false
+  }
+}

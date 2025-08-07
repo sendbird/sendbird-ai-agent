@@ -53,14 +53,7 @@ You can set the language during component initialization:
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 
 function App() {
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      language="ko-KR"
-      countryCode="KR"
-    />
-  );
+  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language="ko-KR" countryCode="KR" />;
 }
 ```
 
@@ -76,7 +69,7 @@ function App() {
   // You can still customize certain stringSet keys even in supported language
   stringSet={{
     MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
-    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
+    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores',
   }}
 />
 ```
@@ -137,12 +130,7 @@ function App() {
     <>
       <button onClick={() => switchLanguage('zh-CN')}>Switch to Chinese</button>
       <button onClick={() => switchLanguage('en-US')}>Switch to English</button>
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-        language={language}
-        stringSet={stringSet}
-      />
+      <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language={language} stringSet={stringSet} />
     </>
   );
 }
@@ -199,12 +187,7 @@ function App() {
       <button onClick={() => loadLanguage('ja')}>日本語</button>
       <button onClick={() => loadLanguage('en-US')}>English</button>
 
-      <FixedMessenger
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-        language={language}
-        stringSet={stringSet}
-      />
+      <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language={language} stringSet={stringSet} />
     </>
   );
 }
@@ -217,14 +200,7 @@ function App() {
 import { zhStringSet } from './languages/zh';
 
 function App() {
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      language="zh-CN"
-      stringSet={zhStringSet}
-    />
-  );
+  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language="zh-CN" stringSet={zhStringSet} />;
 }
 ```
 
