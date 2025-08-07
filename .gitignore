@@ -2,4 +2,8 @@
 **/dist
 **/.vite
 **/deps
+**/.pnpm-store
+**/pnpm-lock.yaml
+**/playwright-report/**
+**/test-results
 .idea

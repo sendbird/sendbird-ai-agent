@@ -30,6 +30,7 @@ You can find it under the **Channels** > **Messenger** menu on the Sendbird Dash
 ![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
 
 **System Requirements:**
+
 - React >=18.0.0
 - React DOM >=18.0.0
 - @sendbird/chat ^4.19.0
@@ -60,14 +61,13 @@ The React SDK provides two main approaches for integration:
 **Option 1: FixedMessenger (Recommended for quick setup)**
 
 FixedMessenger provides a predefined UI toolkit with launcher and messenger at fixed position (bottom-right):
+
 ```tsx
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 function App() {
-  return (
-    <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />
-  );
+  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />;
 }
 ```
 
@@ -123,6 +123,7 @@ Both properties are optional and only need to be configured if required.
 ### FixedMessenger vs AgentProviderContainer
 
 **FixedMessenger:**
+
 - Complete UI toolkit with launcher and messenger
 - Fixed position (bottom-right corner)
 - Includes all necessary providers internally
@@ -130,6 +131,7 @@ Both properties are optional and only need to be configured if required.
 - Use standalone without additional providers
 
 **AgentProviderContainer:**
+
 - Provider component for custom UI implementations
 - Allows building custom messenger interfaces
 - Use when you need specific UI layouts or custom components
@@ -147,31 +149,31 @@ To launch and display the messenger, implement the code below:
 
 ```tsx
 function App() {
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-    />
-  );
+  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />;
 }
 ```
 
 ### FixedMessenger styles
+
 When using the fixed messenger, `FixedMssenger.Style` allows you to customize its appearance and positioning:
-  - `margin`: Defines the margin around the fixed messenger and its launcher.
-  - `launcherSize`: Defines the size of the launcher button in pixels (width and height are equal).
-  - `position`: Determines which corner of the screen the launcher will appear in. Available options are: `start-top`, `start-bottom`, `end-top` and `end-bottom`.
+
+- `margin`: Defines the margin around the fixed messenger and its launcher.
+- `launcherSize`: Defines the size of the launcher button in pixels (width and height are equal).
+- `position`: Determines which corner of the screen the launcher will appear in. Available options are: `start-top`, `start-bottom`, `end-top` and `end-bottom`.
 
 ```tsx
 function App() {
   return (
     <FixedMessenger>
-      <FixedMessenger.Style position={'start-bottom'} launcherSize={32} margin={{ start:0, end:0, bottom:0, top:0 }} />
+      <FixedMessenger.Style
+        position={'start-bottom'}
+        launcherSize={32}
+        margin={{ start: 0, end: 0, bottom: 0, top: 0 }}
+      />
     </FixedMessenger>
   );
 }
 ```
-
 
 ### Manage user sessions
 
@@ -193,14 +195,13 @@ To properly manage user sessions, provide session information when initializing 
           reject(error);
         }
       },
-      onSessionClosed: () => { },
-      onSessionError: (error) => { },
-      onSessionRefreshed: () => { }
-    }
+      onSessionClosed: () => {},
+      onSessionError: (error) => {},
+      onSessionRefreshed: () => {},
+    },
   }}
 />
 ```
-
 
 The messenger view can be programmatically controlled using the `state` prop:
 
@@ -208,13 +209,7 @@ The messenger view can be programmatically controlled using the `state` prop:
 function App() {
   const [opened, setOpened] = useState(true);
 
-  return (
-    <FixedMessenger
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      state={{ opened, setOpened }}
-    />
-  );
+  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" state={{ opened, setOpened }} />;
 }
 ```
 
@@ -234,10 +229,7 @@ import { AgentProviderContainer, Conversation } from '@sendbird/ai-agent-messeng
 function App() {
   return (
     <div style={{ height: '400px', border: '1px solid #ccc' }}>
-      <AgentProviderContainer
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-      >
+      <AgentProviderContainer appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID">
         <Conversation />
       </AgentProviderContainer>
     </div>
@@ -254,16 +246,10 @@ function App() {
   const [messengerKey, setMessengerKey] = useState(0);
 
   const resetMessenger = () => {
-    setMessengerKey(prev => prev + 1); // Force remount
+    setMessengerKey((prev) => prev + 1); // Force remount
   };
 
-  return (
-    <FixedMessenger
-      key={messengerKey}
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-    />
-  );
+  return <FixedMessenger key={messengerKey} appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />;
 }
 ```
 
@@ -287,7 +273,7 @@ This allows for a more personalized and context-aware interaction experience.
   // Context object for the AI Agent
   context={{
     userPreference: 'technical',
-    customerTier: 'premium'
+    customerTier: 'premium',
   }}
 />
 ```
