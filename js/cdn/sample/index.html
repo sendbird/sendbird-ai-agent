@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sendbird AI Agent CDN Sample</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sendbird AI Agent CDN Sample</h1>
+      <p class="description">
+        This is a basic HTML/JavaScript application demonstrating how to integrate the Sendbird AI Agent Messenger using
+        the CDN script.
+      </p>
+
+      <div class="controls">
+        <button id="toggleMessenger">Open Messenger</button>
+        <label>
+          <input type="checkbox" id="sessionToggle" />
+          Use authenticated session
+        </label>
+        <label>
+          <input type="checkbox" id="contextToggle" />
+          Include context
+        </label>
+      </div>
+
+      <div class="info">
+        <h3>How to use:</h3>
+        <ul>
+          <li>Click "Open Messenger" to open the AI agent chat</li>
+          <li>Enable "Use authenticated session" to test with user authentication</li>
+          <li>Enable "Include context" to provide additional context to the AI agent</li>
+        </ul>
+        <p><strong>Note:</strong> The messenger will initialize automatically when the page loads.</p>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
