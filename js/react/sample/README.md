@@ -11,7 +11,7 @@ This is a basic React application demonstrating how to integrate the Sendbird AI
 - Context configuration example
 - Manual messenger controls
 - Unit tests with Vitest
-- Environment variable best practices
+- Environment variable support
 
 ## Getting Started
 
@@ -33,18 +33,12 @@ npm run dev
 - Enable "Use authenticated session" to test with user authentication
 - Enable "Include context" to provide additional context to the AI agent
 
-## Environment Variables (Best Practice)
+## Environment Variables
 
-For production use, create a `.env` file with:
+Create a `.env` file for your own credentials:
 ```
 VITE_APP_ID=your_app_id
 VITE_AI_AGENT_ID=your_ai_agent_id
-```
-
-Then update `src/App.tsx` to use:
-```typescript
-const APP_ID = import.meta.env.VITE_APP_ID
-const AI_AGENT_ID = import.meta.env.VITE_AI_AGENT_ID
 ```
 
 ## Testing
@@ -67,3 +61,5 @@ The built files will be in the `dist` directory.
 ```bash
 npm run preview
 ```
+
+

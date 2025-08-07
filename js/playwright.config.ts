@@ -24,18 +24,7 @@ export default defineConfig({
     },
   ],
 
-  webServer: [
-    {
-      command: 'npm run dev',
-      cwd: './js/react/sample',
-      port: 5173,
-      reuseExistingServer: !process.env.CI,
-    },
-    {
-      command: 'npm run dev',
-      cwd: './js/cdn/sample',
-      port: 5174,
-      reuseExistingServer: !process.env.CI,
-    }
-  ],
+  // Note: Manual server start required
+  // Run either: cd react/sample && npm run dev
+  // Or: cd cdn/sample && npm run dev
 })

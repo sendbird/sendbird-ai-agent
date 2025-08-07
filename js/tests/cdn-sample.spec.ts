@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('CDN Sample - Messenger Mounting', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5174')
+    await page.goto('http://localhost:5173')
   })
 
   test('should load the CDN sample page with correct elements', async ({ page }) => {
@@ -93,7 +93,7 @@ test.describe('CDN Sample - Messenger Mounting', () => {
       jsErrors.push(error.message)
     })
 
-    await page.goto('http://localhost:5174')
+    await page.goto('http://localhost:5173')
     await page.waitForLoadState('networkidle')
     await page.waitForTimeout(3000)
 

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
-import App from './App'
+import App from '../App'
 
 // Mock the Sendbird AI Agent Messenger React component
 vi.mock('@sendbird/ai-agent-messenger-react', () => ({
@@ -38,3 +38,5 @@ describe('App', () => {
     expect(screen.getByText(/Click "Open Messenger" to open the AI agent chat/)).toBeInTheDocument()
   })
 })
+
+
