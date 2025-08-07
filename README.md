@@ -31,13 +31,36 @@ To integrate Sendbird AI Agent into your application, follow these steps:
 
 ## Repository Structure
 
-This repository contains platform-specific implementations of the Sendbird AI Agent:
+This repository contains platform-specific implementations and customer guides for the Sendbird AI Agent:
 
-- **iOS**: Located in the `ios` directory, this includes the Swift Package Manager (SPM) compatible SDK for integrating the AI agent into iOS applications.
+- **JavaScript**: Located in the `js` directory, includes:
+  - Documentation guides for React and CDN integration  
+  - Interactive live examples
+  - Downloadable sample projects for local development
 
-- **Android**: Located in the `android` directory, this includes the necessary components for Android integration.
+- **iOS**: Located in the `ios` directory, includes Swift integration guides and sample applications.
 
-- **Web**: Located in the `js` directory, this includes JavaScript components for web integration.
+- **Android**: Located in the `android` directory, includes Android integration documentation.
+
+### JavaScript Sample Projects
+
+Each JavaScript platform directory contains a ready-to-run sample project:
+
+- **`js/react/sample/`**: Vite + TypeScript + React sample with full AI Agent integration
+- **`js/cdn/sample/`**: Vite + Vanilla JavaScript sample using CDN integration
+
+Both samples demonstrate:
+- Basic AI Agent Messenger integration
+- User authentication and session handling
+- Context configuration
+- Manual messenger controls
+
+To run the samples locally:
+```bash
+cd js/react/sample    # or js/cdn/sample
+npm install
+npm run dev
+```
 
 Each platform-specific directory contains its own README with detailed integration instructions.
 
