@@ -15,13 +15,12 @@ export default defineConfig({
     {
       name: 'cdn-sample',
       use: { ...devices['Desktop Chrome'] },
-      testMatch: '**/*.spec.ts'
+      testMatch: 'e2e/**/*.spec.ts'
     },
   ],
 
   webServer: {
-    command: 'npm run dev',
-    port: 5173,
+    command: 'pnpm dev',
     reuseExistingServer: !process.env.CI,
   }
 })
