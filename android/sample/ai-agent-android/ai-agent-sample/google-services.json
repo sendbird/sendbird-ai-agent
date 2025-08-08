@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096745601007",
+    "project_id": "sb-ai-agent-android",
+    "storage_bucket": "sb-ai-agent-android.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096745601007:android:1d288a6178057e6984581a",
+        "android_client_info": {
+          "package_name": "com.sendbird.sdk.aiagent.sample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsMqYa0pxUcKf73hjTLLGJ20zWVGZZGKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
