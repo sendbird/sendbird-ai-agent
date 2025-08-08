@@ -1,15 +1,19 @@
-# Sendbird AI Agent React Sample
+# Sendbird AI Agent React Interactive Playground
 
-This is a basic React application demonstrating how to integrate the Sendbird AI Agent Messenger using the React npm package.
+This is an interactive React playground demonstrating how to integrate the Sendbird AI Agent Messenger using the React npm package.
 
 ## Features
 
 - React + TypeScript + Vite + Tailwind CSS setup
+- Interactive playground with live code generation
 - Latest version of AI Agent Messenger React package
-- Basic AI Agent Messenger integration
-- User authentication example
-- Context configuration example
-- Manual messenger controls
+- Real-time configuration controls
+- Context configuration with custom JSON input
+- Runtime context updates via patchContext API
+- Multi-language support
+- Authentication examples
+- Code examples with syntax highlighting (Prism.js)
+- Modular component architecture
 - Unit tests with Vitest
 - Environment variable support
 
@@ -31,9 +35,26 @@ npm run dev
 
 ## Usage
 
-- Click "Open Messenger" to open the AI agent chat
-- Enable "Use authenticated session" to test with user authentication
-- Enable "Include context" to provide additional context to the AI agent
+### Interactive Playground Tab
+
+- Configure messenger settings using the controls on the left:
+  - **Authentication**: Toggle user session authentication
+  - **Language**: Select from multiple supported languages
+  - **Context**: Choose from presets or create custom JSON context
+  - **Runtime Updates**: Enable real-time context patching without resetting
+- View dynamically generated React JSX code based on your configuration
+- Click the messenger launcher (bottom-right) to interact with the AI agent
+- Monitor runtime context updates in real-time
+
+### Code Examples Tab
+
+- Browse various integration examples:
+  - Basic React setup
+  - Authenticated sessions
+  - Context configuration
+  - Runtime updates with useRef
+  - Multi-language support
+- Copy code snippets for use in your own projects
 
 ## Environment Variables
 

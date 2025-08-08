@@ -1,105 +1,149 @@
-import { useState } from 'react';
+import 'prismjs/themes/prism-tomorrow.css';
+import { useEffect, useRef, useState } from 'react';
 
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
-const APP_ID = import.meta.env.VITE_NEW_APP_ID;
-const AI_AGENT_ID = import.meta.env.VITE_NEW_AI_AGENT_ID;
-const USER_ID = import.meta.env.VITE_NEW_USER_ID;
-const AUTH_TOKEN = import.meta.env.VITE_NEW_USER_AUTH_TOKEN;
+import { CodeExamples } from './CodeExamples';
+import { PlaygroundConfig } from './PlaygroundConfig';
+import { AI_AGENT_ID, APP_ID, AUTH_TOKEN, CODE_EXAMPLES, USER_ID } from './constants';
 
 function App() {
-  const [opened, setOpened] = useState(false);
-  const [hasSession, setHasSession] = useState(false);
-  const [hasContext, setHasContext] = useState(false);
+  // Core state
+  const [activeTab, setActiveTab] = useState<'playground' | 'code'>('playground');
+  const [config, setConfig] = useState({
+    hasSession: false,
+    language: 'en-US',
+    context: null as any,
+    enableRuntimeUpdate: false,
+  });
+  const [messengerKey, setMessengerKey] = useState(0);
+  const messengerRef = useRef<any>(null);
 
-  const userSessionInfo = hasSession
+  // Code examples state
+  const [activeExample, setActiveExample] = useState<keyof typeof CODE_EXAMPLES>('basic');
+  const [copyFeedback, setCopyFeedback] = useState<{ [key: string]: boolean }>({});
+
+  // Helper functions
+  const resetMessenger = () => setMessengerKey((prev) => prev + 1);
+
+  const handleCopy = async (text: string, key: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyFeedback((prev) => ({ ...prev, [key]: true }));
+      setTimeout(() => setCopyFeedback((prev) => ({ ...prev, [key]: false })), 2000);
+    } catch (error) {
+      console.error('Failed to copy:', error);
+    }
+  };
+
+  const updateConfig = (updates: Partial<typeof config>) => {
+    setConfig((prev) => ({ ...prev, ...updates }));
+
+    // Handle runtime context updates
+    if (updates.context && config.enableRuntimeUpdate && messengerRef.current) {
+      messengerRef.current.patchContext(updates.context).catch(console.error);
+    }
+  };
+
+  // User session info for messenger
+  const userSessionInfo = config.hasSession
     ? {
         userId: USER_ID,
         authToken: AUTH_TOKEN,
         sessionHandler: {
           onSessionTokenRequired: async (resolve: (token: string) => void) => {
-            // In a real application, fetch a new token from your server
             resolve(AUTH_TOKEN);
           },
-          onSessionClosed: () => {
-            console.log('Session closed');
-          },
-          onSessionError: (error: unknown) => {
-            console.error('Session error:', error);
-          },
-          onSessionRefreshed: () => {
-            console.log('Session refreshed');
-          },
+          onSessionClosed: () => console.log('Session closed'),
+          onSessionError: (error: unknown) => console.error('Session error:', error),
+          onSessionRefreshed: () => console.log('Session refreshed'),
         },
       }
     : undefined;
 
-  const context = hasContext
-    ? {
-        userPreference: 'technical',
-        customerTier: 'premium',
+  // Handle syntax highlighting
+  useEffect(() => {
+    const loadPrism = async () => {
+      if (typeof window !== 'undefined') {
+        try {
+          const Prism = (await import('prismjs')).default;
+          await import('prismjs/components/prism-tsx' as any);
+          Prism.highlightAll();
+        } catch (error) {
+          console.warn('Failed to load Prism.js:', error);
+        }
       }
-    : undefined;
+    };
+    loadPrism();
+  }, [activeTab, activeExample, config]);
 
   return (
-    <>
-      <div className="max-w-2xl mx-auto p-5 text-center">
-        <h1 className="text-5xl font-bold leading-tight mb-2 text-gray-900 dark:text-white">
-          Sendbird AI Agent React Sample
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-          This is a basic React application demonstrating how to integrate the Sendbird AI Agent Messenger.
-        </p>
-
-        <div className="flex flex-col items-center gap-4 mb-8">
-          <button
-            onClick={() => setOpened(!opened)}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors"
-          >
-            {opened ? 'Close' : 'Open'} Messenger
-          </button>
-          <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input
-              type="checkbox"
-              checked={hasSession}
-              onChange={(e) => setHasSession(e.target.checked)}
-              className="rounded"
-            />
-            <span>Use authenticated session</span>
-          </label>
-          <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input
-              type="checkbox"
-              checked={hasContext}
-              onChange={(e) => setHasContext(e.target.checked)}
-              className="rounded"
-            />
-            <span>Include context</span>
-          </label>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="px-6 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">React SDK Interactive Playground</h1>
+              <p className="text-sm text-gray-600 mt-1">
+                Learn how to integrate Sendbird AI Agent Messenger with React
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab('playground')}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  activeTab === 'playground' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Interactive Playground
+              </button>
+              <button
+                onClick={() => setActiveTab('code')}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  activeTab === 'code' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Code Examples
+              </button>
+            </div>
+          </div>
         </div>
+      </header>
 
-        <div className="text-left bg-gray-50 dark:bg-gray-800 p-5 rounded-lg border border-gray-200 dark:border-gray-700">
-          <h3 className="font-semibold text-gray-900 dark:text-white mt-0 mb-3">How to use:</h3>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-            <li>Click &quot;Open Messenger&quot; to open the AI agent chat</li>
-            <li>Enable &quot;Use authenticated session&quot; to test with user authentication</li>
-            <li>Enable &quot;Include context&quot; to provide additional context to the AI agent</li>
-          </ul>
-        </div>
-      </div>
+      {/* Main Content */}
+      <main className="px-6 py-6">
+        {activeTab === 'playground' ? (
+          <PlaygroundConfig
+            config={config}
+            onConfigChange={updateConfig}
+            onReset={resetMessenger}
+            messengerRef={messengerRef}
+            copyFeedback={copyFeedback}
+            onCopy={handleCopy}
+          />
+        ) : (
+          <CodeExamples
+            activeExample={activeExample}
+            onExampleChange={setActiveExample}
+            copyFeedback={copyFeedback}
+            onCopy={handleCopy}
+          />
+        )}
+      </main>
 
+      {/* Messenger Component */}
       <FixedMessenger
+        key={`messenger-${messengerKey}`}
         appId={APP_ID}
         aiAgentId={AI_AGENT_ID}
-        state={{
-          opened,
-          setOpened,
-        }}
         userSessionInfo={userSessionInfo}
-        context={context}
+        context={config.context}
+        language={config.language.split('-')[0]}
+        countryCode={config.language.split('-')[1]}
       />
-    </>
+    </div>
   );
 }
 

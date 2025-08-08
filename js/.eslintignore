@@ -28,7 +28,3 @@ yarn.lock
 *.log
 tmp
 temp
-
-# Config files (optional - remove if you want to lint these)
-*.config.js
-*.config.ts

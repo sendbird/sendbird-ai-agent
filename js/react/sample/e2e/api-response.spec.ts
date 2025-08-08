@@ -14,7 +14,7 @@ test.describe('React Sample - API Response Check', () => {
       }
     });
 
-    await page.goto('http://localhost:5174');
+    await page.goto('http://localhost:5175');
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(3000); // Wait for messenger initialization
 
@@ -28,10 +28,8 @@ test.describe('React Sample - API Response Check', () => {
     await contextCheckbox.check();
     await page.waitForTimeout(1000);
 
-    // Try to open messenger to trigger more API calls
-    const openButton = page.locator('button:has-text("Open Messenger")');
-    await openButton.click();
-    await page.waitForTimeout(2000);
+    // Wait for messenger initialization and potential API calls
+    await page.waitForTimeout(3000);
 
     // Check responses
     console.log('Captured responses:', responses);

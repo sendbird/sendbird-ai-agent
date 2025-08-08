@@ -15,14 +15,15 @@ vi.mock('@sendbird/ai-agent-messenger-react', () => ({
 describe('App', () => {
   it('renders the main heading', () => {
     render(<App />);
-    expect(screen.getByText('Sendbird AI Agent React Sample')).toBeInTheDocument();
+    expect(screen.getByText('React SDK Interactive Playground')).toBeInTheDocument();
   });
 
-  it('renders the messenger controls', () => {
+  it('renders the playground controls', () => {
     render(<App />);
-    expect(screen.getByText('Open Messenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Use authenticated session')).toBeInTheDocument();
-    expect(screen.getByLabelText('Include context')).toBeInTheDocument();
+    expect(screen.getByText('Authentication')).toBeInTheDocument();
+    expect(screen.getByText('Language')).toBeInTheDocument();
+    expect(screen.getByText('Context')).toBeInTheDocument();
+    expect(screen.getByText('Runtime Updates')).toBeInTheDocument();
   });
 
   it('renders the FixedMessenger component with correct props', () => {
@@ -33,9 +34,14 @@ describe('App', () => {
     expect(messenger).toHaveAttribute('data-ai-agent-id', '9ec48481-26d4-41b3-a3d7-68f20c0aeb1c');
   });
 
-  it('renders usage instructions', () => {
+  it('renders the playground description', () => {
     render(<App />);
-    expect(screen.getByText('How to use:')).toBeInTheDocument();
-    expect(screen.getByText(/Click "Open Messenger" to open the AI agent chat/)).toBeInTheDocument();
+    expect(screen.getByText('Learn how to integrate Sendbird AI Agent Messenger with React')).toBeInTheDocument();
+  });
+
+  it('renders the tab navigation', () => {
+    render(<App />);
+    expect(screen.getByText('Interactive Playground')).toBeInTheDocument();
+    expect(screen.getByText('Code Examples')).toBeInTheDocument();
   });
 });
