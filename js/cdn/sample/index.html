@@ -4,40 +4,176 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sendbird AI Agent CDN Sample</title>
+    <title>CDN Integration Interactive Playground</title>
     <link rel="stylesheet" href="./src/style.css" />
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
-      <h1>Sendbird AI Agent CDN Sample</h1>
-      <p class="description">
-        This is a basic HTML/JavaScript application demonstrating how to integrate the Sendbird AI Agent Messenger using
-        the CDN script.
-      </p>
+    <div class="app">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="header-left">
+            <h1>CDN Integration Interactive Playground</h1>
+            <p>Learn how to integrate Sendbird AI Agent Messenger using CDN</p>
+          </div>
+          <div class="tab-switcher">
+            <button id="playgroundTab" class="tab-btn tab-active">Interactive Playground</button>
+            <button id="codeTab" class="tab-btn">Code Examples</button>
+          </div>
+        </div>
+      </header>
 
-      <div class="controls">
-        <button id="toggleMessenger">Open Messenger</button>
-        <label>
-          <input type="checkbox" id="sessionToggle" />
-          Use authenticated session
-        </label>
-        <label>
-          <input type="checkbox" id="contextToggle" />
-          Include context
-        </label>
-      </div>
+      <!-- Playground View -->
+      <main id="playgroundView" class="main-content">
+        <div class="playground-grid">
+          <!-- Left Panel - Controls -->
+          <div class="control-panel">
+            <!-- Configuration Card -->
+            <div class="card compact">
+              <h3>Configuration</h3>
 
-      <div class="info">
-        <h3>How to use:</h3>
-        <ul>
-          <li>Click "Open Messenger" to open the AI agent chat</li>
-          <li>Enable "Use authenticated session" to test with user authentication</li>
-          <li>Enable "Include context" to provide additional context to the AI agent</li>
-        </ul>
-        <p><strong>Note:</strong> The messenger will initialize automatically when the page loads.</p>
-      </div>
+              <div class="control-item">
+                <label class="control-label">
+                  <span>Authentication</span>
+                  <input type="checkbox" id="sessionToggle" />
+                </label>
+                <div id="userInfo" class="user-info" style="display: none">
+                  <small>User: <span id="userId"></span></small>
+                </div>
+              </div>
+
+              <div class="control-item">
+                <label class="label-text">Language</label>
+                <select id="languageSelect" class="select-compact">
+                  <option value="en-US">English</option>
+                  <option value="ko-KR">한국어</option>
+                  <option value="ja-JP">日本語</option>
+                  <option value="es-ES">Español</option>
+                  <option value="fr-FR">Français</option>
+                </select>
+              </div>
+
+              <div class="control-item">
+                <label class="label-text">Context</label>
+                <select id="contextPreset" class="select-compact">
+                  <option value="none">No Context</option>
+                  <option value="technical">Technical User</option>
+                  <option value="business">Business User</option>
+                  <option value="support">Support Request</option>
+                </select>
+              </div>
+
+              <div class="control-item">
+                <label class="control-label">
+                  <input type="checkbox" id="customContextToggle" class="checkbox-small" />
+                  <span class="text-small">Use Custom Context</span>
+                </label>
+                <div id="customContextGroup" style="display: none">
+                  <textarea id="customContext" class="textarea-compact" placeholder='{"key": "value"}'></textarea>
+                  <div id="jsonError" class="error-text" style="display: none">Invalid JSON</div>
+                </div>
+              </div>
+
+              <div class="control-item">
+                <label class="control-label control-highlight">
+                  <span>Runtime Updates</span>
+                  <input type="checkbox" id="runtimeUpdateToggle" />
+                </label>
+                <div id="runtimeInfo" class="info-text" style="display: none">Updates context without reset</div>
+              </div>
+
+              <button id="resetMessenger" class="btn btn-secondary btn-full">Reset Messenger</button>
+            </div>
+
+            <!-- Runtime Updates Log -->
+            <div id="runtimeLog" class="card compact" style="display: none">
+              <h3>Runtime Updates Log</h3>
+              <div id="updatesList" class="updates-list"></div>
+            </div>
+          </div>
+
+          <!-- Right Panel - Code View -->
+          <div class="code-panel">
+            <div class="panel-header">
+              <h3>Live Preview</h3>
+            </div>
+
+            <!-- Live Code Display -->
+            <div id="codeDisplay" class="code-block">
+              <div class="code-header">
+                <span class="code-filename">index.html - Live code based on your configuration</span>
+                <button id="copyCode" class="copy-btn">Copy Code</button>
+              </div>
+              <pre id="liveCode" class="code-content"><code class="language-html"></code></pre>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+              <h4>How to Use</h4>
+              <ul>
+                <li>• Toggle settings on the left to see how the messenger initializes</li>
+                <li>• The code above updates in real-time based on your configuration</li>
+                <li>• Click the launcher button (bottom-right) to interact with the AI agent</li>
+                <li>• Enable Runtime Updates to test dynamic context changes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Code Examples View -->
+      <main id="codeView" class="main-content" style="display: none">
+        <div class="examples-grid">
+          <!-- Sidebar - Example List -->
+          <div class="examples-sidebar">
+            <div class="card">
+              <h3>Examples</h3>
+              <div class="examples-list">
+                <button class="example-btn example-active" data-example="basic">Basic Setup</button>
+                <button class="example-btn" data-example="authenticated">With Authentication</button>
+                <button class="example-btn" data-example="context">With Context</button>
+                <button class="example-btn" data-example="runtime">Runtime Updates</button>
+                <button class="example-btn" data-example="localization">Multi-language</button>
+                <button class="example-btn" data-example="events">Event Handlers</button>
+              </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="card tips-card">
+              <h4>Quick Tips</h4>
+              <ul class="tips-list">
+                <li>• Include script tag in HTML head</li>
+                <li>• Wait for DOM ready before init</li>
+                <li>• Get credentials from Dashboard</li>
+                <li>• Check console for debug logs</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Main Content - Code Display -->
+          <div class="examples-main">
+            <div class="code-block large">
+              <div class="code-header">
+                <div class="code-info">
+                  <span id="exampleTitle" class="code-title">Basic Setup</span>
+                  <span class="code-lang">HTML + JavaScript</span>
+                </div>
+                <button id="copyExample" class="copy-btn">Copy Code</button>
+              </div>
+              <pre id="exampleCode" class="code-content"><code class="language-html"></code></pre>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script type="module" src="./src/main.ts"></script>
+
+    <!-- Prism.js core and languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   </body>
 </html>
