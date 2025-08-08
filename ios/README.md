@@ -12,9 +12,11 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
     - [Step 2. Install AI Agent SDK](#step-2-install-ai-agent-sdk)
     - [Step 3. Initialize AI Agent SDK](#step-3-initialize-ai-agent-sdk)
   - [Running your application](#running-your-application)
-    - [Manage user sessions](#manage-user-sessions)
-      - [1. Updating session information](#1-updating-session-information)
-      - [2.Implementing session delegate](#2implementing-session-delegate)
+  - [Manage user sessions](#manage-user-sessions)
+    - [1. Updating session information](#1-updating-session-information)
+      - [Manual session (authenticated users)](#manual-session-authenticated-users)
+      - [Anonymous session (guest users)](#anonymous-session-guest-users)
+    - [2. Implementing session delegate](#2-implementing-session-delegate)
     - [Launch the messenger](#launch-the-messenger)
       - [1. Using the launcher button](#1-using-the-launcher-button)
       - [2. Opening the conversation channel in presentation mode](#2-opening-the-conversation-channel-in-presentation-mode)
@@ -60,22 +62,20 @@ Quickly install and initialize the AI Agent SDK by following the steps below.
 
 ![aiagent-ios-project-options](https://github.com/user-attachments/assets/13f7b8c9-396b-4cc1-ba49-0339db2ddfc9)
 
-
 ### Step 2. Install AI Agent SDK
 
 1. In **Xcode**, select **File > Add Package Dependencies**.
 2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
 
-     ```
-     https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
-     ```
+   ```
+   https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
+   ```
 
 3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
 
 ### Step 3. Initialize AI Agent SDK
 
-  Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
-
+Initialize the SDK by providing the **appId** (generated via Dashboard) and configuration parameters:
 
 ```swift
 // Import the SDK
@@ -109,17 +109,23 @@ Now that you have installed and initialized the AI Agent SDK, follow the steps b
 
 > Note: Make sure to perform the following steps after the SDK has been successfully initialized. Once initialization is complete, set up the user session and launch the messenger.
 
-### Manage user sessions
+## Manage user sessions
 
 User sessions require periodic token reissuance for security purposes, so the following session management is necessary.
 
-#### 1. Updating session information
+### 1. Updating session information
 
-Update the session information to ensure proper session management:
+To ensure proper session management, you need to update the session information:
+
+#### Manual session (authenticated users)
+
+Use this method to authenticate users by providing a user ID and a session token.  
+The session token must be obtained from your server via the Sendbird Platform API. It is used to securely authenticate the user.  
+This method is typically used in apps with their own authentication systems.
 
 ```swift
 AIAgentMessenger.updateSessionInfo(
-    with: AIAgentMessenger.UserSessionInfo(
+    with: .manual(
         userId: userId,
         sessionToken: sessionToken,
         sessionDelegate: self
@@ -127,20 +133,43 @@ AIAgentMessenger.updateSessionInfo(
 )
 ```
 
-#### 2.Implementing session delegate
+#### Anonymous session (guest users)
 
-Handle session-related events by implementing `AIAgentSessionDelegate`:
+Use this method to connect a user without requiring login credentials (anonymous access):
 
 ```swift
-public protocol AIAgentSessionDelegate: AnyObject {
+AIAgentMessenger.updateSessionInfo(with: .anonymous())
+```
+
+> **Note:** Anonymous sessions can only be used if the corresponding setting is enabled in the Sendbird Dashboard under your app’s attributes.
+
+### 2. Implementing session delegate
+
+Implement this protocol to handle session-related events:
+
+```swift
+extension MyViewController: SessionDelegate {
     func sessionTokenDidRequire(
         successCompletion success: @escaping (String?) -> Void,
         failCompletion fail: @escaping () -> Void
-    )
+    ) {
+        // Refresh token from your server
+        AuthService.refreshToken { newToken in
+            if let token = newToken {
+                success(token)
+            } else {
+                fail()
+            }
+        }
+    }
 
-    func sessionWasClosed()
-    func sessionWasRefreshed()
-    func sessionDidHaveError(_ error: Error)
+    func sessionWasClosed() {
+        // Handle session closure
+    }
+
+    func sessionDidHaveError(_ error: SBError) {
+        // Handle session errors
+    }
 }
 ```
 
@@ -254,6 +283,7 @@ You can customize the SDK’s color scheme to match your app's theme as shown be
 ```swift
 AIAgentMessenger.update(colorScheme: .light) // Options: .dark, .light
 ```
+
 Since apps may allow users to switch themes manually or follow device settings, theme updates need to be explicitly called.
 
 ### Deauthenticate and clear session
@@ -287,6 +317,7 @@ AIAgentMessenger.attachLauncher(
     params: params
 )
 ```
+
 ```swift
 // Case:
 let params = ConversationSettingsParams(
