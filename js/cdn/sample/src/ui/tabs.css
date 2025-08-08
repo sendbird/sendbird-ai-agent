@@ -1,0 +1,46 @@
+/* Tab Switcher */
+.tab-switcher {
+  display: flex;
+  background: #f0f0f0;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+.tab-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: #111;
+}
+
+.tab-btn.tab-active {
+  background: white;
+  color: #111;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Tab Views */
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+#playgroundView {
+  display: block;
+}
+
+#codeView {
+  display: none;
+}

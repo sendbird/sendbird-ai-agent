@@ -1,0 +1,44 @@
+/* Messenger specific styles */
+
+/* Runtime Updates Log */
+.updates-log {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.updates-log h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.updates-list {
+  max-height: 12rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.update-item {
+  padding: 0.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+}
+
+.update-time {
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.update-content {
+  color: #374151;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
