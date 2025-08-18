@@ -1,87 +1,46 @@
-import 'prismjs/themes/prism-tomorrow.css';
-import { useEffect, useRef, useState } from 'react';
+// import 'prismjs/themes/prism-tomorrow.css';
+import { useState } from 'react';
 
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 import { CodeExamples } from './CodeExamples';
 import { PlaygroundConfig } from './PlaygroundConfig';
-import { AI_AGENT_ID, APP_ID, AUTH_TOKEN, CODE_EXAMPLES, USER_ID } from './constants';
 
 function App() {
-  // Core state
   const [activeTab, setActiveTab] = useState<'playground' | 'code'>('playground');
-  const [config, setConfig] = useState({
-    hasSession: false,
-    language: 'en-US',
-    context: null as any,
-    enableRuntimeUpdate: false,
-  });
-  const [messengerKey, setMessengerKey] = useState(0);
-  const messengerRef = useRef<any>(null);
 
-  // Code examples state
-  const [activeExample, setActiveExample] = useState<keyof typeof CODE_EXAMPLES>('basic');
-  const [copyFeedback, setCopyFeedback] = useState<{ [key: string]: boolean }>({});
+  // TODO: Highlight for ts|tsx doesn't work for now
+  // useEffect(() => {
+  //   const loadPrism = async () => {
+  //     if (typeof window !== 'undefined') {
+  //       try {
+  //         const Prism = (await import('prismjs')).default;
+  //         // @ts-ignore - Prism.js components don't have TypeScript declarations
+  //         await import('prismjs/components/prism-tsx');
+  //         // @ts-ignore - Prism.js components don't have TypeScript declarations
+  //         await import('prismjs/components/prism-typescript');
+  //         // @ts-ignore - Prism.js components don't have TypeScript declarations
+  //         await import('prismjs/components/prism-javascript');
+  //         // @ts-ignore - Prism.js components don't have TypeScript declarations
+  //         await import('prismjs/components/prism-jsx');
 
-  // Helper functions
-  const resetMessenger = () => setMessengerKey((prev) => prev + 1);
-
-  const handleCopy = async (text: string, key: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopyFeedback((prev) => ({ ...prev, [key]: true }));
-      setTimeout(() => setCopyFeedback((prev) => ({ ...prev, [key]: false })), 2000);
-    } catch (error) {
-      console.error('Failed to copy:', error);
-    }
-  };
-
-  const updateConfig = (updates: Partial<typeof config>) => {
-    setConfig((prev) => ({ ...prev, ...updates }));
-
-    // Handle runtime context updates
-    if (updates.context && config.enableRuntimeUpdate && messengerRef.current) {
-      messengerRef.current.patchContext(updates.context).catch(console.error);
-    }
-  };
-
-  // User session info for messenger
-  const userSessionInfo = config.hasSession
-    ? {
-        userId: USER_ID,
-        authToken: AUTH_TOKEN,
-        sessionHandler: {
-          onSessionTokenRequired: async (resolve: (token: string) => void) => {
-            resolve(AUTH_TOKEN);
-          },
-          onSessionClosed: () => console.log('Session closed'),
-          onSessionError: (error: unknown) => console.error('Session error:', error),
-          onSessionRefreshed: () => console.log('Session refreshed'),
-        },
-      }
-    : undefined;
-
-  // Handle syntax highlighting
-  useEffect(() => {
-    const loadPrism = async () => {
-      if (typeof window !== 'undefined') {
-        try {
-          const Prism = (await import('prismjs')).default;
-          await import('prismjs/components/prism-tsx' as any);
-          Prism.highlightAll();
-        } catch (error) {
-          console.warn('Failed to load Prism.js:', error);
-        }
-      }
-    };
-    loadPrism();
-  }, [activeTab, activeExample, config]);
+  //         // Small delay to ensure DOM elements are ready
+  //         setTimeout(() => {
+  //           if (Prism && Prism.highlightAll) {
+  //             Prism.highlightAll();
+  //           }
+  //         }, 100);
+  //       } catch (error) {
+  //         console.warn('Failed to load Prism.js:', error);
+  //       }
+  //     }
+  //   };
+  //   loadPrism();
+  // }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+    <div className="h-screen flex flex-col bg-gray-50">
+      <header className="bg-white shadow-sm border-b flex-shrink-0">
         <div className="px-6 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -112,37 +71,9 @@ function App() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="px-6 py-6">
-        {activeTab === 'playground' ? (
-          <PlaygroundConfig
-            config={config}
-            onConfigChange={updateConfig}
-            onReset={resetMessenger}
-            messengerRef={messengerRef}
-            copyFeedback={copyFeedback}
-            onCopy={handleCopy}
-          />
-        ) : (
-          <CodeExamples
-            activeExample={activeExample}
-            onExampleChange={setActiveExample}
-            copyFeedback={copyFeedback}
-            onCopy={handleCopy}
-          />
-        )}
+      <main className="flex-1 overflow-hidden">
+        {activeTab === 'playground' ? <PlaygroundConfig /> : <CodeExamples />}
       </main>
-
-      {/* Messenger Component */}
-      <FixedMessenger
-        key={`messenger-${messengerKey}`}
-        appId={APP_ID}
-        aiAgentId={AI_AGENT_ID}
-        userSessionInfo={userSessionInfo}
-        context={config.context}
-        language={config.language.split('-')[0]}
-        countryCode={config.language.split('-')[1]}
-      />
     </div>
   );
 }
