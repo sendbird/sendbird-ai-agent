@@ -82,21 +82,19 @@ Initialize the SDK by providing the **appId** (generated via Dashboard) and conf
 import SendbirdAIAgentMessenger
 
 // Initialize the SDK
-let params = AIAgentMessenger.InitializeParams()
-
 AIAgentMessenger.initialize(
-    appId: appId,
-    params: params
-) { [weak self] result in
-    guard let self = self else { return }
-
+    appId: TestConfig.appId,
+    paramsBuilder: { params in
+        // Set optional parameters if needed
+    }
+) { result in
     switch result {
     case .success:
         // SDK initialized successfully
-        break
+        completion(true, nil)
     case .failure(let error):
         // Handle initialization error
-        break
+        completion(false, error)
     }
 }
 ```
@@ -148,6 +146,8 @@ AIAgentMessenger.updateSessionInfo(with: .anonymous())
 Implement this protocol to handle session-related events:
 
 ```swift
+import SendbirdChatSDK
+
 extension MyViewController: SessionDelegate {
     func sessionTokenDidRequire(
         successCompletion success: @escaping (String?) -> Void,
@@ -257,23 +257,22 @@ The following are available advanced features.
 You can modify the floating launcher button’s behavior and appearance as shown below.
 
 ```swift
-let options = SBALauncherLayoutOptions(
+let options = SBALauncherOptions(
     parentView: nil, // Attaches to the window if nil
-    position: .trailingBottom,
-    margin: .default,
-    spacing: 12,
-    overlayLauncher: false,
-    useSafeArea: true
-)
-
-let params = LauncherSettingsParams(
-    options: options
+    entryPoint: .conversation,
+    layout: .init(
+        position: .trailingBottom,
+        margin: .default,
+        useSafeArea: true
+    ),
+    displayStyle: .overlay(.init(spacing: 12))
 )
 
 AIAgentMessenger.attachLauncher(
-    aiAgentId: {AIAgentId},
-    params: params
-)
+    aiAgentId: TestConfig.aiAgentId
+) { params in
+    params.options = options
+}
 ```
 
 ### Update SDK Theme
@@ -306,30 +305,24 @@ This allows for a more personalized and context-aware interaction experience.
 
 ```swift
 // Case: Attach launcher
-let params = LauncherSettingsParams(
-    language: "en", // (opt)default: Locale.preferredLanguages.first
-    countryCode: "US", // (opt)default: Locale.current.regionCode
-    context: ["key": "value"], // (opt)
-    ...
-)
 AIAgentMessenger.attachLauncher(
-    aiAgentId: {AIAgentId},
-    params: params
-)
+    aiAgentId: TestConfig.aiAgentId
+) { params in
+    params.language = "en" // (opt)default: Locale.preferredLanguages.first
+    params.countryCode = "US" // (opt)default: Locale.current.regionCode
+    params.context = ["key": "value"] // (opt)
+}
 ```
 
 ```swift
 // Case:
-let params = ConversationSettingsParams(
-    language: "en", // (opt)default: Locale.preferredLanguages.first
-    countryCode: "US", // (opt)default: Locale.current.regionCode
-    context: ["key": "value"], // (opt)
-    ...
-)
 AIAgentMessenger.presentConversation(
-    aiAgentId: {AIAgentId},
-    params: params
-)
+    aiAgentId: TestConfig.aiAgentId
+) { params in
+    params.language = "en" // (opt)default: Locale.preferredLanguages.first
+    params.countryCode = "US" // (opt)default: Locale.current.regionCode
+    params.context = ["key": "value"] // (opt)
+}
 ```
 
 > - `language` value should follow the **IETF BCP 47** format.
