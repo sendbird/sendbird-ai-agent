@@ -1,0 +1,5 @@
+packages:
+  - '.'
+  - 'cdn/sample'
+  - 'react/sample'
+  - 'live-example'

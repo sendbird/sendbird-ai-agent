@@ -23,7 +23,7 @@ describe('App', () => {
     expect(screen.getByText('Authentication')).toBeInTheDocument();
     expect(screen.getByText('Language')).toBeInTheDocument();
     expect(screen.getByText('Context')).toBeInTheDocument();
-    expect(screen.getByText('Runtime Updates')).toBeInTheDocument();
+    expect(screen.getByText('Runtime Context Updates')).toBeInTheDocument();
   });
 
   it('renders the FixedMessenger component with correct props', () => {

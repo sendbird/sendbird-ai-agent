@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply m-0 flex items-center justify-center min-w-80 min-h-screen;
+  @apply m-0 min-w-80;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }

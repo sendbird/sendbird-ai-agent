@@ -1,217 +1,252 @@
-// Main application module that handles all functionality
-import { AI_AGENT_ID, APP_ID, AUTH_TOKEN, CODE_EXAMPLES, CONTEXT_PRESETS, LANGUAGES, USER_ID } from './constants';
+import { APP_CONFIG } from './config/appConfig';
+import { CODE_EXAMPLES, CONTEXT_PRESETS, generateCode } from './constants';
+import { AppState, DEFAULT_PLAYGROUND_CONFIG } from './types';
 
-// Application state
-export const state = {
-  activeTab: 'playground' as 'playground' | 'code',
-  activeExample: 'basic' as keyof typeof CODE_EXAMPLES,
-  messenger: null as any,
-  hasSession: false,
-  language: 'en-US',
-  context: null as any,
+export const state: AppState = {
+  activeTab: 'playground',
+  activeExample: 'basic',
+  messenger: null,
+  hasSession: DEFAULT_PLAYGROUND_CONFIG.hasSession,
+  language: DEFAULT_PLAYGROUND_CONFIG.language,
+  context: DEFAULT_PLAYGROUND_CONFIG.context,
+  enableRuntimeUpdate: DEFAULT_PLAYGROUND_CONFIG.enableRuntimeUpdate,
   contextPreset: 0,
   useCustomContext: false,
   customContext: '',
-  enableRuntimeUpdate: false,
-  runtimeUpdates: [] as Array<{ time: string; context: any }>,
+  runtimeUpdates: [],
+  copyFeedback: {},
 };
 
-// Initialize application
 export async function initializeApp() {
-  // Set up tab navigation
   initializeTabs();
-
-  // Set up playground controls
   initializePlayground();
-
-  // Set up code examples
   initializeCodeExamples();
-
-  // Initialize messenger
   await initializeMessenger();
-
-  // Update displays
   updateLiveCode();
   updateExampleCode();
 }
 
-// Tab Management
 function initializeTabs() {
-  const playgroundBtn = document.getElementById('playground-tab');
-  const codeBtn = document.getElementById('code-tab');
-  const playgroundContent = document.getElementById('playground-content');
-  const codeContent = document.getElementById('code-content');
+  const playgroundBtn = document.getElementById('playgroundTab');
+  const codeBtn = document.getElementById('codeTab');
+  const playgroundContent = document.getElementById('playgroundView');
+  const codeContent = document.getElementById('codeView');
 
   playgroundBtn?.addEventListener('click', () => {
     state.activeTab = 'playground';
-    playgroundBtn.classList.add('active');
-    codeBtn?.classList.remove('active');
-    playgroundContent?.classList.remove('hidden');
-    codeContent?.classList.add('hidden');
+    playgroundBtn.classList.add('tab-active');
+    codeBtn?.classList.remove('tab-active');
+    if (playgroundContent) playgroundContent.style.display = 'block';
+    if (codeContent) codeContent.style.display = 'none';
   });
 
   codeBtn?.addEventListener('click', () => {
     state.activeTab = 'code';
-    codeBtn.classList.add('active');
-    playgroundBtn?.classList.remove('active');
-    codeContent?.classList.remove('hidden');
-    playgroundContent?.classList.add('hidden');
+    codeBtn.classList.add('tab-active');
+    playgroundBtn?.classList.remove('tab-active');
+    if (codeContent) codeContent.style.display = 'block';
+    if (playgroundContent) playgroundContent.style.display = 'none';
+
+    // Trigger syntax highlighting after tab switch
+    setTimeout(() => {
+      if (typeof (window as any).Prism !== 'undefined') {
+        (window as any).Prism.highlightAll();
+      }
+    }, 50);
   });
 }
 
-// Playground Controls
 function initializePlayground() {
-  // Authentication toggle
-  const authCheckbox = document.getElementById('auth-checkbox') as HTMLInputElement;
-  authCheckbox?.addEventListener('change', async () => {
-    state.hasSession = authCheckbox.checked;
-    await resetMessenger();
-  });
+  const sessionToggle = document.getElementById('sessionToggle') as HTMLInputElement;
+  const userInfo = document.getElementById('userInfo');
+  const userIdSpan = document.getElementById('userId');
 
-  // Language selector
-  const languageSelect = document.getElementById('language-select') as HTMLSelectElement;
-  if (languageSelect) {
-    LANGUAGES.forEach((lang) => {
-      const option = document.createElement('option');
-      option.value = `${lang.code}-${lang.countryCode}`;
-      option.textContent = lang.label;
-      languageSelect.appendChild(option);
+  if (sessionToggle) {
+    sessionToggle.addEventListener('change', async () => {
+      state.hasSession = sessionToggle.checked;
+      if (userInfo) {
+        userInfo.style.display = state.hasSession ? 'block' : 'none';
+      }
+      if (userIdSpan && state.hasSession) {
+        userIdSpan.textContent = APP_CONFIG.userId || 'default-user';
+      }
+      await resetMessenger();
     });
+  }
 
+  const languageSelect = document.getElementById('languageSelect') as HTMLSelectElement;
+  if (languageSelect) {
     languageSelect.addEventListener('change', async () => {
       state.language = languageSelect.value;
       await resetMessenger();
     });
   }
 
-  // Context selector
-  const contextSelect = document.getElementById('context-select') as HTMLSelectElement;
-  const customContextWrapper = document.getElementById('custom-context-wrapper');
-  const customContextInput = document.getElementById('custom-context') as HTMLTextAreaElement;
+  const contextPreset = document.getElementById('contextPreset') as HTMLSelectElement;
+  const customContextToggle = document.getElementById('customContextToggle') as HTMLInputElement;
+  const customContextGroup = document.getElementById('customContextGroup');
 
-  if (contextSelect) {
-    CONTEXT_PRESETS.forEach((preset, index) => {
-      const option = document.createElement('option');
-      option.value = String(index);
-      option.textContent = preset.label;
-      contextSelect.appendChild(option);
-    });
-
-    const customOption = document.createElement('option');
-    customOption.value = '-1';
-    customOption.textContent = 'Custom Context';
-    contextSelect.appendChild(customOption);
-
-    contextSelect.addEventListener('change', async () => {
-      const value = Number(contextSelect.value);
+  if (contextPreset) {
+    contextPreset.addEventListener('change', async () => {
+      const value = parseInt(contextPreset.value);
       if (value === -1) {
+        // Custom context selected
         state.useCustomContext = true;
         state.context = null;
-        customContextWrapper?.classList.remove('hidden');
+        if (customContextGroup) customContextGroup.style.display = 'block';
+        if (customContextToggle) {
+          customContextToggle.checked = true;
+        }
       } else {
+        // Preset selected - ensure custom context is disabled
         state.useCustomContext = false;
         state.contextPreset = value;
         state.context = CONTEXT_PRESETS[value].value;
-        customContextWrapper?.classList.add('hidden');
 
+        // Always hide custom context group and uncheck toggle when preset is selected
+        if (customContextGroup) customContextGroup.style.display = 'none';
+        if (customContextToggle) {
+          customContextToggle.checked = false;
+        }
+
+        // Handle runtime update if enabled
         if (state.enableRuntimeUpdate && state.messenger && state.context) {
           await updateContextRuntime(state.context);
         }
       }
       updateLiveCode();
     });
+
+    // Add custom context option
+    const customOption = document.createElement('option');
+    customOption.value = '-1';
+    customOption.textContent = 'Custom Context';
+    contextPreset.appendChild(customOption);
   }
 
-  // Custom context input
-  customContextInput?.addEventListener('input', async () => {
-    state.customContext = customContextInput.value;
-    try {
-      state.context = JSON.parse(customContextInput.value);
-      if (state.enableRuntimeUpdate && state.messenger) {
-        await updateContextRuntime(state.context);
+  if (customContextToggle) {
+    customContextToggle.addEventListener('change', () => {
+      const isCustom = customContextToggle.checked;
+      if (customContextGroup) {
+        customContextGroup.style.display = isCustom ? 'block' : 'none';
+      }
+
+      if (isCustom) {
+        if (contextPreset) contextPreset.value = '-1';
+        state.useCustomContext = true;
+        state.context = null;
+      } else {
+        if (contextPreset) contextPreset.value = '0';
+        state.useCustomContext = false;
+        state.contextPreset = 0;
+        state.context = CONTEXT_PRESETS[0].value;
       }
       updateLiveCode();
-    } catch (e) {
-      // Invalid JSON
-    }
-  });
+    });
+  }
 
-  // Runtime updates toggle
-  const runtimeCheckbox = document.getElementById('runtime-checkbox') as HTMLInputElement;
-  runtimeCheckbox?.addEventListener('change', () => {
-    state.enableRuntimeUpdate = runtimeCheckbox.checked;
-    updateRuntimeLog();
-  });
+  const customContext = document.getElementById('customContext') as HTMLTextAreaElement;
+  const jsonError = document.getElementById('jsonError');
 
-  // Reset button
-  const resetBtn = document.getElementById('reset-btn');
-  resetBtn?.addEventListener('click', resetMessenger);
+  if (customContext) {
+    customContext.addEventListener('input', async () => {
+      state.customContext = customContext.value;
+      if (jsonError) jsonError.style.display = 'none';
 
-  // Copy button for live code
-  const copyLiveBtn = document.getElementById('copy-live-btn');
-  copyLiveBtn?.addEventListener('click', () => {
-    const code = generateLiveCode();
-    navigator.clipboard.writeText(code).then(() => {
-      if (copyLiveBtn) {
-        copyLiveBtn.textContent = 'Copied!';
-        setTimeout(() => {
-          copyLiveBtn.textContent = 'Copy Code';
-        }, 2000);
+      try {
+        if (customContext.value.trim()) {
+          state.context = JSON.parse(customContext.value);
+
+          // Handle runtime update if enabled
+          if (state.enableRuntimeUpdate && state.messenger && state.context) {
+            await updateContextRuntime(state.context);
+          }
+        } else {
+          state.context = null;
+        }
+        updateLiveCode();
+      } catch (e) {
+        if (jsonError) jsonError.style.display = 'block';
       }
     });
+  }
+
+  const runtimeUpdateToggle = document.getElementById('runtimeUpdateToggle') as HTMLInputElement;
+  const runtimeInfo = document.getElementById('runtimeInfo');
+
+  if (runtimeUpdateToggle) {
+    runtimeUpdateToggle.addEventListener('change', () => {
+      state.enableRuntimeUpdate = runtimeUpdateToggle.checked;
+      if (runtimeInfo) {
+        runtimeInfo.style.display = state.enableRuntimeUpdate ? 'block' : 'none';
+      }
+      updateRuntimeLog();
+    });
+  }
+
+  const resetBtn = document.getElementById('resetMessenger');
+  resetBtn?.addEventListener('click', resetToDefaults);
+
+  const copyBtn = document.getElementById('copyCode');
+  copyBtn?.addEventListener('click', async () => {
+    const code = generateCode({
+      hasSession: state.hasSession,
+      language: state.language,
+      context: state.context,
+    });
+
+    try {
+      await navigator.clipboard.writeText(code);
+      showCopyFeedback(copyBtn, 'live-code');
+    } catch (error) {
+      console.error('Failed to copy:', error);
+    }
   });
 }
 
-// Code Examples
 function initializeCodeExamples() {
-  const exampleList = document.getElementById('example-list');
-  const copyExampleBtn = document.getElementById('copy-example-btn');
+  const examplesContainer = document.querySelector('.examples-list');
+  if (examplesContainer) {
+    examplesContainer.innerHTML = '';
 
-  // Create example buttons
-  Object.keys(CODE_EXAMPLES).forEach((key) => {
-    const btn = document.createElement('button');
-    btn.className = 'example-btn';
-    btn.textContent = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1');
-    btn.dataset.example = key;
+    Object.keys(CODE_EXAMPLES).forEach((key, index) => {
+      const btn = document.createElement('button');
+      btn.className = `example-btn ${index === 0 ? 'example-active' : ''}`;
+      btn.textContent = CODE_EXAMPLES[key as keyof typeof CODE_EXAMPLES].title;
+      btn.dataset.example = key;
 
-    if (key === state.activeExample) {
-      btn.classList.add('active');
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.example-btn').forEach((b) => b.classList.remove('example-active'));
+        btn.classList.add('example-active');
+        state.activeExample = key;
+        updateExampleCode();
+      });
+
+      examplesContainer.appendChild(btn);
+    });
+  }
+
+  const copyExampleBtn = document.getElementById('copyExample');
+  copyExampleBtn?.addEventListener('click', async () => {
+    const code = CODE_EXAMPLES[state.activeExample as keyof typeof CODE_EXAMPLES].code;
+
+    try {
+      await navigator.clipboard.writeText(code);
+      showCopyFeedback(copyExampleBtn, 'example-code');
+    } catch (error) {
+      console.error('Failed to copy:', error);
     }
-
-    btn.addEventListener('click', () => {
-      // Update active state
-      document.querySelectorAll('.example-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      state.activeExample = key as keyof typeof CODE_EXAMPLES;
-      updateExampleCode();
-    });
-
-    exampleList?.appendChild(btn);
-  });
-
-  // Copy button for examples
-  copyExampleBtn?.addEventListener('click', () => {
-    const code = CODE_EXAMPLES[state.activeExample];
-    navigator.clipboard.writeText(code).then(() => {
-      if (copyExampleBtn) {
-        copyExampleBtn.textContent = 'Copied!';
-        setTimeout(() => {
-          copyExampleBtn.textContent = 'Copy Code';
-        }, 2000);
-      }
-    });
   });
 }
 
-// Messenger Management
 async function initializeMessenger() {
   try {
     const { loadMessenger } = await import('https://aiagent.sendbird.com/orgs/default/index.js');
     state.messenger = await loadMessenger();
 
     const config: any = {
-      appId: APP_ID,
-      aiAgentId: AI_AGENT_ID,
+      appId: APP_CONFIG.appId,
+      aiAgentId: APP_CONFIG.aiAgentId,
       language: state.language.split('-')[0],
       countryCode: state.language.split('-')[1],
     };
@@ -224,11 +259,11 @@ async function initializeMessenger() {
 
     if (state.hasSession) {
       await state.messenger.updateUserSession({
-        userId: USER_ID,
-        authToken: AUTH_TOKEN,
+        userId: APP_CONFIG.userId || 'default-user',
+        authToken: APP_CONFIG.authToken || 'default-token',
         sessionHandler: {
           onSessionTokenRequired: async (resolve: (token: string) => void) => {
-            resolve(AUTH_TOKEN);
+            resolve(APP_CONFIG.authToken || 'default-token');
           },
           onSessionClosed: () => console.log('Session closed'),
           onSessionError: (error: unknown) => console.error('Session error:', error),
@@ -253,7 +288,42 @@ async function resetMessenger() {
   updateLiveCode();
 }
 
-async function updateContextRuntime(context: any) {
+async function resetToDefaults() {
+  state.hasSession = DEFAULT_PLAYGROUND_CONFIG.hasSession;
+  state.language = DEFAULT_PLAYGROUND_CONFIG.language;
+  state.context = DEFAULT_PLAYGROUND_CONFIG.context;
+  state.enableRuntimeUpdate = DEFAULT_PLAYGROUND_CONFIG.enableRuntimeUpdate;
+  state.contextPreset = 0;
+  state.useCustomContext = false;
+  state.customContext = '';
+  state.runtimeUpdates = [];
+
+  const sessionToggle = document.getElementById('sessionToggle') as HTMLInputElement;
+  const languageSelect = document.getElementById('languageSelect') as HTMLSelectElement;
+  const contextPreset = document.getElementById('contextPreset') as HTMLSelectElement;
+  const customContextToggle = document.getElementById('customContextToggle') as HTMLInputElement;
+  const customContext = document.getElementById('customContext') as HTMLTextAreaElement;
+  const customContextGroup = document.getElementById('customContextGroup');
+  const runtimeUpdateToggle = document.getElementById('runtimeUpdateToggle') as HTMLInputElement;
+  const userInfo = document.getElementById('userInfo');
+  const runtimeInfo = document.getElementById('runtimeInfo');
+  const jsonError = document.getElementById('jsonError');
+
+  if (sessionToggle) sessionToggle.checked = state.hasSession;
+  if (languageSelect) languageSelect.value = state.language;
+  if (contextPreset) contextPreset.value = '0';
+  if (customContextToggle) customContextToggle.checked = false;
+  if (customContext) customContext.value = '';
+  if (customContextGroup) customContextGroup.style.display = 'none';
+  if (runtimeUpdateToggle) runtimeUpdateToggle.checked = state.enableRuntimeUpdate;
+  if (userInfo) userInfo.style.display = state.hasSession ? 'block' : 'none';
+  if (runtimeInfo) runtimeInfo.style.display = state.enableRuntimeUpdate ? 'block' : 'none';
+  if (jsonError) jsonError.style.display = 'none';
+
+  await resetMessenger();
+}
+
+async function updateContextRuntime(context: Record<string, string>) {
   if (state.messenger) {
     try {
       await state.messenger.patchContext(context);
@@ -268,62 +338,16 @@ async function updateContextRuntime(context: any) {
   }
 }
 
-// Display Updates
-function generateLiveCode(): string {
-  const lines = [
-    `// Load messenger script
-<script src="https://aiagent.sendbird.com/orgs/default/index.js"></script>
-<script>
-  const { loadMessenger } = window;
-  
-  async function initMessenger() {
-    const messenger = await loadMessenger();
-    
-    await messenger.initialize({
-      appId: "${APP_ID}",
-      aiAgentId: "${AI_AGENT_ID}"${
-        state.context
-          ? `,
-      context: ${JSON.stringify(state.context, null, 6).split('\n').join('\n      ')}`
-          : ''
-      }${
-        state.language !== 'en-US'
-          ? `,
-      language: "${state.language.split('-')[0]}",
-      countryCode: "${state.language.split('-')[1]}"`
-          : ''
-      }
-    });`,
-  ];
-
-  if (state.hasSession) {
-    lines.push(`
-    // Authenticate user
-    await messenger.updateUserSession({
-      userId: "${USER_ID}",
-      authToken: "${AUTH_TOKEN}",
-      sessionHandler: {
-        onSessionTokenRequired: async (resolve) => {
-          resolve("${AUTH_TOKEN}");
-        }
-      }
-    });`);
-  }
-
-  lines.push(`
-    console.log('Messenger ready');
-  }
-  
-  initMessenger();
-</script>`);
-
-  return lines.join('\n');
-}
-
 function updateLiveCode() {
-  const codeElement = document.getElementById('live-code');
+  const codeElement = document.querySelector('#liveCode code');
   if (codeElement) {
-    codeElement.textContent = generateLiveCode();
+    const code = generateCode({
+      hasSession: state.hasSession,
+      language: state.language,
+      context: state.context,
+    });
+
+    codeElement.textContent = code;
 
     // Apply syntax highlighting if Prism is available
     if (typeof (window as any).Prism !== 'undefined') {
@@ -333,16 +357,17 @@ function updateLiveCode() {
 }
 
 function updateExampleCode() {
-  const titleElement = document.getElementById('example-title');
-  const codeElement = document.getElementById('example-code');
+  const titleElement = document.getElementById('exampleTitle');
+  const codeElement = document.querySelector('#exampleCode code');
+
+  const example = CODE_EXAMPLES[state.activeExample as keyof typeof CODE_EXAMPLES];
 
   if (titleElement) {
-    titleElement.textContent =
-      state.activeExample.charAt(0).toUpperCase() + state.activeExample.slice(1).replace(/([A-Z])/g, ' $1');
+    titleElement.textContent = example.title;
   }
 
   if (codeElement) {
-    codeElement.textContent = CODE_EXAMPLES[state.activeExample];
+    codeElement.textContent = example.code;
 
     // Apply syntax highlighting if Prism is available
     if (typeof (window as any).Prism !== 'undefined') {
@@ -352,14 +377,14 @@ function updateExampleCode() {
 }
 
 function updateRuntimeLog() {
-  const logWrapper = document.getElementById('runtime-log-wrapper');
-  const logContent = document.getElementById('runtime-log');
+  const runtimeLog = document.getElementById('runtimeLog');
+  const updatesList = document.getElementById('updatesList');
 
   if (state.enableRuntimeUpdate && state.runtimeUpdates.length > 0) {
-    logWrapper?.classList.remove('hidden');
+    if (runtimeLog) runtimeLog.style.display = 'block';
 
-    if (logContent) {
-      logContent.innerHTML = state.runtimeUpdates
+    if (updatesList) {
+      updatesList.innerHTML = state.runtimeUpdates
         .map(
           (update) => `
         <div class="runtime-update">
@@ -371,6 +396,17 @@ function updateRuntimeLog() {
         .join('');
     }
   } else {
-    logWrapper?.classList.add('hidden');
+    if (runtimeLog) runtimeLog.style.display = 'none';
   }
+}
+
+function showCopyFeedback(button: HTMLElement, key: string) {
+  const originalText = button.textContent;
+  state.copyFeedback[key] = true;
+  button.textContent = 'Copied!';
+
+  setTimeout(() => {
+    state.copyFeedback[key] = false;
+    button.textContent = originalText;
+  }, 2000);
 }
