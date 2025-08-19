@@ -15,19 +15,17 @@ extension AIAgentStarterKit {
     /// - Throws: An error if initialization fails.
     static func initialize() async throws {
         return try await withCheckedThrowingContinuation { continuation in
-            let params = AIAgentMessenger.InitializeParams(
-                logLevel: .all,
-                startHandler: {
-                    // TODO: ui update
-                },
-                migrationHandler: {
-                    // TODO: ui update
-                }
-            )
-            
             AIAgentMessenger.initialize(
                 appId: Self.sessionData.appId,
-                params: params
+                paramsBuilder: { params in
+                    params.logLevel = .all
+                    params.startHandler = {
+                        // TODO: ui update
+                    }
+                    params.migrationHandler = {
+                        // TODO: ui update
+                    }
+                }
             ) { result in
                 switch result {
                 case .success:
@@ -42,7 +40,7 @@ extension AIAgentStarterKit {
     /// Updates the session information for the AIAgentMessenger.
     ///
     /// - Throws: An error if required session data is missing or invalid.
-    static func updateSessionInfo() async throws {
+    static func updateManualSessionInfo() async throws {
         guard
             let userId = Self.sessionData.userId,
             let sessionToken = Self.sessionData.sessionToken,
@@ -50,13 +48,19 @@ extension AIAgentStarterKit {
         else {
             throw ChatError.invalidParameter.asSBError
         }
-        // AIAgent
+        
         AIAgentMessenger.updateSessionInfo(
-            with: AIAgentMessenger.UserSessionInfo(
+            with: .manual(
                 userId: userId,
                 sessionToken: sessionToken,
                 sessionDelegate: sessionHandler
             )
+        )
+    }
+    
+    static func updateAnonymousSessionInfo() async throws {
+        AIAgentMessenger.updateSessionInfo(
+            with: .anonymous()
         )
     }
     

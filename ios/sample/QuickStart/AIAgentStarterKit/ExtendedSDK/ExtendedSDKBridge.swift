@@ -30,11 +30,14 @@ extension ExtendedSDKBridge {
     /// - Note: Only used for internal testing purposes, not needed for production.
     static func updateHost(_ target: String) async throws {
         return try await withCheckedThrowingContinuation { continutation in
+            let userId = SampleTestInfo.sessionInfoType == .manual ? SampleTestInfo.userId : UUID().uuidString
+            
             SendbirdChat.connect(
-                userId: SampleTestInfo.userId,
+                userId: userId,
                 authToken: SampleTestInfo.sessionToken,
                 apiHost: "https://api-\(target).sendbirdtest.com",
                 wsHost: "wss://ws-\(target).sendbirdtest.com") { user, error in
+                    debugPrint("[xxx] target change error : *** \(error)")
                     SendbirdChat.disconnect {
                         continutation.resume()
                     }
