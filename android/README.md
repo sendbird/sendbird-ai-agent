@@ -224,6 +224,8 @@ Follow the code below to refresh and provide a new session token in the session 
     }
     ```
 
+    > When onSuccess is called in `onSessionTokenRequired`, `updateSessionInfo` is invoked internally and the SDK updates the token.
+
 ### Launch the messenger
 
 #### Before You Start
