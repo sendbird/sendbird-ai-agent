@@ -155,8 +155,6 @@ extension MyViewController: SessionDelegate {
         // Refresh token from your server
         AuthService.refreshToken { newToken in
             if let token = newToken {
-                // When success completion is called, updateSessionInfo is called internally, 
-                // which causes the SDK to update the token.
                 success(token)
             } else {
                 fail()
@@ -173,6 +171,8 @@ extension MyViewController: SessionDelegate {
     }
 }
 ```
+
+> When `successCompletion` is called with a token value in `sessionTokenDidRequire`, the SDK automatically updates the token, so no additional handling such as `updateSessionInfo` is required.
 
 ### Launch the messenger
 
