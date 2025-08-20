@@ -22,7 +22,26 @@ extension ExtendedSDKBridge {
         /// Throws an error if initialization fails.
         func initialize() async throws {
             return try await withCheckedThrowingContinuation { continuation in
-                let params = InitParams(applicationId: AIAgentStarterKit.sessionData.appId)
+                #if canImport(SendBirdDesk)
+                let initializeDeskBlock: (() -> Void) = {
+                    if SBDSKMain.initializeDesk() == false {
+                        continuation.resume(
+                            throwing: ChatError.invalidParameter.asSBError
+                        )
+                        return
+                    }
+                }
+                
+                if SendbirdChat.isInitialized {
+                    initializeDeskBlock()
+                    continuation.resume()
+                    return
+                }
+
+                let params = InitParams(
+                    applicationId: AIAgentStarterKit.sessionData.appId,
+                    isLocalCachingEnabled: true
+                )
                 AIAgentStarterKit.shared.initParamsBuilder?(params)
                 
                 // NOTE: SendbirdDesk must be initialized and used with SendbirdChat.
@@ -34,17 +53,13 @@ extension ExtendedSDKBridge {
                             continuation.resume(throwing: error)
                             return
                         }
-                        #if canImport(SendBirdDesk)
-                        if SBDSKMain.initializeDesk() == false {
-                            continuation.resume(
-                                throwing: ChatError.invalidParameter.asSBError
-                            )
-                            return
-                        }
-                        #endif
+                        initializeDeskBlock()
                         continuation.resume()
                     }
                 )
+                #else
+                continuation.resume()
+                #endif
             }
         }
         

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,8 +24,6 @@
 		7C71E7DA9216F9F86D741BB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA91801860324BF877C2336 /* AppDelegate.swift */; };
 		812695A5C4C90FF7E4A3AB9B /* AIAgentStarterKit+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7036E74B93599B2C6902A6 /* AIAgentStarterKit+Utils.swift */; };
 		86EC93CA51BEB68AF7312F70 /* ExtendedSDKBridge+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C5A09D614DDB39BE743B /* ExtendedSDKBridge+UIKit.swift */; };
-		9D89ABC8DB85D4C3F426E347 /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BD5090BE228A912E78D3193F /* Splash */; };
-		A41581E47D6F1E1336A9CF7E /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00E5DFE587D87520B0909B68 /* MarkdownUI */; };
 		A5B4456ED545348FC3E7A084 /* ExtendedSDKBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8BFB011EB64C4DE076D77E /* ExtendedSDKBridge.swift */; };
 		C1761DEEDB4CB13BBDA9D9F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD615656F26260F609F3E19B /* ViewController.swift */; };
 		DF4E553ADFAE538E35089963 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D418B3D75969A462EC6516A /* ViewController.xib */; };
@@ -35,14 +33,14 @@
 /* Begin PBXFileReference section */
 		07F01935FF9C6D0A891C857A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		088C54604D112AE304A65EEE /* SampleTestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTestInfo.swift; sourceTree = "<group>"; };
-		26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1271FEC45D71CDF362CB26 /* AIAgentStarterKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAgentStarterKit.swift; sourceTree = "<group>"; };
 		2A7036E74B93599B2C6902A6 /* AIAgentStarterKit+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+Utils.swift"; sourceTree = "<group>"; };
 		2AA92E0DCCB9C37FC6A894E9 /* SampleAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SampleAssets.xcassets; sourceTree = "<group>"; };
 		306450A7F711E55CAAF1B6A6 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		4615C5A09D614DDB39BE743B /* ExtendedSDKBridge+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedSDKBridge+UIKit.swift"; sourceTree = "<group>"; };
 		46F9619256C952A79374176D /* ExtendedSDKBridge+DeskSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedSDKBridge+DeskSDK.swift"; sourceTree = "<group>"; };
-		504F1132070E1B91DFDF8DBA /* QuickStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		504F1132070E1B91DFDF8DBA /* AIAgent.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AIAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54738A17EFAA5A55C27FCBA3 /* QuickStart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickStart.entitlements; sourceTree = "<group>"; };
 		5ED7ABA0DE26D4AE60EBB708 /* ExtendedSDKBridge+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedSDKBridge+Common.swift"; sourceTree = "<group>"; };
 		6AA91801860324BF877C2336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,8 +64,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				05EF3B883F179441278AD591 /* SendbirdAIAgentMessenger in Frameworks */,
-				A41581E47D6F1E1336A9CF7E /* MarkdownUI in Frameworks */,
-				9D89ABC8DB85D4C3F426E347 /* Splash in Frameworks */,
 				E9134545B3A6C96D0326C579 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,7 +74,7 @@
 		1B0653278AD1D8CFF0B5B8F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				504F1132070E1B91DFDF8DBA /* QuickStart.app */,
+				504F1132070E1B91DFDF8DBA /* AIAgent.app */,
 				26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */,
 			);
 			name = Products;
@@ -178,6 +174,13 @@
 			path = ExtendedSDK;
 			sourceTree = "<group>";
 		};
+		"TEMP_E7192467-2C5D-4027-A17F-704A6E71EF68" /* Customization */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Customization;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -196,11 +199,9 @@
 			name = QuickStart;
 			packageProductDependencies = (
 				691283789AB5ADF115CAE086 /* SendbirdAIAgentMessenger */,
-				00E5DFE587D87520B0909B68 /* MarkdownUI */,
-				BD5090BE228A912E78D3193F /* Splash */,
 			);
 			productName = QuickStart;
-			productReference = 504F1132070E1B91DFDF8DBA /* QuickStart.app */;
+			productReference = 504F1132070E1B91DFDF8DBA /* AIAgent.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B681577BB72BB55817BE43E6 /* NotificationService */ = {
@@ -214,6 +215,8 @@
 			dependencies = (
 			);
 			name = NotificationService;
+			packageProductDependencies = (
+			);
 			productName = NotificationService;
 			productReference = 26F15FDAB2EA2301931B3EB6 /* NotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -247,11 +250,11 @@
 				en,
 			);
 			mainGroup = 8D9F4DD795C1C923CB15CF48;
+			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				5CCBF23D620C7F61876E356B /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */,
-				675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */,
 			);
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -342,14 +345,14 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = QuickStart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.10.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
@@ -384,13 +387,13 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = QuickStart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.10.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -539,14 +542,14 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.10.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
@@ -582,13 +585,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.10.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -638,47 +641,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5CCBF23D620C7F61876E356B /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.1;
-			};
-		};
-		675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JohnSundell/Splash";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.16.0;
-			};
-		};
 		802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sendbird/sendbird-ai-agent-messenger-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.3;
+				minimumVersion = 0.10.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		00E5DFE587D87520B0909B68 /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CCBF23D620C7F61876E356B /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
-		};
 		691283789AB5ADF115CAE086 /* SendbirdAIAgentMessenger */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */;
 			productName = SendbirdAIAgentMessenger;
-		};
-		BD5090BE228A912E78D3193F /* Splash */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */;
-			productName = Splash;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

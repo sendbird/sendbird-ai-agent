@@ -31,6 +31,15 @@ class ViewController: UIViewController {
         
         self.updateConnectedStatus()
         
+        AIAgentMessenger.authenticate(
+            aiAgentId: SampleTestInfo.aiAgentId
+        ) { params in
+            params.language = "en"
+        } completionHandler: { result in
+            print(result)
+        }
+
+        
         #if INTERNAL_TEST
         InternalTestManager.createAppInfoSettingButton(self)
         #endif
@@ -73,12 +82,18 @@ class ViewController: UIViewController {
     }
     
     func login() {
-        // Session info update first
-        AIAgentStarterKit.updateSessionInfo(
-            userId: SampleTestInfo.userId,
-            sessionToken: SampleTestInfo.sessionToken,
-            sessionHandler: AIAgentStarterKit.shared
-        )
+        #warning("Session info update first")
+        switch SampleTestInfo.sessionInfoType {
+        case .manual:
+            AIAgentStarterKit.updateSessionInfo(
+                userId: SampleTestInfo.userId,
+                sessionToken: SampleTestInfo.sessionToken,
+                sessionHandler: AIAgentStarterKit.shared
+            )
+            
+        case .anonymous:
+            AIAgentStarterKit.updateAnonymousSessionInfo()
+        }
         
         AIAgentStarterKit.connect { [weak self] error in
             if let error {

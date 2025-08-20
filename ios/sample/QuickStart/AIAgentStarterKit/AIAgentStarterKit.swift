@@ -19,7 +19,7 @@ extension AIAgentStarterKit {
         /// The session token used for authentication and session management.
         var sessionToken: String?
         /// The delegate handling session-related events.
-        var sessionHandler: AIAgentSessionDelegate?
+        var sessionHandler: SessionDelegate?
     }
     
     /// Represents the different lifecycle stages of the AI Agent.
@@ -71,10 +71,14 @@ extension AIAgentStarterKit {
         
         Task {
             do {
+                // initialize priority: UIKit, Desk, AIAgent
+                
                 // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
                 try await ExtendedSDKBridge.initializeIfNeeded()
                 
                 try await self.initialize()
+
+                AIAgentStarterKit.shared.status = .initialized
                 
                 #if INTERNAL_TEST
                 if let target = SampleTestInfo.productionServer {
@@ -82,7 +86,6 @@ extension AIAgentStarterKit {
                 }
                 #endif
                 
-                AIAgentStarterKit.shared.status = .initialized
                 DispatchQueue.main.async {
                     completion?(nil)
                 }
@@ -106,7 +109,7 @@ extension AIAgentStarterKit {
     static func updateSessionInfo(
         userId: String,
         sessionToken: String?,
-        sessionHandler: AIAgentSessionDelegate?
+        sessionHandler: SessionDelegate?
     ) {
         // Set the session data.
         AIAgentStarterKit.sessionData.userId = userId
@@ -118,7 +121,20 @@ extension AIAgentStarterKit {
                 // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
                 try await ExtendedSDKBridge.updateSessionInfoIfNeeded()
                 
-                try await self.updateSessionInfo()
+                try await self.updateManualSessionInfo()
+                
+                AIAgentStarterKit.shared.status = .readyToUse
+            } catch {
+                debugPrint("[session-info] error: \(error)")
+            }
+        }
+    }
+    
+    static func updateAnonymousSessionInfo(
+    ) {
+        Task {
+            do {
+                try await self.updateAnonymousSessionInfo()
                 
                 AIAgentStarterKit.shared.status = .readyToUse
             } catch {
@@ -130,7 +146,7 @@ extension AIAgentStarterKit {
 
 // MARK: Session Delegate
 // TODO: This session handler is for example code only, and should be updated via the service's API.
-extension AIAgentStarterKit: AIAgentSessionDelegate, SessionDelegate {
+extension AIAgentStarterKit: SessionDelegate {
     /// Called when a session token is required for authentication.
     /// - Parameters:
     ///   - successCompletion: Closure to call with the session token on success.
@@ -139,8 +155,27 @@ extension AIAgentStarterKit: AIAgentSessionDelegate, SessionDelegate {
         successCompletion success: @escaping (String?) -> Void,
         failCompletion fail: @escaping () -> Void
     ) {
-        debugPrint("[xxx] aiagent session handler - \(#function)")
-        success(AIAgentStarterKit.sessionData.sessionToken)
+        // Call the your server to refresh the session token and forward the result.
+        // MockServer is simulating a backend API that refreshes a session token.
+        MockServer.refreshSessionToken(
+            for: AIAgentStarterKit.sessionData.userId
+        ) { result in
+            switch result {
+            case .success(let token):
+                // Persist the refreshed token and notify the SDK via successCompletion
+                // When success completion is called, updateSessionInfo is called internally, which causes the SDK to update the token.
+                debugPrint("[xxx] aiagent session handler - \(#function)")
+                AIAgentStarterKit.sessionData.sessionToken = token
+                DispatchQueue.main.async {
+                    success(token)
+                }
+            case .failure(let error):
+                debugPrint("[xxx] token refresh failed: \(error)")
+                DispatchQueue.main.async {
+                    fail()
+                }
+            }
+        }
     }
     
     /// Called when the session has been closed.
@@ -159,12 +194,6 @@ extension AIAgentStarterKit: AIAgentSessionDelegate, SessionDelegate {
         debugPrint("[xxx] common session error handler - \(#function)- error: \(error)")
     }
     
-    /// Called when the session encounters an error.
-    /// - Parameter error: The error encountered.
-    func sessionDidHaveError(_ error: Error) {
-        self.commonErrorHandle(error)
-    }
-    
     /// Called when the session encounters an SBError.
     /// - Parameter error: The SBError encountered.
     func sessionDidHaveError(_ error: SBError) {
@@ -181,6 +210,8 @@ extension AIAgentStarterKit {
         Task {
             do {
                 self.isConnected = true
+                
+                // Connection priority: UIKit, AIAgent
                 
                 // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
                 try await ExtendedSDKBridge.connectIfNeeded()
@@ -230,24 +261,25 @@ extension AIAgentStarterKit {
     static func present(parent: UIViewController) {
         AIAgentStarterKit.loadCustomSets()
         
-        let params = ConversationSettingsParams(
-            language: self.contextObjects.language,
-            countryCode: self.contextObjects.countryCode,
-            context: self.contextObjects.context,
-            parent: parent
-        )
-        
         AIAgentMessenger.presentConversation(
-            aiAgentId: SampleTestInfo.aiAgentId,
-            params: params
-        )
+            aiAgentId: SampleTestInfo.aiAgentId
+        ) { params in
+            params.language = self.contextObjects.language
+            params.countryCode = self.contextObjects.countryCode
+            params.context = self.contextObjects.context
+            params.parent = parent
+        }
         
         // - NOTE: Use this logic if you want to present it as a conversation list.
 //        AIAgentMessenger.presentConversationList(
-//            aiAgentId: SampleTestInfo.aiAgentId,
-//            params: params
-//        )
-    }
+//            aiAgentId: SampleTestInfo.aiAgentId
+//        ) { params in
+//            params.language = self.contextObjects.language
+//            params.countryCode = self.contextObjects.countryCode
+//            params.context = self.contextObjects.context
+//            params.parent = parent
+//        }
+}
     
     /// Use this when you want to show and use the launcher button from the Sendbird Dashboard.
     /// - Parameter view: The view to parent.
@@ -276,17 +308,14 @@ extension AIAgentStarterKit {
 //        )
         
         // The point at which the context object is assigned is when the launcher is exposed.
-        let params = LauncherSettingsParams(
-            language: self.contextObjects.language,
-            countryCode: self.contextObjects.countryCode,
-            context: self.contextObjects.context
-        )
-        
         let startLauncher: (() -> Void) = {
             AIAgentMessenger.attachLauncher(
-                aiAgentId: SampleTestInfo.aiAgentId,
-                params: params
-            )
+                aiAgentId: SampleTestInfo.aiAgentId
+            ) { params in
+                params.language = self.contextObjects.language
+                params.countryCode = self.contextObjects.countryCode
+                params.context = self.contextObjects.context
+            }
         }
         
         AIAgentStarterKit.shared.onReadyToUse = startLauncher
@@ -299,5 +328,28 @@ extension AIAgentStarterKit {
         AIAgentMessenger.detachLauncher(
             aiAgentId: SampleTestInfo.aiAgentId
         )
+    }
+}
+
+
+// MARK: - Mock Server (for token refresh simulation)
+private enum MockServerError: Error { case refreshFailed }
+
+private final class MockServer {
+    /// Simulates a backend API that refreshes a session token.
+    /// In production, replace this with a real network call.
+    static func refreshSessionToken(
+        for userId: String?,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        // Simulate latency
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) {
+            guard let userId, userId.isEmpty == false else {
+                completion(.failure(MockServerError.refreshFailed))
+                return
+            }
+            let newToken = "mock_" + UUID().uuidString
+            completion(.success(newToken))
+        }
     }
 }

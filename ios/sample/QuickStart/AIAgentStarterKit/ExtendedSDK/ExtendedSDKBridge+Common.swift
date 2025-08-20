@@ -17,8 +17,8 @@ extension ExtendedSDKBridge {
     /// Initializes the DeskSDK and UIKit SDKs if they are available.
     /// This should be called during app startup to prepare the SDKs for use.
     static func initializeIfNeeded() async throws {
-        if self.hasDeskSDK() { try await self.deskTask.initialize() }
         if self.hasUIKit() { try await self.uikitTask.initialize() }
+        if self.hasDeskSDK() { try await self.deskTask.initialize() }
     }
     
     /// Updates the session information for DeskSDK and UIKit SDKs if they are present.
