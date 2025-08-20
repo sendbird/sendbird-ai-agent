@@ -155,8 +155,27 @@ extension AIAgentStarterKit: SessionDelegate {
         successCompletion success: @escaping (String?) -> Void,
         failCompletion fail: @escaping () -> Void
     ) {
-        debugPrint("[xxx] aiagent session handler - \(#function)")
-        success(AIAgentStarterKit.sessionData.sessionToken)
+        // Call the your server to refresh the session token and forward the result.
+        // MockServer is simulating a backend API that refreshes a session token.
+        MockServer.refreshSessionToken(
+            for: AIAgentStarterKit.sessionData.userId
+        ) { result in
+            switch result {
+            case .success(let token):
+                // Persist the refreshed token and notify the SDK via successCompletion
+                // When success completion is called, updateSessionInfo is called internally, which causes the SDK to update the token.
+                debugPrint("[xxx] aiagent session handler - \(#function)")
+                AIAgentStarterKit.sessionData.sessionToken = token
+                DispatchQueue.main.async {
+                    success(token)
+                }
+            case .failure(let error):
+                debugPrint("[xxx] token refresh failed: \(error)")
+                DispatchQueue.main.async {
+                    fail()
+                }
+            }
+        }
     }
     
     /// Called when the session has been closed.
@@ -309,5 +328,28 @@ extension AIAgentStarterKit {
         AIAgentMessenger.detachLauncher(
             aiAgentId: SampleTestInfo.aiAgentId
         )
+    }
+}
+
+
+// MARK: - Mock Server (for token refresh simulation)
+private enum MockServerError: Error { case refreshFailed }
+
+private final class MockServer {
+    /// Simulates a backend API that refreshes a session token.
+    /// In production, replace this with a real network call.
+    static func refreshSessionToken(
+        for userId: String?,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        // Simulate latency
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) {
+            guard let userId, userId.isEmpty == false else {
+                completion(.failure(MockServerError.refreshFailed))
+                return
+            }
+            let newToken = "mock_" + UUID().uuidString
+            completion(.success(newToken))
+        }
     }
 }
