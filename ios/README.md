@@ -172,7 +172,7 @@ extension MyViewController: SessionDelegate {
 }
 ```
 
-> When successCompletion is called in `sessionTokenDidRequire`, `updateSessionInfo` is invoked internally and the SDK updates the token.
+> When `successCompletion` is called with a token value in `sessionTokenDidRequire`, the SDK automatically updates the token, so no additional handling such as `updateSessionInfo` is required.
 
 ### Launch the messenger
 
