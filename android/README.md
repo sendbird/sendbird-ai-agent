@@ -254,7 +254,20 @@ To add the MessengerLauncher to your screen, simply call the `attach()` function
 MessengerLauncher(context, "your_ai_agent_id").attach()
 ```
 
-- `LauncherLayoutParams` allows you to configure the MessengerLauncher’s behavior and appearance:
+- **`entryPoint`**: Controls which screen is displayed first when the MessengerLauncher is clicked:
+
+```kotlin
+val entryPoint = MessengerEntryPoint.CONVERSATION // or MessengerEntryPoint.CONVERSATION_LIST
+MessengerLauncher(this, "your_ai_agent_id", LauncherSettingsParams(entryPoint = entryPoint)).attach()
+```
+
+Available options:
+- `MessengerEntryPoint.CONVERSATION`: Opens directly to the conversation screen (default)
+- `MessengerEntryPoint.CONVERSATION_LIST`: Opens to the conversation list screen
+
+Use `CONVERSATION` for single AI agent conversations, or `CONVERSATION_LIST` when multiple conversation channels are available.
+
+- `LauncherLayoutParams` allows you to configure the MessengerLauncher's behavior and appearance:
     - **`launchMode`**:
         - `EXPANDED`: Opens the messenger in full-screen mode with predefined margins.
         - `ANCHORED`: Opens the messenger anchored near the launcher button, with adjustable positioning.
