@@ -39,7 +39,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```html
 <script type="module">
-    import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
 </script>
 ```
 
@@ -48,8 +48,9 @@ Add the AI Agent SDK to your web page by importing it as a module.
 ```javascript
 const messenger = await loadMessenger();
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_BOT_ID',
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_BOT_ID',
+  userSessionInfo: new messenger.AnonymousSessionInfo(),
 });
 ```
 
@@ -59,10 +60,9 @@ If needed, you can specify custom API and WebSocket hosts during initialization:
 
 ```javascript
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_BOT_ID',
-    customApiHost: 'https://your-proxy-api.example.com',
-    customWebSocketHost: 'wss://your-proxy-websocket.example.com'
+  // ... Other initialization configurations
+  customApiHost: 'https://your-proxy-api.example.com',
+  customWebSocketHost: 'wss://your-proxy-websocket.example.com'
 });
 ```
 
@@ -76,57 +76,76 @@ Now that you have installed and initialized the AI Agent SDK, follow the steps b
 
 ### Manage user sessions
 
-To properly manage user sessions, provide session information when initializing the messenger.
+The SDK supports two types of user sessions: **Manual Session** for authenticated users and **Anonymous Session** for temporary users.
+
+#### Session types
+
+**1. Manual Session (ManualSessionInfo):**
+Use this when you have an authenticated user with a specific user ID and session token.
+
 ```javascript
 messenger.initialize({
-    // ... Other initialization configurations
-    userSessionInfo: {
-        userId: 'user_id',
-        authToken: 'auth_token',
-        sessionHandler: {
-            // A new session token is required in the SDK to refresh the session.
-            onSessionTokenRequired: async (resolve, reject) => {
-                try {
-                    // Refresh the session token and pass it onto the SDK through resolve(NEW_TOKEN).
-                    // If you don't want to refresh the session, pass on a null value through resolve(null).
-                    const response = await fetch('new-token-endpoint');
-                    resolve(response.token);
-                } catch (error) {
-                    // If any error occurs while refreshing the token, let the SDK know about it through reject(error).
-                    reject(error);
-                }
-            },
-            // Called when the session refresh has been denied.
-            // This event can occur if the client app doesn't explicitly refresh the token, the token is revoked, or the user is deactivated.
-            // In this case, the client app should handle the UX appropriately — such as redirecting the user to a login page or hiding/destroying the messenger.
-            onSessionClosed: () => { },
-            // Optional: Called when an error occurs during session refresh.
-            onSessionError: (error) => { },
-            // Optional: Called when the session is refreshed.
-            onSessionRefreshed: () => { },
+  // ... Other initialization configurations
+  userSessionInfo: new messenger.ManualSessionInfo({
+    userId: 'user_id',
+    authToken: 'auth_token',
+    sessionHandler: {
+      // A new session token is required in the SDK to refresh the session.
+      onSessionTokenRequired: async (resolve, reject) => {
+        try {
+          // Refresh the session token and pass it onto the SDK through resolve(NEW_TOKEN).
+          // If you don't want to refresh the session, pass on a null value through resolve(null).
+          const response = await fetch('new-token-endpoint');
+          resolve(response.token);
+        } catch (error) {
+          // If any error occurs while refreshing the token, let the SDK know about it through reject(error).
+          reject(error);
         }
+      },
+      // Called when the session refresh has been denied.
+      // This event can occur if the client app doesn't explicitly refresh the token, the token is revoked, or the user is deactivated.
+      // In this case, the client app should handle the UX appropriately — such as redirecting the user to a login page or hiding/destroying the messenger.
+      onSessionClosed: () => { },
+      // Optional: Called when an error occurs during session refresh.
+      onSessionError: (error) => { },
+      // Optional: Called when the session is refreshed.
+      onSessionRefreshed: () => { },
     }
+  })
+});
+```
+
+**2. Anonymous Session (AnonymousSessionInfo):**
+Use this for temporary users when you don't have user authentication. The server will automatically create a temporary user.
+
+```javascript
+messenger.initialize({
+  // ... Other initialization configurations
+  userSessionInfo: new messenger.AnonymousSessionInfo(),
 });
 ```
 
 For updating session information at runtime, use the `updateUserSession()` method as follows:
 
 ```javascript
-messenger.updateUserSession({
-    userId: 'new_user_id',
-    authToken: 'new_auth_token',
+const newManualSessionInfo = new messenger.ManualSessionInfo({
+  userId: 'new_user_id',
+  authToken: 'new_auth_token',
+  sessionHandler: {
     onSessionTokenRequired: async (resolve, reject) => {
-        try {
-            const response = await fetch('new-token-endpoint');
-            resolve(response.token);
-        } catch (error) {
-            reject(error);
-        }
+      try {
+        const response = await fetch('new-token-endpoint');
+        resolve(response.token);
+      } catch (error) {
+        reject(error);
+      }
     },
     onSessionClosed: () => { },
     onSessionError: (error) => { },
     onSessionRefreshed: () => { },
+  },
 });
+messenger.updateUserSession(newManualSessionInfo);
 ```
 
 ### Launch the messenger
@@ -142,8 +161,9 @@ To launch and display the messenger, implement the code below:
 ```javascript
 const messenger = await loadMessenger();
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID',
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID',
+  userSessionInfo: new messenger.AnonymousSessionInfo(),
 });
 ```
 
@@ -151,9 +171,9 @@ The messenger view can be programmatically controlled using the `open()` and `cl
 
 ```javascript
 // Open the messenger view automatically after initialized
-messenger.initialize({ appId, aiAgentId });
+messenger.initialize({ appId, aiAgentId, userSessionInfo });
 messenger.onLoad(() => {
-    messenger.open();
+  messenger.open();
 });
 
 // Close the messenger view by clicking a button
@@ -165,9 +185,9 @@ To update the configurations:
 ```javascript
 // Update configuration
 messenger.updateConfig({
-    appId: 'NEW_APP_ID',
-    aiAgentId: 'NEW_BOT_ID',
-    // ... other config options
+  appId: 'NEW_APP_ID',
+  aiAgentId: 'NEW_BOT_ID',
+  // ... other config options
 });
 ```
 
@@ -187,14 +207,15 @@ const messenger = await loadMessenger({
   customMainComponent: ({ messenger, react }) => {
     return (props) => {
         return react.createElement(messenger.AgentProviderContainer, props, [
-            react.createElement(messenger.Conversation),
-        ]);
+        react.createElement(messenger.Conversation),
+      ]);
     };
   }
 });
 messenger.initialize({
-    appId: 'APP_ID',
-    aiAgentId: 'AI_AGENT_ID',
+  appId: 'APP_ID',
+  aiAgentId: 'AI_AGENT_ID',
+  userSessionInfo: new messenger.AnonymousSessionInfo(),
 });
 ```
 
@@ -207,12 +228,10 @@ The messenger provides two different methods for cleanup:
 messenger.deauthenticate();
 ```
 
-2. Use `destroy()` to remove the messenger components from the DOM:
+2. Use `destroy()` to completely remove the messenger nodes from the DOM:
 ```javascript
 messenger.destroy();
 ```
-
-> Note: `deauthenticate()` is used for user session management and handles the chat SDK disconnection internally. `destroy()` is used for UI cleanup, removing the rendered components from the page without affecting the session state.
 
 ### Passing context object to Agent
 
@@ -225,18 +244,19 @@ This allows for a more personalized and context-aware interaction experience.
 ```javascript
 const messenger = await loadMessenger();
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_BOT_ID',
-    // Language setting (IETF BCP 47 format)
-    // default: navigator.language
-    language: 'en-US',
-    // Country code setting (ISO 3166 format)
-    countryCode: 'US',
-    // Context object for the AI Agent
-    context: {
-        userPreference: 'technical',
-        customerTier: 'premium'
-    }
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_BOT_ID',
+  userSessionInfo: new messenger.AnonymousSessionInfo(),
+  // Language setting (IETF BCP 47 format)
+  // default: navigator.language
+  language: 'en-US',
+  // Country code setting (ISO 3166 format)
+  countryCode: 'US',
+  // Context object for the AI Agent
+  context: {
+    userPreference: 'technical',
+    customerTier: 'premium'
+  }
 });
 ```
 

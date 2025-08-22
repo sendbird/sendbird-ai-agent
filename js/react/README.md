@@ -174,13 +174,20 @@ function App() {
 
 ### Manage user sessions
 
-To properly manage user sessions, provide session information when initializing the messenger:
+The SDK supports two types of user sessions: **Manual Session** for authenticated users and **Anonymous Session** for temporary users.
+
+#### Session types
+
+**1. Manual Session (ManualSessionInfo):**
+Use this when you have an authenticated user with a specific user ID and session token.
 
 ```tsx
+import { ManualSessionInfo } from '@sendbird/ai-agent-messenger-react';
+
 <FixedMessenger
   appId="YOUR_APP_ID"
   aiAgentId="YOUR_AI_AGENT_ID"
-  userSessionInfo={{
+  userSessionInfo={new ManualSessionInfo({
     userId: 'user_id',
     authToken: 'auth_token',
     sessionHandler: {
@@ -196,10 +203,22 @@ To properly manage user sessions, provide session information when initializing 
       onSessionError: (error) => { },
       onSessionRefreshed: () => { }
     }
-  }}
+  })}
 />
 ```
 
+**2. Anonymous Session (AnonymousSessionInfo):**
+Use this for temporary users when you don't have user authentication. The server will automatically create a temporary user.
+
+```tsx
+import { AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
+
+<FixedMessenger
+  appId="YOUR_APP_ID"
+  aiAgentId="YOUR_AI_AGENT_ID"
+  userSessionInfo={new AnonymousSessionInfo()}
+/>
+```
 
 The messenger view can be programmatically controlled using the `state` prop:
 
