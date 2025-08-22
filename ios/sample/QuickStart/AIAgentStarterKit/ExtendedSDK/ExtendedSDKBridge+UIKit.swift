@@ -23,6 +23,11 @@ extension ExtendedSDKBridge {
         func initialize() async throws {
             return try await withCheckedThrowingContinuation { continuation in
                 #if canImport(SendbirdUIKit)
+                if SendbirdChat.isInitialized {
+                    continuation.resume()
+                    return
+                }
+                
                 SendbirdUIKit.SendbirdUI.initialize(
                     applicationId: AIAgentStarterKit.sessionData.appId,
                     initParamsBuilder: AIAgentStarterKit.shared.initParamsBuilder
