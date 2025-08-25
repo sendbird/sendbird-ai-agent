@@ -349,7 +349,7 @@
 					"@loader_path/Frameworks",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 0.10.5;
+				MARKETING_VERSION = 0.10.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
@@ -390,7 +390,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.10.5;
+				MARKETING_VERSION = 0.10.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -546,7 +546,7 @@
 					"@loader_path/Frameworks",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 0.10.5;
+				MARKETING_VERSION = 0.10.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
@@ -588,7 +588,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.10.5;
+				MARKETING_VERSION = 0.10.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -651,7 +651,7 @@
 			repositoryURL = "https://github.com/sendbird/sendbird-ai-agent-messenger-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.10.5;
+				minimumVersion = 0.10.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
