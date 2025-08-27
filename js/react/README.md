@@ -208,7 +208,7 @@ import { ManualSessionInfo } from '@sendbird/ai-agent-messenger-react';
 ```
 
 **2. Anonymous Session (AnonymousSessionInfo):**
-Use this for temporary users when you don't have user authentication. The server will automatically create a temporary user.
+Use this when you don't have user authentication or want to allow guest access. The server will automatically create a temporary user.
 
 ```tsx
 import { AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
