@@ -17,6 +17,15 @@ export const generateCode = (params: CodeGenerationParams): string => {
         sessionHandler: {
           onSessionTokenRequired: async (resolve) => {
             resolve("${APP_CONFIG.authToken}");
+          },
+          onSessionClosed: () => {
+            console.log('Session closed');
+          },
+          onSessionError: (error) => {
+            console.error('Session error:', error);
+          },
+          onSessionRefreshed: () => {
+            console.log('Session refreshed');
           }
         }
       }}`
