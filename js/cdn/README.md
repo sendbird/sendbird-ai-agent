@@ -116,7 +116,7 @@ messenger.initialize({
 ```
 
 **2. Anonymous Session (AnonymousSessionInfo):**
-Use this for temporary users when you don't have user authentication. The server will automatically create a temporary user.
+Use this for guest users or when user authentication is not available. The server will automatically create a temporary user.
 
 ```javascript
 messenger.initialize({
