@@ -271,6 +271,7 @@ function App() {
   return <FixedMessenger key={messengerKey} appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />;
 }
 ```
+
 ### Passing context object to Agent
 
 You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.

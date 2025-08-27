@@ -322,7 +322,6 @@ function App() {
   }}
 />`,
 
-
   messageLayoutCustomization: `import { AgentProviderContainer, Conversation, IncomingMessageLayout } from '@sendbird/ai-agent-messenger-react';
 import { useState } from 'react';
 
