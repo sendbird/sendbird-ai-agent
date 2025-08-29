@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { FixedMessenger, MessengerSessionRef } from '@sendbird/ai-agent-messenger-react';
+import { FixedMessenger, MessengerSessionRef, ManualSessionInfo, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
 
 import { LayoutWrapper } from '../LayoutWrapper';
 import { APP_CONFIG } from '../constants/appConfig';
@@ -31,7 +31,7 @@ export function PlaygroundConfig() {
   };
 
   const userSessionInfo = playgroundConfig.hasSession
-    ? {
+    ? new ManualSessionInfo({
         userId: APP_CONFIG.userId || 'default-user',
         authToken: APP_CONFIG.authToken || 'default-token',
         sessionHandler: {
@@ -42,8 +42,8 @@ export function PlaygroundConfig() {
           onSessionError: (error: unknown) => console.error('Session error:', error),
           onSessionRefreshed: () => console.log('Session refreshed'),
         },
-      }
-    : undefined;
+      })
+    : new AnonymousSessionInfo();
 
   const { state, handleConfigUpdate, handleContextChange, handleReset } = usePlaygroundState({
     config: playgroundConfig,

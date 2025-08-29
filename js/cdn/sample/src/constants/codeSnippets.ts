@@ -11,7 +11,7 @@ export const generateCode = (params: CodeGenerationParams): string => {
 
   const userSessionSection = hasSession
     ? `,
-      userSessionInfo: {
+      userSessionInfo: new messenger.ManualSessionInfo({
         userId: "${APP_CONFIG.userId}",
         authToken: "${APP_CONFIG.authToken}",
         sessionHandler: {
@@ -28,8 +28,9 @@ export const generateCode = (params: CodeGenerationParams): string => {
             console.log('Session refreshed')
           }
         }
-      }`
-    : '';
+      })`
+    : `,
+      userSessionInfo: new messenger.AnonymousSessionInfo()`;
 
   const contextSection = context
     ? `,
@@ -80,7 +81,8 @@ export const CODE_EXAMPLES = {
 
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
-      aiAgentId: "${APP_CONFIG.aiAgentId}"
+      aiAgentId: "${APP_CONFIG.aiAgentId}",
+      userSessionInfo: new messenger.AnonymousSessionInfo()
     });
 
     console.log('Messenger ready');
@@ -101,7 +103,7 @@ export const CODE_EXAMPLES = {
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
-      userSessionInfo: {
+      userSessionInfo: new messenger.ManualSessionInfo({
         userId: "${APP_CONFIG.userId}",
         authToken: "${APP_CONFIG.authToken}",
         sessionHandler: {
@@ -118,7 +120,7 @@ export const CODE_EXAMPLES = {
             console.log('Session refreshed')
           }
         }
-      }
+      })
     });
 
     console.log('Authenticated messenger ready');
@@ -139,6 +141,7 @@ export const CODE_EXAMPLES = {
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
+      userSessionInfo: new messenger.AnonymousSessionInfo(),
       context: {
         userPreference: "technical",
         customerTier: "premium",
@@ -164,7 +167,8 @@ export const CODE_EXAMPLES = {
 
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
-      aiAgentId: "${APP_CONFIG.aiAgentId}"
+      aiAgentId: "${APP_CONFIG.aiAgentId}",
+      userSessionInfo: new messenger.AnonymousSessionInfo()
     });
 
     console.log('Messenger ready');
@@ -196,6 +200,7 @@ export const CODE_EXAMPLES = {
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
+      userSessionInfo: new messenger.AnonymousSessionInfo(),
       language: lang,
       countryCode: country
     });

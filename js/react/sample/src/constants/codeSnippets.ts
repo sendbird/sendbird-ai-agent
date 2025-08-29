@@ -11,7 +11,7 @@ export const generateCode = (params: CodeGenerationParams): string => {
 
   const userSessionSection = hasSession
     ? `
-      userSessionInfo={{
+      userSessionInfo={new ManualSessionInfo({
         userId: "${APP_CONFIG.userId}",
         authToken: "${APP_CONFIG.authToken}",
         sessionHandler: {
@@ -28,8 +28,9 @@ export const generateCode = (params: CodeGenerationParams): string => {
             console.log('Session refreshed');
           }
         }
-      }}`
-    : '';
+      })}`
+    : `
+      userSessionInfo={new AnonymousSessionInfo()}`;
 
   const contextSection = context
     ? `
@@ -43,7 +44,11 @@ export const generateCode = (params: CodeGenerationParams): string => {
       countryCode="${language.split('-')[1]}"`
       : '';
 
-  return `import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+  const importSection = hasSession 
+    ? `import { FixedMessenger, ManualSessionInfo } from '@sendbird/ai-agent-messenger-react';`
+    : `import { FixedMessenger, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';`;
+
+  return `${importSection}
 
 function App() {
   return (
@@ -59,7 +64,7 @@ export const CODE_EXAMPLES = {
   basic: {
     title: 'Basic Setup',
     code: `
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import { FixedMessenger, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 function App() {
@@ -67,6 +72,7 @@ function App() {
     <FixedMessenger
       appId="${APP_CONFIG.appId}"
       aiAgentId="${APP_CONFIG.aiAgentId}"
+      userSessionInfo={new AnonymousSessionInfo()}
     />
   );
 }`,
@@ -74,11 +80,11 @@ function App() {
   authenticated: {
     title: 'With Authentication',
     code: `
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import { FixedMessenger, ManualSessionInfo } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 function App() {
-  const userSessionInfo = {
+  const userSessionInfo = new ManualSessionInfo({
     userId: "${APP_CONFIG.userId}",
     authToken: "${APP_CONFIG.authToken}",
     sessionHandler: {
@@ -96,7 +102,7 @@ function App() {
         console.log('Session refreshed');
       }
     }
-  };
+  });
 
   return (
     <FixedMessenger
@@ -110,7 +116,7 @@ function App() {
   context: {
     title: 'With Context',
     code: `
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import { FixedMessenger, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 function App() {
@@ -124,6 +130,7 @@ function App() {
     <FixedMessenger
       appId="${APP_CONFIG.appId}"
       aiAgentId="${APP_CONFIG.aiAgentId}"
+      userSessionInfo={new AnonymousSessionInfo()}
       context={context}
     />
   );
@@ -133,7 +140,7 @@ function App() {
     title: 'Runtime Context Updates',
     code: `
 import { useRef } from 'react';
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import { FixedMessenger, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 function App() {
@@ -154,6 +161,7 @@ function App() {
         ref={messenger}
         appId="${APP_CONFIG.appId}"
         aiAgentId="${APP_CONFIG.aiAgentId}"
+        userSessionInfo={new AnonymousSessionInfo()}
       />
     </>
   );
@@ -163,7 +171,7 @@ function App() {
     title: 'Multi-language',
     code: `
 import { useState } from 'react';
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
+import { FixedMessenger, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react';
 import '@sendbird/ai-agent-messenger-react/index.css';
 
 function App() {
@@ -188,6 +196,7 @@ function App() {
         key={\`\${language}-\${countryCode}\`} // Reset on language change
         appId="${APP_CONFIG.appId}"
         aiAgentId="${APP_CONFIG.aiAgentId}"
+        userSessionInfo={new AnonymousSessionInfo()}
         language={language}
         countryCode={countryCode}
       />
