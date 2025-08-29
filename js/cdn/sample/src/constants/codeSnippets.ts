@@ -45,18 +45,18 @@ export const generateCode = (params: CodeGenerationParams): string => {
 
   return `<script type="module">
   import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
-  
+
   async function initMessenger() {
     const messenger = await loadMessenger();
-    
+
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}"${contextSection}${languageSection}${userSessionSection}
     });
-    
+
     console.log('Messenger ready');
   }
-  
+
   initMessenger();
 </script>`;
 };
@@ -74,18 +74,18 @@ export const CODE_EXAMPLES = {
     title: 'Basic Setup',
     code: `<script type="module">
   import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
-  
+
   async function initMessenger() {
     const messenger = await loadMessenger();
-    
+
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}"
     });
-    
+
     console.log('Messenger ready');
   }
-  
+
   initMessenger();
 </script>`,
   },
@@ -94,10 +94,10 @@ export const CODE_EXAMPLES = {
     title: 'With Authentication',
     code: `<script type="module">
   import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
-  
+
   async function initMessenger() {
     const messenger = await loadMessenger();
-    
+
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
@@ -120,10 +120,10 @@ export const CODE_EXAMPLES = {
         }
       }
     });
-    
+
     console.log('Authenticated messenger ready');
   }
-  
+
   initMessenger();
 </script>`,
   },
@@ -132,10 +132,10 @@ export const CODE_EXAMPLES = {
     title: 'With Context',
     code: `<script type="module">
   import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
-  
+
   async function initMessenger() {
     const messenger = await loadMessenger();
-    
+
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
@@ -145,38 +145,38 @@ export const CODE_EXAMPLES = {
         supportLevel: "advanced"
       }
     });
-    
+
     console.log('Messenger with context ready');
   }
-  
+
   initMessenger();
 </script>`,
   },
 
   runtime: {
-    title: 'Runtime Updates',
+    title: 'Runtime Context Updates',
     code: `<script type="module">
   import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
   let messenger;
-  
+
   async function initMessenger() {
     messenger = await loadMessenger();
-    
+
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}"
     });
-    
+
     console.log('Messenger ready');
   }
-  
+
   async function updateContext(newContext) {
     if (messenger) {
       await messenger.patchContext(newContext);
       console.log('Context updated:', newContext);
     }
   }
-  
+
   initMessenger().then(() => {
     setTimeout(() => {
       updateContext({ page: "checkout", cartItems: "3", cartValue: "100" });
@@ -189,20 +189,20 @@ export const CODE_EXAMPLES = {
     title: 'Multi-language',
     code: `<script type="module">
   import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
-  
+
   async function initMessenger(lang = 'en', country = 'US') {
     const messenger = await loadMessenger();
-    
+
     await messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
       language: lang,
       countryCode: country
     });
-    
+
     console.log(\`Messenger ready in \${lang}-\${country}\`);
   }
-  
+
   initMessenger('ko', 'KR');
 </script>`,
   },

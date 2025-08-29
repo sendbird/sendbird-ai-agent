@@ -15,6 +15,7 @@ The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot
   - [Running your application](#running-your-application)
     - [FixedMessenger styles](#fixedmessenger-styles)
     - [Manage user sessions](#manage-user-sessions)
+      - [Session types](#session-types)
   - [Advanced Features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
     - [Passing context object to Agent](#passing-context-object-to-agent)
@@ -253,22 +254,6 @@ function App() {
       </AgentProviderContainer>
     </div>
   );
-}
-```
-
-### Deauthenticate and clear session
-
-Component cleanup is handled automatically by React when the component unmounts, but you can also control the messenger state manually:
-
-```tsx
-function App() {
-  const [messengerKey, setMessengerKey] = useState(0);
-
-  const resetMessenger = () => {
-    setMessengerKey((prev) => prev + 1); // Force remount
-  };
-
-  return <FixedMessenger key={messengerKey} appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" />;
 }
 ```
 

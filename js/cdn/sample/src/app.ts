@@ -1,6 +1,6 @@
 import { APP_CONFIG } from './config/appConfig';
 import { CODE_EXAMPLES, CONTEXT_PRESETS, generateCode } from './constants';
-import { AppState, DEFAULT_PLAYGROUND_CONFIG } from './types';
+import { AppState, DEFAULT_PLAYGROUND_CONFIG, MessengerInitConfig } from './types';
 
 export const state: AppState = {
   activeTab: 'playground',
@@ -49,8 +49,8 @@ function initializeTabs() {
 
     // Trigger syntax highlighting after tab switch
     setTimeout(() => {
-      if (typeof (window as any).Prism !== 'undefined') {
-        (window as any).Prism.highlightAll();
+      if (typeof window.Prism !== 'undefined') {
+        window.Prism.highlightAll();
       }
     }, 50);
   });
@@ -109,7 +109,7 @@ function initializePlayground() {
           customContextToggle.checked = false;
         }
 
-        // Handle runtime update if enabled
+        // Handle runtime context update if enabled
         if (state.enableRuntimeUpdate && state.messenger && state.context) {
           await updateContextRuntime(state.context);
         }
@@ -157,7 +157,7 @@ function initializePlayground() {
         if (customContext.value.trim()) {
           state.context = JSON.parse(customContext.value);
 
-          // Handle runtime update if enabled
+          // Handle runtime context update if enabled
           if (state.enableRuntimeUpdate && state.messenger && state.context) {
             await updateContextRuntime(state.context);
           }
@@ -244,7 +244,7 @@ async function initializeMessenger() {
     const { loadMessenger } = await import('https://aiagent.sendbird.com/orgs/default/index.js');
     state.messenger = await loadMessenger();
 
-    const config: any = {
+    const config: MessengerInitConfig = {
       appId: APP_CONFIG.appId,
       aiAgentId: APP_CONFIG.aiAgentId,
       language: state.language.split('-')[0],
@@ -350,8 +350,8 @@ function updateLiveCode() {
     codeElement.textContent = code;
 
     // Apply syntax highlighting if Prism is available
-    if (typeof (window as any).Prism !== 'undefined') {
-      (window as any).Prism.highlightElement(codeElement);
+    if (typeof window.Prism !== 'undefined') {
+      window.Prism.highlightElement(codeElement);
     }
   }
 }
@@ -370,8 +370,8 @@ function updateExampleCode() {
     codeElement.textContent = example.code;
 
     // Apply syntax highlighting if Prism is available
-    if (typeof (window as any).Prism !== 'undefined') {
-      (window as any).Prism.highlightElement(codeElement);
+    if (typeof window.Prism !== 'undefined') {
+      window.Prism.highlightElement(codeElement);
     }
   }
 }

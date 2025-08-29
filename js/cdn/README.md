@@ -219,22 +219,6 @@ messenger.initialize({
 });
 ```
 
-### Deauthenticate and clear session
-
-The messenger provides two different methods for cleanup:
-
-1. Use `deauthenticate()` to handle user logout by clearing session data and disconnecting from the chat SDK:
-
-```javascript
-messenger.deauthenticate();
-```
-
-2. Use `destroy()` to completely remove the messenger nodes from the DOM:
-
-```javascript
-messenger.destroy();
-```
-
 ### Passing context object to Agent
 
 You can predefine customer-specific information such as country, language, or other custom context data to guide the AI Agent in providing faster and more accurate responses.

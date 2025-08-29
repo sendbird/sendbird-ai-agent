@@ -1,3 +1,27 @@
+// Global type definitions
+declare global {
+  interface Window {
+    ENV?: {
+      NEW_APP_ID?: string;
+      NEW_AI_AGENT_ID?: string;
+      NEW_USER_ID?: string;
+      NEW_USER_AUTH_TOKEN?: string;
+    };
+    Prism?: {
+      highlightAll: () => void;
+      highlightElement: (element: Element) => void;
+    };
+  }
+}
+
+export interface MessengerInitConfig {
+  appId: string;
+  aiAgentId: string;
+  language?: string;
+  countryCode?: string;
+  context?: Record<string, string>;
+}
+
 export interface Config {
   hasSession: boolean;
   language: string;

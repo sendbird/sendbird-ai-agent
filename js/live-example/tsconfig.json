@@ -21,5 +21,10 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "vite.config.ts", "vite-env.d.ts", "tailwind.config.ts"]
+  "include": [
+    "src",
+    "vite.config.ts",
+    "vite-env.d.ts",
+    "tailwind.config.ts"
+  ]
 }

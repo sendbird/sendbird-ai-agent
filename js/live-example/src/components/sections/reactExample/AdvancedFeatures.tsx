@@ -223,6 +223,7 @@ export const AdvancedFeatures = () => {
             </div>
           </div>
         </Section>
+
       </div>
     </div>
   );

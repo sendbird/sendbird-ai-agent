@@ -13,8 +13,8 @@ const DEFAULT_CONFIG: CONFIG = {
 };
 
 export const APP_CONFIG: CONFIG = {
-  appId: (window as any).ENV?.NEW_APP_ID || DEFAULT_CONFIG.appId,
-  aiAgentId: (window as any).ENV?.NEW_AI_AGENT_ID || DEFAULT_CONFIG.aiAgentId,
-  userId: (window as any).ENV?.NEW_USER_ID || DEFAULT_CONFIG.userId,
-  authToken: (window as any).ENV?.NEW_USER_AUTH_TOKEN || DEFAULT_CONFIG.authToken,
+  appId: window.ENV?.NEW_APP_ID || DEFAULT_CONFIG.appId,
+  aiAgentId: window.ENV?.NEW_AI_AGENT_ID || DEFAULT_CONFIG.aiAgentId,
+  userId: window.ENV?.NEW_USER_ID || DEFAULT_CONFIG.userId,
+  authToken: window.ENV?.NEW_USER_AUTH_TOKEN || DEFAULT_CONFIG.authToken,
 };
