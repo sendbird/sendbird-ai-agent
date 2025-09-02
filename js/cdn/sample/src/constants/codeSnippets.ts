@@ -50,7 +50,7 @@ export const generateCode = (params: CodeGenerationParams): string => {
   async function initMessenger() {
     const messenger = await loadMessenger();
 
-    await messenger.initialize({
+    messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}"${contextSection}${languageSection}${userSessionSection}
     });
@@ -79,7 +79,7 @@ export const CODE_EXAMPLES = {
   async function initMessenger() {
     const messenger = await loadMessenger();
 
-    await messenger.initialize({
+    messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
       userSessionInfo: new messenger.AnonymousSessionInfo()
@@ -100,7 +100,7 @@ export const CODE_EXAMPLES = {
   async function initMessenger() {
     const messenger = await loadMessenger();
 
-    await messenger.initialize({
+    messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
       userSessionInfo: new messenger.ManualSessionInfo({
@@ -138,7 +138,7 @@ export const CODE_EXAMPLES = {
   async function initMessenger() {
     const messenger = await loadMessenger();
 
-    await messenger.initialize({
+    messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
       userSessionInfo: new messenger.AnonymousSessionInfo(),
@@ -165,7 +165,7 @@ export const CODE_EXAMPLES = {
   async function initMessenger() {
     messenger = await loadMessenger();
 
-    await messenger.initialize({
+    messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
       userSessionInfo: new messenger.AnonymousSessionInfo()
@@ -197,7 +197,7 @@ export const CODE_EXAMPLES = {
   async function initMessenger(lang = 'en', country = 'US') {
     const messenger = await loadMessenger();
 
-    await messenger.initialize({
+    messenger.initialize({
       appId: "${APP_CONFIG.appId}",
       aiAgentId: "${APP_CONFIG.aiAgentId}",
       userSessionInfo: new messenger.AnonymousSessionInfo(),

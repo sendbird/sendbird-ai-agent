@@ -12,6 +12,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
       - [Custom Host Configuration](#custom-host-configuration)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
+      - [Session types](#session-types)
     - [Launch the messenger](#launch-the-messenger)
   - [Advanced Features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
@@ -217,6 +218,20 @@ messenger.initialize({
   aiAgentId: 'AI_AGENT_ID',
   userSessionInfo: new messenger.AnonymousSessionInfo(),
 });
+```
+
+### Deauthenticate and clear session
+
+The messenger provides two different methods for cleanup:
+
+1. Use `deauthenticate()` to handle user logout by clearing session data and disconnecting from the chat SDK:
+```javascript
+messenger.deauthenticate();
+```
+
+2. Use `destroy()` to completely remove the messenger nodes from the DOM:
+```javascript
+messenger.destroy();
 ```
 
 ### Passing context object to Agent
