@@ -12,6 +12,7 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
       - [Custom Host Configuration](#custom-host-configuration)
   - [Running your application](#running-your-application)
     - [Manage user sessions](#manage-user-sessions)
+      - [Session types](#session-types)
     - [Launch the messenger](#launch-the-messenger)
   - [Advanced Features](#advanced-features)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
@@ -156,7 +157,7 @@ Once the authentication information has been successfully registered, you can la
 
 To launch and display the messenger, implement the code below:
 
->__Note__: Replace `YOUR_APP_ID` AND `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
+> **Note**: Replace `YOUR_APP_ID` AND `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
 
 ```javascript
 const messenger = await loadMessenger();
@@ -177,7 +178,7 @@ messenger.onLoad(() => {
 });
 
 // Close the messenger view by clicking a button
-<button onClick={() => messenger.close()}>Close</button>
+<button onClick={() => messenger.close()}>Close</button>;
 ```
 
 To update the configurations:
@@ -210,7 +211,7 @@ const messenger = await loadMessenger({
         react.createElement(messenger.Conversation),
       ]);
     };
-  }
+  },
 });
 messenger.initialize({
   appId: 'APP_ID',

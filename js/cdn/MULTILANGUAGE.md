@@ -94,20 +94,20 @@ const customLanguageConfig = {
   stringSet: {
     // Override only specific keys
     MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!', // original: 'Hacer una pregunta'
-    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores' // original: 'Historial de conversaciones'
-  }
+    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores', // original: 'Historial de conversaciones'
+  },
 };
 
 // Apply during initialization
 messenger.initialize({
   appId: 'YOUR_APP_ID',
   aiAgentId: 'YOUR_AI_AGENT_ID',
-  ...customLanguageConfig
+  ...customLanguageConfig,
 });
 
 // Or update at runtime (affects UI only)
 messenger.updateConfig({
-  ...customLanguageConfig
+  ...customLanguageConfig,
 });
 ```
 
@@ -147,7 +147,7 @@ messenger.initialize({
     RETRY: '重试',
 
     // ... and all other required strings
-  }
+  },
 });
 ```
 
@@ -255,7 +255,7 @@ You can easily switch between different languages at runtime, allowing users to 
 const switchToChinese = () => {
   messenger.updateConfig({
     language: 'zh-CN',
-    stringSet: cnStringSet // Import from your Chinese translations file
+    stringSet: cnStringSet, // Import from your Chinese translations file
   });
 };
 
@@ -265,8 +265,8 @@ const switchToSpanish = () => {
     language: 'es-ES',
     stringSet: {
       MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
-      CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
-    }
+      CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores',
+    },
   });
 };
 
@@ -274,9 +274,8 @@ const switchToSpanish = () => {
 <div>
   <button onClick={switchToChinese}>Switch to Chinese</button>
   <button onClick={switchToSpanish}>Switch back to Spanish</button>
-</div>
+</div>;
 ```
-
 
 **Dynamically Loading Language Files:**
 
@@ -307,10 +306,9 @@ async function loadLanguageStrings(language) {
   // Update the messenger configuration with the loaded strings
   messenger.updateConfig({
     language,
-    stringSet
+    stringSet,
   });
 }
 ```
 
 This approach ensures that only the language resources needed for the current user are loaded, which is particularly important when supporting multiple languages with large string sets.
-
