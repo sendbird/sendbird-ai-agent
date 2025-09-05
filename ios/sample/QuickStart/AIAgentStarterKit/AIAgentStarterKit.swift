@@ -331,7 +331,6 @@ extension AIAgentStarterKit {
     }
 }
 
-
 // MARK: - Mock Server (for token refresh simulation)
 private enum MockServerError: Error { case refreshFailed }
 

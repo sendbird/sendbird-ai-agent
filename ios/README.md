@@ -25,6 +25,13 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
     - [Unregister for push notifications](#unregister-for-push-notifications)
   - [Advanced features](#advanced-features)
     - [Customize launcher mode](#customize-launcher-mode)
+    - [Entry Point Advanced Configuration Guide](#entry-point-advanced-configuration-guide)
+      - [Entry Point Types](#entry-point-types)
+      - [Launcher-based Entry Point Configuration](#launcher-based-entry-point-configuration)
+        - [Basic Setup](#basic-setup)
+      - [Direct ViewController Presentation](#direct-viewcontroller-presentation)
+        - [Present Conversation](#present-conversation)
+        - [Present Conversation List](#present-conversation-list)
     - [Update SDK Theme](#update-sdk-theme)
     - [Deauthenticate and clear session](#deauthenticate-and-clear-session)
     - [Passing context object to Agent](#passing-context-object-to-agent)
@@ -155,6 +162,8 @@ extension MyViewController: SessionDelegate {
         // Refresh token from your server
         AuthService.refreshToken { newToken in
             if let token = newToken {
+                // When success completion is called, updateSessionInfo is called internally,
+                // which causes the SDK to update the token.
                 success(token)
             } else {
                 fail()
@@ -191,7 +200,7 @@ Display a floating launcher button:
 
 ```swift
 AIAgentMessenger.attachLauncher(
-    aiAgentId: self.aiAgentId
+    aiAgentId: {AIAgentId}
 )
 ```
 
@@ -276,6 +285,70 @@ AIAgentMessenger.attachLauncher(
 }
 ```
 
+### Entry Point Advanced Configuration Guide
+
+This guide covers advanced entry point configuration options for the Sendbird AI Agent iOS SDK.
+
+#### Entry Point Types
+
+The SDK supports two entry point types:
+
+```swift
+public enum SBAEntryPoint {
+    case conversation      // Direct to chat conversation (default)
+    case conversationList  // Show conversation list first
+}
+```
+
+- **`.conversation`**: Opens directly to the chat conversation interface
+- **`.conversationList`**: Shows a list of existing conversations first
+
+#### Launcher-based Entry Point Configuration
+
+##### Basic Setup
+
+Configure entry point through launcher options:
+
+```swift
+AIAgentMessenger.attachLauncher(
+    aiAgentId: {AIAgentId}"
+) { params in
+    params.options = SBALauncherOptions(
+        entryPoint: .conversationList, // or .conversation (default)
+        layout: .default,
+        displayStyle: .overlay()
+    )
+}
+```
+
+#### Direct ViewController Presentation
+
+##### Present Conversation
+
+Use `presentConversation()` when you want to show the chat interface directly:
+
+```swift
+AIAgentMessenger.presentConversation(
+    aiAgentId: {AIAgentId}
+) { params in
+    params.parent = self
+    params.presentationStyle = .fullScreen
+}
+```
+
+##### Present Conversation List
+
+Use `presentConversationList()` to show the conversation list:
+
+```swift
+AIAgentMessenger.presentConversationList(
+    aiAgentId: {AIAgentId}
+) { params in
+    params.parent = self
+    params.presentationStyle = .fullScreen
+}
+```
+
 ### Update SDK Theme
 
 You can customize the SDK’s color scheme to match your app's theme as shown below.
@@ -307,7 +380,7 @@ This allows for a more personalized and context-aware interaction experience.
 ```swift
 // Case: Attach launcher
 AIAgentMessenger.attachLauncher(
-    aiAgentId: TestConfig.aiAgentId
+    aiAgentId: {AIAgentId}
 ) { params in
     params.language = "en" // (opt)default: Locale.preferredLanguages.first
     params.countryCode = "US" // (opt)default: Locale.current.regionCode
@@ -318,7 +391,7 @@ AIAgentMessenger.attachLauncher(
 ```swift
 // Case:
 AIAgentMessenger.presentConversation(
-    aiAgentId: TestConfig.aiAgentId
+    aiAgentId: {AIAgentId}
 ) { params in
     params.language = "en" // (opt)default: Locale.preferredLanguages.first
     params.countryCode = "US" // (opt)default: Locale.current.regionCode
