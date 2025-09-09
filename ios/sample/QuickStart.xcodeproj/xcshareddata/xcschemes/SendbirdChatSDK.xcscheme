@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8FC66CB764B9B97C95E00B1F"
-               BuildableName = "QuickStart.app"
-               BlueprintName = "QuickStart"
+               BlueprintIdentifier = "F31E6741F0276909A92E2EB7"
+               BuildableName = "SendbirdChatSDK.framework"
+               BlueprintName = "SendbirdChatSDK"
                ReferencedContainer = "container:QuickStart.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,9 +30,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8FC66CB764B9B97C95E00B1F"
-            BuildableName = "QuickStart.app"
-            BlueprintName = "QuickStart"
+            BlueprintIdentifier = "F31E6741F0276909A92E2EB7"
+            BuildableName = "SendbirdChatSDK.framework"
+            BlueprintName = "SendbirdChatSDK"
             ReferencedContainer = "container:QuickStart.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -49,16 +49,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8FC66CB764B9B97C95E00B1F"
-            BuildableName = "QuickStart.app"
-            BlueprintName = "QuickStart"
+            BlueprintIdentifier = "F31E6741F0276909A92E2EB7"
+            BuildableName = "SendbirdChatSDK.framework"
+            BlueprintName = "SendbirdChatSDK"
             ReferencedContainer = "container:QuickStart.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Debug"
@@ -66,16 +65,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8FC66CB764B9B97C95E00B1F"
-            BuildableName = "QuickStart.app"
-            BlueprintName = "QuickStart"
+            BlueprintIdentifier = "F31E6741F0276909A92E2EB7"
+            BuildableName = "SendbirdChatSDK.framework"
+            BlueprintName = "SendbirdChatSDK"
             ReferencedContainer = "container:QuickStart.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
