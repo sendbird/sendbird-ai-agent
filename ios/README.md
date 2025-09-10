@@ -181,6 +181,8 @@ extension MyViewController: SessionDelegate {
 }
 ```
 
+> When `successCompletion` is called with a token value in `sessionTokenDidRequire`, the SDK automatically updates the token, so no additional handling such as `updateSessionInfo` is required.
+
 ### Launch the messenger
 
 Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
