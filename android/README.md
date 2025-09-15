@@ -39,6 +39,8 @@ The minimum requirements for AI Agent for Android are the following.
 - Java 11 or higher
 - Android Gradle plugin 8.0.0 or higher
 - Android ViewBinding enabled
+- Sendbird Chat SDK 4.23.1 or higher
+- Sendbird UIKit 3.22.1 or higher
 
 ## Prerequisites
 
