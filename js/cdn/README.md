@@ -168,7 +168,7 @@ messenger.initialize({
 });
 ```
 
-The messenger view can be programmatically controlled using the `open()` and `close()` methods:
+The messenger view can be programmatically controlled using the `messenger.open()` and `messenger.close()` methods:
 
 ```javascript
 // Open the messenger view automatically after initialized
@@ -179,6 +179,31 @@ messenger.onLoad(() => {
 
 // Close the messenger view by clicking a button
 <button onClick={() => messenger.close()}>Close</button>;
+```
+
+The `messenger.setPosition` method allows you to customize its appearance and positioning:
+
+```js
+messenger.onLoad(() => {
+  /**
+   * @public
+   * @description Set the position of the fixed messenger.
+   * @param params.position - The position of the fixed messenger. (default: 'end-bottom')
+   *  - 'start-top': Top-left corner
+   *  - 'start-bottom': Bottom-left corner
+   *  - 'end-top': Top-right corner
+   *  - 'end-bottom': Bottom-right corner
+   * @param params.margin - The margin around the fixed messenger. (default: { top: 24, bottom: 24, start: 24, end: 24 })
+   *  - top: Margin from the top of the viewport
+   *  - bottom: Margin from the bottom of the viewport
+   *  - start: Margin from the start of the viewport
+   *  - end: Margin from the end of the viewport
+   * */
+  messenger.setPosition({
+    position: 'start-bottom',
+    margin: { top: 24, bottom: 24, start: 24, end: 24 }
+  })
+})
 ```
 
 To update the configurations:
