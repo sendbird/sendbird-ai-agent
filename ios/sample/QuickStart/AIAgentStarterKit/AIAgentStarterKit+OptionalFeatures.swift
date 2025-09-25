@@ -30,6 +30,8 @@ extension AIAgentStarterKit {
 extension AIAgentStarterKit {
     static var contextObjects = ContextObjects()
     
+    static var defaultLauncherOptions = SBALauncherOptions()
+    
     struct ContextObjects {
         var language: String? = nil
         var countryCode: String? = nil
