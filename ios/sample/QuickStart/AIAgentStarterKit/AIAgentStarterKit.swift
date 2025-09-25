@@ -66,7 +66,7 @@ extension AIAgentStarterKit {
         
         // (Optional) for log level setting.
         AIAgentStarterKit.shared.initParamsBuilder = { params in
-            params?.logLevel = .debug
+            params?.logLevel = .verbose
         }
         
         Task {
@@ -286,8 +286,10 @@ extension AIAgentStarterKit {
     static func attachLauncher(view: UIView? = nil) {
         AIAgentStarterKit.loadCustomSets()
         
+        var options = AIAgentStarterKit.defaultLauncherOptions
+        
         // INFO: Sample
-//        let options = SBALauncherOptions(
+//      options = SBALauncherOptions(
 //            parentView: nil, // the view that will be the launcher's parent view, if not, attach to window.
 //            entryPoint: .conversationList,
 //
@@ -315,6 +317,7 @@ extension AIAgentStarterKit {
                 params.language = self.contextObjects.language
                 params.countryCode = self.contextObjects.countryCode
                 params.context = self.contextObjects.context
+                params.options = options
             }
         }
         
