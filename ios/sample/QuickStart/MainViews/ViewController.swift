@@ -31,13 +31,13 @@ class ViewController: UIViewController {
         
         self.updateConnectedStatus()
         
-        AIAgentMessenger.authenticate(
-            aiAgentId: SampleTestInfo.aiAgentId
-        ) { params in
-            params.language = "en"
-        } completionHandler: { result in
-            print(result)
-        }
+//        AIAgentMessenger.authenticate(
+//            aiAgentId: SampleTestInfo.aiAgentId
+//        ) { params in
+//            params.language = "en"
+//        } completionHandler: { result in
+//            print(result)
+//        }
 
         
         #if INTERNAL_TEST
