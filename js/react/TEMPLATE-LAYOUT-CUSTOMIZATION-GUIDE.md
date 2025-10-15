@@ -285,10 +285,10 @@ Placeholder layouts handle different states:
 
 ```tsx
 PlaceholderLayout.components = {
-  Loading,     // Loading state
-  Error,       // Error state
-  NoChannels,  // Empty conversation list
-  NoMessages,  // Empty message list
+  Loading,     // Loading state, use PlaceholderLoadingProps type
+  Error,       // Error state, use PlaceholderErrorProps type
+  NoChannels,  // Empty conversation list, use PlaceholderBaseProps type
+  NoMessages,  // Empty message list, use PlaceholderBaseProps type
 }
 ```
 
