@@ -305,7 +305,8 @@ const CustomError = (props: PlaceholderErrorProps) => {
   return (
     <div>
       <h3>Something went wrong</h3>
-      <p>{props.error?.message}</p>
+      <p>{props.action?.label}</p>
+      <button onClick={props.action?.onClick}>{'Retry'}</button>
     </div>
   );
 };
