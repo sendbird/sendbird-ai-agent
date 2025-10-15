@@ -142,8 +142,6 @@ const EmptyComponent = () => <></>;
 export const MinimalIncomingMessage = () => {
   return (
     <IncomingMessageLayout.Template>
-      <IncomingMessageLayout.MessageBody />
-      <IncomingMessageLayout.TypingIndicator />
       {/* Hide these components by providing an empty component */}
       <IncomingMessageLayout.SenderAvatar component={EmptyComponent} />
       <IncomingMessageLayout.SenderName component={EmptyComponent} />
