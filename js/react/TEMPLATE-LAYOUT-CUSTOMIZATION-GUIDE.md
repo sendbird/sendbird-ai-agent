@@ -22,9 +22,6 @@
     - [PlaceholderLayout](#placeholderlayout)
       - [Customization Example](#customization-example-3)
   - [Putting It All Together](#putting-it-all-together)
-  - [Advanced Usage](#advanced-usage)
-    - [Accessing Layout Context](#accessing-layout-context)
-    - [Conditional Rendering](#conditional-rendering)
   - [Best Practices](#best-practices)
 
 ---
@@ -45,6 +42,8 @@ The template system uses React Context to inject custom components, allowing you
 - Replace individual sub-components while keeping the rest of the layout intact
 - Hide unwanted components by returning `null`
 - Maintain the original layout structure while changing specific behaviors
+
+**Note**: All layout customizations must be wrapped within `AgentProviderContainer` along with the `Conversation` component to function properly. The examples below show individual component customizations, but see the [Putting It All Together](#putting-it-all-together) section for the complete integration pattern.
 
 ---
 
@@ -85,6 +84,8 @@ IncomingMessageLayout.components = {
 
 #### Basic Customization Example
 
+You can customize individual components by providing custom implementations:
+
 ```tsx
 import { IncomingMessageLayout, IncomingMessageProps } from '@sendbird/ai-agent-messenger-react';
 
@@ -97,14 +98,37 @@ const CustomMessageBody = (props: IncomingMessageProps) => {
   );
 };
 
-// Using the custom component
+// Apply customization
 export const CustomIncomingMessage = () => {
-  const { Template } = IncomingMessageLayout.useContext();
+  return (
+    <AgentProviderContainer>
+      <IncomingMessageLayout.MessageBody component={CustomMessageBody} />
+      <Conversation />
+    </AgentProviderContainer>
+  );
+};
+```
+
+If you want to provide a completely custom template structure, define your custom template and pass it to `IncomingMessageLayout.Template` using the `template` prop to replace the entire layout:
+
+```tsx
+const CustomIncomingTemplate = (props: IncomingMessageProps) => {
+  const { components } = IncomingMessageLayout.useContext();
 
   return (
-    <Template>
-      <IncomingMessageLayout.MessageBody component={CustomMessageBody} />
-    </Template>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div>Custom Layout Header</div>
+      <components.MessageBody {...props} />
+      <components.SentTime {...props} />
+    </div>
+  );
+};
+
+export const CustomIncomingMessage = () => {
+  return (
+    <IncomingMessageLayout.Template template={CustomIncomingTemplate}>
+      <IncomingMessageLayout.SenderName component={CustomSenderName} />
+    </IncomingMessageLayout.Template>
   );
 };
 ```
@@ -112,6 +136,9 @@ export const CustomIncomingMessage = () => {
 #### Advanced Customization - Hiding Components
 
 ```tsx
+// Define an empty component to hide unwanted UI elements
+const EmptyComponent = () => <></>;
+
 export const MinimalIncomingMessage = () => {
   const { Template } = IncomingMessageLayout.useContext();
 
@@ -119,10 +146,10 @@ export const MinimalIncomingMessage = () => {
     <Template>
       <IncomingMessageLayout.MessageBody />
       <IncomingMessageLayout.TypingIndicator />
-      {/* Hide these components by returning null */}
-      <IncomingMessageLayout.SenderAvatar component={() => null} />
-      <IncomingMessageLayout.SenderName component={() => null} />
-      <IncomingMessageLayout.SentTime component={() => null} />
+      {/* Hide these components by providing an empty component */}
+      <IncomingMessageLayout.SenderAvatar component={EmptyComponent} />
+      <IncomingMessageLayout.SenderName component={EmptyComponent} />
+      <IncomingMessageLayout.SentTime component={EmptyComponent} />
     </Template>
   );
 };
@@ -142,24 +169,27 @@ OutgoingMessageLayout.components = {
 
 #### Customization Example
 
+You can create a custom template to completely control the layout structure:
+
 ```tsx
 import { OutgoingMessageLayout, OutgoingMessageProps } from '@sendbird/ai-agent-messenger-react';
 
-const CustomOutgoingBody = (props: OutgoingMessageProps) => {
+const OutgoingMessageTemplate = (props: OutgoingMessageProps) => {
+  const { components } = OutgoingMessageLayout.useContext();
+
   return (
-    <div style={{ backgroundColor: '#cce5ff', padding: '10px' }}>
-      {props.message}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+      <components.MessageBody {...props} />
       {props.sendingStatus === 'failed' && (
-        <span style={{ color: 'red' }}>Failed to send</span>
+        <span style={{ color: 'red', fontSize: '12px' }}>Failed to send</span>
       )}
+      <components.SentTime {...props} />
     </div>
   );
 };
 
 export const CustomOutgoingMessage = () => {
-  const { Template } = OutgoingMessageLayout.useContext();
-
-  return <Template template={CustomOutgoingBody} />;
+  return <OutgoingMessageLayout.Template template={OutgoingMessageTemplate} />;
 };
 ```
 
@@ -183,8 +213,8 @@ const CustomAdminMessage = (props: SystemMessageProps) => {
   if (props.messageType !== 'admin') return null;
 
   return (
-    <div style={{ textAlign: 'center', padding: '8px' }}>
-      =� {props.message}
+    <div style={{ textAlign: 'center', padding: '8px', color: '#666' }}>
+      {props.message}
     </div>
   );
 };
@@ -247,7 +277,6 @@ export const CustomConversation = () => {
   return (
     <>
       <ConversationLayout.Header component={CustomHeader} />
-      <ConversationLayout.Body />
       <ConversationLayout.Footer component={CustomFooter} />
     </>
   );
@@ -301,11 +330,11 @@ export const CustomPlaceholders = () => {
 
 ## Putting It All Together
 
-After defining your custom components, you need to provide them to the SDK. All layout customizations should be wrapped within `AgentUIProviderContainer`:
+After defining your custom components, you need to provide them to the SDK. All layout customizations should be wrapped within `AgentProviderContainer`:
 
 ```tsx
 import {
-  AgentUIProviderContainer,
+  AgentProviderContainer,
   Conversation,
   IncomingMessageLayout,
   OutgoingMessageLayout,
@@ -318,67 +347,29 @@ import {
 
 // Your custom components
 const CustomMessageBody = (props: IncomingMessageProps) => { /* ... */ };
-const CustomOutgoingBody = (props: OutgoingMessageProps) => { /* ... */ };
+const OutgoingMessageTemplate = (props: OutgoingMessageProps) => { /* ... */ };
 const CustomAdminMessage = (props: SystemMessageProps) => { /* ... */ };
 const CustomFooter = () => { /* ... */ };
 
 export const MyCustomMessenger = () => {
   return (
-    <AgentUIProviderContainer appearance={{ theme: 'light' }}>
+    <AgentProviderContainer appearance={{ theme: 'light' }}>
       {/* Apply all customizations */}
       <IncomingMessageLayout.Template>
         <IncomingMessageLayout.MessageBody component={CustomMessageBody} />
-        <IncomingMessageLayout.SenderAvatar component={() => null} />
+        <IncomingMessageLayout.SenderAvatar component={EmptyComponent} />
       </IncomingMessageLayout.Template>
 
-      <OutgoingMessageLayout.Template template={CustomOutgoingBody} />
+      <OutgoingMessageLayout.Template template={OutgoingMessageTemplate} />
 
       <SystemMessageLayout.AdminMessage component={CustomAdminMessage} />
 
       <ConversationLayout.Footer component={CustomFooter} />
 
-      {/* Your conversation component */}
+      {/* Conversation component renders the actual chat UI */}
       <Conversation channelUrl="your-channel-url" />
-    </AgentUIProviderContainer>
+    </AgentProviderContainer>
   );
-};
-```
-
----
-
-## Advanced Usage
-
-### Accessing Layout Context
-
-You can access the current layout configuration within custom components:
-
-```tsx
-const CustomMessageBody = (props: IncomingMessageProps) => {
-  const { components, Template } = IncomingMessageLayout.useContext();
-
-  // Access other components or the template
-  return (
-    <div>
-      {/* Your custom implementation */}
-      {props.message}
-    </div>
-  );
-};
-```
-
-### Conditional Rendering
-
-Customize components based on specific conditions:
-
-```tsx
-const ConditionalMessage = (props: IncomingMessageProps) => {
-  const { components } = IncomingMessageLayout.useContext();
-
-  if (props.isBotMessage) {
-    return <components.MessageBody {...props} />;
-  }
-
-  return <CustomUserMessage {...props} />;
 };
 ```
 
@@ -388,7 +379,7 @@ const ConditionalMessage = (props: IncomingMessageProps) => {
 
 1. **Maintain Prop Compatibility**: When creating custom components, ensure they accept and handle the same props as the default components.
 
-2. **Hiding Components**: To hide a component, pass a function that returns `null` to the `component` prop (e.g., `component={() => null}`). If you omit the component prop entirely, the default UI will be rendered instead.
+2. **Hiding Components**: To hide a component, pass an empty fragment (e.g., `const EmptyComponent = () => <></>`). If you omit the component prop entirely, the default UI will be rendered instead.
 
 3. **Preserve Context Access**: Custom components can access the layout context using `LayoutName.useContext()` to get access to other components.
 
