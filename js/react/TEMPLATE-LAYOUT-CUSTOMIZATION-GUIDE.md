@@ -295,13 +295,13 @@ PlaceholderLayout.components = {
 #### Customization Example
 
 ```tsx
-import { PlaceholderLayout, PlaceholderTemplateProps } from '@sendbird/ai-agent-messenger-react';
+import { PlaceholderLayout, PlaceholderLoadingProps, PlaceholderErrorProps } from '@sendbird/ai-agent-messenger-react';
 
-const CustomLoading = (props: PlaceholderTemplateProps) => {
+const CustomLoading = (props: PlaceholderLoadingProps) => {
   return <div>Loading conversations...</div>;
 };
 
-const CustomError = (props: PlaceholderTemplateProps) => {
+const CustomError = (props: PlaceholderErrorProps) => {
   return (
     <div>
       <h3>Something went wrong</h3>
