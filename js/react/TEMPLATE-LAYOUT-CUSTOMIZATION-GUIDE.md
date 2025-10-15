@@ -140,17 +140,15 @@ export const CustomIncomingMessage = () => {
 const EmptyComponent = () => <></>;
 
 export const MinimalIncomingMessage = () => {
-  const { Template } = IncomingMessageLayout.useContext();
-
   return (
-    <Template>
+    <IncomingMessageLayout.Template>
       <IncomingMessageLayout.MessageBody />
       <IncomingMessageLayout.TypingIndicator />
       {/* Hide these components by providing an empty component */}
       <IncomingMessageLayout.SenderAvatar component={EmptyComponent} />
       <IncomingMessageLayout.SenderName component={EmptyComponent} />
       <IncomingMessageLayout.SentTime component={EmptyComponent} />
-    </Template>
+    </IncomingMessageLayout.Template>
   );
 };
 ```
@@ -315,13 +313,11 @@ const CustomError = (props: PlaceholderTemplateProps) => {
 };
 
 export const CustomPlaceholders = () => {
-  const { Template } = PlaceholderLayout.useContext();
-
   return (
-    <Template>
+    <PlaceholderLayout.Template>
       <PlaceholderLayout.Loading component={CustomLoading} />
       <PlaceholderLayout.Error component={CustomError} />
-    </Template>
+    </PlaceholderLayout.Template>
   );
 };
 ```
