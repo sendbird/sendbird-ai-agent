@@ -21,13 +21,11 @@ To integrate Sendbird AI Agent into your application, follow these steps:
 
 1. **Create a Sendbird Account**: Sign up at [Sendbird Dashboard](https://dashboard.sendbird.com/).
 
-2. **Set Up Your Application**: Create a new application in the dashboard to obtain your Application ID.
+2. **Check the identifiers**: In the dashboard, go to **Channels → Messenger → Basic information** to check the Application ID and AI Agent ID.
 
-3. **Configure AI Agent**: In the dashboard, navigate to the AI Agent section to create and configure your AI agent, obtaining the necessary Agent ID.
+3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Sendbird AI Agent SDK into your application.
 
-4. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Sendbird AI Agent SDK into your application.
-
-5. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
+4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
 
 ## Repository Structure
 
