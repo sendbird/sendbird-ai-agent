@@ -5,12 +5,14 @@
 "SBA_Common_delete" = "Delete";
 "SBA_Common_settings" = "Settings";
 "SBA_Common_submit" = "Submit";
+"SBA_Common_confirm" = "Confirm";
 
 // MARK: - COMMON PHOTO
 "SBA_Common_Photo_camera" = "Camera";
 "SBA_Common_Photo_photoLibrary" = "Photo library";
 "SBA_Common_Photo_document" = "Files";
 "SBA_Common_Photo_viewLibrary" = "View library";
+"SBA_Common_Photo_gifNotSupported" = "GIF format is not supported.";
 
 // MARK: - COMMON TOAST
 "SBA_Common_Toast_successDownloadFile" = "File saved.";
@@ -44,7 +46,7 @@
 // MARK: - CONVERSATION LIST
 "SBA_Conversation_List_UnknownMessage_title" = "(Unknown message type)";
 "SBA_Conversation_List_UnknownMessage_description" = "Can't read this message.";
-"SBA_Conversation_List_WelcomeMessage_title" = "Powered by Sendbird";
+"SBA_Conversation_List_PoweredByMessage_title" = "Powered by Sendbird";
 
 // MARK: - MESSAGE TEMPLATE
 "SBA_Conversation_List_MessageTemplate_errorTitle" = "(Template error)";
@@ -55,40 +57,33 @@
 // MARK: - USER
 "SBA_Conversation_List_User_me" = "(You)";
 "SBA_Conversation_List_User_noName" = "(No name)";
-"SBA_Conversation_List_User_operator" = "Operator";
-
-// MARK: - FORM
-"SBA_Conversation_List_Form_optional" = "(optional)";
-"SBA_Conversation_List_Form_errorDefault" = "Please check the value";
-"SBA_Conversation_List_Form_errorRequired" = "This field is required";
-"SBA_Conversation_List_Form_fallbackMessage" = "Form type messages are not available in this version.";
-"SBA_Conversation_List_Form_submitDone" = "Submitted successfully";
-"SBA_Conversation_List_Form_noResponse" = "No response";
-
-// MARK: - FEEDBACK
-"SBA_Conversation_List_Feedback_commentTitle" = "Provide additional feedback (optional)";
-"SBA_Conversation_List_Feedback_commentPlaceholder" = "Leave a comment";
-"SBA_Conversation_List_Feedback_editComment" = "Edit comment";
-"SBA_Conversation_List_Feedback_remove" = "Remove feedback";
-"SBA_Conversation_List_Feedback_updateDone" = "Successfully changed";
 
 // MARK: - CONVERSATION CLOSED
 "SBA_Conversation_List_Closed_title" = "Your conversation has ended.";
 "SBA_Conversation_List_Closed_actionTitle" = "💬 Start a new conversation";
 "SBA_Conversation_List_Closed_actionInactiveTitle" = "💬 Return to conversation";
+"SBA_Conversation_List_Closed_talkToAgent" = "Talk to agent";
 
 // MARK: - CSAT
 "SBA_Conversation_List_CSAT_topTitleNormal" = "Your feedback matters to us";
-"SBA_Conversation_List_CSAT_topTitleSubmitted" = "✔️ Successfully submitted.";
+"SBA_Conversation_List_CSAT_topTitleSubmitted" = "Successfully submitted.";
 "SBA_Conversation_List_CSAT_resolutionTitle" = "Was your issue resolved?";
 "SBA_Conversation_List_CSAT_resolutionYes" = "Yes, thank you! 👍";
 "SBA_Conversation_List_CSAT_resolutionNo" = "No, that didn’t help.";
 "SBA_Conversation_List_CSAT_satisfactionTitle" = "How would you rate your experience?";
 "SBA_Conversation_List_CSAT_satisfactionInputPlaceholder" = "Share your feedback";
 "SBA_Conversation_List_CSAT_expiredTitle" = "We're sorry, the survey period has ended.";
+"SBA_Conversation_List_CSAT_followUpOptionalTitle" = "(optional)";
+"SBA_Conversation_List_CSAT_followUpFreeTextErrorTitle" = "This field is required.";
+"SBA_Conversation_List_CSAT_followUpSingleChoiceErrorTitle" = "This question is required";
 
 // MARK: - CONVERSATION LIST
-"SBA_ConversationList_Header_headerTitle" = "Conversation history";
+"SBA_ConversationList_Header_headerTitle" = "Conversations";
 "SBA_ConversationList_List_defaultTopic" = "No category";
+"SBA_ConversationList_List_closeStatus" = "Ended";
+"SBA_ConversationList_List_dateJustNow" = "Just now";
+"SBA_ConversationList_List_dateMinuteFormat" = "%d minutes ago";
+"SBA_ConversationList_List_dateHourFormat" = "%d hours ago";
 "SBA_ConversationList_Footer_actionTitle" = "💬 Start a new conversation";
 "SBA_ConversationList_Footer_actionInactiveTitle" = "💬 Return to conversation";
+"SBA_ConversationList_Footer_talkToAgent" = "Talk to agent";
