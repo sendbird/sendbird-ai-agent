@@ -29,29 +29,29 @@
     <string name="aa_text_orgname">Sendbird</string>
     <string name="aa_text_attribution_header">Powered by Sendbird</string>
     <string name="aa_text_attribution_header_url">https://sendbird.com/?utm_medium=product&amp;utm_source=aiagent&amp;utm_campaign=fy26-glbl-ai-agent-poweredby</string>
-    <string name="aa_text_conversation_history">Conversation history</string>
+    <string name="aa_text_conversations">Conversations</string>
     <string name="aa_text_conversation_topic_fallback_message">No category</string>
     <string name="aa_text_dialog_delete_message">Delete this message?</string>
     <string name="aa_text_button_cancel">Cancel</string>
     <string name="aa_text_button_delete">Delete</string>
-    <string name="aa_text_csat_title">Your feedback matters to us</string>
-    <string name="aa_text_cre_subtitle">Was your issue resolved?</string>
+    <string name="aa_text_csat_title">Your quick score helps us improve</string>
+    <string name="aa_text_cre_subtitle">Did we successfully resolve your issue?</string>
     <string name="aa_text_cre_resolved">Yes, thank you! 👍</string>
     <string name="aa_text_cre_not_resolved">No, that didn’t help.</string>
     <string name="aa_text_csat_submitted">Successfully submitted!</string>
-    <string name="aa_text_csat_subtitle">How would you rate your experience?</string>
+    <string name="aa_text_csat_subtitle">Did we successfully resolve your issue?</string>
     <string name="aa_text_csat_submit_expired">We’re sorry, the survey period has ended.</string>
-    <string name="aa_text_start_new_conversation">💬 Start a new conversation</string>
-    <string name="aa_text_return_to_conversation">💬 Return to conversation</string>
     <string name="aa_text_csat_dialog_csat_title_1">Very dissatisfied</string>
     <string name="aa_text_csat_dialog_csat_title_2">Dissatisfied</string>
     <string name="aa_text_csat_dialog_csat_title_3">Neutral</string>
     <string name="aa_text_csat_dialog_csat_title_4">Satisfied</string>
     <string name="aa_text_csat_dialog_csat_title_5">Very satisfied</string>
-    <string name="aa_text_csat_dialog_subtitle">Tell us more about your experience</string>
+    <string name="aa_text_csat_dialog_subtitle">How was your chat experience?</string>
     <string name="aa_text_csat_submit">Submit</string>
     <string name="aa_text_csat_dialog_edittext_hint"> Share your feedback</string>
-    <string name="aa_text_csat_notice_conversation_closed">Your conversation has ended.</string>
+    <string name="aa_text_csat_notice_conversation_closed">This conversation has ended.</string>
+    <string name="aa_text_symbol_bullet">•</string>
+    <string name="aa_text_ended">Ended</string>
 
     <string name="aa_text_relative_time_seconds">%1$d seconds ago</string>
     <string name="aa_text_relative_time_minutes">%1$d minutes ago</string>
@@ -60,4 +60,10 @@
     <string name="aa_text_relative_time_weeks">%1$d weeks ago</string>
     <string name="aa_text_relative_time_months">%1$d months ago</string>
     <string name="aa_text_relative_time_years">%1$d years ago</string>
+    <string name="aa_text_relative_time_just_now">Just now</string>
+    
+    <string name="aa_text_unread_count_limit_exceeded">%1$d+</string>
+    <string name="aa_text_talk_to_agent">Talk to agent</string>
+    <string name="aa_text_optional">(optional)</string>
+    <string name="aa_text_followup_field_required">This question is required</string>
 </resources>
