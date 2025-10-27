@@ -24,7 +24,9 @@
 		7C71E7DA9216F9F86D741BB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA91801860324BF877C2336 /* AppDelegate.swift */; };
 		812695A5C4C90FF7E4A3AB9B /* AIAgentStarterKit+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7036E74B93599B2C6902A6 /* AIAgentStarterKit+Utils.swift */; };
 		86EC93CA51BEB68AF7312F70 /* ExtendedSDKBridge+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C5A09D614DDB39BE743B /* ExtendedSDKBridge+UIKit.swift */; };
+		A41581E47D6F1E1336A9CF7E /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BD5090BE228A912E78D3193F /* Splash */; };
 		A5B4456ED545348FC3E7A084 /* ExtendedSDKBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8BFB011EB64C4DE076D77E /* ExtendedSDKBridge.swift */; };
+		A9C5AB9BFBD4689F43A508B6 /* Readme.snippets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B528870525B52F7BE84E1 /* Readme.snippets.swift */; };
 		C1761DEEDB4CB13BBDA9D9F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD615656F26260F609F3E19B /* ViewController.swift */; };
 		DF4E553ADFAE538E35089963 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D418B3D75969A462EC6516A /* ViewController.xib */; };
 		E9134545B3A6C96D0326C579 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B18CA8B590809EF2D58F4937 /* UserNotifications.framework */; };
@@ -52,6 +54,7 @@
 		AD4E20B9C1F1ED5A41FF3054 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD615656F26260F609F3E19B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B18CA8B590809EF2D58F4937 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		CB9B528870525B52F7BE84E1 /* Readme.snippets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.snippets.swift; sourceTree = "<group>"; };
 		CE063DDC7D9B81FE0ABF9B62 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		E4E342FCD112E18686E791A5 /* AIAgentStarterKit+OptionalFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+OptionalFeatures.swift"; sourceTree = "<group>"; };
 		EBF8C823A3DA666A6A5282FD /* AIAgentStarterKit+Customize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIAgentStarterKit+Customize.swift"; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05EF3B883F179441278AD591 /* SendbirdAIAgentMessenger in Frameworks */,
+				A41581E47D6F1E1336A9CF7E /* Splash in Frameworks */,
 				E9134545B3A6C96D0326C579 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +99,14 @@
 				B18CA8B590809EF2D58F4937 /* UserNotifications.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4E0BE7381A00D19B64ED6A6B /* PublicDocs */ = {
+			isa = PBXGroup;
+			children = (
+				CB9B528870525B52F7BE84E1 /* Readme.snippets.swift */,
+			);
+			path = PublicDocs;
 			sourceTree = "<group>";
 		};
 		6706FA635E64B8742A7073C9 /* MainViews */ = {
@@ -135,6 +147,7 @@
 				98CF6DE9A08CEAD352D0ADE5 /* AIAgentStarterKit */,
 				2354F861590FE3C54C5ED30E /* Extension */,
 				6706FA635E64B8742A7073C9 /* MainViews */,
+				4E0BE7381A00D19B64ED6A6B /* PublicDocs */,
 				77A90A160A1B249C81152D9E /* Resources */,
 			);
 			path = QuickStart;
@@ -174,13 +187,6 @@
 			path = ExtendedSDK;
 			sourceTree = "<group>";
 		};
-		"TEMP_E7192467-2C5D-4027-A17F-704A6E71EF68" /* Customization */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Customization;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,6 +205,7 @@
 			name = QuickStart;
 			packageProductDependencies = (
 				691283789AB5ADF115CAE086 /* SendbirdAIAgentMessenger */,
+				BD5090BE228A912E78D3193F /* Splash */,
 			);
 			productName = QuickStart;
 			productReference = 504F1132070E1B91DFDF8DBA /* AIAgent.app */;
@@ -253,6 +260,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */,
+				675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */,
 			);
 			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
@@ -302,6 +310,7 @@
 				6070A3E658A7A9FA041847B4 /* ExtendedSDKBridge+DeskSDK.swift in Sources */,
 				86EC93CA51BEB68AF7312F70 /* ExtendedSDKBridge+UIKit.swift in Sources */,
 				A5B4456ED545348FC3E7A084 /* ExtendedSDKBridge.swift in Sources */,
+				A9C5AB9BFBD4689F43A508B6 /* Readme.snippets.swift in Sources */,
 				1F5102365BF756B2470B6498 /* SampleTestInfo.swift in Sources */,
 				1F04F2DF6D87D1B0F8818CF5 /* UIViewController+Extension.swift in Sources */,
 				C1761DEEDB4CB13BBDA9D9F6 /* ViewController.swift in Sources */,
@@ -352,7 +361,7 @@
 					"@loader_path/Frameworks",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 0.10.1;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
@@ -360,7 +369,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_PACKAGE_NAME = SendbirdInternal;
 				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
 				SWIFT_VERSION = 5.10;
 				Swift_COMPILATION_MODE = wholemodule;
@@ -393,7 +401,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.10.1;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -402,7 +410,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_PACKAGE_NAME = SendbirdInternal;
 				SWIFT_VERSION = 5.10;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -549,7 +556,7 @@
 					"@loader_path/Frameworks",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 0.10.1;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
@@ -557,7 +564,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_PACKAGE_NAME = SendbirdInternal;
 				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
 				SWIFT_VERSION = 5.10;
 				Swift_COMPILATION_MODE = wholemodule;
@@ -591,7 +597,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.10.1;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -600,7 +606,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_PACKAGE_NAME = SendbirdInternal;
 				SWIFT_VERSION = 5.10;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -641,12 +646,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Splash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.16.0;
+			};
+		};
 		802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sendbird/sendbird-ai-agent-messenger-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.10.4;
+				minimumVersion = 1.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -656,6 +669,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 802787721279F86457E913BE /* XCRemoteSwiftPackageReference "sendbird-ai-agent-messenger-ios" */;
 			productName = SendbirdAIAgentMessenger;
+		};
+		BD5090BE228A912E78D3193F /* Splash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 675F8C38FD2AE3D8230AF692 /* XCRemoteSwiftPackageReference "Splash" */;
+			productName = Splash;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

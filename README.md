@@ -21,23 +21,44 @@ To integrate Sendbird AI Agent into your application, follow these steps:
 
 1. **Create a Sendbird Account**: Sign up at [Sendbird Dashboard](https://dashboard.sendbird.com/).
 
-2. **Set Up Your Application**: Create a new application in the dashboard to obtain your Application ID.
+2. **Check the identifiers**: In the dashboard, go to **Channels → Messenger → Basic information** to check the Application ID and AI Agent ID.
 
-3. **Configure AI Agent**: In the dashboard, navigate to the AI Agent section to create and configure your AI agent, obtaining the necessary Agent ID.
+3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Sendbird AI Agent SDK into your application.
 
-4. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Sendbird AI Agent SDK into your application.
-
-5. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
+4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
 
 ## Repository Structure
 
-This repository contains platform-specific implementations of the Sendbird AI Agent:
+This repository contains platform-specific implementations and customer guides for the Sendbird AI Agent:
 
-- **iOS**: Located in the `ios` directory, this includes the Swift Package Manager (SPM) compatible SDK for integrating the AI agent into iOS applications.
+- **JavaScript**: Located in the `js` directory, includes:
+  - Documentation guides for React and CDN integration  
+  - Interactive live examples
+  - Downloadable sample projects for local development
 
-- **Android**: Located in the `android` directory, this includes the necessary components for Android integration.
+- **iOS**: Located in the `ios` directory, includes Swift integration guides and sample applications.
 
-- **Web**: Located in the `js` directory, this includes JavaScript components for web integration.
+- **Android**: Located in the `android` directory, includes Android integration documentation.
+
+### JavaScript Sample Projects
+
+Each JavaScript platform directory contains a ready-to-run sample project:
+
+- **`js/react/sample/`**: Vite + TypeScript + React sample with full AI Agent integration
+- **`js/cdn/sample/`**: Vite + Vanilla JavaScript sample using CDN integration
+
+Both samples demonstrate:
+- Basic AI Agent Messenger integration
+- User authentication and session handling
+- Context configuration
+- Manual messenger controls
+
+To run the samples locally:
+```bash
+cd js/react/sample    # or js/cdn/sample
+npm install
+npm run dev
+```
 
 Each platform-specific directory contains its own README with detailed integration instructions.
 
