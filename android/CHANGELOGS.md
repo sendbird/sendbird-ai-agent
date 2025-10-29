@@ -1,5 +1,26 @@
 # Changelog
 
+## v1.2.0 (Oct 29, 2025)
+
+### Features
+
+- Implemented failed message retry with better UX and disabled retry during AI response
+  - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationViewModel`
+  - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationRepository`
+
+- Implemented support for closing conversation manually
+  - Added `fun closeConversation(handler: CompletionHandler?)` in `ConversationViewModel`
+  - Added `suspend fun awaitCloseConversation()` in `ConversationRepository`
+
+- An interface has been added to `ConversationHeaderView` that allows you to add and remove a custom view
+  - Added `fun addToRightSlot(view: View)`
+  - Added `fun addToLeftSlot(view: View)`
+  - Added `fun addToCenterSlot(view: View)`
+  - Added `fun removeFromRightSlot(view: View)`
+  - Added `fun removeFromLeftSlot(view: View)`
+  - Added `fun removeFromCenterSlot(view: View)`
+---
+
 ## v1.1.0 (Oct 2, 2025)
 
 ### Features
