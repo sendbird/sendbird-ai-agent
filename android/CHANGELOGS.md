@@ -24,6 +24,7 @@
 ## v1.1.0 (Oct 2, 2025)
 
 ### Features
+
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
