@@ -5,8 +5,8 @@
 ### Features
 
 - Implemented failed message retry with better UX and disabled retry during AI response
-  - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationViewModel`
   - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationRepository`
+  - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationViewModel`
 
 - Implemented support for closing conversation manually
   - Added `fun closeConversation(handler: CompletionHandler?)` in `ConversationViewModel`
@@ -24,6 +24,7 @@
 ## v1.1.0 (Oct 2, 2025)
 
 ### Features
+
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
