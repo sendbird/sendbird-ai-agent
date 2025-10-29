@@ -9,8 +9,8 @@
   - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationRepository`
 
 - Implemented support for closing conversation manually
-  - Added `fun closeConversation(handler: CompletionHandler?)` in `ConversationViewModel`
   - Added `suspend fun awaitCloseConversation()` in `ConversationRepository`
+  - Added `fun closeConversation(handler: CompletionHandler?)` in `ConversationViewModel`
 
 - An interface has been added to `ConversationHeaderView` that allows you to add and remove a custom view
   - Added `fun addToRightSlot(view: View)`
@@ -24,6 +24,7 @@
 ## v1.1.0 (Oct 2, 2025)
 
 ### Features
+
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
