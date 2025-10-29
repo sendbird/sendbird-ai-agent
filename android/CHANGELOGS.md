@@ -17,8 +17,8 @@
   - Added `fun addToLeftSlot(view: View)`
   - Added `fun addToCenterSlot(view: View)`
   - Added `fun removeFromRightSlot(view: View)`
-  - Added `fun removeFromLeftSlot(view: View)`
   - Added `fun removeFromCenterSlot(view: View)`
+  - Added `fun removeFromLeftSlot(view: View)`
 ---
 
 ## v1.1.0 (Oct 2, 2025)
