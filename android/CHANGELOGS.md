@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.2.1 (Oct 30, 2025)
+
+### Improvements
+
+- Enforced AppCompat theme for consistent UI across different app themes
+  - Applied fixed `Theme.AppCompat.DayNight.NoActionBar` theme to `MessengerLauncher` using `ContextThemeWrapper`
+  - Added explicit theme declarations in `AndroidManifest.xml` for `MessengerActivity` and `PhotoViewActivity`
+  - Ensures consistent UI rendering regardless of host app's theme (Material3, Material2, or AppCompat)
+
+- Updated CSAT string resources
+
+- Optimized CSAT message update logic in `MessageDiffCallback`
+
+---
+
 ## v1.2.0 (Oct 29, 2025)
 
 ### Features
@@ -24,7 +39,6 @@
 ## v1.1.0 (Oct 2, 2025)
 
 ### Features
-
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
