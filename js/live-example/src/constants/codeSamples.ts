@@ -119,7 +119,7 @@ messenger.updateConfig({
 });
 `,
 
-  unsupported_language: `// Example 2: Add support for a language not provided by Sendbird(Chinese)
+  unsupported_language: `// Example 2: Add support for a language not provided by Delight(Chinese)
 messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',

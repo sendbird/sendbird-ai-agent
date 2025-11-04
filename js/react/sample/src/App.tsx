@@ -46,7 +46,7 @@ function App() {
             <div>
               <h1 className="text-2xl font-bold text-gray-900">React SDK Interactive Playground</h1>
               <p className="text-sm text-gray-600 mt-1">
-                Learn how to integrate Sendbird AI Agent Messenger with React
+                Learn how to integrate Delight AI Agent Messenger with React
               </p>
             </div>
             <div className="flex gap-2">

@@ -42,7 +42,7 @@ export function CodeExamples() {
             • Install: <code className="bg-yellow-100 px-1 rounded">npm i @sendbird/ai-agent-messenger-react</code>
           </li>
           <li>• Import CSS in your main file</li>
-          <li>• Get credentials from Sendbird Dashboard</li>
+          <li>• Get credentials from Delight AI Dashboard</li>
           <li>• Check console for debug logs</li>
         </ul>
       </div>
