@@ -70,7 +70,7 @@ The minimum requirements for AI Agent for Android are the following.
 
 ### Features
 
-**Sendbird AI Agent Messenger SDK has been officially released!**
+**Delight AI Agent Messenger SDK has been officially released!**
 This SDK enables you to seamlessly integrate an enterprise-grade AI-powered chat agent into your Android applications.
 
 #### 1. Attaching the MessengerLauncher into the Screen

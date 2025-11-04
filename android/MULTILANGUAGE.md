@@ -1,6 +1,6 @@
-# Sendbird AI Agent SDK Localization Guide
+# Delight AI Agent SDK Localization Guide
 
-This guide explains how to localize the UI strings used in the Sendbird AI Agent SDK for Android to support multiple languages in your application.
+This guide explains how to localize the UI strings used in the Delight AI Agent SDK for Android to support multiple languages in your application.
 
 ---
 
@@ -15,7 +15,7 @@ This guide explains how to localize the UI strings used in the Sendbird AI Agent
 
 ## Overview
 
-Sendbird AI Agent SDK includes a default set of user-facing string resources such as button labels, error messages, input hints, and system texts.
+Delight AI Agent SDK includes a default set of user-facing string resources such as button labels, error messages, input hints, and system texts.
 To support internationalization, you can translate these strings into multiple languages using standard Android localization patterns with `strings.xml`.
 
 > **Built-in languages:**  
@@ -38,7 +38,7 @@ To support internationalization, you can translate these strings into multiple l
 
 ## Default Strings Used by the SDK
 
-The Sendbird AI Agent SDK uses a predefined set of string keys for user-facing texts such as messages, errors, and labels.
+The Delight AI Agent SDK uses a predefined set of string keys for user-facing texts such as messages, errors, and labels.
 
 You can download or view the full list of default strings here:
 

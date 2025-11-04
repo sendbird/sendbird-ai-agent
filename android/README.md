@@ -1,10 +1,10 @@
 [iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / **Android** / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
 
-# Sendbird AI Agent Quickstart guide (Android)
+# Delight AI Agent Quickstart guide (Android)
 
-The **Sendbird AI Agent Messenger** allows seamless integration of chatbot features into your Android application. Follow the steps below to initialize and utilize the SDK effectively.
+The **Delight AI Agent Messenger** allows seamless integration of chatbot features into your Android application. Follow the steps below to initialize and utilize the SDK effectively.
 
-- [Sendbird AI Agent Quickstart guide (Android)](#sendbird-ai-agent-quickstart-guide-android)
+- [Sendbird AI Agent Quickstart guide (Android)](#delight-ai-agent-quickstart-guide-android)
   - [Requirements](#requirements)
   - [Prerequisites](#prerequisites)
   - [Getting started](#getting-started)
@@ -44,9 +44,9 @@ The minimum requirements for AI Agent for Android are the following.
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
+Before you start, you'll need your **Application ID** and **AI Agent ID**.
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
+You can find it under the **Channels** > **Messenger** menu on the Delight AI Dashboard.
 
 ![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
 
@@ -116,7 +116,7 @@ Then, click **'Sync Now'** in the Gradle toolbar to apply all changes.
 
 ### Step 3. Initialize AI Agent SDK
 
-To properly integrate and initialize Sendbird AI Agent in your Android project, [create](#how-to-create-the-application-file) and add the following code to your `Application` class file.
+To properly integrate and initialize Delight AI Agent in your Android project, [create](#how-to-create-the-application-file) and add the following code to your `Application` class file.
 
 ```kotlin
 import android.app.Application
@@ -263,7 +263,7 @@ There are two ways to display the messenger:
 1. Using the launcher button
 2. Opening the conversation channel in full-screen mode
 
->__Note__: Replace `your_ai_agent_id` with your AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
+>__Note__: Replace `your_ai_agent_id` with your AI agent ID which you can obtain from the Delight AI Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
 
 #### 1. Using the launcher button
 
@@ -324,13 +324,13 @@ For more details, refer to the [Push notifications](https://sendbird.com/docs/ch
 
 #### Register for push notifications
 
-To receive push notifications from Sendbird, register the device token by setting up a custom `FirebaseMessagingService`.  
+To receive push notifications from Delight AI server, register the device token by setting up a custom `FirebaseMessagingService`.  
 Call the following method after login:
 
 ```kotlin
 SendbirdPushHelper.registerHandler(MyFirebaseMessagingService())
 ```
-This will register the FCM token and automatically send it to the Sendbird server.
+This will register the FCM token and automatically send it to the Delight AI server.
 
 #### Unregister for Push Notifications
 
@@ -343,7 +343,7 @@ This is typically used on logout or when push notifications should be disabled.
 
 #### Handling Push Notifications
 
-Sendbird push payloads will be delivered via FCM and include a sendbird field in the RemoteMessage data.
+Push payloads will be delivered via FCM and include a `sendbird` field in the RemoteMessage data.
 
 In your custom FirebaseMessagingService, override onMessageReceived() like this:
 ```kotlin
