@@ -6,6 +6,20 @@ The launcher's appearance such as an icon, its color and size can be customized 
 
 <img width="441" height="737" src="https://github.com/user-attachments/assets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
 
+This guide explains the following features of the launcher:
+
+- [Key features](#key-features)
+    - [How to attach](#how-to-attach)
+    - [Start a conversation and customize the entry point](#start-a-conversation-and-customize-the-entry-point)
+    - [Set the launcher position](#set-the-launcher-position)
+    - [Customize the launcher appearance](#customize-the-launchers-appearance)
+- [Usage](#usage)
+    - [Basic](#basic)
+    - [Advanced](#advanced)
+    - [Custom click handler](#custom-click-handler)
+    - [More configuration options](#more-configuration-options)
+- [API reference](#api-references)
+
 ---
 
 ## Key features
@@ -143,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### Custom click handling
+### Custom click handler
 
 You can also customize the logic of the launcher click handler. The following snippet overrides the default `onMessengerLauncherClickListener()` to execute a custom behavior when the launcher is clicked, while still allowing manual control over conversation launch.
 
@@ -271,10 +285,10 @@ The following table lists the configuration options in `LauncherMargin`, which c
 | `bottom` | `Int` | Bottom margin in dp units.  |
 
 ```kotlin
-// 16dp margins on all sides
+// 16dp margins on all sides.
 val margin = LauncherMargin(16, 16, 16, 16)
 
-// Custom margins
+// Custom margins.
 val customMargin = LauncherMargin(
     start = 20,
     top = 10,
