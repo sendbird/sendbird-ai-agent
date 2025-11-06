@@ -288,6 +288,8 @@ val customMargin = LauncherMargin(
 
 ## API References
 
+// to Leo: 여기 걍 아래 테이블 하나로 퉁치면 안될지?... 설명 다 테이블 안에 넣구요
+
 | Method Name | Parameters | Description | Return Type |
 |-------------|------------|-------------|-------------|
 | `attach` | None | Attaches launcher to **FragmentActivity** | `Unit` |
