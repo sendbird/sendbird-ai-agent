@@ -196,7 +196,7 @@ Use Manual Session when you have an existing user authentication system and want
 - Track user activity and provide personalized experiences
 
 ```kotlin
-val manualSessionInfo = ManualSessionInfo(
+val manualSessionInfo = SessionInfo.ManualSessionInfo(
     userId = USER_ID,
     sessionToken = SESSION_TOKEN,
     sessionHandler = YourSessionHandler()
@@ -216,7 +216,7 @@ Use Anonymous Session when you want to:
 The server automatically creates a temporary user identity - no authentication required.
 
 ```kotlin
-val anonymousSessionInfo = AnonymousSessionInfo()
+val anonymousSessionInfo = SessionInfo.AnonymousSessionInfo()
 AIAgentMessenger.updateSessionInfo(anonymousSessionInfo)
 ```
 
@@ -239,7 +239,7 @@ fun onLoginSuccess(userId: String, sessionToken: String) {
 
     // Update AI Agent Messenger session
     AIAgentMessenger.updateSessionInfo(
-        ManualSessionInfo(
+        SessionInfo.ManualSessionInfo(
             userId = userId,
             sessionToken = sessionToken,
             sessionHandler = YourSessionHandler()
@@ -257,19 +257,15 @@ class YourApplication : Application(), MessengerInitResultHandler {
         // Check if user credentials exist in your app
         val userInfo = PreferenceUtils.getUserInfo()
 
-        val sessionInfo = if (userInfo != null) {
+        if (userInfo != null) {
             // User is already logged in - use Manual Session
-            SessionInfo.ManualSessionInfo(
+            val sessionInfo = SessionInfo.ManualSessionInfo(
                 userId = userInfo.userId,
                 sessionToken = userInfo.sessionToken,
                 sessionHandler = YourSessionHandler()
             )
-        } else {
-            // No credentials - use Anonymous Session
-            SessionInfo.AnonymousSessionInfo()
+            AIAgentMessenger.updateSessionInfo(sessionInfo)
         }
-
-        AIAgentMessenger.updateSessionInfo(sessionInfo)
     }
 }
 ```
@@ -279,7 +275,7 @@ Set up anonymous session immediately after SDK initialization or when starting a
 
 ```kotlin
 // No authentication required - set up immediately
-AIAgentMessenger.updateSessionInfo(AnonymousSessionInfo())
+AIAgentMessenger.updateSessionInfo(SessionInfo.AnonymousSessionInfo())
 ```
 
 ### Handle session expiration
@@ -336,7 +332,7 @@ Pass your SessionHandler when creating the ManualSessionInfo:
 ```kotlin
 val sessionHandler = YourSessionHandler()
 
-val manualSessionInfo = ManualSessionInfo(
+val manualSessionInfo = SessionInfo.ManualSessionInfo(
     userId = "USER_ID",
     sessionToken = "SESSION_TOKEN",
     sessionHandler = sessionHandler
