@@ -262,7 +262,7 @@ The following table lists the configuration options in `LaunchMode`, which can b
 
 | Value | Description |
 |-------|-------------|
-| `EXPANDED` | The messenger opens as a full screen. |
+| `EXPANDED` | The messenger opens full-screen. |
 | `ANCHORED` | The messenger opens like an anchored box near the launcher. |
 
 ```kotlin
@@ -279,10 +279,10 @@ The following table lists the configuration options in `LauncherMargin`, which c
 
 | Property | Type | Description              |
 |----------|------|--------------------------|
-| `start` | `Int` | Start margin in dp units. |
-| `top` | `Int` | Top margin in dp units.   |
-| `end` | `Int` | End margin in dp units.     |
-| `bottom` | `Int` | Bottom margin in dp units.  |
+| `start` | `Int` | Start margin in `dp` units. |
+| `top` | `Int` | Top margin in `dp` units.   |
+| `end` | `Int` | End margin in `dp` units.     |
+| `bottom` | `Int` | Bottom margin in `dp` units.  |
 
 ```kotlin
 // 16dp margins on all sides.
@@ -303,9 +303,8 @@ val customMargin = LauncherMargin(
 
 | Method Name | Parameters | Description | Return Type |
 |-------------|------------|-------------|-------------|
-| `attach` | None | Attaches the **MessengerLauncher** to the current **FragmentActivity**. Must be called from the main thread. | `Unit` |
-| `detach` | None | Removes the launcher from the current activity. Safe to call multiple times.
- | `Unit` |
-| `openConversation` | `channelUrl: String? = null` | Opens a specific conversation by channel URL. If `channelUrl` is null, opens the default channel. | `Unit` |
-| `openConversationList` | None | Opens the conversation list view showing all user conversations. | `Unit` |
-| `closeMessenger` | None | Closes any open messenger screens and returns user to the previous screen. | `Unit` |
+| `attach` | None | Attaches the `MessengerLauncher` to the current `FragmentActivity`. This must be called from the main thread. | `Unit` |
+| `detach` | None | Removes the launcher from the current activity. This can be called multiple times.| `Unit` |
+| `openConversation` | `channelUrl: String? = null` | Opens a specific conversation with its channel URL. If `channelUrl` is null, it opens the default channel. | `Unit` |
+| `openConversationList` | None | Opens the conversation list view, showing all user conversations. | `Unit` |
+| `closeMessenger` | None | Closes any open messenger screens and returns to the previous screen. | `Unit` |
