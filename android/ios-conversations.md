@@ -1,30 +1,32 @@
 # Conversations
 
-In Delight AI agent, **conversation** refers to a channel where an **AI Agent** communicates with a user. Delight AI agent supports both **Single active conversation** and **Multiple active conversations** modes, with multiple active conversations being the default setting.
+In Delight AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Delight AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
-When a launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
+When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
-**Conversation Mode Comparison:**
-- **Single Active Conversation**: One ongoing conversation per AI agent.
-- **Multiple Active Conversations** (Default): Users can have multiple concurrent conversations with the same AI agent. Each conversation maintains its own context and history. Best for complex use cases where users need to maintain separate conversation threads.
+| Feature| Single active conversation| Multiple active conversations|
+|-------------------|------------------|----------------|
+| Number of active conversation| A user can have only one active conversation with your AI agent at a time.| A user can have multiple active conversations with your AI agent at the same time. (Default)|
+| Starting a new conversation | A new conversation can't be created if there is an active conversation at the moment. The existing conversation must end first.| New conversations can be created anytime using `AIAgentMessenger.createConversation()`.|
+
+>__Note__: Whichever conversation mode you choose, if there is no active conversation, a new conversation is automatically created and the user can start a dialogue with your AI agent. This provides seamless user experience without requiring manual conversation setup.
+
 
 ---
 
 ## Start a conversation
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Delight AI agent SDK supports two launch methods: `Launcher` and directly calling `present`. The following table describes the characteristics of each class.
 
-Once you determined which conversation mode to opt for, conversations can begin through both **Launcher** and **Direct Presentation** methods.
-
-**Method Comparison:**
-- **Launcher**: Provides a persistent floating button UI. Best for applications where AI agent should be accessible from any screen. The launcher automatically handles conversation creation and presentation.
-- **Direct Presentation**: Programmatically presents conversation or conversation list screens. Best for custom UI flows, button-triggered interactions, or when you need fine-grained control over when conversations are shown.
-
-If there is no ongoing conversation, a new conversation is automatically created to start the dialogue. This provides seamless user experience without requiring manual conversation setup.
+| Launch Method | Description | Recommended Use Case |
+|----------------|--------------|-----------------------|
+| Launcher | Provides a persistent floating button UI that automatically handles conversation creation and presentation. | Ideal when the AI agent should be accessible from any screen within the app. |
+| Direct Presentation | Programmatically presents a conversation or conversation list screen, offering fine-grained control over timing and triggers. | Best for custom UI flows, button-triggered interactions, or controlled conversation launches. |
 
 ### With Launcher
 
-The **Launcher** provides a floating button UI approach for starting conversations. Simply calling `attachLauncher(aiAgentId:)` enables automatic conversation start when the launcher is clicked.
+`Launcher` provides a floating UI approach for launching the messenger and starting a conversation. With `SBALauncherOptions.entryPoint`, you can lead the user to either a conversation view or a conversation list view. In the snippet below, simply calling `attachLauncher()` automatically starts a conversation when the launcher is clicked. If you wish to show a conversation list first, set `entryPoint` to `conversationList`.
 
-For detailed **Launcher** API reference and comprehensive integration guide, see [Launcher Documentation](launcher.md).
+For detailed API reference and comprehensive integration guide, see [our Launcher guide](launcher.md).
 
 ```swift
 import SendbirdAIAgentMessenger
@@ -35,7 +37,7 @@ AIAgentMessenger.attachLauncher(
 )
 ```
 
-#### Configure launcher to open conversation directly
+#### Launch a conversation
 
 By default, the launcher opens a conversation when clicked. You can explicitly configure this behavior:
 
@@ -70,7 +72,7 @@ AIAgentMessenger.attachLauncher(
 }
 ```
 
-#### Configure launcher to open conversation list
+#### Launch a conversation list
 
 You can configure the launcher to show the conversation list first:
 
@@ -92,9 +94,12 @@ AIAgentMessenger.attachLauncher(
 
 ### With Direct Presentation
 
-**Direct Presentation** provides a programmatic approach for starting conversations without the launcher button.
+Direct Presentation provides a programmatic approach without the launcher button for starting a conversation. Like `Launcher`, you can lead the user to either a conversation view or a conversation list view. 
 
-#### Launch conversations
+When directly opening a conversation, use `AIAgentMessenger.presentConversation()` and pass `channelURL` to open an existing channel. If `nil`, a new conversation is created.
+If you wish to open a conversation list first, use `AIAgentMessenger.presentConversationList()`.
+
+#### Launch a conversation
 
 ```swift
 // Start new conversation directly
@@ -121,7 +126,7 @@ AIAgentMessenger.presentConversation(
 }
 ```
 
-#### Launch conversation list
+#### Launch a conversation list
 
 ```swift
 // Open conversation list directly
@@ -140,20 +145,19 @@ AIAgentMessenger.presentConversationList(
 
 Beside the conversation mode, you can further configure how the conversation channels are created and built.
 
-When a conversation begins, you can pass over user information to the channel so that AI agent can provide more personalized assistance to the user. This information is contained in a `context` object, which can be set at the creation of the conversation.
+When a new conversation begins, you can pass over user information to the channel so that AI agent can provide more personalized assistance to the user. This information is contained in a `context` object, which can be set at the creation of the conversation.
 
 Also, you can open a specific conversation channel by passing its URL to either the launcher or direct presentation methods, or manually create a new one while in multiple conversation mode.
 
 ### Context object for personalized conversation
 
-The **Context Object** allows you to provide personalized information to AI agents, including customer details like country code and language settings. This context can be set when creating conversations to enhance the conversational experience.
+The `context` object allows you to provide user's information to AI agents for more personalized service, such as their country code and language preference. This context can be set when creating conversations to enhance the user experience. The following table lists configuration classes where you can initialize a `context` object.
 
-// turn the below info into a table with a list of params, their data type and description.
-
-Context objects can be configured through:
-- **ConversationSettingsParams** for direct presentation
-- **ConversationCreateParams** for manual conversation creation
-- **LauncherSettingsParams** for launcher configuration
+| Class | Purpose | 
+|--------|----------|
+| `ConversationSettingsParams` | Configures the conversation settings when launching via `presentConversation()`. | 
+| `ConversationCreateParams` | Manually creates a new conversation via `createConversation()`. | 
+| `LauncherSettingsParams` | Configures the floating launcher’s behavior and appearance. |
 
 ```swift
 // Setting context through ConversationSettingsParams
@@ -193,7 +197,7 @@ AIAgentMessenger.createConversation(
 
 You can open a specific conversation by passing its channel URL to either the launcher or direct presentation methods:
 
-#### With Launcher
+#### With `Launcher`
 
 ```swift
 // Configure launcher to open specific conversation
@@ -223,9 +227,9 @@ AIAgentMessenger.presentConversation(
 
 ### Start a conversation in multiple conversation mode
 
-Only in **Multiple active conversation** mode, you can manually create a conversation using `AIAgentMessenger.createConversation(aiAgentId:paramsBuilder:completionHandler:)`.
+Multiple active conversation mode allows users to simultaneously communicate with your AI agent in different channels. In this case, use `AIAgentMessenger.createConversation(aiAgentId:paramsBuilder:completionHandler:)` to create a new conversation whenever needed.
 
->__Note__: In **Single active conversation** mode, a new conversation can't be created as long as there is an active conversation.
+>__Note__: In single conversation mode, a new conversation can't be created if there is an active conversation.
 
 ```swift
 // Create conversation manually
@@ -264,19 +268,19 @@ AIAgentMessenger.createConversation(
 }
 ```
 
-### Presentation Methods
+### Presentation methods
 
-**AIAgentMessenger** provides the following public methods for conversation management:
+`AIAgentMessenger` provides the following public methods for conversation management:
 
-| Method | Parameters | Description | Usage Scenario |
+| Method | Parameters | Description | Usage case |
 |--------|------------|-------------|----------------|
 | `presentConversation` | aiAgentId, channelURL?, paramsBuilder? | Presents a conversation screen | Use when you want to show a specific or new conversation |
 | `presentConversationList` | aiAgentId, paramsBuilder? | Presents the conversation list screen | Use when you want to show all conversations to let user choose |
 | `attachLauncher` | aiAgentId, channelURL?, paramsBuilder? | Attaches launcher button to screen | Use when you want a persistent floating button |
 
-#### Complete integration example
+#### Full code for integration
 
-The following example demonstrates how to integrate all conversation launch methods in a single view controller. It shows the launcher setup, direct conversation creation, conversation list presentation, and fullscreen conversation presentation.
+The following example demonstrates how to integrate all conversation launch methods in a single view controller. It shows the launcher setup, direct conversation creation, conversation list presentation, and full-screen conversation presentation.
 
 ```swift
 import UIKit
@@ -369,7 +373,7 @@ class MainViewController: UIViewController {
 
 ## API Reference
 
-### AIAgentMessenger Conversation Methods
+### AIAgentMessenger conversation ethods
 
 Core methods for managing conversations in the AI Agent Messenger SDK.
 
@@ -377,21 +381,21 @@ Core methods for managing conversations in the AI Agent Messenger SDK.
 
 Presents a conversation screen in full-screen or modal mode.
 
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+| `channelURL` | `String?` | (Optional) The channel URL. If `nil`, a new conversation is created. |
+| `paramsBuilder` | `ConversationSettingsParamsBuilder?` | (Optional) A closure used to configure conversation settings. |
+
+
 ```swift
 static func presentConversation(
     aiAgentId: String,
     channelURL: String? = nil,
     paramsBuilder: ConversationSettingsParamsBuilder? = nil
 )
-```
 
-**Parameters:**
-- `aiAgentId`: The ID of the AI agent
-- `channelURL`: Optional channel URL. If nil, creates new conversation
-- `paramsBuilder`: Optional closure to configure conversation settings
-
-**Example:**
-```swift
+// Example: Present an existing conversation
 AIAgentMessenger.presentConversation(
     aiAgentId: "your_ai_agent_id",
     channelURL: "sendbird_group_channel_123"
@@ -405,19 +409,19 @@ AIAgentMessenger.presentConversation(
 
 Presents the conversation list screen.
 
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+| `paramsBuilder` | `ConversationSettingsParamsBuilder?` | (Optional) A closure used to configure the conversation list settings. |
+
+
 ```swift
 static func presentConversationList(
     aiAgentId: String,
     paramsBuilder: ConversationSettingsParamsBuilder? = nil
 )
-```
 
-**Parameters:**
-- `aiAgentId`: The ID of the AI agent
-- `paramsBuilder`: Optional closure to configure list settings
-
-**Example:**
-```swift
+// Example: Present a conversation list
 AIAgentMessenger.presentConversationList(
     aiAgentId: "your_ai_agent_id"
 ) { params in
@@ -430,21 +434,20 @@ AIAgentMessenger.presentConversationList(
 
 Creates a new conversation with an AI agent.
 
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+| `paramsBuilder` | `ConversationCreateParamsBuilder?` | (Optional) A closure used to configure conversation creation parameters. |
+| `completionHandler` | `ChannelURLResponseHandler` | A completion handler that returns the created channel URL or an error. |
+
 ```swift
 static func createConversation(
     aiAgentId: String,
     paramsBuilder: ConversationCreateParamsBuilder? = nil,
     completionHandler: @escaping ChannelURLResponseHandler
 )
-```
 
-**Parameters:**
-- `aiAgentId`: The ID of the AI agent
-- `paramsBuilder`: Optional closure to configure conversation creation
-- `completionHandler`: Closure that receives created channel URL or error
-
-**Example:**
-```swift
+// Example: Create a new conversation
 AIAgentMessenger.createConversation(
     aiAgentId: "your_ai_agent_id"
 ) { params in
@@ -472,7 +475,6 @@ Configuration parameters for conversation and conversation list screens.
 | `countryCode` | String? | Country code (ISO 3166) | nil |
 | `context` | [String: String] | Additional metadata for AI agent | [:] |
 
-**Example:**
 ```swift
 let params = ConversationSettingsParams()
 params.parent = self
@@ -492,7 +494,6 @@ Parameters for creating new conversations with AI agents.
 | `countryCode` | String? | Country code (ISO 3166) | nil |
 | `context` | [String: String] | Additional metadata for AI agent | [:] |
 
-**Example:**
 ```swift
 let params = ConversationCreateParams()
 params.language = "ko-KR"
@@ -514,7 +515,6 @@ Configuration parameters for the launcher button.
 | `countryCode` | String? | Country code (ISO 3166) | nil |
 | `context` | [String: String] | Additional metadata for AI agent | [:] |
 
-**Example:**
 ```swift
 let params = LauncherSettingsParams()
 params.options.layout.position = .trailingBottom
@@ -559,7 +559,6 @@ Standard UIKit presentation styles supported by the SDK.
 | `.currentContext` | Presents over current context |
 | `.overFullScreen` | Presents over full screen with transparency |
 
-**Example:**
 ```swift
 AIAgentMessenger.presentConversation(
     aiAgentId: "agent_id"

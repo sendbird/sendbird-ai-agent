@@ -42,7 +42,7 @@ val messengerLauncher = MessengerLauncher(
 messengerLauncher.attach() // After attach(), clicking launcher automatically starts a conversation.
 ```
 
-#### Launch conversations
+#### Launch a conversation
 
 ```kotlin
 // Direct conversation launch through MessengerLauncher
@@ -52,7 +52,7 @@ messengerLauncher.openConversation()
 messengerLauncher.openConversation(channelUrl = "sendbird_group_channel_12345")
 ```
 
-#### Launch conversation list
+#### Launch a conversation list
 
 ```kotlin
 // Launch conversation list through MessengerLauncher
@@ -63,7 +63,7 @@ messengerLauncher.openConversationList()
 
 `MessengerActivity` provides a full-screen approach for launching the messenger and starting a conversation. Like `MessengerLauncher`, you can lead the user to either a conversation view or a conversation list view. What differentiates the two is the `conversationChannelUrl` parameter. When creating a new `intent` instance, if you don't use the parameter, it leads the user to their conversation list. If the `conversationChannelUrl` is `null`, it creates a new conversation. If the URL is specified, it opens the existing channel.
 
-#### Launch conversations
+#### Launch a conversation
 
 ```kotlin
 // Start a new conversation in full-screen mode.
@@ -88,7 +88,7 @@ val existingConversationIntent = MessengerActivity.newIntentForConversation(
 startActivity(existingConversationIntent)
 ```
 
-#### Launch conversation list
+#### Launch a conversation list
 
 ```kotlin
 // Open the conversation list in full-screen mode
@@ -119,7 +119,7 @@ The `context` object allows you to provide user's information to AI agents for m
 
 | Class | Purpose | Used With |
 |--------|----------|------------|
-| `ConversationSettingsParams` | Configures conversation settings when launching via `MessengerActivity`. | `MessengerActivity.newIntentForConversation()`, `MessengerActivity.newIntentForConversationList()` |
+| `ConversationSettingsParams` | Configures the conversation settings when launching via `MessengerActivity`. | `MessengerActivity.newIntentForConversation()`, `MessengerActivity.newIntentForConversationList()` |
 | `ConversationCreateParams` | Manually creates a new conversation. | `AIAgentMessenger.createConversation()` |
 | `LauncherSettingsParams` | Configures the floating launcher’s behavior and appearance. | `MessengerLauncher` constructor |
 
