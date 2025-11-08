@@ -8,38 +8,40 @@ Delight AI agent messenger provides various message types to enable rich and int
 
 Delight AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
 
-| Message Type | Definition | Content Format | Use Cases |
+|  Type | Description | Content format | Use cases |
 |-------------|------------|----------------|-----------|
-| **Text Message** | Regular text-based communication | Plain text | Basic conversational interactions, Q&A, general dialogue |
-| **Image Message** | Visual file sharing | Image files (PNG, JPG, etc.) | Visual communication, screenshots, diagrams |
-| **File Message** | Document and file sharing | Various file formats | Document sharing, attachments, downloadable resources |
-| **Rich Message** | Template-based interactive UI | Structured JSON templates | Product displays, carousels, forms, interactive elements |
+| [Text message](#text-message) | Regular text-based communication | Plain text | Basic conversational interactions, Q&A, general dialogue |
+| [Image message](#image-message) | Visual file sharing | Image files in `PNG` and `JPG` only | Visual communication, screenshots, diagrams |
+| [File message](#file-message) | Document and file sharing | Various file formats | Document sharing, attachments, downloadable resources |
+| [Rich message](#rich-message)| Template-based interactive UI | Structured JSON templates | Product displays, carousels, forms, interactive elements |
 
 ### Text Message
 
 **Text Message** represents regular text-based communication between users and AI agents. These messages support plain text content and are the foundation of conversational interactions.
 
-- **Content**: Plain text messages.
-- **Use case**: Basic conversational interactions.
-- **Support**: Full text rendering with proper formatting.
+- Content: Plain text messages. Markdown supported.
+- Use case: Basic conversational interactions.
+- Support: Full text rendering with proper formatting.
 
 ### Image Message
 
 **Image Message** enables sharing of image files within conversations. This message type supports common image formats for visual communication.
 
-- **Supported formats**: `JPEG`, `PNG` only.
-- **Use case**: Sharing visual content.
-- **Display**: Optimized image rendering with proper scaling.
+- Supported formats: `JPEG`, `PNG` only. Can be sent with text.
+- Use case: Sharing visual content.
+- Display: Optimized image rendering with proper scaling.
 
 <img width="362" height="641" src="https://github.com/user-attachments/assets/27f77195-04c5-4591-b2a0-77f13b184de1" />
+
+>__Note__: However, once handed off to a human agent, users can send image files in any format.
 
 ### File Message
 
 **File Message** allows sharing of various file formats within conversations, enabling sharing document and resource between users and AI agents.
 
-- **Supported formats**: `PDF` only.
-- **Use case**: Document sharing and file-based communication.
-- **Display**: File preview with download capabilities.
+- Supported formats: `PDF` only. Can be sent with text.
+- Use case: Document sharing and file-based communication.
+- Display: File preview with download capabilities.
 
 <img width="363" height="645" src="https://github.com/user-attachments/assets/ef96f422-be0b-4bcf-9fb2-dbf0adb663be" />
 
@@ -49,11 +51,11 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 #### Call to Action (CTA) button
 
-**CTA** messages contain buttons or links that enable users to take specific actions directly from the conversation interface.
+**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Delight AI messenger, the button opens the specified external URL in a web browser.
 
-- **Components**: Interactive buttons and clickable links.
-- **Use case**: Action-oriented user interactions.
-- **Configuration**: Available through dashboard template configuration.
+- Components: A single button that links to an external webpage. Custom link formats are not supported.
+- Use case: Action-oriented user interactions.
+- Configuration: Available through dashboard template configuration.
 
 <img width="363" height="641" src="https://github.com/user-attachments/assets/fc97f72b-3560-40c8-98a7-2533faddcb60" />
 
@@ -61,9 +63,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 **Carousel** messages present multiple items that can be horizontally scrolled. This allows users to browse through various options or content pieces in a compact format.
 
-- **Layout**: Horizontal scrolling interface.
-- **Content**: Multiple items with individual interactions.
-- **Use case**: Product showcases, option selection, content browsing.
+- Layout: Horizontal scrolling interface.
+- Content: Multiple items with individual interactions.
+- Use case: Product showcases, option selection, content browsing.
 
 <img width="361" height="641" src="https://github.com/user-attachments/assets/0080282c-e0d1-466f-a984-9c4342027f7c" />
 
@@ -71,9 +73,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 **Suggested replies** provide predefined quick responses for users, enabling faster and more efficient conversation flow by offering common response options.
 
-- **Functionality**: Quick response selection.
-- **Use case**: Streamlined user interactions and faster response times.
-- **Display**: Accessible quick reply buttons.
+- Functionality: Quick response selection.
+- Use case: Streamlined user interactions and faster response times.
+- Display: Accessible quick reply buttons.
 
 <img width="360" height="639" src="https://github.com/user-attachments/assets/9ce0e000-f3d4-4e4d-ba5a-17b30064d032" />
 
@@ -81,9 +83,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 **CSAT Message** is designed to collect user feedback for customer satisfaction (CSAT) survey within conversations.
 
-- **Purpose**: Customer satisfaction measurement.
-- **Components**: Rating systems and feedback collection.
-- **Use case**: Service quality assessment and user experience evaluation.
+- Purpose: Customer satisfaction measurement.
+- Components: Rating systems and feedback collection.
+- Use case: Service quality assessment and user experience evaluation.
 
 <img width="361" height="642" src="https://github.com/user-attachments/assets/52e0028c-3b80-4c60-906e-2c9205be53cd" />
 
@@ -91,9 +93,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 **Product List** messages display product information in a vertical scrolling format, different from Carousel with its vertical layout optimized for product browsing and selection.
 
-- **Layout**: Vertical scrolling interface.
-- **Content**: Product information and details.
-- **Use case**: E-commerce integration, product showcases, inventory display.
+- Layout: Vertical scrolling interface.
+- Content: Product information and details.
+- Use case: E-commerce integration, product showcases, inventory display.
 
 ---
 
@@ -107,7 +109,7 @@ The core features supported for messages in Delight AI agent include:
 
 ### Read receipt
 
-Messages within conversations can display read status to show when messages have been viewed. This feature can be enabled through **AIAgentMessenger.config** for read-receipt feature activation.
+Messages in a conversation can display their read status, indicating when they have been viewed by participants. By default, read status isn't displayed, but it can be enabled through `AIAgentMessenger.config`.
 
 ```swift
 import SendbirdAIAgentMessenger
@@ -116,9 +118,9 @@ import SendbirdAIAgentMessenger
 AIAgentMessenger.config.conversation.list.isMessageReceiptStateEnabled = true
 ```
 
-**Configuration:**
+#### SDK configuration
 
-The read receipt feature is controlled through the SDK configuration:
+The read receipt feature can also be controlled through the SDK configuration:
 
 ```swift
 // Access conversation list configuration
@@ -129,9 +131,12 @@ listConfig.isMessageReceiptStateEnabled = true  // Show read receipts
 listConfig.isMessageReceiptStateEnabled = false // Hide read receipts
 ```
 
-**Visual Indicators:**
+// to Tez: 이거는 sdk config에서 따로 또 enabled가 가능하시다는 걸까요?... read receipt만 키면 아래도 다 되는 거예요?
+
+Visual Indicators:
 
 When enabled, messages display visual indicators showing:
+
 - Sent status
 - Delivered status
 - Read status with timestamp
@@ -140,37 +145,37 @@ When enabled, messages display visual indicators showing:
 
 **Citation** feature displays source information of AI agent responses, allowing users to see the references and sources that the AI agent used to generate its responses. This feature provides transparency and credibility to the AI agent's answers.
 
-- **Default**: Disabled by default.
-- **Configuration**: Requires dashboard configuration to be displayed.
-- **Activation settings**: Adjustable through dashboard configuration values.
+- Default: Disabled by default.
+- Configuration: Requires dashboard configuration to be displayed.
+- Activation settings: Adjustable through dashboard configuration values.
 
-**Implementation:**
+#### Implementation
 
-Citations are automatically rendered by the SDK when provided by the AI agent. No additional code is required in your iOS application - the feature is configured entirely through the Sendbird dashboard.
-
-**Display:**
+Citations are automatically rendered by the SDK when provided by the AI agent. No additional code is required in your iOS application - the feature is configured entirely through Delight AI dashboard.
 
 When enabled, citations appear as:
+
 - Source links or references
 - Document titles
 - URL references
 - Knowledge base articles
 
-Citations appear inline within the message content, providing users with source references and additional context for the AI agent's responses. They display as clickable elements that can show more detailed information about the source.
+Citations appear inline within the message content, providing users with source references and additional context for the AI agent's responses. They display as clickable elements that can expand and collapse, with more details about the source.
 
 ### Special notice
 
 **Special Notice** displays important information to users before conversation starts. This feature helps communicate important guidelines, terms, or instructions to users at the beginning of their interaction.
 
-- **Display location**: Bottom of the screen.
-- **Behavior**: Automatically disappears when a conversation starts.
-- **Configuration**: Available through dashboard configuration.
+- Display location: Bottom of the screen.
+- Behavior: Automatically disappears when a conversation starts.
+- Configuration: Available through dashboard configuration.
 
 <img width="359" height="643" src="https://github.com/user-attachments/assets/4da72edf-d181-427d-9bbe-003b68fa4dd6" />
 
-**Usage:**
+#### Usage
 
-Special notices are configured through the Sendbird dashboard and automatically displayed by the SDK. The notice appears:
+Special notices are configured through Delight AI dashboard and automatically displayed by the SDK. The notice appears:
+
 - When conversation screen is first opened
 - Before any messages are sent
 - At the bottom of the conversation view
@@ -182,15 +187,12 @@ Special notices are configured through the Sendbird dashboard and automatically 
 
 ### SBAConfig.Conversation.List
 
-Configuration options for conversation list and message display.
-
-**Properties:**
+The following table lists the configuration options for conversation list and message display.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
 | `isMessageReceiptStateEnabled` | Bool | Enable/disable message read receipts | false |
 
-**Example:**
 ```swift
 import SendbirdAIAgentMessenger
 
@@ -198,11 +200,12 @@ import SendbirdAIAgentMessenger
 AIAgentMessenger.config.conversation.list.isMessageReceiptStateEnabled = true
 ```
 
+
+// To Tez: 여기서부터는 API ref가 아닌 것 같아서... 뭐를 적어주신 걸까요?...
+
 ### Message Types
 
 The SDK automatically handles different message types without requiring explicit type checking in most cases. Messages are rendered according to their type:
-
-**Supported Message Types:**
 
 | Type | Class | Description |
 |------|-------|-------------|
@@ -213,7 +216,7 @@ The SDK automatically handles different message types without requiring explicit
 
 ### Message Display Configuration
 
-**Text Message Configuration:**
+Text Message Configuration:
 
 Text messages are automatically formatted and displayed. The SDK handles:
 - Text wrapping
@@ -221,7 +224,7 @@ Text messages are automatically formatted and displayed. The SDK handles:
 - Markdown rendering (if enabled)
 - Font and color theming
 
-**Image Message Configuration:**
+Image Message Configuration:
 
 Image messages are displayed with:
 - Automatic thumbnail generation
@@ -229,7 +232,7 @@ Image messages are displayed with:
 - Loading indicators
 - Error handling for failed downloads
 
-**File Message Configuration:**
+File Message Configuration:
 
 File messages show:
 - File name and size
@@ -237,7 +240,7 @@ File messages show:
 - Download button
 - Preview capability (for PDFs)
 
-**Rich Message Configuration:**
+Rich Message Configuration:
 
 Rich messages using templates include:
 - Interactive buttons (CTA)
@@ -334,18 +337,18 @@ Rich messages use templates configured in the dashboard. The SDK automatically:
 - Handles user interactions
 - Sends action events back to the AI agent
 
-**No additional code is required** for template rendering - just ensure templates are properly configured in the Sendbird dashboard.
+>__Note__: No additional code is required for template rendering - just ensure templates are properly configured in the Sendbird dashboard.
 
 ### Special Notice Configuration
 
 Special notices are configured through the dashboard and automatically displayed by the SDK. To customize the behavior:
 
-**Display Timing:**
+Display Timing:
 - Appears on conversation screen load
 - Before first message is sent
 - Automatically dismissed after user interaction
 
-**Customization:**
+Customization:
 - Content and styling configured in dashboard
 - Dismissal behavior is automatic
 - No code changes needed in iOS app
