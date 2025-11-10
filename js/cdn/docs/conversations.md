@@ -7,7 +7,7 @@ When the launcher is clicked, a user can be led to either their conversation lis
 | Feature| Single active conversation| Multiple active conversations (Default)|
 |-------------------|------------------|----------------|
 | Number of active conversation| A user can have only one active conversation with your AI agent at a time.| A user can have multiple active conversations with your AI agent at the same time.|
-| Starting a new conversation | A new conversation can't be created if there is an active conversation at the moment. The existing conversation must end first.| New conversations can be created anytime through the SDK methods.|
+| Starting a new conversation | A new conversation can't be created if there is an active conversation at the moment. The existing conversation must end first.| New conversations can be created anytime. However, this is not currently supported in CDN.|
 
 >__Note__: Whichever conversation mode you choose, if there is no active conversation, a new conversation is automatically created and the user can start a dialogue with your AI agent. This provides seamless user experience without requiring manual conversation setup.
 
@@ -15,19 +15,18 @@ This guide explains:
 
 - [Conversations](#conversations)
   - [Installation](#installation)
-  - [Getting Started](#getting-started)
-    - [Basic setup](#basic-setup)
-    - [Without Shadow DOM](#without-shadow-dom)
+  - [Start a conversation](#start-a-conversation)
+    - [With Messenger](#with-messenger)
+      - [Basic setup](#basic-setup)
+      - [Without Shadow DOM](#without-shadow-dom)
+      - [Launch a conversation](#launch-a-conversation)
+      - [Launch a conversation list](#launch-a-conversation-list)
+      - [Set the launcher position](#set-the-launcher-position)
+      - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With custom main component](#with-custom-main-component)
-  - [Launcher customization](#launcher-customization)
-    - [Set the launcher position](#set-the-launcher-position)
-    - [Customize the launcher appearance](#customize-the-launcher-appearance)
-  - [Managing conversations](#managing-conversations)
-    - [Open and close messenger](#open-and-close-messenger)
-    - [Update configuration](#update-configuration)
-    - [Update user session](#update-user-session)
-    - [Deauthenticate](#deauthenticate)
-    - [Destroy messenger](#destroy-messenger)
+  - [Advanced configuration](#advanced-configuration)
+    - [Context object for personalized conversation](#context-object-for-personalized-conversation)
+    - [Managing messenger lifecycle](#managing-messenger-lifecycle)
   - [API Reference](#api-reference)
 
 ---
@@ -42,11 +41,20 @@ import { loadMessenger } from 'https://aiagent.sendbird.com/orgs/default/index.j
 
 ---
 
-## Getting Started
+## Start a conversation
 
-The CDN provides a module-based API to integrate the Sendbird AI Agent Messenger into your web application without requiring a build process.
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for CDN provides two launch methods: using the default `Messenger` with launcher or customizing with `custom main component`. The following table describes the characteristics of each approach.
 
-### Basic setup
+| Launch Method | Description | Recommended Use Case |
+|----------------|--------------|-----------------------|
+| Messenger | Provides a floating launcher button that automatically manages conversation creation and navigation. | Ideal when you want a persistent, always-accessible AI agent across your application. |
+| Custom Main Component | Programmatically provide your own main component, offering fine-grained control over layout and navigation. | Best for custom UI layouts, embedded conversations, or when you need full control over the conversation interface. |
+
+### With Messenger
+
+The default messenger provides a floating UI approach for launching the messenger and starting a conversation. The `entryPoint` option allows you to lead the user to either a conversation view or a conversation list view.
+
+#### Basic setup
 
 Load the messenger and initialize it with your application credentials:
 
@@ -76,7 +84,7 @@ Load the messenger and initialize it with your application credentials:
 </html>
 ```
 
-### Without Shadow DOM
+#### Without Shadow DOM
 
 By default, the messenger uses Shadow DOM for style encapsulation. You can disable it if needed:
 
@@ -92,38 +100,56 @@ messenger.initialize({
 });
 ```
 
-### With custom main component
+#### Launch a conversation
 
-You can provide a custom main component for advanced customization:
+By default, the messenger opens a conversation when clicked. You can explicitly configure this behavior using the `entryPoint` option:
 
 ```javascript
-const messenger = await loadMessenger({
-    customMainComponent: ({ messenger, react }) => {
-        return (props) => {
-            return react.createElement(
-                messenger.AgentProviderContainer,
-                props,
-                [react.createElement(messenger.Conversation)]
-            );
-        };
-    }
-});
+// Configure messenger to open conversation directly (default behavior)
+const messenger = await loadMessenger();
 
 messenger.initialize({
     appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID'
+    aiAgentId: 'YOUR_AI_AGENT_ID',
+    entryPoint: 'Conversation'
 });
 ```
 
----
+You can also provide additional context, language, and country settings:
 
-## Launcher customization
+```javascript
+// Launch conversation with personalization settings
+messenger.initialize({
+    appId: 'YOUR_APP_ID',
+    aiAgentId: 'YOUR_AI_AGENT_ID',
+    entryPoint: 'Conversation',
+    language: 'en-US',
+    countryCode: 'US',
+    context: {
+        user_type: 'premium',
+        session_id: 'session_123'
+    }
+});
+```
 
-The messenger includes a floating launcher button that can be customized in terms of position and appearance.
+#### Launch a conversation list
 
-### Set the launcher position
+You can configure the messenger to show the conversation list first:
 
-You can dynamically change the launcher position and margins:
+```javascript
+// Configure messenger to open conversation list
+messenger.initialize({
+    appId: 'YOUR_APP_ID',
+    aiAgentId: 'YOUR_AI_AGENT_ID',
+    entryPoint: 'ConversationList'
+});
+```
+
+#### Set the launcher position
+
+>__Note__: On mobile devices, the messenger automatically opens in full-screen mode. On desktop, it displays as a floating mini-window anchored near the launcher.
+
+Set the launcher position on the screen using the `setPosition()` method. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
 
 ```javascript
 messenger.setPosition({
@@ -155,19 +181,73 @@ messenger.setPosition({
 | `start` | number | 24 | Start margin in pixels (left in LTR, right in RTL) |
 | `end` | number | 24 | End margin in pixels (right in LTR, left in RTL) |
 
-### Customize the launcher appearance
+#### Customize the launcher appearance
 
 The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
 <img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
 
+### With custom main component
+
+For advanced use cases where you need direct control over the conversation view without the floating launcher, you can provide a custom main component. This provides a full-screen or custom-sized conversation interface.
+
+```javascript
+const messenger = await loadMessenger({
+    customMainComponent: ({ messenger, react }) => {
+        return (props) => {
+            return react.createElement(
+                messenger.AgentProviderContainer,
+                props,
+                [react.createElement(messenger.Conversation)]
+            );
+        };
+    }
+});
+
+messenger.initialize({
+    appId: 'YOUR_APP_ID',
+    aiAgentId: 'YOUR_AI_AGENT_ID'
+});
+```
+
+This approach is recommended when:
+- You want to embed the conversation in a specific part of your UI
+- You need custom navigation or layout control
+- You want to build a full-page conversation experience
+- You need to open specific conversations programmatically
+
 ---
 
-## Managing conversations
+## Advanced configuration
+
+Beside the conversation mode, you can further configure how the conversation channels are created and built.
+
+When a new conversation begins, you can pass over user information to the channel so that AI agent can provide more personalized assistance to the user. This information is contained in a `context` object, which can be set at the creation of the conversation.
+
+### Context object for personalized conversation
+
+The `context` object allows you to provide user's information to AI agents for more personalized service, such as their country code and language preference. This context can be set when initializing the messenger to enhance the user experience.
+
+```javascript
+// Setting context through initialize configuration
+messenger.initialize({
+    appId: 'YOUR_APP_ID',
+    aiAgentId: 'YOUR_AI_AGENT_ID',
+    language: 'en-US',  // IETF BCP 47 format
+    countryCode: 'US',  // ISO 3166 format
+    context: {
+        customer_tier: 'premium',
+        previous_interaction: 'support_ticket_123',
+        user_preferences: 'technical_support'
+    }
+});
+```
+
+### Managing messenger lifecycle
 
 The messenger provides methods to control visibility and manage conversations.
 
-### Open and close messenger
+#### Open and close messenger
 
 Control the messenger visibility programmatically:
 
@@ -179,7 +259,7 @@ messenger.open();
 messenger.close();
 ```
 
-### Update configuration
+#### Update configuration
 
 Update messenger configuration after initialization:
 
@@ -197,7 +277,7 @@ messenger.updateConfig({
 });
 ```
 
-### Update user session
+#### Update user session
 
 Update user session information dynamically:
 
@@ -228,7 +308,7 @@ const sessionInfo = new messenger.ManualSessionInfo({
 messenger.updateUserSession(sessionInfo);
 ```
 
-### Deauthenticate
+#### Deauthenticate
 
 Log out the current user:
 
@@ -236,7 +316,7 @@ Log out the current user:
 messenger.deauthenticate();
 ```
 
-### Destroy messenger
+#### Destroy messenger
 
 Completely remove the messenger instance:
 
