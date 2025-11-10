@@ -4,7 +4,7 @@
 
 The launcher's appearance such as an icon, its color and size can be customized via the Sendbird AI agent dashboard as shown below.
 
-![launcher-thumbnail](https://github.com/user-attachments/assets/dc0ea3af-713e-452b-b907-cfe9db8a5d55)
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/launcher.png" />
 
 This guide explains the following features of the launcher:
 
