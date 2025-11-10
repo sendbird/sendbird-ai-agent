@@ -50,7 +50,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Sharing visual content.
 - Display: Optimized image rendering with proper scaling.
 
-<img width="362" height="641" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/image-message.png" />
+<img width="362" height="641" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-image-message.png" />
 
 >__Note__: However, once handed off to a human agent, users can send image files in any format.
 
@@ -62,7 +62,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Document sharing and file-based communication.
 - Display: File preview with download capabilities.
 
-<img width="363" height="645" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/file-message.png" />
+<img width="363" height="645" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-file-message.png" />
 
 ### Rich message
 
@@ -76,7 +76,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Action-oriented user interactions.
 - Configuration: Available through dashboard template configuration.
 
-<img width="363" height="641" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/cta.png" />
+<img width="363" height="641" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-cta.png" />
 
 #### Carousel
 
@@ -86,7 +86,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Content: Multiple items with individual interactions.
 - Use case: Product showcases, option selection, content browsing.
 
-<img width="361" height="641" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/carousel.png" />
+<img width="361" height="641" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-carousel.png" />
 
 #### Suggested replies
 
@@ -96,7 +96,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Streamlined user interactions and faster response times.
 - Display: Accessible quick reply buttons.
 
-<img width="360" height="639" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/suggested-replies.png" />
+<img width="360" height="639" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-suggested-replies.png" />
 
 #### CSAT message
 
@@ -106,7 +106,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Components: Rating systems and feedback collection.
 - Use case: Service quality assessment and user experience evaluation.
 
-<img width="361" height="642" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/csat.png" />
+<img width="361" height="642" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-csat.png" />
 
 #### Product list
 
@@ -116,7 +116,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Content: Product information and details.
 - Use case: E-commerce integration, product showcases, inventory display.
 
-<img width="360" height="639" alt="cascade" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/product-list.png" />
+<img width="360" height="639" alt="cascade" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-product-list.png" />
 
 ---
 
@@ -178,6 +178,8 @@ When enabled, citations appear as:
 
 Citations appear inline within the message content, providing users with source references and additional context for the AI agent's responses. They display as clickable elements that can expand and collapse, with more details about the source.
 
+<img width="359" height="643" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-citation.png" />
+
 ### Special notice
 
 **Special notice** displays important information to users before conversation starts. This feature helps communicate important guidelines, terms, or instructions to users at the beginning of their interaction.
@@ -186,7 +188,7 @@ Citations appear inline within the message content, providing users with source 
 - Behavior: Automatically disappears when a conversation starts.
 - Configuration: Available through dashboard configuration.
 
-<img width="359" height="643" src="https://github.com/user-attachments/assets/4da72edf-d181-427d-9bbe-003b68fa4dd6" />
+<img width="359" height="799" alt="special_notice" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-special-notice.png" />
 
 #### Usage
 
