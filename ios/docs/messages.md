@@ -1,12 +1,12 @@
 # Messages
 
-Delight AI agent messenger provides various message types to enable rich and interactive conversations with AI Agents. The messenger supports diverse message formats including text, images, files, and rich template-based messages, allowing users to have comprehensive and engaging conversations with AI agents across different use cases.
+Sendbird AI agent messenger provides various message types to enable rich and interactive conversations with AI Agents. The messenger supports diverse message formats including text, images, files, and rich template-based messages, allowing users to have comprehensive and engaging conversations with AI agents across different use cases.
 
 ---
 
 ## Types
 
-Delight AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
+Sendbird AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
 
 |  Type | Description | Content format | Use cases |
 |-------------|------------|----------------|-----------|
@@ -47,11 +47,11 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 ### Rich message
 
-**Rich message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Delight AI dashboard settings and provide enhanced user interaction.
+**Rich message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Sendbird AI agent dashboard settings and provide enhanced user interaction.
 
 #### Call to Action (CTA) button
 
-**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Delight AI messenger, the button opens the specified external URL in a web browser.
+**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Sendbird AI messenger, the button opens the specified external URL in a web browser.
 
 - Components: A single button that links to an external webpage. Custom link formats are not supported.
 - Use case: Action-oriented user interactions.
@@ -101,7 +101,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 ## Key features
 
-The core features supported for messages in Delight AI agent include:
+The core features supported for messages in Sendbird AI agent include:
 
 - [Read receipt](#read-receipt)
 - [Citation](#citation)
@@ -146,7 +146,7 @@ When enabled, messages can also display visual indicators as following:
 
 #### Implementation
 
-**Citations** are automatically rendered by the SDK when provided by the AI agent. No additional code is required in your iOS application - the feature is configured entirely through Delight AI dashboard.
+**Citations** are automatically rendered by the SDK when provided by the AI agent. No additional code is required in your iOS application - the feature is configured entirely through Sendbird AI dashboard.
 
 When enabled, citations appear as:
 
@@ -169,7 +169,7 @@ Citations appear inline within the message content, providing users with source 
 
 #### Usage
 
-Special notices are configured through Delight AI dashboard and automatically displayed by the SDK. The notice appears:
+Special notices are configured through Sendbird AI agent dashboard and automatically displayed by the SDK. The notice appears:
 
 - When conversation screen is first opened.
 - Before any messages are sent.

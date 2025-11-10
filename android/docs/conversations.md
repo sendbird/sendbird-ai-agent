@@ -1,6 +1,6 @@
 # Conversations
 
-In Delight AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Delight AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -15,7 +15,7 @@ When the launcher is clicked, a user can be led to either their conversation lis
 
 ## Start a conversation
 
-Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Delight AI agent SDK supports two launch methods: `MessengerLauncher` and `MessengerActivity`. The following table describes the characteristics of each class.
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK supports two launch methods: `MessengerLauncher` and `MessengerActivity`. The following table describes the characteristics of each class.
 
 | Feature| MessengerLauncher| MessengerActivity|
 |----------------------|------------------------------------------|------------------------------------------|

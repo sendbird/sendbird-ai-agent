@@ -1,8 +1,8 @@
 # Launcher
 
-`Launcher` is a core component of Delight AI agent messenger that enables you to start and manage conversations in your client app for iOS. It can be attached to any `UIView` and provides a floating button interface. When the launcher is tapped, it automatically launches a conversation screen based on your configuration.
+`Launcher` is a core component of Sendbird AI agent messenger that enables you to start and manage conversations in your client app for iOS. It can be attached to any `UIView` and provides a floating button interface. When the launcher is tapped, it automatically launches a conversation screen based on your configuration.
 
-The launcher's appearance such as an icon, its color and size can be customized via the Delight AI agent dashboard as shown below. 
+The launcher's appearance such as an icon, its color and size can be customized via the Sendbird AI agent dashboard as shown below. 
 
 <img width="441" height="737" src="https://github.com/user-attachments/assets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
 
@@ -124,7 +124,7 @@ AIAgentMessenger.attachLauncher(
 
 ### Customize the launcher appearance
 
-Launcher appearance, such as its icon and color, can be configured through [Delight AI dashboard](https://dashboard.sendbird.com) - no code changes required.
+Launcher appearance, such as its icon and color, can be configured through [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required.
 Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
 ---
