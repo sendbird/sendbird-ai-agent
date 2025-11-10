@@ -4,7 +4,7 @@ The Launcher is a core component of Delight AI agent messenger that enables you 
 
 The launcher's appearance such as an icon, its color and size can be customized via the Delight AI agent dashboard as shown below. 
 
-<img width="441" height="737" src="https://github.com/user-attachments/assets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
+<img width="441" height="737" src="https://github.com/user-attachments/asdsets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
 
 This guide explains the following features of the launcher:
 
@@ -492,60 +492,33 @@ Core methods for managing the launcher in the AI Agent Messenger SDK.
 
 Attaches the launcher button to the screen.
 
-| Parameter | Type | Description |
-|------------|------|-------------|
-| `aiAgentId` | `String` | The unique identifier of the AI agent. |
-| `channelURL` | `String?` | (Optional) The channel URL to open a specific conversation. If `nil`, a new conversation will be created. |
-| `paramsBuilder` | `LauncherSettingsParamsBuilder?` | (Optional) A closure used to configure launcher settings such as layout and appearance. |
-
-
 ```swift
 static func attachLauncher(
     aiAgentId: String,
     channelURL: String? = nil,
     paramsBuilder: LauncherSettingsParamsBuilder? = nil
 )
-
-// Example
-let options = SBALauncherOptions(
-    parentView: nil,
-    entryPoint: .default,
-    layout: .init(
-        position: .trailingBottom,
-        margin: .default,
-        useSafeArea: true
-    ),
-    displayStyle: .default
-)
-
-AIAgentMessenger.attachLauncher(
-    aiAgentId: "your-ai-agent-id",
-    channelURL: nil
-) { params in
-    params.options = options
-    params.language = "en-US"
-}
 ```
+
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+| `channelURL` | `String?` | (Optional) The channel URL to open a specific conversation. If `nil`, a new conversation will be created. |
+| `paramsBuilder` | `LauncherSettingsParamsBuilder?` | (Optional) A closure used to configure launcher settings such as layout and appearance. |
 
 #### detachLauncher
 
 Removes the launcher button from the screen.
 
-| Parameter | Type | Description |
-|------------|------|-------------|
-| `aiAgentId` | `String` | The unique identifier of the AI agent. |
-
-
 ```swift
 static func detachLauncher(
     aiAgentId: String
 )
-
-// Example
-AIAgentMessenger.detachLauncher(
-    aiAgentId: "your-ai-agent-id"
-)
 ```
+
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
 
 ### LauncherSettingsParams
 
@@ -553,31 +526,10 @@ Configuration parameters for the launcher button. Inherits from `BaseMessengerPa
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
-| `options` | SBALauncherOptions | Launcher layout and display options | .default |
-| `language` | String? | Language code (IETF BCP 47) | nil |
-| `countryCode` | String? | Country code (ISO 3166) | nil |
-| `context` | [String: String] | Additional metadata for AI agent | [:] |
-
-```swift
-let options = SBALauncherOptions(
-    parentView: nil,
-    entryPoint: .conversation,
-    layout: .init(
-        position: .trailingBottom,
-        margin: .default,
-        useSafeArea: true
-    ),
-    displayStyle: .default
-)
-
-AIAgentMessenger.attachLauncher(
-    aiAgentId: "agent_id"
-) { params in
-    params.options = options
-    params.language = "en-US"
-    params.context = ["user_type": "premium"]
-}
-```
+| `options` | SBALauncherOptions | Launcher layout and display options. | .default |
+| `language` | String? | Language code (IETF BCP 47). | nil |
+| `countryCode` | String? | Country code (ISO 3166). | nil |
+| `context` | [String: String] | Additional metadata for AI agent. | [:] |
 
 ### SBALauncherOptions
 
@@ -585,23 +537,10 @@ Comprehensive configuration options for launcher appearance and behavior.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
-| `parentView` | UIView? | Parent view to attach launcher | nil |
-| `entryPoint` | SBAEntryPoint | Initial screen to show | .conversation |
-| `layout` | Layout | Position and margin configuration | .default |
-| `displayStyle` | DisplayStyle | How conversation appears | .overlay() |
-
-```swift
-let options = SBALauncherOptions(
-    parentView: customView,
-    entryPoint: .conversationList,
-    layout: .init(
-        position: .leadingTop,
-        margin: .default,
-        useSafeArea: true
-    ),
-    displayStyle: .fullscreen(.default)
-)
-```
+| `parentView` | UIView? | Parent view to attach launcher. | nil |
+| `entryPoint` | SBAEntryPoint | Initial screen to show. | .conversation |
+| `layout` | Layout | Position and margin configuration. | .default |
+| `displayStyle` | DisplayStyle | How conversation appears. | .overlay() |
 
 ### LauncherSettingsParamsBuilder
 
@@ -609,111 +548,4 @@ Type alias for launcher settings parameter builder closure.
 
 ```swift
 typealias LauncherSettingsParamsBuilder = (LauncherSettingsParams) -> Void
-
-// Usage example
-let options = SBALauncherOptions(
-    parentView: nil,
-    entryPoint: .default,
-    layout: .init(
-        position: .trailingBottom,
-        margin: .default,
-        useSafeArea: true
-    ),
-    displayStyle: .default
-)
-
-AIAgentMessenger.attachLauncher(
-    aiAgentId: "agent_id"
-) { params in
-    params.options = options
-}
-```
-
-// To Tez: ?
-
-### Best Practices
-
-#### Lifecycle Management
-
-Properly manage launcher lifecycle in your view controllers:
-
-```swift
-class ViewController: UIViewController {
-    private let aiAgentId = "your-ai-agent-id"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Attach when view loads.
-        AIAgentMessenger.attachLauncher(aiAgentId: aiAgentId)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // Optional: detach when view disappears.
-        // AIAgentMessenger.detachLauncher(aiAgentId: aiAgentId)
-    }
-
-    deinit {
-        // Always detach in deinit.
-        AIAgentMessenger.detachLauncher(aiAgentId: aiAgentId)
-    }
-}
-```
-
-#### Multiple Views
-
-When using launcher across multiple view controllers:
-
-```swift
-class BaseViewController: UIViewController {
-    let aiAgentId = "your-ai-agent-id"
-
-    func attachLauncher() {
-        AIAgentMessenger.attachLauncher(aiAgentId: aiAgentId)
-    }
-
-    func detachLauncher() {
-        AIAgentMessenger.detachLauncher(aiAgentId: aiAgentId)
-    }
-}
-
-class HomeViewController: BaseViewController {
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        attachLauncher()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        detachLauncher()
-    }
-}
-```
-
-#### Safe Area Handling
-
-Respect safe area insets for proper positioning:
-
-```swift
-let options = SBALauncherOptions(
-    parentView: nil,
-    entryPoint: .default,
-    layout: .init(
-        position: .trailingBottom,
-        margin: LauncherAreaMargin(
-            leading: 16,
-            trailing: 16,
-            top: 16,
-            bottom: 16
-        ),
-        useSafeArea: true
-    ),
-    displayStyle: .default
-)
-
-AIAgentMessenger.attachLauncher(
-    aiAgentId: "agent_id"
-) { params in
-    params.options = options
-}
 ```

@@ -131,8 +131,6 @@ listConfig.isMessageReceiptStateEnabled = true  // Show read receipts
 listConfig.isMessageReceiptStateEnabled = false // Hide read receipts
 ```
 
-// to Tez: 이거는 sdk config에서 따로 또 enabled가 가능하시다는 걸까요?... read receipt만 키면 아래도 다 되는 거예요?
-
 Visual Indicators:
 
 When enabled, messages display visual indicators showing:
@@ -191,176 +189,16 @@ The following table lists the configuration options for conversation list and me
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
-| `isMessageReceiptStateEnabled` | Bool | Enable/disable message read receipts | false |
+| `isMessageReceiptStateEnabled` | Bool | Enable/disable message read receipts. | false |
 
-```swift
-import SendbirdAIAgentMessenger
-
-// Configure message receipt state
-AIAgentMessenger.config.conversation.list.isMessageReceiptStateEnabled = true
-```
-
-
-// To Tez: 여기서부터는 API ref가 아닌 것 같아서... 뭐를 적어주신 걸까요?...
 
 ### Message Types
 
-The SDK automatically handles different message types without requiring explicit type checking in most cases. Messages are rendered according to their type:
+The SDK automatically handles different message types without requiring explicit type checking in most cases.
 
 | Type | Class | Description |
 |------|-------|-------------|
-| Text | UserMessage | Plain text messages |
-| Image | FileMessage | Image files (JPEG, PNG) |
-| File | FileMessage | Document files (PDF) |
-| Rich | UserMessage with template | Template-based interactive messages |
-
-### Message Display Configuration
-
-Text Message Configuration:
-
-Text messages are automatically formatted and displayed. The SDK handles:
-- Text wrapping
-- URL detection and linking
-- Markdown rendering (if enabled)
-- Font and color theming
-
-Image Message Configuration:
-
-Image messages are displayed with:
-- Automatic thumbnail generation
-- Full-size image preview on tap
-- Loading indicators
-- Error handling for failed downloads
-
-File Message Configuration:
-
-File messages show:
-- File name and size
-- File type icon
-- Download button
-- Preview capability (for PDFs)
-
-Rich Message Configuration:
-
-Rich messages using templates include:
-- Interactive buttons (CTA)
-- Horizontal carousels
-- Suggested reply chips
-- CSAT rating interfaces
-- Product list layouts
-
-All rich message templates are configured through the Sendbird dashboard and automatically rendered by the SDK.
-
-### Advanced Message Features
-
-#### Message Receipt State
-
-Control message read receipt display:
-
-```swift
-import SendbirdAIAgentMessenger
-
-class ConversationViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Enable read receipts
-        AIAgentMessenger.config.conversation.list.isMessageReceiptStateEnabled = true
-    }
-}
-```
-
-#### Message Rendering Customization
-
-The SDK provides theming options for message appearance:
-
-```swift
-// Access current color scheme
-let currentScheme = AIAgentMessenger.currentColorScheme
-let currentColors = AIAgentMessenger.currentColorSet
-
-// Update color scheme (light or dark mode)
-AIAgentMessenger.update(colorScheme: .dark)
-
-// Message colors are automatically applied to all message types
-```
-
-### Configuration Best Practices
-
-#### Enabling Read Receipts
-
-Enable read receipts early in your application lifecycle:
-
-```swift
-import UIKit
-import SendbirdAIAgentMessenger
-
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
-        // Initialize SDK first
-        AIAgentMessenger.initialize(appId: "YOUR_APP_ID") { result in
-            if case .success = result {
-                // Configure message features
-                AIAgentMessenger.config.conversation.list.isMessageReceiptStateEnabled = true
-            }
-        }
-        return true
-    }
-}
-```
-
-#### Runtime Configuration Changes
-
-You can change message configuration at runtime:
-
-```swift
-class SettingsViewController: UIViewController {
-    @IBAction func toggleReadReceipts(_ sender: UISwitch) {
-        // Update configuration
-        AIAgentMessenger.config.conversation.list.isMessageReceiptStateEnabled = sender.isOn
-
-        // Configuration takes effect immediately for new messages
-        // Existing conversation views may need to be refreshed
-    }
-}
-```
-
-### Message Template Handling
-
-Rich messages use templates configured in the dashboard. The SDK automatically:
-- Fetches template definitions
-- Renders template components
-- Handles user interactions
-- Sends action events back to the AI agent
-
->__Note__: No additional code is required for template rendering - just ensure templates are properly configured in the Sendbird dashboard.
-
-### Special Notice Configuration
-
-Special notices are configured through the dashboard and automatically displayed by the SDK. To customize the behavior:
-
-Display Timing:
-- Appears on conversation screen load
-- Before first message is sent
-- Automatically dismissed after user interaction
-
-Customization:
-- Content and styling configured in dashboard
-- Dismissal behavior is automatic
-- No code changes needed in iOS app
-
-### Error Handling
-
-Handle message-related errors gracefully:
-
-```swift
-import SendbirdChatSDK
-
-func handleMessageError(_ error: SBError) {
-    print("Message error: \(error.localizedDescription)")
-}
-```
+| Text | UserMessage | Plain text messages. |
+| Image | FileMessage | Image files (JPEG, PNG). |
+| File | FileMessage | Document files (PDF). |
+| Rich | UserMessage with template | Template-based interactive messages. |

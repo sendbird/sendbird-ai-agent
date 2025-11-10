@@ -373,7 +373,7 @@ class MainViewController: UIViewController {
 
 ## API Reference
 
-### AIAgentMessenger conversation ethods
+### AIAgentMessenger conversation methods
 
 Core methods for managing conversations in the AI Agent Messenger SDK.
 
@@ -381,64 +381,39 @@ Core methods for managing conversations in the AI Agent Messenger SDK.
 
 Presents a conversation screen in full-screen or modal mode.
 
-| Parameter | Type | Description |
-|------------|------|-------------|
-| `aiAgentId` | `String` | The unique identifier of the AI agent. |
-| `channelURL` | `String?` | (Optional) The channel URL. If `nil`, a new conversation is created. |
-| `paramsBuilder` | `ConversationSettingsParamsBuilder?` | (Optional) A closure used to configure conversation settings. |
-
-
 ```swift
 static func presentConversation(
     aiAgentId: String,
     channelURL: String? = nil,
     paramsBuilder: ConversationSettingsParamsBuilder? = nil
 )
-
-// Example: Present an existing conversation
-AIAgentMessenger.presentConversation(
-    aiAgentId: "your_ai_agent_id",
-    channelURL: "sendbird_group_channel_123"
-) { params in
-    params.language = "en-US"
-    params.presentationStyle = .fullScreen
-}
 ```
-
-#### presentConversationList
-
-Presents the conversation list screen.
 
 | Parameter | Type | Description |
 |------------|------|-------------|
 | `aiAgentId` | `String` | The unique identifier of the AI agent. |
-| `paramsBuilder` | `ConversationSettingsParamsBuilder?` | (Optional) A closure used to configure the conversation list settings. |
+| `channelURL` | `String?` | (Optional) The channel URL. If `nil`, a new conversation is created. |
+| `paramsBuilder` | `ConversationSettingsParamsBuilder?` | (Optional) A closure used to configure conversation settings. |
 
+#### presentConversationList
+
+Presents the conversation list screen.
 
 ```swift
 static func presentConversationList(
     aiAgentId: String,
     paramsBuilder: ConversationSettingsParamsBuilder? = nil
 )
-
-// Example: Present a conversation list
-AIAgentMessenger.presentConversationList(
-    aiAgentId: "your_ai_agent_id"
-) { params in
-    params.language = "ko-KR"
-    params.presentationStyle = .pageSheet
-}
 ```
-
-#### createConversation
-
-Creates a new conversation with an AI agent.
 
 | Parameter | Type | Description |
 |------------|------|-------------|
 | `aiAgentId` | `String` | The unique identifier of the AI agent. |
-| `paramsBuilder` | `ConversationCreateParamsBuilder?` | (Optional) A closure used to configure conversation creation parameters. |
-| `completionHandler` | `ChannelURLResponseHandler` | A completion handler that returns the created channel URL or an error. |
+| `paramsBuilder` | `ConversationSettingsParamsBuilder?` | (Optional) A closure used to configure the conversation list settings. |
+
+#### createConversation
+
+Creates a new conversation with an AI agent.
 
 ```swift
 static func createConversation(
@@ -446,22 +421,13 @@ static func createConversation(
     paramsBuilder: ConversationCreateParamsBuilder? = nil,
     completionHandler: @escaping ChannelURLResponseHandler
 )
-
-// Example: Create a new conversation
-AIAgentMessenger.createConversation(
-    aiAgentId: "your_ai_agent_id"
-) { params in
-    params.language = "en-US"
-    params.context = ["user_type": "premium"]
-} completionHandler: { result in
-    switch result {
-    case .success(let channelURL):
-        print("Created: \(channelURL)")
-    case .failure(let error):
-        print("Error: \(error)")
-    }
-}
 ```
+
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+| `paramsBuilder` | `ConversationCreateParamsBuilder?` | (Optional) A closure used to configure conversation creation parameters. |
+| `completionHandler` | `ChannelURLResponseHandler` | A completion handler that returns the created channel URL or an error. |
 
 ### ConversationSettingsParams
 
@@ -469,20 +435,11 @@ Configuration parameters for conversation and conversation list screens.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
-| `parent` | UIViewController? | Parent view controller for presentation | nil |
-| `presentationStyle` | UIModalPresentationStyle | Modal presentation style | .fullScreen |
-| `language` | String? | Language code (IETF BCP 47) | nil |
-| `countryCode` | String? | Country code (ISO 3166) | nil |
-| `context` | [String: String] | Additional metadata for AI agent | [:] |
-
-```swift
-let params = ConversationSettingsParams()
-params.parent = self
-params.presentationStyle = .pageSheet
-params.language = "en-US"
-params.countryCode = "US"
-params.context = ["user_tier": "premium"]
-```
+| `parent` | UIViewController? | Parent view controller for presentation. | nil |
+| `presentationStyle` | UIModalPresentationStyle | Modal presentation style. | .fullScreen |
+| `language` | String? | Language code (IETF BCP 47). | nil |
+| `countryCode` | String? | Country code (ISO 3166). | nil |
+| `context` | [String: String] | Additional metadata for AI agent. | [:] |
 
 ### ConversationCreateParams
 
@@ -490,19 +447,9 @@ Parameters for creating new conversations with AI agents.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
-| `language` | String? | Language code (IETF BCP 47) | nil |
-| `countryCode` | String? | Country code (ISO 3166) | nil |
-| `context` | [String: String] | Additional metadata for AI agent | [:] |
-
-```swift
-let params = ConversationCreateParams()
-params.language = "ko-KR"
-params.countryCode = "KR"
-params.context = [
-    "customer_tier": "premium",
-    "session_type": "support"
-]
-```
+| `language` | String? | Language code (IETF BCP 47). | nil |
+| `countryCode` | String? | Country code (ISO 3166). | nil |
+| `context` | [String: String] | Additional metadata for AI agent. | [:] |
 
 ### LauncherSettingsParams
 
@@ -510,18 +457,10 @@ Configuration parameters for the launcher button.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
-| `options` | SBALauncherOptions | Launcher layout and display options | .default |
-| `language` | String? | Language code (IETF BCP 47) | nil |
-| `countryCode` | String? | Country code (ISO 3166) | nil |
-| `context` | [String: String] | Additional metadata for AI agent | [:] |
-
-```swift
-let params = LauncherSettingsParams()
-params.options.layout.position = .trailingBottom
-params.options.displayStyle = .overlay()
-params.language = "en-US"
-params.context = ["source": "launcher"]
-```
+| `options` | SBALauncherOptions | Launcher layout and display options. | .default |
+| `language` | String? | Language code (IETF BCP 47). | nil |
+| `countryCode` | String? | Country code (ISO 3166). | nil |
+| `context` | [String: String] | Additional metadata for AI agent. | [:] |
 
 ### ChannelURLResponseHandler
 
@@ -531,38 +470,14 @@ Type alias for conversation creation completion handler.
 typealias ChannelURLResponseHandler = (Result<String, Error>) -> Void
 ```
 
-**Usage:**
-```swift
-AIAgentMessenger.createConversation(
-    aiAgentId: "agent_id"
-) { result in
-    switch result {
-    case .success(let channelURL):
-        // Handle success with channel URL
-        print("Channel created: \(channelURL)")
-    case .failure(let error):
-        // Handle error
-        print("Error: \(error.localizedDescription)")
-    }
-}
-```
-
 ### UIModalPresentationStyle
 
 Standard UIKit presentation styles supported by the SDK.
 
 | Style | Description |
 |-------|-------------|
-| `.fullScreen` | Full screen modal presentation |
-| `.pageSheet` | Sheet that covers most of the screen |
-| `.formSheet` | Form-style centered modal |
-| `.currentContext` | Presents over current context |
-| `.overFullScreen` | Presents over full screen with transparency |
-
-```swift
-AIAgentMessenger.presentConversation(
-    aiAgentId: "agent_id"
-) { params in
-    params.presentationStyle = .pageSheet
-}
-```
+| `.fullScreen` | Full screen modal presentation. |
+| `.pageSheet` | Sheet that covers most of the screen. |
+| `.formSheet` | Form-style centered modal. |
+| `.currentContext` | Presents over current context. |
+| `.overFullScreen` | Presents over full screen with transparency. |
