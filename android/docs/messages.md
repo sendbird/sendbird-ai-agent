@@ -186,7 +186,8 @@ AIAgentMessenger.config.conversation.header.shouldShowProfile = true
 
 #### Configuration properties
 
-// To Leo: 이건 어디 속하는 건가요??
+The following table lists the configuration options available in `AIAgentMessenger.config.conversation.list` besides read receipt. 
+These options control how the conversation list and messages are displayed in the messenger UI.
 
 | Property | Type | Default | Description |
 |---|---|---|---|

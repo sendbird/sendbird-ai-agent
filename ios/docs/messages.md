@@ -201,7 +201,7 @@ Special notices are configured through Sendbird AI agent dashboard and automatic
 
 ### SBAConfig.Conversation.List
 
-The following table lists the configuration options for conversation list and message display.
+The following table lists the configuration options that control how the conversation list and messages are displayed in the messenger UI.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
