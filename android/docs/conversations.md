@@ -4,9 +4,9 @@ In Sendbird AI agent, a conversation refers to a channel where an AI Agent commu
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
-| Feature| Single active conversation| Multiple active conversations|
+| Feature| Single active conversation| Multiple active conversations (Default)|
 |-------------------|------------------|----------------|
-| Number of active conversation| A user can have only one active conversation with your AI agent at a time.| A user can have multiple active conversations with your AI agent at the same time. (Default)|
+| Number of active conversation| A user can have only one active conversation with your AI agent at a time.| A user can have multiple active conversations with your AI agent at the same time.|
 | Starting a new conversation | A new conversation can't be created if there is an active conversation at the moment. The existing conversation must end first.| New conversations can be created anytime using `AIAgentMessenger.createConversation()`.|
 
 >__Note__: Whichever conversation mode you choose, if there is no active conversation, a new conversation is automatically created and the user can start a dialogue with your AI agent. This provides seamless user experience without requiring manual conversation setup.
