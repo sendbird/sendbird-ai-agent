@@ -51,7 +51,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Sharing visual content.
 - Display: Optimized image rendering with proper scaling.
 
-<img width="362" height="641" src="https://github.com/user-attachments/assets/27f77195-04c5-4591-b2a0-77f13b184de1" />
+<img width="362" height="641" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/image-message.png" />
 
 >__Note__: However, once handed off to a human agent, users can send image files in any format.
 
@@ -63,7 +63,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Document sharing and file-based communication.
 - Display: File preview with download capabilities.
 
-<img width="363" height="645" src="https://github.com/user-attachments/assets/ef96f422-be0b-4bcf-9fb2-dbf0adb663be" />
+<img width="363" height="645" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/file-message.png" />
 
 ### Rich Message
 
@@ -77,7 +77,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Action-oriented user interactions.
 - Configuration: Available through dashboard template configuration.
 
-<img width="363" height="641" src="https://github.com/user-attachments/assets/fc97f72b-3560-40c8-98a7-2533faddcb60" />
+<img width="363" height="641" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/cta.png" />
 
 #### Carousel
 
@@ -87,7 +87,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Content: Multiple items with individual interactions.
 - Use case: Product showcases, option selection, content browsing.
 
-<img width="361" height="641" src="https://github.com/user-attachments/assets/0080282c-e0d1-466f-a984-9c4342027f7c" />
+<img width="361" height="641" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/carousel.png" />
 
 #### Suggested replies
 
@@ -97,7 +97,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Use case: Streamlined user interactions and faster response times.
 - Display: Accessible quick reply buttons.
 
-<img width="360" height="639" src="https://github.com/user-attachments/assets/9ce0e000-f3d4-4e4d-ba5a-17b30064d032" />
+<img width="360" height="639" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/suggested-replies.png" />
 
 #### CSAT Message
 
@@ -107,7 +107,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Components: Rating systems and feedback collection.
 - Use case: Service quality assessment and user experience evaluation.
 
-<img width="361" height="642" src="https://github.com/user-attachments/assets/52e0028c-3b80-4c60-906e-2c9205be53cd" />
+<img width="361" height="642" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/csat.png" />
 
 #### Product List
 
@@ -117,7 +117,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 - Content: Product information and details.
 - Use case: E-commerce integration, product showcases, inventory display.
 
-<img width="360" height="639" alt="cascade" src="https://github.com/user-attachments/assets/e0c68cfd-bc40-4657-b770-7eafd0c5dd80" />
+<img width="360" height="639" alt="cascade" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/product-list.png" />
 
 ---
 
@@ -146,7 +146,7 @@ AIAgentMessenger.config.conversation.list.enableMessageReceiptState = true
 - Configuration: Requires dashboard configuration to be displayed.
 - Activation settings: Adjustable through dashboard configuration values.
 
-<img width="359" height="643" src="https://github.com/user-attachments/assets/4da72edf-d181-427d-9bbe-003b68fa4dd6" />
+<img width="359" height="643" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/citation.png" />
 
 ### Special notice
 
@@ -156,7 +156,7 @@ AIAgentMessenger.config.conversation.list.enableMessageReceiptState = true
 - Behavior: Automatically disappears when a conversation starts.
 - Configuration: Available through dashboard configuration.
 
-<img width="359" height="799" alt="special_notice" src="https://github.com/user-attachments/assets/d2dfeff2-c0fb-47b4-9e8d-066517a39c77" />
+<img width="359" height="799" alt="special_notice" src="https://ap-northeast-1.console.aws.amazon.com/s3/object/sendbird-files?region=ap-northeast-1&prefix=docs/special-notice.png" />
 
 ---
 
