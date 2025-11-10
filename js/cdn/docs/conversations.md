@@ -14,7 +14,6 @@ When the launcher is clicked, a user can be led to either their conversation lis
 This guide explains:
 
 - [Conversations](#conversations)
-  - [Installation](#installation)
   - [Start a conversation](#start-a-conversation)
     - [With Messenger](#with-messenger)
       - [Basic setup](#basic-setup)
@@ -28,16 +27,6 @@ This guide explains:
     - [Context object for personalized conversation](#context-object-for-personalized-conversation)
     - [Managing messenger lifecycle](#managing-messenger-lifecycle)
   - [API Reference](#api-reference)
-
----
-
-## Installation
-
-The Sendbird AI Agent Messenger is available via ES module import from the Sendbird CDN:
-
-```javascript
-import { loadMessenger } from 'https://aiagent.sendbird.com/orgs/default/index.js';
-```
 
 ---
 
@@ -62,24 +51,24 @@ Load the messenger and initialize it with your application credentials:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Agent Messenger</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent Messenger</title>
 </head>
 <body>
-    <script type="module">
-        import { loadMessenger } from 'https://aiagent.sendbird.com/orgs/default/index.js';
+  <script type="module">
+    import { loadMessenger } from 'https://aiagent.sendbird.com/orgs/default/index.js';
 
-        // Load messenger
-        const messenger = await loadMessenger();
+    // Load messenger
+    const messenger = await loadMessenger();
 
-        // Initialize messenger
-        messenger.initialize({
-            appId: 'YOUR_APP_ID',
-            aiAgentId: 'YOUR_AI_AGENT_ID',
-            userSessionInfo: new messenger.AnonymousSessionInfo()
-        });
-    </script>
+    // Initialize messenger
+    messenger.initialize({
+      appId: 'YOUR_APP_ID',
+      aiAgentId: 'YOUR_AI_AGENT_ID',
+      userSessionInfo: new messenger.AnonymousSessionInfo()
+    });
+  </script>
 </body>
 </html>
 ```
@@ -90,13 +79,13 @@ By default, the messenger uses Shadow DOM for style encapsulation. You can disab
 
 ```javascript
 const messenger = await loadMessenger({
-    useShadowDOM: false
+  useShadowDOM: false
 });
 
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID',
-    userSessionInfo: new messenger.AnonymousSessionInfo()
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID',
+  userSessionInfo: new messenger.AnonymousSessionInfo()
 });
 ```
 
@@ -109,9 +98,9 @@ By default, the messenger opens a conversation when clicked. You can explicitly 
 const messenger = await loadMessenger();
 
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID',
-    entryPoint: 'Conversation'
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID',
+  entryPoint: 'Conversation'
 });
 ```
 
@@ -120,15 +109,15 @@ You can also provide additional context, language, and country settings:
 ```javascript
 // Launch conversation with personalization settings
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID',
-    entryPoint: 'Conversation',
-    language: 'en-US',
-    countryCode: 'US',
-    context: {
-        user_type: 'premium',
-        session_id: 'session_123'
-    }
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID',
+  entryPoint: 'Conversation',
+  language: 'en-US',
+  countryCode: 'US',
+  context: {
+    user_type: 'premium',
+    session_id: 'session_123'
+  }
 });
 ```
 
@@ -139,9 +128,9 @@ You can configure the messenger to show the conversation list first:
 ```javascript
 // Configure messenger to open conversation list
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID',
-    entryPoint: 'ConversationList'
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID',
+  entryPoint: 'ConversationList'
 });
 ```
 
@@ -153,13 +142,13 @@ Set the launcher position on the screen using the `setPosition()` method. Availa
 
 ```javascript
 messenger.setPosition({
-    position: 'end-bottom',
-    margin: {
-        top: 24,
-        bottom: 24,
-        start: 24,
-        end: 24
-    }
+  position: 'end-bottom',
+  margin: {
+    top: 24,
+    bottom: 24,
+    start: 24,
+    end: 24
+  }
 });
 ```
 
@@ -193,20 +182,20 @@ For advanced use cases where you need direct control over the conversation view 
 
 ```javascript
 const messenger = await loadMessenger({
-    customMainComponent: ({ messenger, react }) => {
-        return (props) => {
-            return react.createElement(
-                messenger.AgentProviderContainer,
-                props,
-                [react.createElement(messenger.Conversation)]
-            );
-        };
-    }
+  customMainComponent: ({ messenger, react }) => {
+    return (props) => {
+      return react.createElement(
+        messenger.AgentProviderContainer,
+        props,
+        [react.createElement(messenger.Conversation)]
+      );
+    };
+  }
 });
 
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID'
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID'
 });
 ```
 
@@ -231,15 +220,15 @@ The `context` object allows you to provide user's information to AI agents for m
 ```javascript
 // Setting context through initialize configuration
 messenger.initialize({
-    appId: 'YOUR_APP_ID',
-    aiAgentId: 'YOUR_AI_AGENT_ID',
-    language: 'en-US',  // IETF BCP 47 format
-    countryCode: 'US',  // ISO 3166 format
-    context: {
-        customer_tier: 'premium',
-        previous_interaction: 'support_ticket_123',
-        user_preferences: 'technical_support'
-    }
+  appId: 'YOUR_APP_ID',
+  aiAgentId: 'YOUR_AI_AGENT_ID',
+  language: 'en-US',  // IETF BCP 47 format
+  countryCode: 'US',  // ISO 3166 format
+  context: {
+    customer_tier: 'premium',
+    previous_interaction: 'support_ticket_123',
+    user_preferences: 'technical_support'
+  }
 });
 ```
 
@@ -265,15 +254,15 @@ Update messenger configuration after initialization:
 
 ```javascript
 messenger.updateConfig({
-    appId: 'NEW_APP_ID',
-    aiAgentId: 'NEW_AI_AGENT_ID',
-    language: 'ko-KR',
-    countryCode: 'KR',
-    theme: {
-        palette: {
-            primary: '#6210CC'
-        }
+  appId: 'NEW_APP_ID',
+  aiAgentId: 'NEW_AI_AGENT_ID',
+  language: 'ko-KR',
+  countryCode: 'KR',
+  theme: {
+    palette: {
+      primary: '#6210CC'
     }
+  }
 });
 ```
 
@@ -284,25 +273,25 @@ Update user session information dynamically:
 ```javascript
 // With ManualSessionInfo
 const sessionInfo = new messenger.ManualSessionInfo({
-    userId: 'user_123',
-    authToken: 'your_auth_token',
-    sessionHandler: {
-        onSessionTokenRequired: (resolve, reject) => {
-            // Fetch new token when required
-            fetchNewToken()
-                .then(token => resolve(token))
-                .catch(error => reject(error));
-        },
-        onSessionError: (error) => {
-            console.error('Session error:', error);
-        },
-        onSessionRefreshed: () => {
-            console.log('Session refreshed');
-        },
-        onSessionClosed: () => {
-            console.log('Session closed');
-        }
+  userId: 'user_123',
+  authToken: 'your_auth_token',
+  sessionHandler: {
+    onSessionTokenRequired: (resolve, reject) => {
+      // Fetch new token when required
+      fetchNewToken()
+        .then(token => resolve(token))
+        .catch(error => reject(error));
+    },
+    onSessionError: (error) => {
+      console.error('Session error:', error);
+    },
+    onSessionRefreshed: () => {
+      console.log('Session refreshed');
+    },
+    onSessionClosed: () => {
+      console.log('Session closed');
     }
+  }
 });
 
 messenger.updateUserSession(sessionInfo);
@@ -399,14 +388,14 @@ messenger.initialize(config)
 
 ```javascript
 new messenger.ManualSessionInfo({
-    userId: string,
-    authToken: string,
-    sessionHandler: {
-        onSessionTokenRequired?: (resolve, reject) => void,
-        onSessionError?: (error) => void,
-        onSessionRefreshed?: () => void,
-        onSessionClosed?: () => void
-    }
+  userId: string,
+  authToken: string,
+  sessionHandler: {
+    onSessionTokenRequired?: (resolve, reject) => void,
+    onSessionError?: (error) => void,
+    onSessionRefreshed?: () => void,
+    onSessionClosed?: () => void
+  }
 })
 ```
 
