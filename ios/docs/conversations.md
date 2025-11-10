@@ -22,7 +22,7 @@ Once you have determined which conversation mode to apply, you should also consi
 | Launcher | Provides a persistent floating button UI that automatically handles conversation creation and presentation. | Ideal when the AI agent should be accessible from any screen within the app. |
 | Direct Presentation | Programmatically presents a conversation or conversation list screen, offering fine-grained control over timing and triggers. | Best for custom UI flows, button-triggered interactions, or controlled conversation launches. |
 
-### With Launcher
+### With `Launcher`
 
 `Launcher` provides a floating UI approach for launching the messenger and starting a conversation. With `SBALauncherOptions.entryPoint`, you can lead the user to either a conversation view or a conversation list view. In the snippet below, simply calling `attachLauncher()` automatically starts a conversation when the launcher is clicked. If you wish to show a conversation list first, set `entryPoint` to `conversationList`.
 
@@ -92,9 +92,9 @@ AIAgentMessenger.attachLauncher(
 }
 ```
 
-### With Direct Presentation
+### With direct presentation
 
-Direct Presentation provides a programmatic approach without the launcher button for starting a conversation. Like `Launcher`, you can lead the user to either a conversation view or a conversation list view. 
+Direct presentation provides a programmatic approach without the launcher button for starting a conversation. Like `Launcher`, you can lead the user to either a conversation view or a conversation list view. 
 
 When directly opening a conversation, use `AIAgentMessenger.presentConversation()` and pass `channelURL` to open an existing channel. If `nil`, a new conversation is created.
 If you wish to open a conversation list first, use `AIAgentMessenger.presentConversationList()`.
@@ -213,7 +213,7 @@ AIAgentMessenger.presentConversation(
 )
 ```
 
-#### With Direct Presentation
+#### With direct presentation
 
 ```swift
 // Open specific conversation with channel URL

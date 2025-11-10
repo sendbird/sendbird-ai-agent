@@ -15,17 +15,17 @@ Delight AI agent messenger supports various message types to provide comprehensi
 | [File message](#file-message) | Document and file sharing | Various file formats | Document sharing, attachments, downloadable resources |
 | [Rich message](#rich-message)| Template-based interactive UI | Structured JSON templates | Product displays, carousels, forms, interactive elements |
 
-### Text Message
+### Text message
 
-**Text Message** represents regular text-based communication between users and AI agents. These messages support plain text content and are the foundation of conversational interactions.
+**Text message** represents regular text-based communication between users and AI agents. These messages support plain text content and are the foundation of conversational interactions.
 
 - Content: Plain text messages. Markdown supported.
 - Use case: Basic conversational interactions.
 - Support: Full text rendering with proper formatting.
 
-### Image Message
+### Image message
 
-**Image Message** enables sharing of image files within conversations. This message type supports common image formats for visual communication.
+**Image message** enables sharing of image files within conversations. This message type supports common image formats for visual communication.
 
 - Supported formats: `JPEG`, `PNG` only. Can be sent with text.
 - Use case: Sharing visual content.
@@ -35,9 +35,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 >__Note__: However, once handed off to a human agent, users can send image files in any format.
 
-### File Message
+### File message
 
-**File Message** allows sharing of various file formats within conversations, enabling sharing document and resource between users and AI agents.
+**File message** allows sharing of various file formats within conversations, enabling sharing document and resource between users and AI agents.
 
 - Supported formats: `PDF` only. Can be sent with text.
 - Use case: Document sharing and file-based communication.
@@ -45,9 +45,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 <img width="363" height="645" src="https://github.com/user-attachments/assets/ef96f422-be0b-4bcf-9fb2-dbf0adb663be" />
 
-### Rich Message
+### Rich message
 
-**Rich Message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Delight AI dashboard settings and provide enhanced user interaction.
+**Rich message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Delight AI dashboard settings and provide enhanced user interaction.
 
 #### Call to Action (CTA) button
 
@@ -79,9 +79,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 <img width="360" height="639" src="https://github.com/user-attachments/assets/9ce0e000-f3d4-4e4d-ba5a-17b30064d032" />
 
-#### CSAT Message
+#### CSAT message
 
-**CSAT Message** is designed to collect user feedback for customer satisfaction (CSAT) survey within conversations.
+**CSAT message** is designed to collect user feedback for customer satisfaction (CSAT) survey within conversations.
 
 - Purpose: Customer satisfaction measurement.
 - Components: Rating systems and feedback collection.
@@ -89,9 +89,9 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 <img width="361" height="642" src="https://github.com/user-attachments/assets/52e0028c-3b80-4c60-906e-2c9205be53cd" />
 
-#### Product List
+#### Product list
 
-**Product List** messages display product information in a vertical scrolling format, different from Carousel with its vertical layout optimized for product browsing and selection.
+**Product list** messages display product information in a vertical scrolling format, different from Carousel with its vertical layout optimized for product browsing and selection.
 
 - Layout: Vertical scrolling interface.
 - Content: Product information and details.
@@ -99,7 +99,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 ---
 
-## Key Features
+## Key features
 
 The core features supported for messages in Delight AI agent include:
 
@@ -131,12 +131,9 @@ listConfig.isMessageReceiptStateEnabled = true  // Show read receipts
 listConfig.isMessageReceiptStateEnabled = false // Hide read receipts
 ```
 
-Visual Indicators:
-
-When enabled, messages display visual indicators showing:
+When enabled, messages can also display visual indicators as following:
 
 - Sent status
-
 - Read status with timestamp
 
 ### Citation
@@ -149,20 +146,20 @@ When enabled, messages display visual indicators showing:
 
 #### Implementation
 
-Citations are automatically rendered by the SDK when provided by the AI agent. No additional code is required in your iOS application - the feature is configured entirely through Delight AI dashboard.
+**Citations** are automatically rendered by the SDK when provided by the AI agent. No additional code is required in your iOS application - the feature is configured entirely through Delight AI dashboard.
 
 When enabled, citations appear as:
 
-- Source links or references
-- Document titles
-- URL references
-- Knowledge base articles
+- Source links or references.
+- Document titles.
+- URL references.
+- Knowledge base articles.
 
 Citations appear inline within the message content, providing users with source references and additional context for the AI agent's responses. They display as clickable elements that can expand and collapse, with more details about the source.
 
 ### Special notice
 
-**Special Notice** displays important information to users before conversation starts. This feature helps communicate important guidelines, terms, or instructions to users at the beginning of their interaction.
+**Special notice** displays important information to users before conversation starts. This feature helps communicate important guidelines, terms, or instructions to users at the beginning of their interaction.
 
 - Display location: Bottom of the screen.
 - Behavior: Automatically disappears when a conversation starts.
@@ -174,10 +171,10 @@ Citations appear inline within the message content, providing users with source 
 
 Special notices are configured through Delight AI dashboard and automatically displayed by the SDK. The notice appears:
 
-- When conversation screen is first opened
-- Before any messages are sent
-- At the bottom of the conversation view
-- Dismisses automatically when user sends first message
+- When conversation screen is first opened.
+- Before any messages are sent.
+- At the bottom of the conversation view.
+- Dismisses automatically when user sends first message.
 
 ---
 
@@ -192,13 +189,13 @@ The following table lists the configuration options for conversation list and me
 | `isMessageReceiptStateEnabled` | Bool | Enable/disable message read receipts. | false |
 
 
-### Message Types
+### Message types
 
 The SDK automatically handles different message types without requiring explicit type checking in most cases.
 
 | Type | Class | Description |
 |------|-------|-------------|
 | Text | UserMessage | Plain text messages. |
-| Image | FileMessage | Image files (JPEG, PNG). |
-| File | FileMessage | Document files (PDF). |
+| Image | FileMessage | Image files in JPEG and PNG. |
+| File | FileMessage | Document files in PDF. |
 | Rich | UserMessage with template | Template-based interactive messages. |

@@ -1,10 +1,10 @@
 # Launcher
 
-The Launcher is a core component of Delight AI agent messenger that enables you to start and manage conversations in your client app for iOS. It can be attached to any UIView and provides a floating button interface. When the launcher is tapped, it automatically launches a conversation screen based on your configuration.
+`Launcher` is a core component of Delight AI agent messenger that enables you to start and manage conversations in your client app for iOS. It can be attached to any `UIView` and provides a floating button interface. When the launcher is tapped, it automatically launches a conversation screen based on your configuration.
 
 The launcher's appearance such as an icon, its color and size can be customized via the Delight AI agent dashboard as shown below. 
 
-<img width="441" height="737" src="https://github.com/user-attachments/asdsets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
+<img width="441" height="737" src="https://github.com/user-attachments/assets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
 
 This guide explains the following features of the launcher:
 
@@ -26,7 +26,7 @@ This guide explains the following features of the launcher:
 
 The core features of the Launcher are:
 
-- [Automatic Attachment](#how-to-attach)
+- [Automatic attachment](#how-to-attach)
 - [Start a conversation and customize the entry point](#start-a-conversation-and-customize-the-entry-point)
 - [Set the launcher position](#set-the-launcher-position)
 - [Customize the launcher appearance](#customize-the-launchers-appearance)
