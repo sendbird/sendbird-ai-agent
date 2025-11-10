@@ -11,6 +11,18 @@ When the launcher is clicked, a user can be led to either their conversation lis
 
 >__Note__: Whichever conversation mode you choose, if there is no active conversation, a new conversation is automatically created and the user can start a dialogue with your AI agent. This provides seamless user experience without requiring manual conversation setup.
 
+This guide explains:
+
+- [Conversations](#conversations)
+  - [Start a conversation](#start-a-conversation)
+    - [With `MessengerLauncher`](#with-messengerlauncher)
+    - [With `MessengerActivity`](#with-messengeractivity)
+  - [Advanced configuration](#advanced-configuration)
+    - [Context object for personalized conversation](#context-object-for-personalized-conversation)
+    - [Opening a specific conversation with channel URL](#opening-a-specific-conversation-with-channel-url)
+    - [Start a conversation in multiple conversation mode](#start-a-conversation-in-multiple-conversation-mode)
+  - [API Reference](#api-reference)
+
 ---
 
 ## Start a conversation

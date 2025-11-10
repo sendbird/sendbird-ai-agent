@@ -2,6 +2,25 @@
 
 In Sendbird AI agent messenger, AI agent and users can exchange various types of messages to enable rich and interactive conversations, including text, images, files, and rich template-based messages. It allows users to have comprehensive and engaging conversations with AI agents across different use cases.
 
+This guide explains:
+
+- [Messages](#messages)
+  - [Types](#types)
+    - [Text Message](#text-message)
+    - [Image Message](#image-message)
+    - [File Message](#file-message)
+    - [Rich Message](#rich-message)
+      - [Call to Action (CTA) button](#call-to-action-cta-button)
+      - [Carousel](#carousel)
+      - [Suggested replies](#suggested-replies)
+      - [CSAT Message](#csat-message)
+      - [Product List](#product-list)
+  - [Key features](#key-features)
+    - [Read receipt](#read-receipt)
+    - [Citation](#citation)
+    - [Special notice](#special-notice)
+  - [API reference](#api-reference)
+
 ---
 
 ## Types
