@@ -138,7 +138,7 @@ Visual Indicators:
 When enabled, messages display visual indicators showing:
 
 - Sent status
-- Delivered status
+
 - Read status with timestamp
 
 ### Citation

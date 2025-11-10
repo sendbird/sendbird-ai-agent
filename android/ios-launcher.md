@@ -2,7 +2,7 @@
 
 The Launcher is a core component of Delight AI agent messenger that enables you to start and manage conversations in your client app for iOS. It can be attached to any UIView and provides a floating button interface. When the launcher is tapped, it automatically launches a conversation screen based on your configuration.
 
-The launcher's appearance such as an icon, its color and size can be customized via the Delight AI agent dashboard as shown below.
+The launcher's appearance such as an icon, its color and size can be customized via the Delight AI agent dashboard as shown below. 
 
 <img width="441" height="737" src="https://github.com/user-attachments/assets/dc0ea3af-713e-452b-b907-cfe9db8a5d55" />
 
@@ -96,7 +96,7 @@ AIAgentMessenger.attachLauncher(
 
 ### Set the launcher position
 
-Set the launcher position on a screen using `LauncherPosition` as shown below.
+Set the launcher position on a screen using `layout.init()` as shown below.
 
 ```swift
 let options = SBALauncherOptions(
@@ -218,9 +218,9 @@ class ViewController: UIViewController {
 }
 ```
 
-### Detaching the launcher
+### Remove the launcher
 
-When you need to remove the launcher from the screen:
+When you need to remove the launcher from the screen, use the snippet below.
 
 ```swift
 // Detach launcher when view disappears or is no longer needed.
@@ -412,10 +412,10 @@ let overlayOptions = SBALauncherOptions(
     ))
 )
 ```
+ 
+- `FullscreenStyle`
 
-##### FullscreenStyle
-
-Configuration for fullscreen display mode.
+Configuration for full-screen display mode.
 
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
@@ -429,7 +429,7 @@ let fullscreenStyle = SBALauncherOptions.DisplayStyle.FullscreenStyle(
 )
 ```
 
-##### OverlayStyle
+- `OverlayStyle`
 
 Configuration for overlay display mode.
 
@@ -492,21 +492,21 @@ Core methods for managing the launcher in the AI Agent Messenger SDK.
 
 Attaches the launcher button to the screen.
 
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+| `channelURL` | `String?` | (Optional) The channel URL to open a specific conversation. If `nil`, a new conversation will be created. |
+| `paramsBuilder` | `LauncherSettingsParamsBuilder?` | (Optional) A closure used to configure launcher settings such as layout and appearance. |
+
+
 ```swift
 static func attachLauncher(
     aiAgentId: String,
     channelURL: String? = nil,
     paramsBuilder: LauncherSettingsParamsBuilder? = nil
 )
-```
 
-**Parameters:**
-- `aiAgentId`: The ID of the AI agent
-- `channelURL`: Optional channel URL to open specific conversation
-- `paramsBuilder`: Optional closure to configure launcher settings
-
-**Example:**
-```swift
+// Example
 let options = SBALauncherOptions(
     parentView: nil,
     entryPoint: .default,
@@ -531,17 +531,17 @@ AIAgentMessenger.attachLauncher(
 
 Removes the launcher button from the screen.
 
+| Parameter | Type | Description |
+|------------|------|-------------|
+| `aiAgentId` | `String` | The unique identifier of the AI agent. |
+
+
 ```swift
 static func detachLauncher(
     aiAgentId: String
 )
-```
 
-**Parameters:**
-- `aiAgentId`: The ID of the AI agent
-
-**Example:**
-```swift
+// Example
 AIAgentMessenger.detachLauncher(
     aiAgentId: "your-ai-agent-id"
 )
@@ -551,8 +551,6 @@ AIAgentMessenger.detachLauncher(
 
 Configuration parameters for the launcher button. Inherits from `BaseMessengerParams`.
 
-**Properties:**
-
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
 | `options` | SBALauncherOptions | Launcher layout and display options | .default |
@@ -560,7 +558,6 @@ Configuration parameters for the launcher button. Inherits from `BaseMessengerPa
 | `countryCode` | String? | Country code (ISO 3166) | nil |
 | `context` | [String: String] | Additional metadata for AI agent | [:] |
 
-**Example:**
 ```swift
 let options = SBALauncherOptions(
     parentView: nil,
@@ -586,8 +583,6 @@ AIAgentMessenger.attachLauncher(
 
 Comprehensive configuration options for launcher appearance and behavior.
 
-**Properties:**
-
 | Property | Type | Description | Default |
 |----------|------|-------------|---------|
 | `parentView` | UIView? | Parent view to attach launcher | nil |
@@ -595,7 +590,6 @@ Comprehensive configuration options for launcher appearance and behavior.
 | `layout` | Layout | Position and margin configuration | .default |
 | `displayStyle` | DisplayStyle | How conversation appears | .overlay() |
 
-**Example:**
 ```swift
 let options = SBALauncherOptions(
     parentView: customView,
@@ -615,10 +609,8 @@ Type alias for launcher settings parameter builder closure.
 
 ```swift
 typealias LauncherSettingsParamsBuilder = (LauncherSettingsParams) -> Void
-```
 
-**Usage:**
-```swift
+// Usage example
 let options = SBALauncherOptions(
     parentView: nil,
     entryPoint: .default,
@@ -636,6 +628,8 @@ AIAgentMessenger.attachLauncher(
     params.options = options
 }
 ```
+
+// To Tez: ?
 
 ### Best Practices
 
