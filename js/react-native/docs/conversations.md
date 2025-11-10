@@ -1,0 +1,573 @@
+# Conversations
+
+In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+
+When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
+
+| Feature| Single active conversation| Multiple active conversations (Default)|
+|-------------------|------------------|----------------|
+| Number of active conversation| A user can have only one active conversation with your AI agent at a time.| A user can have multiple active conversations with your AI agent at the same time.|
+| Starting a new conversation | A new conversation can't be created if there is an active conversation at the moment. The existing conversation must end first.| New conversations can be created anytime using the `createConversation()` function from `useMessengerSessionContext()`.|
+
+>__Note__: Whichever conversation mode you choose, if there is no active conversation, a new conversation is automatically created and the user can start a dialogue with your AI agent. This provides seamless user experience without requiring manual conversation setup.
+
+This guide explains:
+
+- [Conversations](#conversations)
+  - [Prerequisites](#prerequisites)
+  - [Start a conversation](#start-a-conversation)
+    - [With `FixedMessenger`](#with-fixedmessenger)
+      - [Launch a conversation](#launch-a-conversation)
+      - [Launch a conversation list](#launch-a-conversation-list)
+      - [Set the window mode](#set-the-window-mode)
+      - [Set the launcher position](#set-the-launcher-position)
+      - [Set the launcher margin](#set-the-launcher-margin)
+      - [Set the launcher size](#set-the-launcher-size)
+      - [Customize the launcher appearance](#customize-the-launcher-appearance)
+    - [With direct presentation](#with-direct-presentation)
+  - [Advanced configuration](#advanced-configuration)
+    - [Context object for personalized conversation](#context-object-for-personalized-conversation)
+    - [Opening a specific conversation with channel URL](#opening-a-specific-conversation-with-channel-url)
+    - [Start a conversation in multiple conversation mode](#start-a-conversation-in-multiple-conversation-mode)
+  - [API Reference](#api-reference)
+
+---
+
+## Prerequisites
+
+Before using the Sendbird AI Agent Messenger in React Native, you need to install and configure required native modules for local storage and file picking functionality.
+
+### Install required packages
+
+Install the following packages using your package manager:
+
+```bash
+# Using npm
+npm install react-native-mmkv expo-image-picker expo-document-picker
+
+# Using yarn
+yarn add react-native-mmkv expo-image-picker expo-document-picker
+
+# Using pnpm
+pnpm add react-native-mmkv expo-image-picker expo-document-picker
+```
+
+>__Note__: If you're using bare React Native (not Expo), you may need to use `react-native-image-picker` and `react-native-document-picker` instead of the Expo packages. Make sure to follow the installation instructions for each package.
+
+### Configure native modules
+
+Initialize the required native modules before using the messenger:
+
+```tsx
+import { createMMKV } from 'react-native-mmkv';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
+
+// Create MMKV instance for local storage
+const mmkv = createMMKV();
+
+// Native modules configuration
+const nativeModules = {
+  mmkv,
+  imagePicker: ImagePicker,
+  documentPicker: DocumentPicker
+};
+```
+
+These modules are required for:
+- **MMKV**: Local storage for caching and session management
+- **Image Picker**: Selecting images from gallery or camera
+- **Document Picker**: Selecting files for sharing in conversations
+
+---
+
+## Start a conversation
+
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for React Native provides two launch methods: `FixedMessenger` and directly using the `Conversation` component. The following table describes the characteristics of each approach.
+
+| Launch Method | Description | Recommended Use Case |
+|----------------|--------------|-----------------------|
+| FixedMessenger | Provides a floating launcher button that automatically manages conversation creation and navigation. | Ideal when you want a persistent, always-accessible AI agent across your application. |
+| Direct Conversation Usage | Programmatically render the Conversation component directly, offering fine-grained control over layout and navigation. | Best for custom UI layouts, embedded conversations, or when you need full control over the conversation interface. |
+
+### With `FixedMessenger`
+
+`FixedMessenger` provides a floating UI approach for launching the messenger and starting a conversation. The `entryPoint` prop allows you to lead the user to either a conversation view or a conversation list view. Simply mounting the `<FixedMessenger />` component automatically creates a conversation (if none exists) when the launcher is clicked. If you wish to show a conversation list first, set `entryPoint` to `ConversationList`.
+
+The launcher's appearance can be customized via the dashboard. For positioning and sizing customization, see the launcher customization sections below.
+
+```tsx
+import { FixedMessenger } from '@sendbird/ai-agent-messenger-react-native';
+import { createMMKV } from 'react-native-mmkv';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
+
+const mmkv = createMMKV();
+
+// Basic launcher setup - automatically starts conversation when clicked
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+/>
+```
+
+#### Launch a conversation
+
+By default, the launcher opens a conversation when clicked. You can explicitly configure this behavior using the `entryPoint` prop:
+
+```tsx
+// Configure messenger to open conversation directly (default behavior)
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  entryPoint={'Conversation'}
+/>
+```
+
+You can also provide additional context, language, and country settings:
+
+```tsx
+// Launch conversation with personalization settings
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  entryPoint={'Conversation'}
+  language={'en-US'}
+  countryCode={'US'}
+  context={{
+    user_type: 'premium',
+    session_id: 'session_123'
+  }}
+/>
+```
+
+#### Launch a conversation list
+
+You can configure the messenger to show the conversation list first:
+
+```tsx
+// Configure messenger to open conversation list
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  entryPoint={'ConversationList'}
+/>
+```
+
+#### Set the window mode
+
+React Native allows you to control how the messenger window is displayed using the `windowMode` prop. Available modes are `floating` (default) and `fullscreen`.
+
+```tsx
+// Floating window mode (default) - appears as a floating window
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  windowMode={'floating'}
+/>
+
+// Fullscreen mode - takes up the entire screen
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  windowMode={'fullscreen'}
+/>
+```
+
+You can also configure fullscreen insets for safe area handling:
+
+```tsx
+// Fullscreen with custom insets
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  windowMode={'fullscreen'}
+  fullscreenInsets={{ top: 0, bottom: 0, left: 0, right: 0 }}
+/>
+```
+
+#### Set the launcher position
+
+You can customize the launcher's position, margin, and size using the `FixedMessenger.Style` component.
+
+Set the launcher position on the screen using the `position` prop. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+>
+  <FixedMessenger.Style position={'end-bottom'} />
+</FixedMessenger>
+```
+
+The following table lists available position values:
+
+| Position | Description |
+|----------|-------------|
+| `'start-top'` | Top-left corner of the screen |
+| `'start-bottom'` | Bottom-left corner of the screen |
+| `'end-top'` | Top-right corner of the screen |
+| `'end-bottom'` | Bottom-right corner of the screen (default) |
+
+#### Set the launcher margin
+
+Adjust the spacing around the launcher using the `margin` prop. You can set margins for each side individually.
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+>
+  <FixedMessenger.Style
+    position={'end-bottom'}
+    margin={{ bottom: 24, end: 24 }}
+  />
+</FixedMessenger>
+```
+
+The `margin` prop accepts an object with the following optional properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `top` | number | Top margin in pixels |
+| `bottom` | number | Bottom margin in pixels |
+| `start` | number | Start margin in pixels (left in LTR, right in RTL) |
+| `end` | number | End margin in pixels (right in LTR, left in RTL) |
+
+Default margins are `{ top: 24, bottom: 24, start: 24, end: 24 }`.
+
+#### Set the launcher size
+
+Customize the launcher button size in pixels using the `launcherSize` prop. The default size is 48 pixels.
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+>
+  <FixedMessenger.Style
+    position={'end-bottom'}
+    margin={{ bottom: 20, end: 20 }}
+    launcherSize={64}
+  />
+</FixedMessenger>
+```
+
+You can also set the spacing between the launcher and the messenger window:
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+>
+  <FixedMessenger.Style
+    position={'end-bottom'}
+    launcherSize={56}
+    spacing={12}  // Space between launcher and window
+  />
+</FixedMessenger>
+```
+
+#### Customize the launcher appearance
+
+The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+
+The following example demonstrates all customization options together:
+
+```tsx
+import { FixedMessenger } from '@sendbird/ai-agent-messenger-react-native';
+import { createMMKV } from 'react-native-mmkv';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
+
+const mmkv = createMMKV();
+
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  entryPoint={'Conversation'}
+  windowMode={'floating'}
+  language={'en-US'}
+  context={{ user_type: 'premium' }}
+>
+  <FixedMessenger.Style
+    position={'start-bottom'}
+    margin={{
+      start: 20,
+      bottom: 20
+    }}
+    launcherSize={56}
+    spacing={12}
+  />
+</FixedMessenger>
+```
+
+### With direct presentation
+
+For advanced use cases where you need direct control over the conversation view without the floating launcher, you can use the `Conversation` component directly. This provides a full-screen or custom-sized conversation interface.
+
+```tsx
+import { AIAgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react-native';
+import { createMMKV } from 'react-native-mmkv';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
+
+const mmkv = createMMKV();
+
+function DirectConversationView() {
+  const [channelUrl, setChannelUrl] = useState<string | undefined>();
+
+  return (
+    <AIAgentProviderContainer
+      appId={'YOUR_APP_ID'}
+      aiAgentId={'YOUR_AI_AGENT_ID'}
+      userSessionInfo={{ userId: 'user_123' }}
+      nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+      language={'en-US'}
+      context={{ launch_source: 'direct_view' }}
+    >
+      <Conversation
+        channelUrl={channelUrl}
+        onClearChannelUrl={() => setChannelUrl(undefined)}
+        onClose={() => {/* Handle close */}}
+      />
+    </AIAgentProviderContainer>
+  );
+}
+```
+
+This approach is recommended when:
+- You want to embed the conversation in a specific part of your UI
+- You need custom navigation or layout control
+- You want to build a full-page conversation experience
+- You need to open specific conversations programmatically
+
+---
+
+## Advanced configuration
+
+Beside the conversation mode, you can further configure how the conversation channels are created and built.
+
+When a new conversation begins, you can pass over user information to the channel so that AI agent can provide more personalized assistance to the user. This information is contained in a `context` object, which can be set at the creation of the conversation.
+
+Also, you can open a specific conversation channel by passing its URL, or manually create a new one while in multiple conversation mode.
+
+### Context object for personalized conversation
+
+The `context` object allows you to provide user's information to AI agents for more personalized service, such as their country code and language preference. This context can be set when creating conversations to enhance the user experience. You can configure these settings at the provider level using the `FixedMessenger` or `AIAgentProviderContainer` component props.
+
+```tsx
+// Setting context through FixedMessenger props
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+  language={'en-US'}  // IETF BCP 47 format
+  countryCode={'US'}  // ISO 3166 format
+  context={{
+    customer_tier: 'premium',
+    previous_interaction: 'support_ticket_123',
+    user_preferences: 'technical_support'
+  }}
+/>
+```
+
+### Opening a specific conversation with channel URL
+
+You can open a specific conversation by passing its channel URL to the `Conversation` component. This is useful when you want to display a specific conversation directly without using the launcher.
+
+```tsx
+import { useState } from 'react';
+import { AIAgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react-native';
+import { createMMKV } from 'react-native-mmkv';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
+
+const mmkv = createMMKV();
+
+// Using Conversation component directly to open specific conversation
+function CustomMessengerView() {
+  const [channelUrl] = useState('sendbird_group_channel_12345');
+
+  return (
+    <AIAgentProviderContainer
+      appId={'YOUR_APP_ID'}
+      aiAgentId={'YOUR_AI_AGENT_ID'}
+      userSessionInfo={{ userId: 'user_123' }}
+      nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+    >
+      <Conversation
+        channelUrl={channelUrl}
+        onClearChannelUrl={() => {/* Handle clear */}}
+        onClose={() => {/* Handle close */}}
+      />
+    </AIAgentProviderContainer>
+  );
+}
+```
+
+### Start a conversation in multiple conversation mode
+
+Multiple active conversation mode allows users to simultaneously communicate with your AI agent in different channels. In this case, use the `createConversation()` function from `useMessengerSessionContext()` to create a new conversation whenever needed.
+
+>__Note__: In single conversation mode, a new conversation can't be created if there is an active conversation.
+
+```tsx
+import { useMessengerSessionContext } from '@sendbird/ai-agent-messenger-react-native';
+
+function CreateConversationButton() {
+  const { createConversation } = useMessengerSessionContext();
+
+  const handleCreateConversation = async () => {
+    try {
+      const channelUrl = await createConversation({
+        aiAgentId: 'YOUR_AI_AGENT_ID',
+        language: 'en-US',
+        country: 'US',
+        context: {
+          user_type: 'premium',
+          session_id: 'session_123'
+        }
+      });
+
+      console.log('Successfully created conversation:', channelUrl);
+
+      // You can now use this channelUrl to open the specific conversation
+      // See "With direct presentation" section for details
+
+    } catch (error) {
+      console.error('Failed to create conversation:', error);
+    }
+  };
+
+  return (
+    <Button title="Create New Conversation" onPress={handleCreateConversation} />
+  );
+}
+
+// Usage within FixedMessenger context
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  userSessionInfo={{ userId: 'user_123' }}
+  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
+>
+  <CreateConversationButton />
+</FixedMessenger>
+```
+
+---
+
+## API Reference
+
+### FixedMessenger Props
+
+Configuration options for the `FixedMessenger` component.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `appId` | string | Required | Your Sendbird application ID |
+| `aiAgentId` | string | Required | AI agent identifier for conversation target |
+| `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | Required | User session information for authentication |
+| `nativeModules` | NativeAdapterConfig | Required | Native modules configuration (mmkv, imagePicker, documentPicker) |
+| `entryPoint` | 'Conversation' \| 'ConversationList' | 'Conversation' | Which screen to show when the messenger is first loaded |
+| `windowMode` | 'floating' \| 'fullscreen' | 'floating' | Display mode for the messenger window |
+| `fullscreenInsets` | Partial<{ top: number; left: number; right: number; bottom: number }> | - | Insets for fullscreen mode to handle safe areas |
+| `edgeToEdgeEnabled` | boolean | true | (Android only) Enable edge-to-edge display |
+| `language` | string | System default | Language setting following IETF BCP 47 format (e.g., "en-US", "ko-KR") |
+| `countryCode` | string | - | Country code following ISO 3166 format (e.g., "US", "KR") |
+| `context` | Record<string, string> | - | Context object for personalized AI agent responses |
+| `queryParams` | AIAgentQueryParams | - | Global default query parameters for AI agent |
+| `config` | AIAgentConfig | - | Global default configuration for AI agent |
+| `theme` | object | - | Theme customization including mode, palette and typography |
+| `strings` | PartialDeep<StringSet> | - | Localization strings for the messenger |
+| `logLevel` | LogLevel | LogLevel.WARN | Log level for the AI agent client |
+
+### FixedMessenger.Style Props
+
+Configuration options for customizing the launcher appearance.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `position` | 'start-top' \| 'start-bottom' \| 'end-top' \| 'end-bottom' | 'end-bottom' | Position of the launcher button |
+| `margin` | Partial<{ top: number; bottom: number; start: number; end: number }> | { top: 24, bottom: 24, start: 24, end: 24 } | Margin around the launcher |
+| `launcherSize` | number | 48 | Size of the launcher button in pixels |
+| `spacing` | number | 12 | Space between launcher and messenger window in pixels |
+
+### NativeAdapterConfig
+
+Required native modules configuration.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `mmkv` | MMKVInstance | MMKV instance for local storage |
+| `imagePicker` | typeof ImagePicker | Image picker module (expo-image-picker or react-native-image-picker) |
+| `documentPicker` | typeof DocumentPicker | Document picker module (expo-document-picker or react-native-document-picker) |
+
+### Conversation Props
+
+Configuration options for the `Conversation` component.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `channelUrl` | string | - | Channel URL to open. If not provided, uses active channel from context |
+| `onClearChannelUrl` | () => void | - | Callback when channel URL should be cleared |
+| `onNavigateToConversationList` | () => void | - | Callback to navigate to conversation list |
+
+### useMessengerSessionContext Hook
+
+Access to messenger session context and conversation management functions.
+
+**Key Properties:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `sdkUser` | User \| null | Sendbird Chat SDK user object |
+
+**Methods:**
+
+| Method | Parameters | Return Type | Description |
+|--------|------------|-------------|-------------|
+| `createConversation` | params: ConversationCreateParams | Promise<string> | Creates a new conversation and returns the channel URL |
+| `refreshActiveChannel` | - | Promise<string> | Refreshes the active channel and returns URL |
+| `authenticate` | - | Promise<MessengerSettingsResponse> | Authenticates the user session |
+| `deauthenticate` | - | Promise<void> | Deauthenticates the user session |
+
+### ConversationCreateParams
+
+Parameters for creating new conversations.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `aiAgentId` | string | Required | AI agent identifier |
+| `language` | string | - | Language code (IETF BCP 47) |
+| `country` | string | - | Country code (ISO 3166) |
+| `context` | Record<string, string> | - | Additional metadata for AI agent |
