@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.3.0 (Nov 6, 2025)
+## v1.3.0 (Nov 6, 2025) with Chat SDK `v4.32.0`
 
 ### Features
 
@@ -25,7 +25,7 @@
 
 ---
 
-## v1.2.2 (Nov 3, 2025)
+## v1.2.2 (Nov 3, 2025) with Chat SDK `v4.31.1`
 
 ### Improvements
 
@@ -34,7 +34,7 @@
 
 ---
 
-## v1.2.1 (Oct 30, 2025)
+## v1.2.1 (Oct 30, 2025) with Chat SDK `v4.31.0`
 
 ### Improvements
 
@@ -49,7 +49,7 @@
 
 ---
 
-## v1.2.0 (Oct 29, 2025)
+## v1.2.0 (Oct 29, 2025) with Chat SDK `v4.31.0`
 
 ### Features
 
@@ -70,14 +70,14 @@
   - Added `fun removeFromCenterSlot(view: View)`
 ---
 
-## v1.1.0 (Oct 2, 2025)
+## v1.1.0 (Oct 2, 2025) with Chat SDK `v4.29.0`
 
 ### Features
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
 
-## v1.0.0 (Sep 25, 2025)
+## v1.0.0 (Sep 25, 2025) with Chat SDK `v4.29.0`
 
 ### Highlights
 
