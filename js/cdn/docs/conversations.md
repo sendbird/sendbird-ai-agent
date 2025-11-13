@@ -32,20 +32,18 @@ This guide explains:
 
 ## Start a conversation
 
-Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for CDN provides two launch methods: using the default `Messenger` with launcher or customizing with `custom main component`. The following table describes the characteristics of each approach.
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for CDN provides two launch methods: using the default `Messenger` with a `launcher` or customizing with `custom main component`. The following table describes the characteristics of each approach.
 
-| Launch Method | Description | Recommended Use Case |
+| Launch method | Description | Recommended use case |
 |----------------|--------------|-----------------------|
 | Messenger | Provides a floating launcher button that automatically manages conversation creation and navigation. | Ideal when you want a persistent, always-accessible AI agent across your application. |
-| Custom Main Component | Programmatically provide your own main component, offering fine-grained control over layout and navigation. | Best for custom UI layouts, embedded conversations, or when you need full control over the conversation interface. |
+| Custom main component | Programmatically provide your own main component, offering fine-grained control over layout and navigation. | Best for custom UI layouts, embedded conversations, or when you need full control over the conversation interface. |
 
-### With Messenger
+### With `Messenger`
 
-The default messenger provides a floating UI approach for launching the messenger and starting a conversation. The `entryPoint` option allows you to lead the user to either a conversation view or a conversation list view.
+First, load the `messenger` and initialize it with your application credentials.
 
-#### Basic setup
-
-Load the messenger and initialize it with your application credentials:
+The messenger provides a floating UI approach for launching the messenger and starting a conversation by default. However, during initialization, you can determine whether to launch either a conversation view or a conversation list view using `entryPoint`. The following code snippet allows the messenger to show a conversation instead of the list view. 
 
 ```html
 <!DOCTYPE html>
@@ -73,25 +71,9 @@ Load the messenger and initialize it with your application credentials:
 </html>
 ```
 
-#### Without Shadow DOM
+#### Launch a conversation list
 
-By default, the messenger uses Shadow DOM for style encapsulation. You can disable it if needed:
-
-```javascript
-const messenger = await loadMessenger({
-  useShadowDOM: false
-});
-
-messenger.initialize({
-  appId: 'YOUR_APP_ID',
-  aiAgentId: 'YOUR_AI_AGENT_ID',
-  userSessionInfo: new messenger.AnonymousSessionInfo()
-});
-```
-
-#### Launch a conversation
-
-By default, the messenger opens a conversation when clicked. You can explicitly configure this behavior using the `entryPoint` option:
+By default, the messenger opens a conversation when clicked. However, you can explicitly configure this behavior using the `entryPoint` option:
 
 ```javascript
 // Configure messenger to open conversation directly (default behavior)
@@ -100,11 +82,11 @@ const messenger = await loadMessenger();
 messenger.initialize({
   appId: 'YOUR_APP_ID',
   aiAgentId: 'YOUR_AI_AGENT_ID',
-  entryPoint: 'Conversation'
+  entryPoint: 'ConversationList'  // Values can be 'Conversation' or 'ConversationList'
 });
 ```
 
-You can also provide additional context, language, and country settings:
+You can also provide additional context, language, and country settings during initialization:
 
 ```javascript
 // Launch conversation with personalization settings
@@ -121,24 +103,29 @@ messenger.initialize({
 });
 ```
 
-#### Launch a conversation list
+#### Without `ShadowDOM`
 
-You can configure the messenger to show the conversation list first:
+By default, the messenger uses `ShadowDOM` for style encapsulation, enabling the SDK to maintain its own styling independent of outside codes. However, you can disable the functionality if needed as follows:
 
 ```javascript
-// Configure messenger to open conversation list
+const messenger = await loadMessenger({
+  useShadowDOM: false
+});
+
 messenger.initialize({
   appId: 'YOUR_APP_ID',
   aiAgentId: 'YOUR_AI_AGENT_ID',
-  entryPoint: 'ConversationList'
+  userSessionInfo: new messenger.AnonymousSessionInfo()
 });
 ```
 
-#### Set the launcher position
+---
 
->__Note__: On mobile devices, the messenger automatically opens in full-screen mode. On desktop, it displays as a floating mini-window anchored near the launcher.
+## Set the launcher position
 
-Set the launcher position on the screen using the `setPosition()` method. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
+On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
+
+You can configure the launcher's positioning and margin on the screen using the `setPosition()` method. 
 
 ```javascript
 messenger.setPosition({
@@ -152,7 +139,7 @@ messenger.setPosition({
 });
 ```
 
-**Available positions:**
+#### Position
 
 | Position | Description |
 |----------|-------------|
@@ -161,7 +148,7 @@ messenger.setPosition({
 | `'end-top'` | Top-right corner of the screen |
 | `'end-bottom'` | Bottom-right corner of the screen (default) |
 
-**Margin options:**
+#### Margin
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -170,15 +157,28 @@ messenger.setPosition({
 | `start` | number | 24 | Start margin in pixels (left in LTR, right in RTL) |
 | `end` | number | 24 | End margin in pixels (right in LTR, left in RTL) |
 
-#### Customize the launcher appearance
+
+### Customize the launcher appearance
 
 The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
 <img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
 
+---
+
+## Advanced usage
+
 ### With custom main component
 
 For advanced use cases where you need direct control over the conversation view without the floating launcher, you can provide a custom main component. This provides a full-screen or custom-sized conversation interface.
+
+This approach is recommended when:
+- You want to embed the conversation in a specific part of your UI
+- You need custom navigation or layout control
+- You want to build a full-page conversation experience
+- You need to open specific conversations programmatically
+
+The following snippet demonstrates how to load the `messenger` with a custom main component that renders `AgentProviderContainer` and a `Conversation` view.
 
 ```javascript
 const messenger = await loadMessenger({
@@ -198,12 +198,6 @@ messenger.initialize({
   aiAgentId: 'YOUR_AI_AGENT_ID'
 });
 ```
-
-This approach is recommended when:
-- You want to embed the conversation in a specific part of your UI
-- You need custom navigation or layout control
-- You want to build a full-page conversation experience
-- You need to open specific conversations programmatically
 
 ---
 
@@ -236,7 +230,7 @@ messenger.initialize({
 
 The messenger provides methods to control visibility and manage conversations.
 
-#### Open and close messenger
+#### Open and close the messenger
 
 Control the messenger visibility programmatically:
 
@@ -248,9 +242,9 @@ messenger.open();
 messenger.close();
 ```
 
-#### Update configuration
+#### Update the messenger configuration
 
-Update messenger configuration after initialization:
+You can update the messenger configuration even after initialization:
 
 ```javascript
 messenger.updateConfig({
@@ -266,9 +260,9 @@ messenger.updateConfig({
 });
 ```
 
-#### Update user session
+#### Update the user session
 
-Update user session information dynamically:
+When the user's session token expires or a new session token is required, you need to update the user session information. Use `messenger.updateUserSession()` to do so dynamically:
 
 ```javascript
 // With ManualSessionInfo
@@ -299,7 +293,7 @@ messenger.updateUserSession(sessionInfo);
 
 #### Deauthenticate
 
-Log out the current user:
+To log out the current user, use `deauthenticate()`.
 
 ```javascript
 messenger.deauthenticate();
@@ -307,7 +301,7 @@ messenger.deauthenticate();
 
 #### Destroy messenger
 
-Completely remove the messenger instance:
+You can also completely remove the messenger instance using `destroy()`.
 
 ```javascript
 messenger.destroy();
@@ -319,20 +313,16 @@ messenger.destroy();
 
 ### loadMessenger()
 
-Loads the AI Agent Messenger module.
+Loads the AI Agent Messenger module. It returns `Promise<Messenger>`.
 
 ```javascript
 await loadMessenger(config)
 ```
 
-**Parameters:**
-
-| Property | Type | Default | Description |
+| Parameter | Type | Default | Description |
 |----------|------|---------|-------------|
-| `useShadowDOM` | boolean | true | Use Shadow DOM for style encapsulation (set to false to disable) |
+| `useShadowDOM` | boolean | true | Use Shadow DOM for style encapsulation (set to `false` to disable) |
 | `customMainComponent` | function | - | Custom main component function for advanced customization |
-
-**Returns:** Promise<Messenger>
 
 ### messenger.initialize()
 
@@ -342,9 +332,7 @@ Initializes the AI Agent Messenger with configuration.
 messenger.initialize(config)
 ```
 
-**Parameters:**
-
-| Property | Type | Default | Description |
+| Parameters | Type | Default | Description |
 |----------|------|---------|-------------|
 | `appId` | string | Required | Your Sendbird application ID |
 | `aiAgentId` | string | Required | AI agent identifier for conversation target |
@@ -360,7 +348,7 @@ messenger.initialize(config)
 
 ### Messenger Methods
 
-**Lifecycle Methods:**
+- Lifecycle Methods
 
 | Method | Parameters | Description |
 |--------|------------|-------------|
@@ -368,7 +356,7 @@ messenger.initialize(config)
 | `close()` | - | Close the messenger |
 | `destroy()` | - | Completely remove the messenger instance |
 
-**Configuration Methods:**
+- Configuration Methods
 
 | Method | Parameters | Description |
 |--------|------------|-------------|
@@ -376,7 +364,7 @@ messenger.initialize(config)
 | `updateUserSession(session)` | session: ManualSessionInfo \| AnonymousSessionInfo | Update user session information |
 | `setPosition(params)` | params: { position?, margin? } | Set launcher position and margins |
 
-**Session Methods:**
+- Session Methods
 
 | Method | Description |
 |--------|-------------|
@@ -405,11 +393,11 @@ new messenger.ManualSessionInfo({
 new messenger.AnonymousSessionInfo()
 ```
 
-### Position Parameters
+### setPosition()
 
 Parameters for `setPosition()` method:
 
-| Property | Type | Default | Description |
+| Parameter | Type | Default | Description |
 |----------|------|---------|-------------|
 | `position` | 'start-top' \| 'start-bottom' \| 'end-top' \| 'end-bottom' | - | Position of the launcher button |
 | `margin` | Partial<{ top: number; bottom: number; start: number; end: number }> | - | Margin around the launcher in pixels |
