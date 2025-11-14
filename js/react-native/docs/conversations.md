@@ -203,6 +203,8 @@ You can also configure full-screen insets for safe area handling:
 
 You can customize the launcher's position, margin, size and spacing between the launcher and browser using the `FixedMessenger.Style` component.
 
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+
 The following example demonstrates all customization options together:
 
 ```tsx
@@ -271,8 +273,7 @@ You can also set the spacing between the launcher and the messenger window using
 
 The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
-
+<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-apperance.png">
 
 ### With direct presentation
 

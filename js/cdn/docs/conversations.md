@@ -40,7 +40,7 @@ Once you have determined which conversation mode to apply, you should also consi
 
 ### With `Messenger`
 
-Load the `messenger` and initialize it with your application credentials.
+Load the messenger and initialize it with your application credentials.
 
 #### Launch a conversation
 
@@ -107,6 +107,8 @@ messenger.initialize({
 
 On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
 
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+
 You can configure the launcher's positioning and margin on the screen using the `setPosition()` method. 
 
 ```javascript
@@ -144,7 +146,7 @@ messenger.setPosition({
 
 The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-apperance.png">
 
 ---
 
@@ -158,7 +160,7 @@ This approach is recommended when:
 - You want to build a full-page conversation experience.
 - You need to open a specific conversation programmatically with its `channelUrl`.
 
-The following snippet demonstrates how to load the `messenger` with a custom main component that renders `AgentProviderContainer` and a `Conversation` view.
+The following snippet demonstrates how to load the messenger with a custom main component that renders `AgentProviderContainer` and a `Conversation` view.
 
 ```javascript
 const messenger = await loadMessenger({
@@ -352,7 +354,7 @@ messenger.initialize(config)
 
 ### Session Info Classes
 
-**ManualSessionInfo:**
+- ManualSessionInfo
 
 ```javascript
 new messenger.ManualSessionInfo({
@@ -367,7 +369,7 @@ new messenger.ManualSessionInfo({
 })
 ```
 
-**AnonymousSessionInfo:**
+- AnonymousSessionInfo
 
 ```javascript
 new messenger.AnonymousSessionInfo()
