@@ -203,7 +203,7 @@ You can also configure full-screen insets for safe area handling:
 
 You can customize the launcher's position, margin, size and spacing between the launcher and browser using the `FixedMessenger.Style` component.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-js-launcher.png" />
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
 
 The following example demonstrates all customization options together:
 
