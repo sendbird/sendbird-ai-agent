@@ -20,7 +20,7 @@ This guide explains:
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
       - [Set the window mode](#set-the-window-mode)
-      - [Set the launcher position, margin, and size](#set-the-launcher-position-margin-and-size)
+      - [Set the launcher layout (position, margin, size, spacing)](#set-the-launcher-layout)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With direct presentation](#with-direct-presentation)
   - [Advanced configuration](#advanced-configuration)
@@ -199,7 +199,7 @@ You can also configure full-screen insets for safe area handling:
 />
 ```
 
-#### Set the launcher position, margin, and size
+#### Set the launcher layout
 
 You can customize the launcher's position, margin, size and spacing between the launcher and browser using the `FixedMessenger.Style` component.
 

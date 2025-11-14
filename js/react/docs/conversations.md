@@ -18,7 +18,7 @@ This guide explains:
     - [With `FixedMessenger`](#with-fixedmessenger)
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
-      - [Set the launcher position, margin, and size](#set-the-launcher-position-margin-and-size)
+      - [Set the launcher layout (position, margin, size)](#set-the-launcher-layout)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With direct presentation](#with-direct-presentation)
   - [Advanced configuration](#advanced-configuration)
@@ -73,7 +73,7 @@ You can configure the messenger to show the conversation list first:
 />
 ```
 
-#### Set the launcher position, margin, and size
+#### Set the launcher layout
 
 You can customize the launcher's position, margin, and size using the `FixedMessenger.Style` component.
 

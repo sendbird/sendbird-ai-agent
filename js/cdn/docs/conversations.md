@@ -19,7 +19,7 @@ This guide explains:
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
       - [Without Shadow DOM](#without-shadowdom)      
-      - [Set the launcher position and margin](#set-the-launcher-position-and-margin)
+      - [Set the launcher layout (position, margin)](#set-the-launcher-layout)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With custom main component](#with-custom-main-component)
   - [Advanced configuration](#advanced-configuration)
@@ -103,7 +103,7 @@ messenger.initialize({
 });
 ```
 
-#### Set the launcher position and margin
+#### Set the launcher layout
 
 On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
 
