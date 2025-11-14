@@ -77,7 +77,7 @@ You can configure the messenger to show the conversation list first:
 
 You can customize the launcher's position, margin, and size using the `FixedMessenger.Style` component.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-js-launcher.png" />
 
 >__Note__: On mobile devices, the messenger automatically opens in full-screen mode. On desktop, it displays as a floating mini-window anchored near the launcher.
 
