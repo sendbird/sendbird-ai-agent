@@ -263,9 +263,9 @@ The `margin` prop accepts an object with the following optional properties.
 
 Customize the launcher button size in pixels using the `launcherSize` prop. The default size is `48` pixels.
 
-- Space 
+- Spacing
 
-You can also set the spacing between the launcher and the messenger window using `spacing`.
+You can also set the spacing between the launcher and the messenger window using `spacing`. The default is `12`.
 
 #### Customize the launcher appearance
 
