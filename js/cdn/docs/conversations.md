@@ -16,10 +16,9 @@ This guide explains:
 - [Conversations](#conversations)
   - [Start a conversation](#start-a-conversation)
     - [With Messenger](#with-messenger)
-      - [Basic setup](#basic-setup)
-      - [Without Shadow DOM](#without-shadow-dom)
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
+      - [Without Shadow DOM](#without-shadow-dom)      
       - [Set the launcher position](#set-the-launcher-position)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With custom main component](#with-custom-main-component)
@@ -41,9 +40,11 @@ Once you have determined which conversation mode to apply, you should also consi
 
 ### With `Messenger`
 
-First, load the `messenger` and initialize it with your application credentials.
+Load the `messenger` and initialize it with your application credentials.
 
-The messenger provides a floating UI approach for launching the messenger and starting a conversation by default. However, during initialization, you can determine whether to launch either a conversation view or a conversation list view using `entryPoint`. The following code snippet allows the messenger to show a conversation instead of the list view. 
+#### Launch a conversation
+
+The messenger provides a floating UI approach for launching the messenger and starting a conversation by default. During initialization, you can determine whether to launch either a conversation view or a conversation list view using `entryPoint`. The messenger provides a floating UI approach for launching the messenger and starting a conversation by default. 
 
 ```html
 <!DOCTYPE html>
@@ -73,7 +74,7 @@ The messenger provides a floating UI approach for launching the messenger and st
 
 #### Launch a conversation list
 
-By default, the messenger opens a conversation when clicked. However, you can explicitly configure this behavior using the `entryPoint` option:
+Use `entryPoint` to configure which view to display when the messenger is launched. As its `entryPoint` is set to `ConversationList`, the following code snippet will show the user's conversation list instead of a conversation view. 
 
 ```javascript
 // Configure messenger to open conversation directly (default behavior)
@@ -83,23 +84,6 @@ messenger.initialize({
   appId: 'YOUR_APP_ID',
   aiAgentId: 'YOUR_AI_AGENT_ID',
   entryPoint: 'ConversationList'  // Values can be 'Conversation' or 'ConversationList'
-});
-```
-
-You can also provide additional context, language, and country settings during initialization:
-
-```javascript
-// Launch conversation with personalization settings
-messenger.initialize({
-  appId: 'YOUR_APP_ID',
-  aiAgentId: 'YOUR_AI_AGENT_ID',
-  entryPoint: 'Conversation',
-  language: 'en-US',
-  countryCode: 'US',
-  context: {
-    user_type: 'premium',
-    session_id: 'session_123'
-  }
 });
 ```
 
@@ -119,9 +103,7 @@ messenger.initialize({
 });
 ```
 
----
-
-## Set the launcher position
+#### Set the launcher position
 
 On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
 
@@ -139,7 +121,7 @@ messenger.setPosition({
 });
 ```
 
-#### Position
+- Position
 
 | Position | Description |
 |----------|-------------|
@@ -148,7 +130,7 @@ messenger.setPosition({
 | `'end-top'` | Top-right corner of the screen |
 | `'end-bottom'` | Bottom-right corner of the screen (default) |
 
-#### Margin
+- Margin
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -158,15 +140,13 @@ messenger.setPosition({
 | `end` | number | 24 | End margin in pixels (right in LTR, left in RTL) |
 
 
-### Customize the launcher appearance
+#### Customize the launcher appearance
 
 The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
 <img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
 
 ---
-
-## Advanced usage
 
 ### With custom main component
 

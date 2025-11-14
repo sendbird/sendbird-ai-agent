@@ -33,17 +33,17 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 | [Rich message](#rich-message)| Template-based messages with interactive UI | Structured JSON templates | Product displays, carousels, CTAs and more. See below section for details. |
 
 
-### Text Message
+### Text message
 
-**Text Message** represents regular text-based communication between users and AI agents. These messages support plain text content and are the foundation of conversational interactions.
+**Text message** represents regular text-based communication between users and AI agents. These messages support plain text content and are the foundation of conversational interactions.
 
 - Content: Plain text messages. Markdown supported.
 - Use case: Basic conversational interactions.
 - Support: Full text rendering with proper formatting.
 
-### Image Message
+### Image message
 
-**Image Message** enables sharing of image files within conversations. This message type supports common image formats for visual communication.
+**Image message** enables sharing of image files within conversations. This message type supports common image formats for visual communication.
 
 - Supported formats: `JPEG`, `PNG` only. Can be sent with text.
 - Use case: Sharing visual content.
@@ -53,9 +53,9 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 >__Note__: However, once handed off to a human agent, users can send image files in any format.
 
-### File Message
+### File message
 
-**File Message** allows sharing of various file formats within conversations, enabling sharing document and resource between users and AI agents.
+**File message** allows sharing of various file formats within conversations, enabling sharing document and resource between users and AI agents.
 
 - Supported formats: `PDF` only. Can be sent with text.
 - Use case: Document sharing and file-based communication.
@@ -63,9 +63,9 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 <img width="363" height="645" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-file-message.png" />
 
-### Rich Message
+### Rich message
 
-**Rich Message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Sendbird AI agent dashboard settings and provide enhanced user interaction.
+**Rich message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Sendbird AI agent dashboard settings and provide enhanced user interaction.
 
 #### Call to Action (CTA) button
 
@@ -99,27 +99,15 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 <img width="360" height="639" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-suggested-replies.png" />
 
-#### CSAT Message
+#### CSAT message
 
-**CSAT Message** is designed to collect user feedback for customer satisfaction (CSAT) survey within conversations.
+**CSAT message** is designed to collect user feedback for customer satisfaction (CSAT) survey within conversations.
 
 - Purpose: Customer satisfaction measurement.
 - Components: Rating systems and feedback collection.
 - Use case: Service quality assessment and user experience evaluation.
 
 <img width="361" height="642" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-csat.png" />
-
-#### Product List
-
->__Note__: **This feature is not yet supported in React Native and will be available in a future release.**
-
-**Product List** messages display product information in a vertical scrolling format, different from Carousel with its vertical layout optimized for product browsing and selection.
-
-- Layout: Vertical scrolling interface.
-- Content: Product information and details.
-- Use case: E-commerce integration, product showcases, inventory display.
-
-<img width="360" height="639" alt="cascade" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-product-list.png" />
 
 ---
 
@@ -142,7 +130,7 @@ The core features supported for messages in Sendbird AI agent include:
 
 ### Special notice
 
-**Special Notice** displays important information to users before conversation starts. This feature helps communicate important guidelines, terms, or instructions to users at the beginning of their interaction.
+**Special notice** displays important information to users before conversation starts. This feature helps communicate important guidelines, terms, or instructions to users at the beginning of their interaction.
 
 - Display location: Bottom of the screen.
 - Behavior: Automatically disappears when a conversation starts.

@@ -35,54 +35,30 @@ This guide explains:
 
 Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for React provides two launch methods: `FixedMessenger` and directly using the `Conversation` component. The following table describes the characteristics of each approach.
 
-| Launch Method | Description | Recommended Use Case |
+| Launch method | Description | Recommended use case |
 |----------------|--------------|-----------------------|
 | FixedMessenger | Provides a floating launcher button that automatically manages conversation creation and navigation. | Ideal when you want a persistent, always-accessible AI agent across your application. |
 | Direct Conversation Usage | Programmatically render the Conversation component directly, offering fine-grained control over layout and navigation. | Best for custom UI layouts, embedded conversations, or when you need full control over the conversation interface. |
 
 ### With `FixedMessenger`
 
-`FixedMessenger` provides a floating UI approach for launching the messenger and starting a conversation. The `entryPoint` prop allows you to lead the user to either a conversation view or a conversation list view. Simply mounting the `<FixedMessenger />` component automatically creates a conversation (if none exists) when the launcher is clicked. If you wish to show a conversation list first, set `entryPoint` to `ConversationList`.
+`FixedMessenger` provides a floating UI approach for launching the messenger and starting a conversation.
+
+#### Launch a conversation
+
+The `entryPoint` prop allows you to lead the user to either a conversation view or a conversation list view. By default, the messenger launches a conversation view when the launcher is clicked. However, if there is no ongoing conversation for the user, mounting the `<FixedMessenger />` component automatically creates a conversation on click. If you wish to show a conversation list first, simply set `entryPoint` to `ConversationList`.
 
 The launcher's appearance can be customized via the dashboard. For positioning and sizing customization, see [Launcher customization](#launcher-customization).
 
 ```tsx
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 
-// Basic launcher setup - automatically starts conversation when clicked
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
-/>
-```
-
-#### Launch a conversation
-
-By default, the launcher opens a conversation when clicked. You can explicitly configure this behavior using the `entryPoint` prop:
-
-```tsx
+// Basic launcher setup - automatically starts conversation when clicked.
 // Configure messenger to open conversation directly (default behavior)
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
   entryPoint={'Conversation'}
-/>
-```
-
-You can also provide additional context, language, and country settings:
-
-```tsx
-// Launch conversation with personalization settings
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
-  entryPoint={'Conversation'}
-  language={'en-US'}
-  countryCode={'US'}
-  context={{
-    user_type: 'premium',
-    session_id: 'session_123'
-  }}
 />
 ```
 
@@ -104,76 +80,6 @@ You can configure the messenger to show the conversation list first:
 You can customize the launcher's position, margin, and size using the `FixedMessenger.Style` component.
 
 >__Note__: On mobile devices, the messenger automatically opens in full-screen mode. On desktop, it displays as a floating mini-window anchored near the launcher.
-
-Set the launcher position on the screen using the `position` prop. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
->
-  <FixedMessenger.Style position={'end-bottom'} />
-</FixedMessenger>
-```
-
-The following table lists available position values:
-
-| Position | Description |
-|----------|-------------|
-| `'start-top'` | Top-left corner of the screen |
-| `'start-bottom'` | Bottom-left corner of the screen |
-| `'end-top'` | Top-right corner of the screen |
-| `'end-bottom'` | Bottom-right corner of the screen (default) |
-
-#### Set the launcher margin
-
-Adjust the spacing around the launcher using the `margin` prop. You can set margins for each side individually.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    margin={{ bottom: 24, end: 24 }}
-  />
-</FixedMessenger>
-```
-
-The `margin` prop accepts an object with the following optional properties:
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `top` | number | Top margin in pixels |
-| `bottom` | number | Bottom margin in pixels |
-| `start` | number | Start margin in pixels (left in LTR, right in RTL) |
-| `end` | number | End margin in pixels (right in LTR, left in RTL) |
-
-Default margins are `{ top: 24, bottom: 24, start: 24, end: 24 }`.
-
-#### Set the launcher size
-
-Customize the launcher button size in pixels using the `launcherSize` prop. The default size is 48 pixels.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    margin={{ bottom: 20, end: 20 }}
-    launcherSize={56}
-  />
-</FixedMessenger>
-```
-
-#### Customize the launcher appearance
-
-The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
-
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
 
 The following example demonstrates all customization options together:
 
@@ -198,9 +104,90 @@ import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 </FixedMessenger>
 ```
 
+- Position
+
+Set the launcher position on the screen using the `position` prop. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+>
+  <FixedMessenger.Style position={'end-bottom'} />
+</FixedMessenger>
+```
+
+The following table lists available position values:
+
+| Position | Description |
+|----------|-------------|
+| `'start-top'` | Top-left corner of the screen.|
+| `'start-bottom'` | Bottom-left corner of the screen. |
+| `'end-top'` | Top-right corner of the screen. |
+| `'end-bottom'` | Bottom-right corner of the screen (default). |
+
+- Margin
+
+Adjust the spacing around the launcher using the `margin` prop. You can set margins for each side individually.
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+>
+  <FixedMessenger.Style
+    position={'end-bottom'}
+    margin={{ bottom: 24, end: 24 }}
+  />
+</FixedMessenger>
+```
+
+The `margin` prop accepts an object with the following optional properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `top` | number | Top margin in pixels. |
+| `bottom` | number | Bottom margin in pixels. |
+| `start` | number | Start margin in pixels (left in LTR, right in RTL). |
+| `end` | number | End margin in pixels (right in LTR, left in RTL). |
+
+Default margins are `{ top: 24, bottom: 24, start: 24, end: 24 }`.
+
+- Size
+
+Customize the launcher button size in pixels using the `launcherSize` prop. The default size is 48 pixels.
+
+```tsx
+<FixedMessenger
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+>
+  <FixedMessenger.Style
+    position={'end-bottom'}
+    margin={{ bottom: 20, end: 20 }}
+    launcherSize={56}
+  />
+</FixedMessenger>
+```
+
+#### Customize the launcher appearance
+
+The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+
+
 ### With direct presentation
 
 For advanced use cases where you need direct control over the conversation view without the floating launcher, you can use the `Conversation` component directly. This provides a full-screen or custom-sized conversation interface.
+
+This approach is recommended when:
+- You want to embed the conversation in a specific part of your UI.
+- You need custom navigation or layout control.
+- You want to build a full-page conversation experience.
+- You need to open specific conversations programmatically.
+
+The following snippet demonstrates how to render a conversation directly by wrapping the `Conversation` component with `AgentProviderContainer`.
 
 ```tsx
 import { AgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react';
@@ -224,12 +211,6 @@ function DirectConversationView() {
 }
 ```
 
-This approach is recommended when:
-- You want to embed the conversation in a specific part of your UI
-- You need custom navigation or layout control
-- You want to build a full-page conversation experience
-- You need to open specific conversations programmatically
-
 ---
 
 ## Advanced configuration
@@ -240,9 +221,9 @@ When a new conversation begins, you can pass over user information to the channe
 
 Also, you can open a specific conversation channel by passing its URL, or manually create a new one while in multiple conversation mode.
 
-### Context object for personalized conversation
+#### Context object for personalized conversation
 
-The `context` object allows you to provide user's information to AI agents for more personalized service, such as their country code and language preference. This context can be set when creating conversations to enhance the user experience. You can configure these settings at the provider level using the `FixedMessenger` component props.
+The `context` object allows you to provide user's information to AI agents for more personalized service, such as their country code and language preference. This context can be set when creating conversations to enhance the user experience. Use the `FixedMessenger` component props to configure these settings at the provider level.
 
 ```tsx
 // Setting context through FixedMessenger props
@@ -345,22 +326,22 @@ Configuration options for the `FixedMessenger` component.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `appId` | string | Required | Your Sendbird application ID |
-| `aiAgentId` | string | Required | AI agent identifier for conversation target |
-| `entryPoint` | 'Conversation' \| 'ConversationList' | 'Conversation' | Which screen to show when the messenger is first loaded |
-| `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | - | User session information for authentication |
-| `language` | string | navigator.language | Language setting following IETF BCP 47 format (e.g., "en-US", "ko-KR") |
-| `countryCode` | string | - | Country code following ISO 3166 format (e.g., "US", "KR") |
-| `context` | Record<string, string> | - | Context object for personalized AI agent responses |
-| `queryParams` | AIAgentQueryParams | - | Global default query parameters for AI agent |
-| `config` | AIAgentConfig | - | Global default configuration for AI agent |
-| `theme` | object | - | Theme customization for palette and typography |
-| `stringSet` | Partial<StringSet> | - | Localization string set for the messenger |
-| `logLevel` | LogLevel | LogLevel.WARN | Log level for the AI agent client |
-| `dir` | 'ltr' \| 'rtl' | - | Text direction for the widget |
-| `entryStyle` | CSSProperties | - | Custom CSS styles for the entry container element |
-| `rootElement` | HTMLElement | document.body | Root HTML element to which the messenger will be appended |
-| `state` | object | - | Custom state management for opened/expanded states |
+| `appId` | string | Required | Your Sendbird application ID. |
+| `aiAgentId` | string | Required | AI agent identifier for conversation target. |
+| `entryPoint` | 'Conversation' \| 'ConversationList' | 'Conversation' | Which screen to show when the messenger is first loaded. |
+| `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | - | User session information for authentication. |
+| `language` | string | navigator.language | Language setting following IETF BCP 47 format (e.g., "en-US", "ko-KR"). |
+| `countryCode` | string | - | Country code following ISO 3166 format (e.g., "US", "KR"). |
+| `context` | Record<string, string> | - | Context object for personalized AI agent responses. |
+| `queryParams` | AIAgentQueryParams | - | Global default query parameters for AI agent. |
+| `config` | AIAgentConfig | - | Global default configuration for AI agent. |
+| `theme` | object | - | Theme customization for palette and typography. |
+| `stringSet` | Partial<StringSet> | - | Localization string set for the messenger. |
+| `logLevel` | LogLevel | LogLevel.WARN | Log level for the AI agent client. |
+| `dir` | 'ltr' \| 'rtl' | - | Text direction for the widget. |
+| `entryStyle` | CSSProperties | - | Custom CSS styles for the entry container element. |
+| `rootElement` | HTMLElement | document.body | Root HTML element to which the messenger will be appended. |
+| `state` | object | - | Custom state management for opened/expanded states. |
 
 ### FixedMessenger.Style Props
 
@@ -368,9 +349,9 @@ Configuration options for customizing the launcher appearance.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `position` | 'start-top' \| 'start-bottom' \| 'end-top' \| 'end-bottom' | 'end-bottom' | Position of the launcher button |
-| `margin` | Partial<{ top: number; bottom: number; start: number; end: number }> | { top: 24, bottom: 24, start: 24, end: 24 } | Margin around the launcher |
-| `launcherSize` | number | 48 | Size of the launcher button in pixels |
+| `position` | 'start-top' \| 'start-bottom' \| 'end-top' \| 'end-bottom' | 'end-bottom' | Position of the launcher button. |
+| `margin` | Partial<{ top: number; bottom: number; start: number; end: number }> | { top: 24, bottom: 24, start: 24, end: 24 } | Margin around the launcher. |
+| `launcherSize` | number | 48 | Size of the launcher button in pixels. |
 
 ### Conversation Props
 
@@ -378,29 +359,29 @@ Configuration options for the `Conversation` component.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `channelUrl` | string | - | Channel URL to open. If not provided, uses active channel from context |
-| `onClearChannelUrl` | () => void | - | Callback when channel URL should be cleared |
-| `onNavigateToConversationList` | () => void | - | Callback to navigate to conversation list |
-| `shouldMarkAsRead` | boolean | false | Whether to mark messages as read when viewed |
+| `channelUrl` | string | - | Channel URL to open. If not provided, uses active channel from context. |
+| `onClearChannelUrl` | () => void | - | Callback when channel URL should be cleared. |
+| `onNavigateToConversationList` | () => void | - | Callback to navigate to conversation list. |
+| `shouldMarkAsRead` | boolean | false | Whether to mark messages as read when viewed. |
 
 ### useMessengerSessionContext Hook
 
 Access to messenger session context and conversation management functions.
 
-**Key Properties:**
+- Key Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `sdkUser` | User \| null | Sendbird Chat SDK user object |
+| `sdkUser` | User \| null | Sendbird Chat SDK user object. |
 
-**Methods:**
+- Methods
 
 | Method | Parameters | Return Type | Description |
 |--------|------------|-------------|-------------|
-| `createConversation` | params: ConversationCreateParams | Promise<string> | Creates a new conversation and returns the channel URL |
-| `refreshActiveChannel` | - | Promise<string> | Refreshes the active channel and returns URL |
-| `authenticate` | - | Promise<MessengerSettingsResponse> | Authenticates the user session |
-| `deauthenticate` | - | Promise<void> | Deauthenticates the user session |
+| `createConversation` | params: ConversationCreateParams | Promise<string> | Creates a new conversation and returns the channel URL. |
+| `refreshActiveChannel` | - | Promise<string> | Refreshes the active channel and returns URL. |
+| `authenticate` | - | Promise<MessengerSettingsResponse> | Authenticates the user session. |
+| `deauthenticate` | - | Promise<void> | Deauthenticates the user session. |
 
 ### ConversationCreateParams
 
@@ -408,7 +389,7 @@ Parameters for creating new conversations.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `aiAgentId` | string | Required | AI agent identifier |
-| `language` | string | - | Language code (IETF BCP 47) |
-| `country` | string | - | Country code (ISO 3166) |
-| `context` | Record<string, string> | - | Additional metadata for AI agent |
+| `aiAgentId` | string | Required | AI agent identifier. |
+| `language` | string | - | Language code (IETF BCP 47).|
+| `country` | string | - | Country code (ISO 3166). |
+| `context` | Record<string, string> | - | Additional metadata for AI agent. |
