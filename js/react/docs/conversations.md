@@ -1,6 +1,6 @@
 # Conversations
 
-In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -18,9 +18,7 @@ This guide explains:
     - [With `FixedMessenger`](#with-fixedmessenger)
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
-      - [Set the launcher position](#set-the-launcher-position)
-      - [Set the launcher margin](#set-the-launcher-margin)
-      - [Set the launcher size](#set-the-launcher-size)
+      - [Set the launcher position, margin, and size](#set-the-launcher-position-margin-and-size)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With direct presentation](#with-direct-presentation)
   - [Advanced configuration](#advanced-configuration)
@@ -75,7 +73,7 @@ You can configure the messenger to show the conversation list first:
 />
 ```
 
-#### Set the launcher position
+#### Set the launcher position, margin, and size
 
 You can customize the launcher's position, margin, and size using the `FixedMessenger.Style` component.
 
@@ -107,16 +105,6 @@ import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 - Position
 
 Set the launcher position on the screen using the `position` prop. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
->
-  <FixedMessenger.Style position={'end-bottom'} />
-</FixedMessenger>
-```
-
 The following table lists available position values:
 
 | Position | Description |
@@ -129,46 +117,19 @@ The following table lists available position values:
 - Margin
 
 Adjust the spacing around the launcher using the `margin` prop. You can set margins for each side individually.
+The `margin` prop accepts an object with the following optional properties. 
 
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    margin={{ bottom: 24, end: 24 }}
-  />
-</FixedMessenger>
-```
-
-The `margin` prop accepts an object with the following optional properties:
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `top` | number | Top margin in pixels. |
-| `bottom` | number | Bottom margin in pixels. |
-| `start` | number | Start margin in pixels (left in LTR, right in RTL). |
-| `end` | number | End margin in pixels (right in LTR, left in RTL). |
-
-Default margins are `{ top: 24, bottom: 24, start: 24, end: 24 }`.
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `top` | number | 24 | Top margin in pixels |
+| `bottom` | number | 24 | Bottom margin in pixels |
+| `start` | number | 24 | Start margin in pixels (left in LTR, right in RTL) |
+| `end` | number | 24 | End margin in pixels (right in LTR, left in RTL) |
 
 - Size
 
-Customize the launcher button size in pixels using the `launcherSize` prop. The default size is 48 pixels.
+Customize the launcher button size in pixels using the `launcherSize` prop. The default size is `48` pixels.
 
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    margin={{ bottom: 20, end: 20 }}
-    launcherSize={56}
-  />
-</FixedMessenger>
-```
 
 #### Customize the launcher appearance
 
@@ -185,7 +146,7 @@ This approach is recommended when:
 - You want to embed the conversation in a specific part of your UI.
 - You need custom navigation or layout control.
 - You want to build a full-page conversation experience.
-- You need to open specific conversations programmatically.
+- You need to open a specific conversation programmatically with its `channelUrl`.
 
 The following snippet demonstrates how to render a conversation directly by wrapping the `Conversation` component with `AgentProviderContainer`.
 

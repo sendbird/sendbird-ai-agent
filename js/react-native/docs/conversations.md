@@ -1,6 +1,6 @@
 # Conversations
 
-In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -20,9 +20,7 @@ This guide explains:
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
       - [Set the window mode](#set-the-window-mode)
-      - [Set the launcher position](#set-the-launcher-position)
-      - [Set the launcher margin](#set-the-launcher-margin)
-      - [Set the launcher size](#set-the-launcher-size)
+      - [Set the launcher position, margin, and size](#set-the-launcher-position-margin-and-size)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With direct presentation](#with-direct-presentation)
   - [Advanced configuration](#advanced-configuration)
@@ -52,11 +50,17 @@ yarn add react-native-mmkv expo-image-picker expo-document-picker
 pnpm add react-native-mmkv expo-image-picker expo-document-picker
 ```
 
->__Note__: If you're using bare React Native (not Expo), you may need to use `react-native-image-picker` and `react-native-document-picker` instead of the Expo packages. Make sure to follow the installation instructions for each package.
+>__Note__: If you're using bare React Native instead of Expo, use `react-native-image-picker` and `react-native-document-picker` instead of the Expo packages. Make sure to follow the installation instructions for each package.
 
 ### Configure native modules
 
-Initialize the required native modules before using the messenger:
+Initialize the required native modules before using the messenger. The following table and snippet describes the purpose of each module and its settings.
+
+| Module | Purpose |
+|--------|----------|
+| `MMKV` | Local storage for caching and session management |
+| `ImagePicker` | Selecting images from the gallery or camera |
+| `DocumentPicker` | Selecting files for sharing in conversations |
 
 ```tsx
 import { createMMKV } from 'react-native-mmkv';
@@ -73,11 +77,6 @@ const nativeModules = {
   documentPicker: DocumentPicker
 };
 ```
-
-These modules are required for:
-- **MMKV**: Local storage for caching and session management
-- **Image Picker**: Selecting images from gallery or camera
-- **Document Picker**: Selecting files for sharing in conversations
 
 ---
 
@@ -149,7 +148,7 @@ You can also provide additional context, language, and country settings:
 
 #### Launch a conversation list
 
-You can configure the messenger to show the conversation list first:
+You can configure the messenger to show the conversation list first. Simply set `entryPoint` to `ConversationList`.
 
 ```tsx
 // Configure messenger to open conversation list
@@ -176,7 +175,7 @@ React Native allows you to control how the messenger window is displayed using t
   windowMode={'floating'}
 />
 
-// Fullscreen mode - takes up the entire screen
+// Full-screen mode - takes up the entire screen
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
@@ -186,7 +185,7 @@ React Native allows you to control how the messenger window is displayed using t
 />
 ```
 
-You can also configure fullscreen insets for safe area handling:
+You can also configure full-screen insets for safe area handling:
 
 ```tsx
 // Fullscreen with custom insets
@@ -200,102 +199,9 @@ You can also configure fullscreen insets for safe area handling:
 />
 ```
 
-#### Set the launcher position
+#### Set the launcher position, margin, and size
 
-You can customize the launcher's position, margin, and size using the `FixedMessenger.Style` component.
-
-Set the launcher position on the screen using the `position` prop. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
-  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
->
-  <FixedMessenger.Style position={'end-bottom'} />
-</FixedMessenger>
-```
-
-The following table lists available position values:
-
-| Position | Description |
-|----------|-------------|
-| `'start-top'` | Top-left corner of the screen |
-| `'start-bottom'` | Bottom-left corner of the screen |
-| `'end-top'` | Top-right corner of the screen |
-| `'end-bottom'` | Bottom-right corner of the screen (default) |
-
-#### Set the launcher margin
-
-Adjust the spacing around the launcher using the `margin` prop. You can set margins for each side individually.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
-  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    margin={{ bottom: 24, end: 24 }}
-  />
-</FixedMessenger>
-```
-
-The `margin` prop accepts an object with the following optional properties:
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `top` | number | Top margin in pixels |
-| `bottom` | number | Bottom margin in pixels |
-| `start` | number | Start margin in pixels (left in LTR, right in RTL) |
-| `end` | number | End margin in pixels (right in LTR, left in RTL) |
-
-Default margins are `{ top: 24, bottom: 24, start: 24, end: 24 }`.
-
-#### Set the launcher size
-
-Customize the launcher button size in pixels using the `launcherSize` prop. The default size is 48 pixels.
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
-  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    margin={{ bottom: 20, end: 20 }}
-    launcherSize={64}
-  />
-</FixedMessenger>
-```
-
-You can also set the spacing between the launcher and the messenger window:
-
-```tsx
-<FixedMessenger
-  appId={'YOUR_APP_ID'}
-  aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
-  nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
->
-  <FixedMessenger.Style
-    position={'end-bottom'}
-    launcherSize={56}
-    spacing={12}  // Space between launcher and window
-  />
-</FixedMessenger>
-```
-
-#### Customize the launcher appearance
-
-The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
-
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+You can customize the launcher's position, margin, size and spacing between the launcher and browser using the `FixedMessenger.Style` component.
 
 The following example demonstrates all customization options together:
 
@@ -329,9 +235,54 @@ const mmkv = createMMKV();
 </FixedMessenger>
 ```
 
+- Position 
+
+Set the launcher position on the screen using the `position` prop. Available positions are: `start-top`, `start-bottom`, `end-top`, and `end-bottom`.
+The following table lists available position values:
+
+| Position | Description |
+|----------|-------------|
+| `'start-top'` | Top-left corner of the screen |
+| `'start-bottom'` | Bottom-left corner of the screen |
+| `'end-top'` | Top-right corner of the screen |
+| `'end-bottom'` | Bottom-right corner of the screen (default) |
+
+- Margin
+
+Adjust the spacing around the launcher using the `margin` prop. You can set margins for each side individually.
+The `margin` prop accepts an object with the following optional properties.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `top` | number | 24 | Top margin in pixels |
+| `bottom` | number | 24 | Bottom margin in pixels |
+| `start` | number | 24 | Start margin in pixels (left in LTR, right in RTL) |
+| `end` | number | 24 | End margin in pixels (right in LTR, left in RTL) |
+
+- Size
+
+Customize the launcher button size in pixels using the `launcherSize` prop. The default size is `48` pixels.
+
+- Space 
+
+You can also set the spacing between the launcher and the messenger window using `spacing`.
+
+#### Customize the launcher appearance
+
+The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-launcher.png" />
+
+
 ### With direct presentation
 
-For advanced use cases where you need direct control over the conversation view without the floating launcher, you can use the `Conversation` component directly. This provides a full-screen or custom-sized conversation interface.
+For advanced use cases where you need direct control over the conversation view without the floating launcher, you can use the `Conversation` component directly. This provides both a full-screen or custom-sized conversation interface.
+
+This approach is recommended when:
+- You want to embed the conversation in a specific part of your UI.
+- You need custom navigation or layout control.
+- You want to build a full-page conversation experience.
+- You need to open a specific conversation programmatically with its `channelUrl`.
 
 ```tsx
 import { AIAgentProviderContainer, Conversation } from '@sendbird/ai-agent-messenger-react-native';
@@ -362,12 +313,6 @@ function DirectConversationView() {
   );
 }
 ```
-
-This approach is recommended when:
-- You want to embed the conversation in a specific part of your UI
-- You need custom navigation or layout control
-- You want to build a full-page conversation experience
-- You need to open specific conversations programmatically
 
 ---
 
@@ -546,13 +491,13 @@ Configuration options for the `Conversation` component.
 
 Access to messenger session context and conversation management functions.
 
-**Key Properties:**
+- Key Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
 | `sdkUser` | User \| null | Sendbird Chat SDK user object |
 
-**Methods:**
+- Methods
 
 | Method | Parameters | Return Type | Description |
 |--------|------------|-------------|-------------|

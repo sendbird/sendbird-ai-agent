@@ -1,6 +1,6 @@
 # Conversations
 
-In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -19,7 +19,7 @@ This guide explains:
       - [Launch a conversation](#launch-a-conversation)
       - [Launch a conversation list](#launch-a-conversation-list)
       - [Without Shadow DOM](#without-shadow-dom)      
-      - [Set the launcher position](#set-the-launcher-position)
+      - [Set the launcher position and margin](#set-the-launcher-positio-and-margin)
       - [Customize the launcher appearance](#customize-the-launcher-appearance)
     - [With custom main component](#with-custom-main-component)
   - [Advanced configuration](#advanced-configuration)
@@ -103,7 +103,7 @@ messenger.initialize({
 });
 ```
 
-#### Set the launcher position
+#### Set the launcher position and margin
 
 On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
 
@@ -153,10 +153,10 @@ The launcher's icon and color can be configured through the [Sendbird AI agent d
 For advanced use cases where you need direct control over the conversation view without the floating launcher, you can provide a custom main component. This provides a full-screen or custom-sized conversation interface.
 
 This approach is recommended when:
-- You want to embed the conversation in a specific part of your UI
-- You need custom navigation or layout control
-- You want to build a full-page conversation experience
-- You need to open specific conversations programmatically
+- You want to embed the conversation in a specific part of your UI.
+- You need custom navigation or layout control.
+- You want to build a full-page conversation experience.
+- You need to open a specific conversation programmatically with its `channelUrl`.
 
 The following snippet demonstrates how to load the `messenger` with a custom main component that renders `AgentProviderContainer` and a `Conversation` view.
 
