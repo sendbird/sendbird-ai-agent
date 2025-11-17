@@ -1,6 +1,40 @@
 # Changelog
 
-## v1.2.1 (Oct 30, 2025)
+## v1.3.0 (Nov 6, 2025) with Chat SDK `v4.32.0`
+
+### Features
+
+- Added the ability to send feedback on AI agent messages
+  - Added `fun createMessageFeedback(params: AIAgentMessageFeedbackCreateParams, handler: AIAgentMessageFeedbackCreateHandler?)` in `ConversationViewModel`
+  - Added `fun updateMessageFeedback(params: AIAgentMessageFeedbackUpdateParams, handler: AIAgentMessageFeedbackUpdateHandler?)` in `ConversationViewModel`
+  - Added `fun deleteMessageFeedback(params: AIAgentMessageFeedbackDeleteParams, handler: AIAgentMessageFeedbackDeleteHandler?)` in `ConversationViewModel`
+  - Added `suspend fun awaitCreateMessageFeedback(params: AIAgentMessageFeedbackCreateParams)` in `ConversationRepository`
+  - Added `suspend fun awaitUpdateMessageFeedback(params: AIAgentMessageFeedbackUpdateParams)` in `ConversationRepository`
+  - Added `suspend fun awaitDeleteMessageFeedback(params: AIAgentMessageFeedbackDeleteParams)` in `ConversationRepository`
+  - Added `OnMessageFeedbackClickListener` interface for handling feedback clicks
+  - Added `MessageFeedbackView` widget for displaying message feedback UI
+  - Added `MessageFeedbackStyle` and `MessageFeedbackDialogStyle` for theme customization
+
+### Improvements
+
+- Improved CSAT to support optional Custom Response Elements (CRE)
+  - Added `creOptionalLabelTextAppearance` property in theme styles
+  - Added `csatOptionalLabelTextAppearance` property in theme styles
+
+- Updated Sendbird Chat SDK to 4.32.0
+
+---
+
+## v1.2.2 (Nov 3, 2025) with Chat SDK `v4.31.1`
+
+### Improvements
+
+- Updated Sendbird Chat SDK to 4.31.1
+  - Fixed a possible binary compatibility issue when using Chat SDK in multiple products
+
+---
+
+## v1.2.1 (Oct 30, 2025) with Chat SDK `v4.31.0`
 
 ### Improvements
 
@@ -15,7 +49,7 @@
 
 ---
 
-## v1.2.0 (Oct 29, 2025)
+## v1.2.0 (Oct 29, 2025) with Chat SDK `v4.31.0`
 
 ### Features
 
@@ -36,14 +70,14 @@
   - Added `fun removeFromCenterSlot(view: View)`
 ---
 
-## v1.1.0 (Oct 2, 2025)
+## v1.1.0 (Oct 2, 2025) with Chat SDK `v4.29.0`
 
 ### Features
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
 
-## v1.0.0 (Sep 25, 2025)
+## v1.0.0 (Sep 25, 2025) with Chat SDK `v4.29.0`
 
 ### Highlights
 

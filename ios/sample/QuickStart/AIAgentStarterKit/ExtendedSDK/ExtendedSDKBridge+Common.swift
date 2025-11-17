@@ -34,7 +34,7 @@ extension ExtendedSDKBridge {
     static func connectIfNeeded() async throws {
         // >>>> HERE <<<< //
         // NOTE: Use this with production environment.
-//                if self.hasDeskSDK() { try await self.deskTask.connect() }
+        if self.hasDeskSDK() { try await self.deskTask.connect() }
         // >>>> HERE <<<< //
         if self.hasUIKit() { try await self.uikitTask.connect() }
     }
