@@ -1,6 +1,6 @@
 # Messages
 
-In Sendbird AI agent messenger, AI agent and users can exchange various types of messages to enable rich and interactive conversations, including text, images, files, and rich template-based messages. It allows users to have comprehensive and engaging conversations with AI agents across different use cases.
+In Delight AI agent messenger, AI agent and users can exchange various types of messages to enable rich and interactive conversations, including text, images, files, and rich template-based messages. It allows users to have comprehensive and engaging conversations with AI agents across different use cases.
 
 This guide explains:
 
@@ -23,7 +23,7 @@ This guide explains:
 
 ## Types
 
-Sendbird AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
+Delight AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
 
 |  Type | Description | Content format | Use cases |
 |-------------|------------|----------------|-----------|
@@ -69,7 +69,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 #### Call to Action (CTA) button
 
-**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Sendbird AI messenger, the button opens the specified external URL in a web browser.
+**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Delight AI messenger, the button opens the specified external URL in a web browser.
 
 - Components: A single button that links to an external webpage. Custom link formats are not supported.
 - Use case: Action-oriented user interactions.
@@ -121,7 +121,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 ## Key features
 
-The core features supported for messages in Sendbird AI agent include:
+The core features supported for messages in Delight AI agent include:
 
 - [Citation](#citation)
 - [Special notice](#special-notice)

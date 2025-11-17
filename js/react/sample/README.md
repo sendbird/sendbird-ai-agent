@@ -1,6 +1,6 @@
-# Sendbird AI Agent React Interactive Playground
+# Delight AI Agent React Interactive Playground
 
-This is an interactive React playground demonstrating how to integrate the Sendbird AI Agent Messenger using the React npm package.
+This is an interactive React playground demonstrating how to integrate the Delight AI Agent Messenger using the React npm package.
 
 ## Features
 

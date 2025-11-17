@@ -45,7 +45,7 @@ export const generateCode = (params: CodeGenerationParams): string => {
       : '';
 
   return `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 
   async function initMessenger() {
     const messenger = await loadMessenger();
@@ -65,7 +65,7 @@ export const generateCode = (params: CodeGenerationParams): string => {
 export const SETUP_SNIPPETS = {
   installation: `<!-- Add to your HTML -->
 <script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
   // Your messenger code here
 </script>`,
 };
@@ -74,7 +74,7 @@ export const CODE_EXAMPLES = {
   basic: {
     title: 'Basic Setup',
     code: `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 
   async function initMessenger() {
     const messenger = await loadMessenger();
@@ -95,7 +95,7 @@ export const CODE_EXAMPLES = {
   authenticated: {
     title: 'With Authentication',
     code: `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 
   async function initMessenger() {
     const messenger = await loadMessenger();
@@ -133,7 +133,7 @@ export const CODE_EXAMPLES = {
   context: {
     title: 'With Context',
     code: `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 
   async function initMessenger() {
     const messenger = await loadMessenger();
@@ -159,7 +159,7 @@ export const CODE_EXAMPLES = {
   runtime: {
     title: 'Runtime Context Updates',
     code: `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
   let messenger;
 
   async function initMessenger() {
@@ -192,7 +192,7 @@ export const CODE_EXAMPLES = {
   localization: {
     title: 'Multi-language',
     code: `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 
   async function initMessenger(lang = 'en', country = 'US') {
     const messenger = await loadMessenger();

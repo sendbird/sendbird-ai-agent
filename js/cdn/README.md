@@ -1,10 +1,10 @@
-[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / **JS**
+[iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / **JS**
 
-# Sendbird AI Agent Quickstart guide (JS)
+# Delight AI Agent Quickstart guide (JS)
 
-The **Sendbird AI Agent Messenger** allows seamless integration of chatbot features into your Web. Follow the steps below to initialize and utilize the SDK effectively.
+The **Delight AI Agent Messenger** allows seamless integration of chatbot features into your Web. Follow the steps below to initialize and utilize the SDK effectively.
 
-- [Sendbird AI Agent Quickstart guide (JS)](#sendbird-ai-agent-quickstart-guide-js)
+- [Delight AI Agent Quickstart guide (JS)](#delight-ai-agent-quickstart-guide-js)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
@@ -22,9 +22,9 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
+Before you start, you'll need your Delight **Application ID** and **AI Agent ID**.
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
+You can find it under the **Channels** > **Messenger** menu on the Delight Dashboard.
 
 ![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
 
@@ -40,7 +40,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```html
 <script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 </script>
 ```
 

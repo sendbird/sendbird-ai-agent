@@ -1,6 +1,6 @@
 # Conversations
 
-In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Delight AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Delight AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -31,7 +31,7 @@ This guide explains:
 
 ## Start a conversation
 
-Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for CDN provides two launch methods: using the default `Messenger` with a `launcher` or customizing with `custom main component`. The following table describes the characteristics of each approach.
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Delight AI agent SDK for CDN provides two launch methods: using the default `Messenger` with a `launcher` or customizing with `custom main component`. The following table describes the characteristics of each approach.
 
 | Launch method | Description | Recommended use case |
 |----------------|--------------|-----------------------|
@@ -56,7 +56,7 @@ The messenger provides a floating UI approach for launching the messenger and st
 </head>
 <body>
   <script type="module">
-    import { loadMessenger } from 'https://aiagent.sendbird.com/orgs/default/index.js';
+    import { loadMessenger } from 'https://aiagent.delight.ai/orgs/default/index.js';
 
     // Load messenger
     const messenger = await loadMessenger();
@@ -316,7 +316,7 @@ messenger.initialize(config)
 
 | Parameters | Type | Default | Description |
 |----------|------|---------|-------------|
-| `appId` | string | Required | Your Sendbird application ID |
+| `appId` | string | Required | Your application ID |
 | `aiAgentId` | string | Required | AI agent identifier for conversation target |
 | `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | - | User session information for authentication |
 | `entryPoint` | 'Conversation' \| 'ConversationList' | 'Conversation' | Which screen to show when the messenger is first loaded |

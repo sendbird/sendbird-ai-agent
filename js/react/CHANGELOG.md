@@ -384,6 +384,6 @@
 
 ### Documentation
 
-- **📚 Public Documentation**: [https://github.com/sendbird/sendbird-ai-agent/blob/main/react/](https://github.com/sendbird/sendbird-ai-agent/blob/main/react/)
+- **📚 Public Documentation**: [https://github.com/sendbird/delight-ai-agent/blob/main/react/](https://github.com/sendbird/delight-ai-agent/blob/main/react/)
 - **🚀 Live Example**: [https://ai-agent-messenger-sample.netlify.app/react](https://ai-agent-messenger-sample.netlify.app/react)
 

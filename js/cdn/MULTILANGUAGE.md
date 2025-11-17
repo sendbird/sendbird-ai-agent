@@ -1,12 +1,12 @@
-# Sendbird AI Agent SDK Localization Guide (JavaScript)
+# Delight AI Agent SDK Localization Guide (JavaScript)
 
-This guide explains how to localize the UI strings used in the Sendbird AI Agent SDK for JavaScript to support multiple languages in your web application.
+This guide explains how to localize the UI strings used in the Delight AI Agent SDK for JavaScript to support multiple languages in your web application.
 
 ---
 
 ## Table of Contents
 
-- [Sendbird AI Agent SDK Localization Guide (JavaScript)](#sendbird-ai-agent-sdk-localization-guide-javascript)
+- [Delight AI Agent SDK Localization Guide (JavaScript)](#delight-ai-agent-sdk-localization-guide-javascript)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Supported Languages](#supported-languages)
@@ -21,7 +21,7 @@ This guide explains how to localize the UI strings used in the Sendbird AI Agent
 
 ## Overview
 
-Sendbird AI Agent SDK includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during initialization or update it later with the `updateConfig` method.
+Delight AI Agent SDK includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during initialization or update it later with the `updateConfig` method.
 
 The language setting influences both the UI text displayed in the messenger and potentially the AI Agent's responses.
 
@@ -85,7 +85,7 @@ There are two scenarios where you might want to customize the strings used in th
 
 ### Scenario 1: Customizing Strings in Supported Languages
 
-You can override specific UI strings in a language that Sendbird already supports. This is useful when you want to change particular messages or labels to better match your application's terminology or tone.
+You can override specific UI strings in a language that SDK already supports. This is useful when you want to change particular messages or labels to better match your application's terminology or tone.
 
 ```javascript
 // Example: Customize specific strings in Spanish
@@ -115,7 +115,7 @@ messenger.updateConfig({
 
 ### Scenario 2: Adding Support for Unsupported Languages
 
-For languages not supported by Sendbird, you must provide a complete set of string values for all UI elements. Please refer to the [Default String Keys Used by the SDK](#default-string-keys-used-by-the-sdk) section below for the full list of required string keys.
+For languages not supported by SDK, you must provide a complete set of string values for all UI elements. Please refer to the [Default String Keys Used by the SDK](#default-string-keys-used-by-the-sdk) section below for the full list of required string keys.
 
 ```javascript
 // Example: Add support for Chinese (zh-CN)

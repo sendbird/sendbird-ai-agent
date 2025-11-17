@@ -241,7 +241,7 @@ function initializeCodeExamples() {
 
 async function initializeMessenger() {
   try {
-    const { loadMessenger } = await import('https://aiagent.sendbird.com/orgs/default/index.js');
+    const { loadMessenger } = await import('https://aiagent.delight.ai/orgs/default/index.js');
     state.messenger = await loadMessenger();
 
     const config: MessengerInitConfig = {
