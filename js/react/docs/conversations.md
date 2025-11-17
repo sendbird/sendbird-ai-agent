@@ -1,6 +1,6 @@
 # Conversations
 
-In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Delight AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Delight AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -31,7 +31,7 @@ This guide explains:
 
 ## Start a conversation
 
-Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for React provides two launch methods: `FixedMessenger` and directly using the `Conversation` component. The following table describes the characteristics of each approach.
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Delight AI agent SDK for React provides two launch methods: `FixedMessenger` and directly using the `Conversation` component. The following table describes the characteristics of each approach.
 
 | Launch method | Description | Recommended use case |
 |----------------|--------------|-----------------------|
@@ -135,7 +135,7 @@ Customize the launcher button size in pixels using the `launcherSize` prop. The 
 
 #### Customize the launcher appearance
 
-The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+The launcher's icon and color can be configured through the [Delight AI dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
 <img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-apperance.png">
 
