@@ -1,0 +1,389 @@
+# Changelog
+
+## v1.9.2 (Nov 13, 2025) with ChatSDK v4.20.1
+
+### Improvements
+
+- Adjust top margin offset in ConversationScrollContext for improved scroll positioning
+
+## v1.9.1 (Nov 13, 2025) with ChatSDK v4.20.1
+
+### Bug Fixes
+
+- Prevent channel fetch without authenticated user
+- Fix welcome message grouping when feedback is enabled
+
+## v1.9.0 (Nov 11, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Implement progressive streaming text animation for AI responses with smooth character-by-character display
+
+## v1.8.2 (Nov 06, 2025) with ChatSDK v4.20.1
+
+### Bug Fixes
+
+- Fix scroll jitter issue during AI message streaming when user attempts to scroll up
+
+## v1.8.1 (Nov 07, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Add file attachment rules configuration for file upload validation
+- Make CSAT5 CRE (Customer Relationship Effort) field optional
+
+### Internal
+
+- Refactor attachment handling and validation logic
+
+## v1.8.0 (Nov 04, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Add `scrollMode` configuration (`fixed` / `auto`) for controlled message streaming scroll behavior
+- Add message retry functionality for failed messages
+- Add shared localization strings to core package
+
+### Fixes
+
+- Fix scroll position interference when conversation closes during message streaming
+
+### Internal
+
+- Upgrade TypeScript target and lib to ES2023
+- Refactor localization architecture across core, React, and React Native packages
+
+## v1.7.0 (Oct 30, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Add user feedback feature with feedback modal and sentiment icons
+- Add closeConversation method to AIAgentConversationContext to enable closing conversations programmatically
+
+### Fixes
+
+- Fix underscore characters in email addresses being incorrectly rendered as italic markdown formatting
+
+## v1.6.4 (Oct 23, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Add support for user_input_disabled_by field in extended message payload to control input state based on extended message data
+- Add form_type to UserActionRequestedData for enhanced form type tracking
+- Add deleteMessage to AIAgentConversationContext to enable message deletion functionality
+
+## v1.6.3 (Oct 22, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Add bottom sheet component
+
+### Improvements
+
+- Move input state and typing hooks to core package
+- Convert BottomSheet to compound component pattern
+- Update typing indicator invalidate time to 20 seconds
+- Update internal dependencies
+
+## v1.6.2 (Oct 10, 2025) with ChatSDK v4.20.1
+
+### Fixes
+
+- Fix rendering of square brackets without URLs in markdown text
+
+## v1.6.1 (Oct 06, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Add onInitializeFailed handler to AgentClientHandlers
+- Implement PlaceholderLayout
+
+## v1.6.0 (Oct 02, 2025) with ChatSDK v4.20.1
+
+### Features
+
+- Support customizable CSAT with improved component structure
+- Add csatStartedAt and resolutionScore parameters to CSAT submission
+
+### Bug Fixes
+
+- Switch to useLayoutEffect in createLayout to avoid UI flicker
+- Fix text overflow in radio label
+- Fix text overflow in submit button label
+
+## v1.5.0 (Sep 25, 2025) with ChatSDK v4.20.0
+
+### Features
+
+- Add new channel list UI
+- Add copilot conversation filters to AIAgentGroupChannelFilter
+- Enable file upload for non-AI agent channels
+- Add entryPoint prop to control initial messenger screen
+- Add startNewConversation visibility control flag to config prop
+
+### Bug Fixes
+
+- Prevent text overflow in MessageLogs labels
+- Add automatic navigation for proactive conversation join
+- Prevent text overflow in ConversationListItem
+- Only apply input blocking after sending in AI agent channels
+- Resolve last message streaming issue
+
+## v1.4.1 (Sep 22, 2025) with ChatSDK v4.19.11
+
+### Features
+
+- Add copilot conversation only mode and support channel URL to AIAgentGroupChannelFilter
+- Add tester mode conversation details footer and copy link functionality
+- Trigger custom events for user_action_required on initial render with improved message processing
+
+### Improvements
+
+- Optimize scroll trigger logic for closed conversations
+- Improve CustomEventHandler performance and reliability
+- Centralize handler check in useCustomEventForMessageReceive
+- Enhance custom event handling for user_action_required events
+
+## v1.4.0 (Sep 19, 2025) with ChatSDK v4.19.10
+
+### Features
+
+- Add custom chat SDK injection support with validation
+- Implement comprehensive form system with validation constraints and styled components
+- Add user action required event handling for ADMM messages
+- Implement input blocking and form state management during conversations
+- Add message feedback type to extended message payload
+
+### Bug Fixes
+
+- Fix active channel update on reconnected flow
+- Prevent MessageBody rendering during typing indicator display
+- Add userId validation and improve manual session handling
+
+## v1.3.2 (Sep 10, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Update typing indicator invalidation time configuration
+
+## v1.3.1 (Sep 08, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Add query params and conversation list limit support
+- Add id to DateSeparator component for external styling
+
+## v1.3.0 (Aug 27, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Add custom event interface for bot message receive
+- Pass isStreaming prop to incoming message component
+- Add typing event support in message input
+- Add strict session check with class instances
+
+### Bug Fixes
+
+- Use a uniq handler id for connection handler
+- Fix deauthenticate bugfix
+
+### Refactoring
+
+- Refactor authentication hooks
+
+### Tests
+
+- Wrap assertions in waitFor for useConversationChannels test
+- Add comprehensive cache tests and export STORAGE_PREFIX constant
+- Add comprehensive integration tests for useAuthentication hook
+
+## v1.2.7 (Aug 12, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Add citation component support for incoming messages
+- Support attachment mode-based file upload button visibility
+
+### Bug Fixes
+
+- Add type details to replaceVariable error message
+
+## v1.2.6 (Aug 12, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Add citation component support for incoming messages
+- Support attachment mode-based file upload button visibility
+
+### Bug Fixes
+
+- Add type details to replaceVariable error message
+
+## v1.2.5 (Aug 07, 2025) with ChatSDK v4.19.5
+
+### Bug Fixes
+
+- Added missing activeChannel in messenger session ref type
+
+## v1.2.4 (Aug 07, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Added context to collection event handlers
+- Added activeChannel to messenger session ref
+
+## v1.2.3 (Aug 06, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Added deauthenticate method to messenger session ref
+- Added support for file viewer in markdown images
+- Added entryStyle prop to AgentProviderContainer for custom entry styling
+
+## v1.2.2 (Jul 29, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Added bold styling to outgoing message text
+
+### Bug Fixes
+
+- Fixed issue with ESM file extension resolution and module paths
+- Fixed scroll issue when typing indicator or resolution feedback message appears
+
+## v1.2.1 (Jul 28, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Added support for HELPDESK_CSAT_5 type in customer satisfaction messages
+
+### Bug Fixes
+
+- Fixed scroll-to-bottom behavior for improved message list stability
+- Fixed component re-mounting when context object changes
+
+## v1.2.0 (Jul 23, 2025) with ChatSDK v4.19.5
+
+### Features
+
+- Added groupChannel data prop to ConversationListItem for enhanced channel information access
+- Introduced onHandleTemplateInternalAction for improved message template interaction handling
+- Implemented FixedMessenger.Style API to support dynamic position, margin, and size updates
+- Added MessengerSessionRef API for programmatic context object updates
+- Introduced createConversation method to MessengerSessionContext for programmatic conversation creation
+- Added token refresh hook to automatically update user session on token renewal
+- Added conversationListFilter prop to ConversationList for custom conversation filtering
+
+### Bug Fixes
+
+- Fixed conversation closure to target specific channels only instead of all conversations
+- Improved createConversation error handling with better condition checks
+- Applied patch for markdown renderer to resolve rendering issues
+- Enhanced session handling with stricter validation
+
+### Chores
+
+- Updated Chat SDK and various dependencies
+
+## v1.1.2 (Jul 16, 2025) with ChatSDK v4.19.2
+
+### Features
+
+- Enabled file upload during human agent handoff
+
+### Bug Fixes
+
+- Fixed bot typing indicator by adding isBotMessage flag
+
+## v1.1.1 (Jul 02, 2025) with ChatSDK v4.19.2
+
+### Features
+
+- Added lineHeight support to Typography customization
+
+### Bug Fixes
+
+- Fixed wrong selected theme key issue
+- Fixed tooltip not dismissing properly on mobile devices
+- Applied dynamic border-radius based on computed line-height for suggested reply items
+
+## v1.1.0 (Jun 24, 2025) with ChatSDK v4.19.2
+
+- Added AIAgentThemeContext for better theme management (support palette and typography)
+- Added ConversationListItemLayout for improved customization.
+- Added ConversationLayout and ConversationListLayout for improved customization.
+- Added customizable message bubble style to Incoming and Outgoing message layouts.
+
+### Bug Fixes
+
+- Updated global font specificity for better style inheritance
+
+### Improvements
+
+- Migrated color names for consistency across the codebase
+
+## v1.0.1 (Jun 16, 2025) with ChatSDK v4.19.2
+
+- Added user data cache and known channel URL support for improved performance
+- Added file download functionality with onClickFile handler
+- Added message template fetching context for dynamic message handling
+- Added styled-components-minify plugin for optimized bundle size
+- Added prompt cache support to agent attributes for faster responses
+
+### Bug Fixes
+
+- Fixed incoming file message rendering issues
+- Fixed missing dispatcher injection in messenger
+- Added length validation for tester message logs to prevent errors
+
+### Improvements
+
+- Added AI Agent conversation context for better conversation management
+- Added AI Agent conversation list context for managing multiple conversations
+- Added strict streaming order for conversation messages
+- Updated Chat SDK to latest version with minimum version requirements
+- Improved test coverage with unit tests for AgentProviderContainer
+- Enhanced createContextInternal function for better context creation
+- Optimized useConversationList initialization flow for better performance
+
+## v1.0.0 (Jun 11, 2025) with ChatSDK v4.19.0
+
+### Feature
+
+#### Messenger Components
+
+- **DefaultMessenger**: Main messenger component for standard chat interface
+- **FixedMessenger**: Fixed position messenger component for embedded use cases
+- **LauncherBase**: Base launcher component for triggering messenger UI
+
+#### Message Components & Layouts
+
+- **MessageLogs**: Component for displaying chat message history
+- **IncomingMessageLayout**: Layout for incoming agent/user messages
+- **OutgoingMessageLayout**: Layout for outgoing user messages
+- **SystemMessageLayout**: Layout for system notifications and status messages
+- Support for extended message payloads (function calls, groundedness info, actionbook info)
+- **CSAT Integration**: Customer satisfaction rating system
+
+#### React Hooks & Context
+
+- **AgentProviderContainer**: Main provider for AI agent functionality
+- **AgentUIProviderContainer**: UI-specific context provider
+- **useAgentContext**: Hook for accessing agent state and methods
+- **useAgentSessionContext**: Hook for managing agent sessions
+- **useLocalizationContext**: Hook for internationalization support
+
+#### Communication & Domain
+
+- **messengerDispatcher**: Core communication dispatcher for agent interactions
+- **Commands**: Command system for programmatic control
+- **Conversation**: Individual conversation management
+- **ConversationList**: Multiple conversation handling
+
+---
+
+### Documentation
+
+- **📚 Public Documentation**: [https://github.com/sendbird/sendbird-ai-agent/blob/main/react/](https://github.com/sendbird/sendbird-ai-agent/blob/main/react/)
+- **🚀 Live Example**: [https://ai-agent-messenger-sample.netlify.app/react](https://ai-agent-messenger-sample.netlify.app/react)
+
