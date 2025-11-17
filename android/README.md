@@ -78,7 +78,7 @@ Add the following to your `settings.gradle.kts` (Project Settings) file:
 ```kotlin
 dependencyResolutionManagement {
     repositories {
-        maven { setUrl("https://repo.sendbird.com/public/maven") }
+        maven { setUrl("https://repo.delight.ai/public/maven") }
     }
 }
 ```
