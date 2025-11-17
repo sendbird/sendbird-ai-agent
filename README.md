@@ -68,7 +68,7 @@ For comprehensive documentation, including API references and advanced configura
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue in this repository or contact [Contact Sales](https://delight.ai/contact-sales).
+If you encounter any issues or have questions, please open an issue in this repository or [Contact Sales](https://delight.ai/contact-sales).
 
 ## License
 
