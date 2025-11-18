@@ -1,10 +1,10 @@
-[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
+[iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/delight-ai-agent/blob/main/js/)
 
-# Sendbird AI Agent Quickstart guide (React)
+# Delight AI agent Quickstart guide (React)
 
-The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot features into your React application.
+The **Delight AI agent Messenger React** allows seamless integration of chatbot features into your React application.
 
-- [Sendbird AI Agent Quickstart guide (React)](#sendbird-ai-agent-quickstart-guide-react)
+- [Delight AI agent Quickstart guide (React)](#delight-ai-agent-quickstart-guide-react)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
@@ -23,11 +23,11 @@ The **Sendbird AI Agent Messenger React** allows seamless integration of chatbot
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
+Before you start, you'll need your **Application ID** and **AI Agent ID**.
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
+You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
 
-![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
+![ai-agent-app-id-agent-id](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-basic-information.png)
 
 **System Requirements:**
 
@@ -145,7 +145,7 @@ Now that you have installed and initialized the AI Agent SDK, follow the steps b
 
 To launch and display the messenger, implement the code below:
 
-> **Note:** Replace `YOUR_APP_ID` and `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how to do so, refer to the [prerequisites](#prerequisites) section.
+> **Note:** Replace `YOUR_APP_ID` and `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Delight AI dashboard. To learn how to do so, refer to the [prerequisites](#prerequisites) section.
 
 ```tsx
 function App() {

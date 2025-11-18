@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: sendbird-ai-agent
+  name: delight-ai-agent
   description: AI Agent Messenger Guide for Android, iOS, and Web
   annotations:
-    github.com/project-slug: sendbird/sendbird-ai-agent
+    github.com/project-slug: sendbird/delight-ai-agent
 spec:
   type: library-internal dev
   lifecycle: production
   owner: dep-client-platform
-  system: sendbird-ai-agent
+  system: delight-ai-agent

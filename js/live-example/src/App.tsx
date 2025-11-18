@@ -10,7 +10,7 @@ export function App() {
     <div className="min-h-full">
       <header className="bg-white shadow">
         <h1 className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-3xl font-bold tracking-tight text-gray-900">
-          Sendbird AI Agent Messenger Live Example
+          Delight AI Agent Messenger Live Example
         </h1>
       </header>
 

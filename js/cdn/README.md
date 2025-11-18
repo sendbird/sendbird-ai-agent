@@ -1,10 +1,10 @@
-[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / **JS**
+[iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / **JS**
 
-# Sendbird AI Agent Quickstart guide (JS)
+# Delight AI agent Quickstart guide (JS)
 
-The **Sendbird AI Agent Messenger** allows seamless integration of chatbot features into your Web. Follow the steps below to initialize and utilize the SDK effectively.
+The **Delight AI agent Messenger** allows seamless integration of chatbot features into your Web. Follow the steps below to initialize and utilize the SDK effectively.
 
-- [Sendbird AI Agent Quickstart guide (JS)](#sendbird-ai-agent-quickstart-guide-js)
+- [Delight AI agent Quickstart guide (JS)](#delight-ai-agent-quickstart-guide-js)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
@@ -22,11 +22,11 @@ The **Sendbird AI Agent Messenger** allows seamless integration of chatbot featu
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
+Before you start, you'll need your Delight **Application ID** and **AI Agent ID**.
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Sendbird Dashboard.
+You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
 
-![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
+![ai-agent-app-id-agent-id](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-basic-information.png)
 
 ---
 
@@ -40,7 +40,7 @@ Add the AI Agent SDK to your web page by importing it as a module.
 
 ```html
 <script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 </script>
 ```
 
@@ -151,13 +151,13 @@ messenger.updateUserSession(newManualSessionInfo);
 
 ### Launch the messenger
 
-![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
+![Image](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-launcher.png)
 
 Once the authentication information has been successfully registered, you can launch the messenger to start a conversation with the ai agent.
 
 To launch and display the messenger, implement the code below:
 
-> **Note**: Replace `YOUR_APP_ID` AND `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
+> **Note**: Replace `YOUR_APP_ID` AND `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Delight AI dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
 
 ```javascript
 const messenger = await loadMessenger();
@@ -225,7 +225,7 @@ The following are available advanced features.
 
 ### Display messenger without launcher button
 
-![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
+![Image](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-suggested-replies.png)
 
 ```javascript
 const messenger = await loadMessenger({

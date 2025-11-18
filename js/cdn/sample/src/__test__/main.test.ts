@@ -38,7 +38,7 @@ Object.defineProperty(global, 'console', {
 });
 
 // Mock dynamic import for messenger
-vi.mock('https://aiagent.sendbird.com/orgs/default/index.js', () => ({
+vi.mock('https://aiagent.delight.ai/orgs/default/index.js', () => ({
   loadMessenger: vi.fn(() =>
     Promise.resolve({
       initialize: vi.fn(() => Promise.resolve()),

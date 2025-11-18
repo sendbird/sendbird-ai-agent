@@ -29,7 +29,7 @@ extension AIAgentStarterKit {
     }
     
     // MARK: - Theme
-    /// Updates the theme of the Sendbird AI Agent Messenger with the specified color scheme.
+    /// Updates the theme of the Delight AI Agent Messenger with the specified color scheme.
     /// - Parameter colorScheme: The color scheme to apply to the AI Agent Messenger.
     static func updateAIAgentTheme(_ colorScheme: SBAColorScheme) {
         AIAgentMessenger.update(colorScheme: colorScheme)

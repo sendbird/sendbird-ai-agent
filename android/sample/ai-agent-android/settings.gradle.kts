@@ -18,7 +18,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
-        maven { url = uri("https://repo.sendbird.com/public/maven") }
+        maven { url = uri("https://repo.delight.ai/public/maven") }
         mavenLocal()
     }
 }

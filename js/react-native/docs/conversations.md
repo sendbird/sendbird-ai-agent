@@ -1,6 +1,6 @@
 # Conversations
 
-In Sendbird AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Sendbird AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
+In Delight AI agent, a conversation refers to a channel where an AI Agent communicates with a user. Depending on your service requirements, you can allow users to maintain a single active conversation or multiple. Delight AI agent supports two different conversation modes: Single active conversation and Multiple active conversation mode, which is the default.
 
 When the launcher is clicked, a user can be led to either their conversation list or a conversation depending on your choice of the conversation mode.
 
@@ -33,7 +33,7 @@ This guide explains:
 
 ## Prerequisites
 
-Before using the Sendbird AI Agent Messenger in React Native, you need to install and configure required native modules for local storage and file picking functionality.
+Before using the Delight AI agent Messenger in React Native, you need to install and configure required native modules for local storage and file picking functionality.
 
 ### Install required packages
 
@@ -82,7 +82,7 @@ const nativeModules = {
 
 ## Start a conversation
 
-Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Sendbird AI agent SDK for React Native provides two launch methods: `FixedMessenger` and directly using the `Conversation` component. The following table describes the characteristics of each approach.
+Once you have determined which conversation mode to apply, you should also consider how the messenger will be launched. Delight AI agent SDK for React Native provides two launch methods: `FixedMessenger` and directly using the `Conversation` component. The following table describes the characteristics of each approach.
 
 | Launch Method | Description | Recommended Use Case |
 |----------------|--------------|-----------------------|
@@ -271,9 +271,9 @@ You can also set the spacing between the launcher and the messenger window using
 
 #### Customize the launcher appearance
 
-The launcher's icon and color can be configured through the [Sendbird AI agent dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+The launcher's icon and color can be configured through the [Delight AI dashboard](https://dashboard.delight.ai) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.delight.ai/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
-<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-apperance.png">
+<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-messenger-appearance.png">
 
 ### With direct presentation
 
@@ -440,7 +440,7 @@ Configuration options for the `FixedMessenger` component.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `appId` | string | Required | Your Sendbird application ID |
+| `appId` | string | Required | Your application ID |
 | `aiAgentId` | string | Required | AI agent identifier for conversation target |
 | `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | Required | User session information for authentication |
 | `nativeModules` | NativeAdapterConfig | Required | Native modules configuration (mmkv, imagePicker, documentPicker) |
