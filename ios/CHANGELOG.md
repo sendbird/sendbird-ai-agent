@@ -61,7 +61,7 @@
 
 ## v1.0.0 (Sep 25, 2025) with ChatSDK v4.30.0
 
-## **Sendbird AI Agent iOS SDK - GA Release Changelog**
+## **Delight AI agent iOS SDK - GA Release Changelog**
 
 ### Highlights
 
@@ -125,7 +125,7 @@ end
 
 ### Features
 
-**Sendbird AI Agent Messenger SDK has been officially released!**
+**Delight AI agent Messenger SDK has been officially released!**
 This SDK enables you to seamlessly integrate an enterprise-grade AI-powered chat agent into your iOS applications.
 
 #### 1. Messenger Launcher Widget
@@ -311,7 +311,7 @@ AIAgentMessenger.authenticate(aiAgentId: "your_ai_agent_id") { result in
 
 ---
 
-*This release is the first GA (Generally Available) version of the Sendbird AI Agent iOS SDK. It is safe for use in production environments.*
+*This release is the first GA (Generally Available) version of the Delight AI agent iOS SDK. It is safe for use in production environments.*
 
 ## v0.10.9 (Sep 03, 2025) with ChatSDK v4.29.2
 

@@ -1,7 +1,7 @@
-# Sendbird AI Agent
+# Delight AI agent
 
-**Sendbird AI Agent** is an enterprise-grade, omnichannel AI solution designed to revolutionize customer service.
-Unlike traditional chatbots, Sendbird AI Agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
+**Delight AI agent** is an enterprise-grade, omnichannel AI solution designed to revolutionize customer service.
+Unlike traditional chatbots, Delight AI agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
 
 ## Features
 
@@ -17,19 +17,19 @@ Unlike traditional chatbots, Sendbird AI Agents understand intent, maintain cont
 
 ## Getting Started
 
-To integrate Sendbird AI Agent into your application, follow these steps:
+To integrate Delight AI agent into your application, follow these steps:
 
 1. **Create a Sendbird Account**: Sign up at [Sendbird Dashboard](https://dashboard.sendbird.com/).
 
 2. **Check the identifiers**: In the dashboard, go to **Channels → Messenger → Basic information** to check the Application ID and AI Agent ID.
 
-3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Sendbird AI Agent SDK into your application.
+3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Delight AI agent SDK into your application.
 
 4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
 
 ## Repository Structure
 
-This repository contains platform-specific implementations and customer guides for the Sendbird AI Agent:
+This repository contains platform-specific implementations and customer guides for the Delight AI agent:
 
 - **JavaScript**: Located in the `js` directory, includes:
   - Documentation guides for React and CDN integration  

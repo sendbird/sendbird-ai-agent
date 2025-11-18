@@ -28,7 +28,7 @@
 
 ## Overview
 
-The Sendbird AI Agent Messenger React SDK provides a powerful template-based layout system that allows for deep customization of UI components while maintaining the core functionality. This system uses a composition pattern where each layout component exposes a template and sub-components that can be individually customized or replaced.
+The Delight AI agent Messenger React SDK provides a powerful template-based layout system that allows for deep customization of UI components while maintaining the core functionality. This system uses a composition pattern where each layout component exposes a template and sub-components that can be individually customized or replaced.
 
 ### How Template Components Work
 

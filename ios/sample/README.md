@@ -1,6 +1,6 @@
-# Sendbird AI Agent iOS Sample (QuickStart)
+# Delight AI agent iOS Sample (QuickStart)
 
-This is a quick start guide for using the Sendbird AI Agent iOS SDK. This sample project demonstrates how to integrate AI Agent functionality into iOS applications.
+This is a quick start guide for using the Delight AI agent iOS SDK. This sample project demonstrates how to integrate AI Agent functionality into iOS applications.
 
 ## Development Approach Options
 
@@ -360,4 +360,4 @@ AIAgentStarterKit.shared.initParamsBuilder = { params in
 
 ---
 
-This QuickStart guide helps you quickly integrate Sendbird AI Agent into your iOS app. If you have additional questions or need help, please contact the Sendbird support team.
+This QuickStart guide helps you quickly integrate Delight AI agent into your iOS app. If you have additional questions or need help, please contact the Sendbird support team.
