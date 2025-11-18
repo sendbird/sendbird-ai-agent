@@ -25,7 +25,10 @@ To integrate Delight AI agent into your application, follow these steps:
 
 3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Delight AI agent SDK into your application.
 
-4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
+4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application. You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
+
+![ai-agent-app-id-agent-id](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-basic-information.png)
+
 
 ## Repository Structure
 
