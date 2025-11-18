@@ -360,4 +360,4 @@ AIAgentStarterKit.shared.initParamsBuilder = { params in
 
 ---
 
-This QuickStart guide helps you quickly integrate Delight AI agent into your iOS app. If you have additional questions or need help, please contact the Sendbird support team.
+This QuickStart guide helps you quickly integrate Delight AI agent into your iOS app. If you have additional questions or need help, please contact the Delight AI support team.
