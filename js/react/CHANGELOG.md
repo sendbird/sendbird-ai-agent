@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.9.4 (Nov 18, 2025) with ChatSDK ^4.20.1
+
+
+### Fixes
+
+- Ensure ConversationScrollProvider always wraps ConversationContext to maintain backward compatibility and prevent context errors when upgrading to v1.9.0+
+
+### Improvements
+
+- Update branding from Sendbird to Delight across UI components and documentation
+- Update bot icon to new Delight icon design
+- Refresh color palette with updated basic colors
+- Add ellipse fill color support for improved visual consistency
+
+
 ## v1.9.3 (Nov 17, 2025) with ChatSDK ^4.20.1
 
 
