@@ -7,117 +7,174 @@ import UIKit
 import SendbirdChatSDK
 import SendbirdAIAgentMessenger
 
+/// Main view controller demonstrating AIAgentStarterKit integration
 class ViewController: UIViewController {
+    // MARK: - UI Constants
+    // Constants for button styling and text labels
+    private enum UIConstants {
+        static let buttonCornerRadius: CGFloat = 24.0
+        static let buttonBorderWidth: CGFloat = 1.0
+        static let lightThemeTitle = "Change theme (Light)"
+        static let darkThemeTitle = "Change theme (Dark)"
+        static let chatButtonTitle = "Talk to an AI Agent"
+    }
+
+    // MARK: - Outlets
     @IBOutlet weak var chatBotItemView: UIButton!
     @IBOutlet weak var toggleColorSchemeButton: UIButton!
     @IBOutlet weak var loginOutButton: UIButton!
-    
     @IBOutlet weak var versionLabel: UILabel!
-    
-    static let lightThemeString = "Change theme (Light)"
-    static let darkThemeString = "Change theme (Dark)"
-    
+
+    // MARK: - Lifecycle
+    // Configure UI and update button states on load
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        updateAllButtonStates()
 
-        self.chatBotItemView.setTitle("Talk to an AI Agent", for: .normal)
-        self.chatBotItemView.layer.cornerRadius = 24.0
-        
-        [toggleColorSchemeButton, loginOutButton].forEach { $0.layer.cornerRadius = 24.0 }
-        [toggleColorSchemeButton, loginOutButton].forEach { $0.layer.borderWidth = 1.0 }
-        [toggleColorSchemeButton, loginOutButton].forEach { $0.layer.borderColor = UIColor.white.cgColor }
-        
-        self.setupVersion()
-        
-        self.updateConnectedStatus()
-        
-//        AIAgentMessenger.authenticate(
-//            aiAgentId: SampleTestInfo.aiAgentId
-//        ) { params in
-//            params.language = "en"
-//        } completionHandler: { result in
-//            print(result)
-//        }
-
-        
         #if INTERNAL_TEST
         InternalTestManager.createAppInfoSettingButton(self)
         #endif
     }
-    
-    override func viewWillAppear(_ animated:Bool) {
+
+    // Attach launcher when returning to this screen if connected
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if AIAgentStarterKit.isConnected {
-            AIAgentStarterKit.attachLauncher(view: self.view)
-        }
+        attachLauncherIfNeeded()
     }
-    
+
+    // Remove launcher when leaving this screen
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         AIAgentStarterKit.detachLauncher()
     }
-    
+
+    // MARK: - UI Setup
+    // Configure all UI components
+    private func setupUI() {
+        setupChatButton()
+        setupActionButtons()
+        setupVersionLabel()
+    }
+
+    private func setupChatButton() {
+        chatBotItemView.setTitle(UIConstants.chatButtonTitle, for: .normal)
+        chatBotItemView.layer.cornerRadius = UIConstants.buttonCornerRadius
+    }
+
+    private func setupActionButtons() {
+        let buttons = [toggleColorSchemeButton, loginOutButton]
+        buttons.forEach { button in
+            button?.layer.cornerRadius = UIConstants.buttonCornerRadius
+            button?.layer.borderWidth = UIConstants.buttonBorderWidth
+            button?.layer.borderColor = UIColor.white.cgColor
+        }
+    }
+
+    private func setupVersionLabel() {
+        versionLabel.text = versionString()
+    }
+
+    // MARK: - Actions
     @IBAction func onTapChatBotItemViewButton(_ sender: UIButton) {
         AIAgentStarterKit.present(parent: self)
     }
-    
+
     @IBAction func onTapToggleColorScheme(_ sender: UIButton) {
         AIAgentStarterKit.toggleColorScheme()
-        
-        let schemeTitle = (AIAgentMessenger.currentColorScheme == .light) ? Self.lightThemeString : Self.darkThemeString
-        self.toggleColorSchemeButton.setTitle(schemeTitle, for: .normal)
+        updateThemeButtonTitle()
     }
-    
+
     @IBAction func onTapLoginOut(_ sender: UIButton) {
-        if AIAgentStarterKit.isConnected {
-            self.logout()
+        self.checkConnectIfNeeded() ? logout() : login()
+    }
+
+    // MARK: - Authentication
+    // Connect to Sendbird with configured session info
+    private func login() {
+        updateSessionInfo()
+        
+        if ExtendedSDKBridge.hasUIKit() || ExtendedSDKBridge.hasDeskSDK() {
+            // If you use UIKit or Desk SDK along with AIAgent, you need to connect first before using AIAgent feature.
+                AIAgentStarterKit.connect { [weak self] error in
+                guard let self = self else { return }
+
+                if let error = error {
+                    debugPrint("[ViewController] ❌ Connect failed - \(error.localizedDescription)")
+                    return
+                }
+
+                self.attachLauncherIfNeeded()
+                self.updateAllButtonStates()
+            }
         } else {
-            self.login()
+            // If you only use AIAgent, there is no need to use this function because connect is handled internally when necessary.
+            self.attachLauncherIfNeeded()
+            self.updateAllButtonStates()
         }
     }
-    
-    func setupVersion() {
-        versionLabel.text = self.versionString()
+
+    // Disconnect from Sendbird and detach launcher
+    private func logout() {
+        AIAgentStarterKit.detachLauncher()
+
+        AIAgentStarterKit.disconnect { [weak self] error in
+            if let error = error {
+                debugPrint("[ViewController] ❌ Disconnect failed - \(error.localizedDescription)")
+            }
+            self?.updateAllButtonStates()
+        }
     }
-    
-    func login() {
-        #warning("Session info update first")
-        switch SampleTestInfo.sessionInfoType {
+
+    // Configure session info based on manual or anonymous mode
+    private func updateSessionInfo() {
+        switch SampleConfiguration.sessionInfoType {
         case .manual:
             AIAgentStarterKit.updateSessionInfo(
-                userId: SampleTestInfo.userId,
-                sessionToken: SampleTestInfo.sessionToken,
+                userId: SampleConfiguration.userId,
+                sessionToken: SampleConfiguration.sessionToken,
                 sessionHandler: AIAgentStarterKit.shared
             )
-            
         case .anonymous:
             AIAgentStarterKit.updateAnonymousSessionInfo()
         }
+    }
+
+    // MARK: - UI Updates
+    // Update all UI elements to reflect current connection state
+    private func updateAllButtonStates() {
+        updateConnectedStatus()
+        updateThemeButtonTitle()
+    }
+
+    // Enable/disable buttons based on connection status
+    private func updateConnectedStatus() {
+        let isConnected = self.checkConnectIfNeeded()
+        chatBotItemView.isEnabled = isConnected
+        toggleColorSchemeButton.isEnabled = isConnected
+        loginOutButton.setTitle(isConnected ? "Logout" : "Login", for: .normal)
+    }
+
+    // Update theme button title to show current color scheme
+    private func updateThemeButtonTitle() {
+        let title = AIAgentMessenger.currentColorScheme == .light
+            ? UIConstants.lightThemeTitle
+            : UIConstants.darkThemeTitle
+        toggleColorSchemeButton.setTitle(title, for: .normal)
+    }
+
+    // MARK: - Helpers
+    // Attach floating launcher button if connected
+    private func attachLauncherIfNeeded() {
+        guard self.checkConnectIfNeeded() else { return }
+
+        AIAgentStarterKit.attachLauncher(view: view)
+    }
+    
+    private func checkConnectIfNeeded() -> Bool {
+        let needsConnection = ExtendedSDKBridge.hasUIKit() || ExtendedSDKBridge.hasDeskSDK()
+        if needsConnection && AIAgentStarterKit.isConnected == false { return false }
         
-        AIAgentStarterKit.connect { [weak self] error in
-            if let error {
-                debugPrint("[AIAgentStarterKit][Connect] error: \(error)")
-                return
-            }
-            
-            AIAgentStarterKit.attachLauncher(view: self?.view)
-            self?.updateConnectedStatus()
-        }
-    }
-    
-    func logout() {
-        AIAgentStarterKit.detachLauncher()
-        AIAgentStarterKit.disconnect { [weak self] error in
-            if let error { debugPrint("[AIAgentStarterKit][Disconnect] handle error: \(error)")}
-            self?.updateConnectedStatus()
-        }
-    }
-    
-    func updateConnectedStatus() {
-        let isConnected = AIAgentStarterKit.isConnected
-        self.chatBotItemView.isEnabled = isConnected
-        self.toggleColorSchemeButton.isEnabled = isConnected
-        self.loginOutButton.setTitle(isConnected ? "Logout" : "Login", for: .normal)
+        return true
     }
 }

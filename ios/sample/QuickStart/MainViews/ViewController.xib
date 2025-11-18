@@ -107,7 +107,7 @@
                                 <constraint firstAttribute="height" constant="16" id="vaf-F1-l7E"/>
                             </constraints>
                         </view>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallLogoSendbirdFull" translatesAutoresizingMaskIntoConstraints="NO" id="GAY-gF-5Xl" userLabel="Sendbird Logo Image View">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="GAY-gF-5Xl" userLabel="Sendbird Logo Image View">
                             <rect key="frame" x="0.0" y="30.333333333333371" width="393" height="16"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -136,6 +136,6 @@
     </objects>
     <resources>
         <image name="SampleBackground" width="390" height="495"/>
-        <image name="smallLogoSendbirdFull" width="94" height="16"/>
+        <image name="logo_white" width="837.66668701171875" height="162.66667175292969"/>
     </resources>
 </document>

@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.0 (Nov 18, 2025) with Chat SDK v4.34.0
+
+### Improvements
+  - Implemented file attachment rules system to support server-side control of uploadable file types
+  - Improved the performance and structure of the starter kit
+  - Changed SBALogType to hierarchical levels and simplified log level mapping across the SDK
 ## v1.3.1 (Nov 14, 2025) with ChatSDK v4.34.0
 
 ### Improvements
@@ -61,7 +67,7 @@
 
 ## v1.0.0 (Sep 25, 2025) with ChatSDK v4.30.0
 
-## **Delight AI agent iOS SDK - GA Release Changelog**
+## **Delight AI Agent iOS SDK - GA Release Changelog**
 
 ### Highlights
 
@@ -125,7 +131,7 @@ end
 
 ### Features
 
-**Delight AI agent Messenger SDK has been officially released!**
+**Delight AI Agent Messenger SDK has been officially released!**
 This SDK enables you to seamlessly integrate an enterprise-grade AI-powered chat agent into your iOS applications.
 
 #### 1. Messenger Launcher Widget
@@ -307,10 +313,11 @@ AIAgentMessenger.authenticate(aiAgentId: "your_ai_agent_id") { result in
 ### Support
 
 - **Sample Apps**: [iOS AIAgent basic sample](https://github.com/sendbird/delight-ai-agent/tree/main/ios/sample)
+- **Technical Support**: [Sendbird Support](https://sendbird.com/support)
 
 ---
 
-*This release is the first GA (Generally Available) version of the Delight AI agent iOS SDK. It is safe for use in production environments.*
+*This release is the first GA (Generally Available) version of the Delight AI Agent iOS SDK. It is safe for use in production environments.*
 
 ## v0.10.9 (Sep 03, 2025) with ChatSDK v4.29.2
 

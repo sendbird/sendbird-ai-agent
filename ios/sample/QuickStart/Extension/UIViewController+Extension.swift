@@ -26,6 +26,6 @@ extension UIViewController {
                 return AIAgentMessenger.shortVersion
             }
         }
-        return "AIAgent v\(aiagentVersion)\tSDK v\(coreVersion)"
+        return "DelightAI v\(aiagentVersion)\tSDK v\(coreVersion)"
     }
 }
