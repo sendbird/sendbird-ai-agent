@@ -359,7 +359,7 @@ There are two ways to display the messenger:
 
 #### 1. Using the launcher button
 
-![Image](https://github.com/user-attachments/assets/74eea8d0-a984-4fb9-9c35-299b6b35b283)
+![Image](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher.png)
 
 The SDK provides the MessengerLauncher view, which can be easily attached to your application’s root view programmatically without directly adding it to XML layouts.
 
@@ -400,7 +400,7 @@ Use `CONVERSATION` for single AI agent conversations, or `CONVERSATION_LIST` whe
 
 #### 2. Opening the conversation channel in full-screen mode
 
-![Image](https://github.com/user-attachments/assets/348ccad1-ec9a-4851-9324-084eaf569e34)
+![Image](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-suggested-replies.png)
 
 You can open a full-screen conversation by starting an `Activity`.
 

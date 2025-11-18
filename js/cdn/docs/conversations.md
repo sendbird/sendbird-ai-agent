@@ -107,7 +107,7 @@ messenger.initialize({
 
 On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-js-launcher.png" />
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-launcher.png" />
 
 You can configure the launcher's positioning and margin on the screen using the `setPosition()` method. 
 
@@ -146,7 +146,7 @@ messenger.setPosition({
 
 The launcher's icon and color can be configured through the [Delight AI dashboard](https://dashboard.sendbird.com) - no code changes required. Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
-<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-apperance.png">
+<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-messenger-apperance.png">
 
 ---
 
