@@ -19,7 +19,7 @@ Unlike traditional chatbots, Delight AI agents understand intent, maintain conte
 
 To integrate Delight AI agent into your application, follow these steps:
 
-1. **Log in to [Delight AI dashboard](https://dashboard.sendbird.com/)**.
+1. **Log in to your dedicated Delight AI dashboard**.
 
 2. **Check the identifiers**: In the dashboard, go to **Channels → Messenger → Basic information** to check the Application ID and AI Agent ID.
 
