@@ -307,7 +307,6 @@ AIAgentMessenger.authenticate(aiAgentId: "your_ai_agent_id") { result in
 ### Support
 
 - **Sample Apps**: [iOS AIAgent basic sample](https://github.com/sendbird/delight-ai-agent/tree/main/ios/sample)
-- **Technical Support**: [Sendbird Support](https://sendbird.com/support)
 
 ---
 
