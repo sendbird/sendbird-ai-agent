@@ -71,7 +71,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 #### Call to Action (CTA) button
 
-**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Sendbird AI messenger, the button opens the specified external URL in a web browser.
+**CTA** messages contain a button that allows users to take specific actions directly from the conversation interface. In the Delight AI messenger, the button opens the specified external URL in a web browser.
 
 - Components: A single button that links to an external webpage. Custom link formats are not supported.
 - Use case: Action-oriented user interactions.
