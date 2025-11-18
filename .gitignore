@@ -30,3 +30,9 @@ xcuserdata/
 **/Package.resolved
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode
+
+### Android ###
+**/.gradle
+**/build
+**/local.properties
+**/.DS_Store
