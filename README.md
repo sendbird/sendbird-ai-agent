@@ -67,7 +67,7 @@ Each platform-specific directory contains its own README with detailed integrati
 
 ## Documentation
 
-For comprehensive documentation, including API references and advanced configuration options, visit the [Delight AI agent documentation](https://delight.ai/docs).
+For comprehensive documentation, including API references and advanced configuration options, visit the [Delight AI agent documentation](https://docs.delight.ai).
 
 ## Support
 
