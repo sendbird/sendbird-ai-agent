@@ -1,0 +1,7 @@
+role,text
+USER,Hi I would like to cancel my membership.
+AI_AGENT, I can help you with that. May I ask why you're looking to cancel your membership?
+USER,I'm not using it as much anymore.
+AI_AGENT,Thank you for letting us know. I’ll guide you through the cancellation process. Are you ready to proceed now?
+USER,Yes.
+AI_AGENT,Got it. Please click [here](https://example.com) or go to your account settings > Membership > Cancel to complete the cancellation. Let me know if you need help at any point.
