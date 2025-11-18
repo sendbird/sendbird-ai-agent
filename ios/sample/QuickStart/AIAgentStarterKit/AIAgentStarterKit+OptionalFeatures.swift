@@ -67,7 +67,7 @@ extension AIAgentStarterKit {
         )
     }
     
-    /// Registers the device token for push notifications with Sendbird AI Agent Messenger.
+    /// Registers the device token for push notifications with Delight AI Agent Messenger.
     ///
     /// This method should be called after the app successfully registers for remote notifications
     /// and receives a device token from APNs.
@@ -83,7 +83,7 @@ extension AIAgentStarterKit {
         }
     }
     
-    /// Unregisters the device token for push notifications from Sendbird AI Agent Messenger.
+    /// Unregisters the device token for push notifications from Delight AI Agent Messenger.
     ///
     /// This method should be called when the app no longer wants to receive push notifications,
     /// such as during logout or when disabling notifications.

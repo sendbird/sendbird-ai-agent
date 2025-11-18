@@ -17,7 +17,7 @@ struct TestConfig {
     static let sessionToken = "YOUR_SESSION_TOKEN_HERE"  // Replace with actual token from your server
 }
 
-// MARK: - Sendbird AI Agent Quickstart guide (iOS)
+// MARK: - Delight AI Agent Quickstart guide (iOS)
 
 // MARK: - Getting Started
 
