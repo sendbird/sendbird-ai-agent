@@ -1,4 +1,4 @@
-[iOS](https://github.com/sendbird/sendbird-ai-agent/blob/main/ios/README.md) / **Android** / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
+[iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / **Android** / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
 
 # Delight AI agent Quickstart guide (Android)
 

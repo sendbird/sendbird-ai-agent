@@ -80,8 +80,8 @@ val launcherParams = LauncherSettingsParams(layoutParams = layoutParams)
 
 ### Customize the launcher's appearance
 
-Launcher appearance, such as its icon and color, can be configured through [Delight AI dashboard](https://dashboard.sendbird.com) - no code changes required.
-Simply go to **[Build > Channels > Messenger](https://dashboard.sendbird.com/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+Launcher appearance, such as its icon and color, can be configured through [Delight AI dashboard](https://dashboard.delight.ai) - no code changes required.
+Simply go to **[Build > Channels > Messenger](https://dashboard.delight.ai/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
 
 <img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-messenger-appearance.png">
 
