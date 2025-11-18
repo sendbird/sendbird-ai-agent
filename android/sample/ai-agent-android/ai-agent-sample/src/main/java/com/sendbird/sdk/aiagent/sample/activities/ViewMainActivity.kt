@@ -112,7 +112,7 @@ class ViewMainActivity : BaseSampleActivity() {
                 val fingerPrint = "${BuildConfig.VERSION_NAME} - [$region]"
 
                 PreferenceUtils.manualUserInfo?.let {
-                    "${fingerPrint}\n${it.userId}"
+                    "${fingerPrint}\t\t${it.userId}"
                 } ?: fingerPrint
             }
 
