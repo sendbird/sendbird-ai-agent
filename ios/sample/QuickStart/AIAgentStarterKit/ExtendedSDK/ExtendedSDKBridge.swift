@@ -30,14 +30,16 @@ extension ExtendedSDKBridge {
     /// - Note: Only used for internal testing purposes, not needed for production.
     static func updateHost(_ target: String) async throws {
         return try await withCheckedThrowingContinuation { continutation in
-            let userId = SampleTestInfo.sessionInfoType == .manual ? SampleTestInfo.userId : UUID().uuidString
-            
+            let userId = SampleConfiguration.sessionInfoType == .manual ? SampleConfiguration.userId : UUID().uuidString
+
             SendbirdChat.connect(
                 userId: userId,
-                authToken: SampleTestInfo.sessionToken,
+                authToken: SampleConfiguration.sessionToken,
                 apiHost: "https://api-\(target).sendbirdtest.com",
                 wsHost: "wss://ws-\(target).sendbirdtest.com") { user, error in
-                    debugPrint("[xxx] target change error : *** \(error)")
+                    if let error = error {
+                        debugPrint("[ExtendedSDK] ❌ Target change failed - \(error.localizedDescription)")
+                    }
                     SendbirdChat.disconnect {
                         continutation.resume()
                     }
@@ -58,7 +60,7 @@ protocol ExtendedSDKBaseTaskable {
 /// Protocol extending ExtendedSDKBaseTaskable to include asynchronous lifecycle methods
 /// for initializing, connecting, and disconnecting SDK tasks.
 protocol ExtendedSDKTaskable: ExtendedSDKBaseTaskable {
-    func initialize() async throws
+    func initialize(applicationId: String, logLevel: SBALogType, migrationHandler: VoidHandler?) async throws
     func connect() async throws
     func disconnect() async throws
 }

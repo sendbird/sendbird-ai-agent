@@ -9,48 +9,27 @@ import UIKit
 import SendbirdAIAgentMessenger
 import SendbirdChatSDK
 
-extension AIAgentStarterKit {
-    /// Stores information required to manage a session with the AI Agent.
-    class SessionData {
-        /// The application ID used to identify the AI Agent service.
-        var appId: String = ""
-        /// The user ID associated with the current session.
-        var userId: String?
-        /// The session token used for authentication and session management.
-        var sessionToken: String?
-        /// The delegate handling session-related events.
-        var sessionHandler: SessionDelegate?
-    }
-    
-    /// Represents the different lifecycle stages of the AI Agent.
-    enum Status {
-        case uninitialized
-        case initialized
-        case readyToUse
-    }
-}
+// MARK: - AIAgentStarterKit
 
-/// Singleton controller for initializing and managing AI Agent SDK operations.
-class AIAgentStarterKit: NSObject {
-    typealias ErrorHandler = (Error?) -> Void
-    
-    static let shared = AIAgentStarterKit()
-    
-    static var isConnected: Bool = false
-    static var sessionData = SessionData()
-    
-    var onReadyToUse: (() -> Void)?
-    var initParamsBuilder: ((_ params: SendbirdChatSDK.InitParams?) -> Void)?
-    var status: Status = .uninitialized {
-        didSet {
-            if self.status == oldValue { return }
-            if self.status != .readyToUse { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.onReadyToUse?()
-            }
-        }
-    }
-}
+/// A simplified starter kit for integrating Delight AI Agent SDK into your iOS application.
+///
+/// `AIAgentStarterKit` provides a convenient wrapper around the Delight AI Agent SDK,
+/// handling initialization, session management, connection, and UI presentation.
+/// It's designed for QuickStart samples and can be customized for production use.
+///
+/// # Key Features
+/// - Easy SDK initialization with minimal configuration
+/// - Session management (manual and anonymous modes)
+/// - Automatic token refresh handling
+/// - UI presentation helpers (full-screen and launcher button)
+/// - Extended SDK integration (UIKit, DeskSDK)
+/// - Theme, context, and push notification support
+///
+/// # Usage
+/// See individual method documentation for detailed usage examples.
+/// Configuration properties are defined in `AIAgentStarterKit+Configuration.swift`.
+///
+class AIAgentStarterKit: NSObject { }
 
 // MARK: - Initialize
 extension AIAgentStarterKit {
@@ -59,38 +38,48 @@ extension AIAgentStarterKit {
     ///   - appId: The application ID to initialize the SDK.
     ///   - completion: Optional completion handler called with an error if initialization fails.
     static func initialize(
-        appId: String,
+        applicationId: String,
+        logLevel: SBALogType = .none,
+        startHandler: VoidHandler? = nil,
+        migrationHandler: VoidHandler? = nil,
         completion: ErrorHandler? = nil
     ) {
-        Self.sessionData.appId = appId
-        
-        // (Optional) for log level setting.
-        AIAgentStarterKit.shared.initParamsBuilder = { params in
-            params?.logLevel = .verbose
-        }
+        Self.sessionData.appId = applicationId
         
         Task {
             do {
-                // initialize priority: UIKit, Desk, AIAgent
-                
-                // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
-                try await ExtendedSDKBridge.initializeIfNeeded()
-                
-                try await self.initialize()
+                // Call the start handler before initialization
+                startHandler?()
 
-                AIAgentStarterKit.shared.status = .initialized
-                
+                // Step 1: Extended SDK initialization
+                // initialize priority: UIKit, Desk, AIAgent
+                // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
+                try await ExtendedSDKBridge.initializeIfNeeded(
+                    applicationId: applicationId,
+                    logLevel: logLevel,
+                    migrationHandler: migrationHandler
+                )
+
+                // Step 2: AI Agent SDK initialization
+                try await self.initialize(
+                    applicationId: applicationId,
+                    logLevel: logLevel,
+                    migrationHandler: migrationHandler
+                )
+
+                AIAgentStarterKit.status = .initialized
+
                 #if INTERNAL_TEST
-                if let target = SampleTestInfo.productionServer {
+                if let target = SampleConfiguration.productionServer {
                     try await ExtendedSDKBridge.updateHost(target)
                 }
                 #endif
-                
+
                 DispatchQueue.main.async {
                     completion?(nil)
                 }
             } catch {
-                debugPrint("[sdk-initialize] error: \(error)")
+                debugPrint("[Initialize] ❌ Failed - \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     completion?(error)
                 }
@@ -118,14 +107,16 @@ extension AIAgentStarterKit {
         
         Task {
             do {
+                // Step 1: Extended SDK session info update
                 // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
                 try await ExtendedSDKBridge.updateSessionInfoIfNeeded()
-                
+
+                // Step 2: AI Agent session info update
                 try await self.updateManualSessionInfo()
-                
-                AIAgentStarterKit.shared.status = .readyToUse
+
+                AIAgentStarterKit.status = .readyToUse
             } catch {
-                debugPrint("[session-info] error: \(error)")
+                debugPrint("[Session] ❌ Update failed - \(error.localizedDescription)")
             }
         }
     }
@@ -135,72 +126,14 @@ extension AIAgentStarterKit {
         Task {
             do {
                 try await self.updateAnonymousSessionInfo()
-                
-                AIAgentStarterKit.shared.status = .readyToUse
+
+                AIAgentStarterKit.status = .readyToUse
             } catch {
-                debugPrint("[session-info] error: \(error)")
+                debugPrint("[Session] ❌ Anonymous session update failed - \(error.localizedDescription)")
             }
         }
     }
 }
-
-// MARK: Session Delegate
-// TODO: This session handler is for example code only, and should be updated via the service's API.
-extension AIAgentStarterKit: SessionDelegate {
-    /// Called when a session token is required for authentication.
-    /// - Parameters:
-    ///   - successCompletion: Closure to call with the session token on success.
-    ///   - failCompletion: Closure to call on failure.
-    func sessionTokenDidRequire(
-        successCompletion success: @escaping (String?) -> Void,
-        failCompletion fail: @escaping () -> Void
-    ) {
-        // Call the your server to refresh the session token and forward the result.
-        // MockServer is simulating a backend API that refreshes a session token.
-        MockServer.refreshSessionToken(
-            for: AIAgentStarterKit.sessionData.userId
-        ) { result in
-            switch result {
-            case .success(let token):
-                // Persist the refreshed token and notify the SDK via successCompletion
-                // When success completion is called, updateSessionInfo is called internally, which causes the SDK to update the token.
-                debugPrint("[xxx] aiagent session handler - \(#function)")
-                AIAgentStarterKit.sessionData.sessionToken = token
-                DispatchQueue.main.async {
-                    success(token)
-                }
-            case .failure(let error):
-                debugPrint("[xxx] token refresh failed: \(error)")
-                DispatchQueue.main.async {
-                    fail()
-                }
-            }
-        }
-    }
-    
-    /// Called when the session has been closed.
-    func sessionWasClosed() {
-        debugPrint("[xxx] aiagent session handler - \(#function)")
-    }
-    
-    /// Called when the session has been refreshed.
-    func sessionWasRefreshed() {
-        debugPrint("[xxx] aiagent session handler - \(#function)")
-    }
-    
-    /// Handles common session errors.
-    /// - Parameter error: The error encountered.
-    func commonErrorHandle(_ error: Error) {
-        debugPrint("[xxx] common session error handler - \(#function)- error: \(error)")
-    }
-    
-    /// Called when the session encounters an SBError.
-    /// - Parameter error: The SBError encountered.
-    func sessionDidHaveError(_ error: SBError) {
-        self.commonErrorHandle(error)
-    }
-}
-
 
 // MARK: - Connect/Disconnect
 extension AIAgentStarterKit {
@@ -210,19 +143,18 @@ extension AIAgentStarterKit {
         Task {
             do {
                 self.isConnected = true
-                
+
                 // Connection priority: UIKit, AIAgent
-                
                 // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
                 try await ExtendedSDKBridge.connectIfNeeded()
-                
-                // If you only use AIAgent, there is no need to use this function because connect is handled internally when necessary.
-                try await self.connect()
-                
+
+                // Note: If you only use AIAgent, there is no need to use this function because connect is handled internally when necessary.
+
                 DispatchQueue.main.async {
                     completion?(nil)
                 }
             } catch {
+                debugPrint("[Connect] ❌ Failed - \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     completion?(error)
                 }
@@ -236,16 +168,17 @@ extension AIAgentStarterKit {
         Task {
             do {
                 self.isConnected = false
-                
+
                 // INFO: This is only necessary when using extended SDKs(e,g,. UIKit, DeskSDK).
                 try await ExtendedSDKBridge.disconnectIfNeeded()
-                
+
                 try await self.disconnect()
-                
+
                 DispatchQueue.main.async {
                     completion?(nil)
                 }
             } catch {
+                debugPrint("[Disconnect] ❌ Failed - \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     completion?(error)
                 }
@@ -259,20 +192,20 @@ extension AIAgentStarterKit {
     /// Use this when you want to display in full screen.
     /// - Parameter parent: The ViewController to parent and integrate with.
     static func present(parent: UIViewController) {
-        AIAgentStarterKit.loadCustomSets()
-        
+        AIAgentStarterKit.applyCustomizations()
+
         AIAgentMessenger.presentConversation(
-            aiAgentId: SampleTestInfo.aiAgentId
+            aiAgentId: SampleConfiguration.aiAgentId
         ) { params in
             params.language = self.contextObjects.language
             params.countryCode = self.contextObjects.countryCode
             params.context = self.contextObjects.context
             params.parent = parent
         }
-        
+
         // - NOTE: Use this logic if you want to present it as a conversation list.
 //        AIAgentMessenger.presentConversationList(
-//            aiAgentId: SampleTestInfo.aiAgentId
+//            aiAgentId: SampleConfiguration.aiAgentId
 //        ) { params in
 //            params.language = self.contextObjects.language
 //            params.countryCode = self.contextObjects.countryCode
@@ -281,12 +214,12 @@ extension AIAgentStarterKit {
 //        }
 }
     
-    /// Use this when you want to show and use the launcher button from the Sendbird Dashboard.
+    /// Use this when you want to show and use the launcher button from the Delight AI Dashboard.
     /// - Parameter view: The view to parent.
     static func attachLauncher(view: UIView? = nil) {
-        AIAgentStarterKit.loadCustomSets()
-        
-        var options = AIAgentStarterKit.defaultLauncherOptions
+        AIAgentStarterKit.applyCustomizations()
+
+        let options = AIAgentStarterKit.defaultLauncherOptions
         
         // INFO: Sample
 //      options = SBALauncherOptions(
@@ -312,7 +245,7 @@ extension AIAgentStarterKit {
         // The point at which the context object is assigned is when the launcher is exposed.
         let startLauncher: (() -> Void) = {
             AIAgentMessenger.attachLauncher(
-                aiAgentId: SampleTestInfo.aiAgentId
+                aiAgentId: SampleConfiguration.aiAgentId
             ) { params in
                 params.language = self.contextObjects.language
                 params.countryCode = self.contextObjects.countryCode
@@ -320,38 +253,16 @@ extension AIAgentStarterKit {
                 params.options = options
             }
         }
-        
-        AIAgentStarterKit.shared.onReadyToUse = startLauncher
-        
+
+        AIAgentStarterKit.onReadyToUse = startLauncher
+
         startLauncher()
     }
 
     /// Call this if you attach a launcher to the window.
     static func detachLauncher() {
         AIAgentMessenger.detachLauncher(
-            aiAgentId: SampleTestInfo.aiAgentId
+            aiAgentId: SampleConfiguration.aiAgentId
         )
-    }
-}
-
-// MARK: - Mock Server (for token refresh simulation)
-private enum MockServerError: Error { case refreshFailed }
-
-private final class MockServer {
-    /// Simulates a backend API that refreshes a session token.
-    /// In production, replace this with a real network call.
-    static func refreshSessionToken(
-        for userId: String?,
-        completion: @escaping (Result<String, Error>) -> Void
-    ) {
-        // Simulate latency
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.2) {
-            guard let userId, userId.isEmpty == false else {
-                completion(.failure(MockServerError.refreshFailed))
-                return
-            }
-            let newToken = "mock_" + UUID().uuidString
-            completion(.success(newToken))
-        }
     }
 }

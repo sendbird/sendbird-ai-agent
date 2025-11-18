@@ -19,10 +19,15 @@ extension AIAgentStarterKit {
     public static var moduleSetCustomizationBuilder: (() -> Void)?
     /// Closure to customize context objects used throughout the agent.
     public static var contextObjectsBuilder: (() -> Void)?
-    
-    /// Executes all provided customization closures to apply global configurations,
-    /// module settings, and context object customizations.
-    static func loadCustomSets() {
+
+    /// Applies all custom configurations including global settings, module customizations, and context objects.
+    ///
+    /// This method should be called before presenting UI to ensure all customizations are applied.
+    /// It executes the following builders in order:
+    /// - `globalConfigCustomizationBuilder`: Global configuration settings
+    /// - `moduleSetCustomizationBuilder`: Module-specific customizations
+    /// - `contextObjectsBuilder`: Context object configurations
+    static func applyCustomizations() {
         Self.globalConfigCustomizationBuilder?()
         Self.moduleSetCustomizationBuilder?()
         Self.contextObjectsBuilder?()

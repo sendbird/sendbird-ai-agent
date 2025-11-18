@@ -20,7 +20,11 @@ extension ExtendedSDKBridge {
     class DeskTask: BaseTask, ExtendedSDKTaskable {
         /// Initializes the SendbirdChat and DeskSDK components asynchronously.
         /// Throws an error if initialization fails.
-        func initialize() async throws {
+        func initialize(
+            applicationId: String,
+            logLevel: SBALogType = .none,
+            migrationHandler: VoidHandler? = nil
+        ) async throws {
             return try await withCheckedThrowingContinuation { continuation in
                 #if canImport(SendBirdDesk)
                 let initializeDeskBlock: (() -> Void) = {
@@ -39,15 +43,15 @@ extension ExtendedSDKBridge {
                 }
 
                 let params = InitParams(
-                    applicationId: AIAgentStarterKit.sessionData.appId,
-                    isLocalCachingEnabled: true
+                    applicationId: applicationId,
+                    isLocalCachingEnabled: true,
+                    logLevel: logLevel.toChatLogLevel()
                 )
-                AIAgentStarterKit.shared.initParamsBuilder?(params)
                 
                 // NOTE: SendbirdDesk must be initialized and used with SendbirdChat.
                 SendbirdChat.initialize(
                     params: params,
-                    migrationStartHandler: nil,
+                    migrationStartHandler: migrationHandler,
                     completionHandler: { error in
                         if let error {
                             continuation.resume(throwing: error)
@@ -75,36 +79,32 @@ extension ExtendedSDKBridge {
             guard let userId = AIAgentStarterKit.sessionData.userId else {
                 throw ChatError.invalidParameter.asSBError
             }
-            
+
             let sessionToken = AIAgentStarterKit.sessionData.sessionToken
-            
-            return try await withCheckedThrowingContinuation { continuation in
-                #if canImport(SendBirdDesk)
-                SBDSKMain.authenticate(
-                    withUserId: userId,
-                    accessToken: sessionToken
-                ) { error in
-                    if let error {
-                        continuation.resume(throwing: error)
-                        return
+
+            #if canImport(SendBirdDesk)
+            try await ExtendedSDKBridge.asyncify { completion in
+                SendbirdChat.connect(
+                    userId: userId,
+                    authToken: sessionToken
+                ) { user, error in
+                    SBDSKMain.authenticate(
+                        withUserId: userId,
+                        accessToken: sessionToken
+                    ) { error in
+                        completion(error)
                     }
-                    continuation.resume()
                 }
-                #else
-                continuation.resume()
-                #endif
             }
+            #endif
         }
         
         /// Disconnects from the DeskSDK.
         /// This implementation calls `initializeDesk` as part of the disconnection process.
         func disconnect() async throws {
-            return try await withCheckedThrowingContinuation { continuation in
-                #if canImport(SendBirdDesk)
-                SBDSKMain.initializeDesk()
-                #endif
-                continuation.resume()
-            }
+            #if canImport(SendBirdDesk)
+            SBDSKMain.initializeDesk()
+            #endif
         }
     }
 }

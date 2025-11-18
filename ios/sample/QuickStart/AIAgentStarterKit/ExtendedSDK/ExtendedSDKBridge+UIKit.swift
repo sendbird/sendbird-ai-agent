@@ -20,28 +20,30 @@ extension ExtendedSDKBridge {
         /// This method must be called before performing any other SDK operations.
         /// - Throws: An error if initialization fails.
         /// - Note: This method only performs actions if SendbirdUIKit is available.
-        func initialize() async throws {
-            return try await withCheckedThrowingContinuation { continuation in
-                #if canImport(SendbirdUIKit)
-                if SendbirdChat.isInitialized {
-                    continuation.resume()
-                    return
-                }
-                
-                SendbirdUIKit.SendbirdUI.initialize(
-                    applicationId: AIAgentStarterKit.sessionData.appId,
-                    initParamsBuilder: AIAgentStarterKit.shared.initParamsBuilder
-                ) { error in
-                    if let error {
-                        continuation.resume(throwing: error)
-                        return
-                    }
-                    continuation.resume()
-                }
-                #else
-                continuation.resume()
-                #endif
+        func initialize(
+            applicationId: String,
+            logLevel: SBALogType = .none,
+            migrationHandler: VoidHandler? = nil
+        ) async throws {
+            #if canImport(SendbirdUIKit)
+            if SendbirdChat.isInitialized {
+                return
             }
+
+            try await ExtendedSDKBridge.asyncify { completion in
+                SendbirdUIKit.SendbirdUI.initialize(
+                    applicationId: applicationId,
+                    initParamsBuilder: { params in
+                        params?.applicationId = applicationId
+                        params?.logLevel = logLevel.toChatLogLevel()
+                    }, migrationHandler: {
+                        migrationHandler?()
+                    }, completionHandler: { error in
+                        completion(error)
+                    }
+                )
+            }
+            #endif
         }
         
         /// Updates the current session information such as user ID and access token in the UIKit globals.
@@ -61,36 +63,23 @@ extension ExtendedSDKBridge {
         /// - Throws: An error if the connection fails.
         /// - Note: This method only performs actions if SendbirdUIKit is available.
         func connect() async throws {
-            return try await withCheckedThrowingContinuation { continuation in
-                #if canImport(SendbirdUIKit)
+            #if canImport(SendbirdUIKit)
+            try await ExtendedSDKBridge.asyncify { completion in
                 SendbirdUI.connect { user, error in
-                    if let error {
-                        continuation.resume(throwing: error)
-                        return
-                    }
-                    
-                    if let user {
-                        debugPrint("[force-connect] \(user.userId)")
-                    }
-                    
-                    continuation.resume()
+                    completion(error)
                 }
-                #else
-                continuation.resume()
-                #endif
             }
+            #endif
         }
         
         /// Disconnects from the Sendbird UIKit service asynchronously.
         /// - Note: This method only performs actions if SendbirdUIKit is available.
         func disconnect() async throws {
-            return try await withCheckedThrowingContinuation { continuation in
-                #if canImport(SendbirdUIKit)
-                SendbirdUI.disconnect { continuation.resume() }
-                #else
-                continuation.resume()
-                #endif
+            #if canImport(SendbirdUIKit)
+            try await ExtendedSDKBridge.asyncify { completion in
+                SendbirdUI.disconnect { completion(nil) }
             }
+            #endif
         }
     }
 }

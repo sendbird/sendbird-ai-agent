@@ -13,18 +13,17 @@ extension AIAgentStarterKit {
     /// Initializes the AIAgentMessenger.
     ///
     /// - Throws: An error if initialization fails.
-    static func initialize() async throws {
+    static func initialize(
+        applicationId: String,
+        logLevel: SBALogType,
+        migrationHandler: VoidHandler? = nil
+    ) async throws {
         return try await withCheckedThrowingContinuation { continuation in
             AIAgentMessenger.initialize(
-                appId: Self.sessionData.appId,
+                appId: applicationId,
                 paramsBuilder: { params in
-                    params.logLevel = .all
-                    params.startHandler = {
-                        // TODO: ui update
-                    }
-                    params.migrationHandler = {
-                        // TODO: ui update
-                    }
+                    params.logLevel = logLevel
+                    params.migrationHandler = migrationHandler
                 }
             ) { result in
                 switch result {
