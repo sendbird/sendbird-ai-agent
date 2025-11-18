@@ -1,7 +1,7 @@
 # Delight AI agent
 
 **Delight AI agent** is an enterprise-grade, omnichannel AI solution designed to revolutionize customer service.
-Unlike traditional chatbots, Delight AI agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
+Unlike traditional chatbots, Delight AI agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([delight.ai](https://delight.ai/ai-agent?utm_source=chatgpt.com))
 
 ## Features
 
