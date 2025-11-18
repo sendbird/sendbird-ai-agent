@@ -65,7 +65,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 ### Rich message
 
-**Rich Message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Sendbird AI agent dashboard settings and provide enhanced user interaction.
+**Rich Message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Delight AI dashboard settings and provide enhanced user interaction.
 
 #### Call to Action (CTA) button
 

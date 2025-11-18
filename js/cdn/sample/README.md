@@ -1,6 +1,6 @@
-# Delight AI Agent CDN Interactive Playground
+# Delight AI agent CDN Interactive Playground
 
-This is an interactive HTML/TypeScript playground demonstrating how to integrate the Delight AI Agent Messenger using the CDN script.
+This is an interactive HTML/TypeScript playground demonstrating how to integrate the Delight AI agent Messenger using the CDN script.
 
 ## Features
 

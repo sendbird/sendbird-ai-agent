@@ -1,10 +1,10 @@
-# Delight AI Agent SDK Localization Guide (React)
+# Delight AI agent SDK Localization Guide (React)
 
 ---
 
 ## Table of Contents
 
-- [Delight AI Agent SDK Localization Guide (React)](#delight-ai-agent-sdk-localization-guide-react)
+- [Delight AI agent SDK Localization Guide (React)](#delight-ai-agent-sdk-localization-guide-react)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Supported Languages](#supported-languages)
@@ -20,7 +20,7 @@
 
 ## Overview
 
-Delight AI Agent SDK for React includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during component initialization or update it later using the `FixedMessenger` props.
+Delight AI agent SDK for React includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during component initialization or update it later using the `FixedMessenger` props.
 
 The language setting influences both the UI text displayed in the messenger and potentially the AI Agent's responses.
 

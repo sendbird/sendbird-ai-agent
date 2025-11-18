@@ -1,6 +1,6 @@
 # Messages
 
-In Sendbird AI agent messenger, AI agent and users can exchange various types of messages to enable rich and interactive conversations, including text, images, files, and rich template-based messages. It allows users to have comprehensive and engaging conversations with AI agents across different use cases.
+In Delight AI agent messenger, AI agent and users can exchange various types of messages to enable rich and interactive conversations, including text, images, files, and rich template-based messages. It allows users to have comprehensive and engaging conversations with AI agents across different use cases.
 
 This guide explains:
 
@@ -25,7 +25,7 @@ This guide explains:
 
 ## Types
 
-Sendbird AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
+Delight AI agent messenger supports various message types to provide comprehensive communication capabilities between users and AI agents. Each message type is designed for specific use cases and content formats.
 
 |  Type | Description | Content format | Use cases |
 |-------------|------------|----------------|-----------|
@@ -67,7 +67,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 ### Rich Message
 
-**Rich Message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Sendbird AI agent dashboard settings and provide enhanced user interaction.
+**Rich Message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Delight AI dashboard settings and provide enhanced user interaction.
 
 #### Call to Action (CTA) button
 
@@ -123,7 +123,7 @@ Sendbird AI agent messenger supports various message types to provide comprehens
 
 ## Key features
 
-The core features supported for messages in Sendbird AI agent include:
+The core features supported for messages in Delight AI agent include:
 
 - [Read receipt](#read-receipt)
 - [Citation](#citation)

@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.9.3 (Nov 17, 2025) with ChatSDK ^4.20.1
+
+
+### Fixes
+
+- Buffer extendedMessagePayload until text streaming completes to prevent suggested replies and citations from appearing before message text finishes displaying
+
+### Improvements
+
+- Centralize streaming text logic in parent component to eliminate duplicate hook calls and improve performance
+- Mark unused localization strings as deprecated
+
+
 ## v1.9.2 (Nov 13, 2025) with ChatSDK v4.20.1
 
 ### Improvements

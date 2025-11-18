@@ -1,7 +1,7 @@
-# Delight AI Agent
+# Delight AI agent
 
-**Delight AI Agent** is an enterprise-grade, omnichannel AI solution designed to revolutionize customer service.
-Unlike traditional chatbots, Delight AI Agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([delight.ai](https://delight.ai/ai-agent?utm_source=chatgpt.com))
+**Delight AI agent** is an enterprise-grade, omnichannel AI solution designed to revolutionize customer service.
+Unlike traditional chatbots, Delight AI agents understand intent, maintain context, take action, and adapt over time, delivering natural, human-like conversations that resolve complex issues and escalate seamlessly when needed. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
 
 ## Features
 
@@ -17,19 +17,22 @@ Unlike traditional chatbots, Delight AI Agents understand intent, maintain conte
 
 ## Getting Started
 
-To integrate Delight AI Agent into your application, follow these steps:
+To integrate Delight AI agent into your application, follow these steps:
 
-1. **Create a Delight Account**: Sign up at [Delight AI dashboard](https://dashboard.delight.ai/).
+1. **Log in to your dedicated Delight AI dashboard**.
 
 2. **Check the identifiers**: In the dashboard, go to **Channels → Messenger → Basic information** to check the Application ID and AI Agent ID.
 
-3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Delight AI Agent SDK into your application.
+3. **Integrate SDK**: Depending on your platform (iOS, Android, Web), integrate the appropriate Delight AI agent SDK into your application.
 
-4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application.
+4. **Initialize AI Agent**: Use the Application ID and Agent ID to initialize the AI agent within your application. You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
+
+![ai-agent-app-id-agent-id](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-basic-information.png)
+
 
 ## Repository Structure
 
-This repository contains platform-specific implementations and customer guides for the Delight AI Agent:
+This repository contains platform-specific implementations and customer guides for the Delight AI agent:
 
 - **JavaScript**: Located in the `js` directory, includes:
   - Documentation guides for React and CDN integration  

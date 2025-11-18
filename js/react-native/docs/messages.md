@@ -65,7 +65,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 ### Rich message
 
-**Rich message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Sendbird AI agent dashboard settings and provide enhanced user interaction.
+**Rich message** utilizes predefined templates to create interactive and visually appealing message experiences. These templates are configurable through the Delight AI dashboard settings and provide enhanced user interaction.
 
 #### Call to Action (CTA) button
 
@@ -113,7 +113,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 
 ## Key features
 
-The core features supported for messages in Sendbird AI agent include:
+The core features supported for messages in Delight AI agent include:
 
 - [Citation](#citation)
 - [Special notice](#special-notice)

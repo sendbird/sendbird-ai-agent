@@ -1,10 +1,10 @@
 [iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / **JS**
 
-# Delight AI Agent Quickstart guide (JS)
+# Delight AI agent Quickstart guide (JS)
 
-The **Delight AI Agent Messenger** allows seamless integration of chatbot features into your Web. Follow the steps below to initialize and utilize the SDK effectively.
+The **Delight AI agent Messenger** allows seamless integration of chatbot features into your Web. Follow the steps below to initialize and utilize the SDK effectively.
 
-- [Delight AI Agent Quickstart guide (JS)](#delight-ai-agent-quickstart-guide-js)
+- [Delight AI agent Quickstart guide (JS)](#delight-ai-agent-quickstart-guide-js)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [Step 1. Install AI Agent SDK](#step-1-install-ai-agent-sdk)
@@ -24,9 +24,9 @@ The **Delight AI Agent Messenger** allows seamless integration of chatbot featur
 
 Before you start, you'll need your Delight **Application ID** and **AI Agent ID**.
 <br><br/>
-You can find it under the **Channels** > **Messenger** menu on the Delight Dashboard.
+You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
 
-![ai-agent-app-id-agent-id](https://github.com/user-attachments/assets/37d2873e-f35d-45dd-97cc-3d7c7e638a0c)
+![ai-agent-app-id-agent-id](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/aa-messenger-basic-information.png)
 
 ---
 
@@ -157,7 +157,7 @@ Once the authentication information has been successfully registered, you can la
 
 To launch and display the messenger, implement the code below:
 
-> **Note**: Replace `YOUR_APP_ID` AND `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Sendbird Dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
+> **Note**: Replace `YOUR_APP_ID` AND `YOUR_AI_AGENT_ID` with your Application ID and AI agent ID which you can obtain from the Delight AI dashboard. To learn how do to so, refer to the [prerequisites](#prerequisites) section.
 
 ```javascript
 const messenger = await loadMessenger();
