@@ -61,7 +61,7 @@ Delight AI agent messenger supports various message types to provide comprehensi
 - Use case: Document sharing and file-based communication.
 - Display: File preview with download capabilities.
 
-<img width="363" height="645" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-js-file-message.png" />
+<img width="363" height="645" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-file-message.png" />
 
 ### Rich message
 
