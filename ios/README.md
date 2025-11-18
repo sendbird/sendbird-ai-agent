@@ -1,4 +1,4 @@
-**iOS** / [Android](https://github.com/sendbird/sendbird-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/sendbird-ai-agent/blob/main/js/)
+**iOS** / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/delight-ai-agent/blob/main/js/)
 
 # Delight AI agent Quickstart guide (iOS)
 
@@ -48,7 +48,7 @@ The minimum requirements for AI Agent for iOS are the following.
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
+Before you start, you'll need your Delight AI **Application ID** and **AI Agent ID**.
 <br><br/>
 You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
 
@@ -76,7 +76,7 @@ Quickly install and initialize the AI Agent SDK by following the steps below.
 2. Add **SendbirdAIAgentMessenger** into your package repository using the following URL:
 
    ```
-   https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git
+   https://github.com/sendbird/delight-ai-agent-messenger-ios.git
    ```
 
 3. Set the **Dependency Rule** to **Branch** and use the provided branch name.
@@ -375,7 +375,7 @@ AIAgentMessenger.presentConversation(
 
 ### Register for push notifications
 
-[Push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) are a type of notification sent to your user's device when a client app is running in the background. Push notifications for the client app will contain a payload created by Sendbird and be delivered through APNs. Sendbird server will communicate with APNs whenever needed and APNs will send a push notification to the client app on iOS devices. In order to use this feature, you need to register the user's device token to Sendbird server through the AppDelegate.
+[Push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) are a type of notification sent to your user's device when a client app is running in the background. Push notifications for the client app will contain a payload created by Delight AI and be delivered through APNs. Delight AI server will communicate with APNs whenever needed and APNs will send a push notification to the client app on iOS devices. In order to use this feature, you need to register the user's device token to Delight AI server through the AppDelegate.
 
 > Note : APNs should be set up in advance in order to send push notifications.
 
@@ -389,7 +389,7 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 
 ### Unregister for push notifications
 
-You should unregister a user's device token from Sendbird server if you don’t want to send [push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) to the user.
+You should unregister a user's device token from Delight AI server if you don’t want to send [push notifications](https://sendbird.com/docs/chat/sdk/v4/ios/push-notifications/overview-push-notifications) to the user.
 
 ```swift
 // If you want to unregister the current device only, call this method.

@@ -44,7 +44,7 @@ The minimum requirements for AI Agent for Android are the following.
 
 ## Prerequisites
 
-Before you start, you'll need your Sendbird **Application ID** and **AI Agent ID**.
+Before you start, you'll need your **Application ID** and **AI Agent ID**.
 <br><br/>
 You can find it under the **Channels** > **Messenger** menu on the Delight AI dashboard.
 
@@ -78,7 +78,7 @@ Add the following to your `settings.gradle.kts` (Project Settings) file:
 ```kotlin
 dependencyResolutionManagement {
     repositories {
-        maven { setUrl("https://repo.sendbird.com/public/maven") }
+        maven { setUrl("https://repo.delight.ai/public/maven") }
     }
 }
 ```
@@ -416,13 +416,13 @@ For more details, refer to the [Push notifications](https://sendbird.com/docs/ch
 
 #### Register for push notifications
 
-To receive push notifications from Sendbird, register the device token by setting up a custom `FirebaseMessagingService`.  
+To receive push notifications from Delight AI server, register the device token by setting up a custom `FirebaseMessagingService`.  
 Call the following method after login:
 
 ```kotlin
 SendbirdPushHelper.registerHandler(MyFirebaseMessagingService())
 ```
-This will register the FCM token and automatically send it to the Sendbird server.
+This will register the FCM token and automatically send it to the Delight AI server.
 
 #### Unregister for Push Notifications
 
@@ -435,7 +435,7 @@ This is typically used on logout or when push notifications should be disabled.
 
 #### Handling Push Notifications
 
-Sendbird push payloads will be delivered via FCM and include a sendbird field in the RemoteMessage data.
+Push payloads will be delivered via FCM and include a `sendbird` field in the RemoteMessage data.
 
 In your custom FirebaseMessagingService, override onMessageReceived() like this:
 ```kotlin

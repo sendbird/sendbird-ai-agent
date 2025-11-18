@@ -288,7 +288,7 @@ Configuration options for the `FixedMessenger` component.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `appId` | string | Required | Your Sendbird application ID. |
+| `appId` | string | Required | Your application ID. |
 | `aiAgentId` | string | Required | AI agent identifier for conversation target. |
 | `entryPoint` | 'Conversation' \| 'ConversationList' | 'Conversation' | Which screen to show when the messenger is first loaded. |
 | `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | - | User session information for authentication. |

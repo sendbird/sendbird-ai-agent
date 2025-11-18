@@ -3,7 +3,7 @@ import { vi } from 'vitest';
 
 import App from '../App';
 
-// Mock the Sendbird AI Agent Messenger React component
+// Mock the Delight AI Agent Messenger React component
 vi.mock('@sendbird/ai-agent-messenger-react', () => ({
   FixedMessenger: ({ appId, aiAgentId }: { appId: string; aiAgentId: string }) => (
     <div data-testid="fixed-messenger" data-app-id={appId} data-ai-agent-id={aiAgentId}>
@@ -36,7 +36,7 @@ describe('App', () => {
 
   it('renders the playground description', () => {
     render(<App />);
-    expect(screen.getByText('Learn how to integrate Sendbird AI Agent Messenger with React')).toBeInTheDocument();
+    expect(screen.getByText('Learn how to integrate Delight AI Agent Messenger with React')).toBeInTheDocument();
   });
 
   it('renders the tab navigation', () => {

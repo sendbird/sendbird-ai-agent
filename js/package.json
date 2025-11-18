@@ -1,9 +1,9 @@
 {
-  "name": "sendbird-ai-agent-samples",
+  "name": "delight-ai-agent-samples",
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "description": "Sendbird AI Agent samples for different platforms",
+  "description": "Delight AI Agent samples for different platforms",
   "scripts": {
     "install:samples": "pnpm install -r",
     "dev:react": "pnpm --filter react-sample dev",

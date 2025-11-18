@@ -56,7 +56,7 @@ The messenger provides a floating UI approach for launching the messenger and st
 </head>
 <body>
   <script type="module">
-    import { loadMessenger } from 'https://aiagent.sendbird.com/orgs/default/index.js';
+    import { loadMessenger } from 'https://aiagent.delight.ai/orgs/default/index.js';
 
     // Load messenger
     const messenger = await loadMessenger();
@@ -316,7 +316,7 @@ messenger.initialize(config)
 
 | Parameters | Type | Default | Description |
 |----------|------|---------|-------------|
-| `appId` | string | Required | Your Sendbird application ID |
+| `appId` | string | Required | Your application ID |
 | `aiAgentId` | string | Required | AI agent identifier for conversation target |
 | `userSessionInfo` | ManualSessionInfo \| AnonymousSessionInfo | - | User session information for authentication |
 | `entryPoint` | 'Conversation' \| 'ConversationList' | 'Conversation' | Which screen to show when the messenger is first loaded |

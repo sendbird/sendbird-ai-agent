@@ -92,7 +92,7 @@ The SDK can be installed through various package managers.
 **Swift Package Manager (SPM)**
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sendbird/sendbird-ai-agent-messenger-ios.git", from: "1.0.0")
+    .package(url: "https://github.com/sendbird/delight-ai-agent-messenger-ios.git", from: "1.0.0")
 ]
 ```
 
@@ -306,7 +306,7 @@ AIAgentMessenger.authenticate(aiAgentId: "your_ai_agent_id") { result in
 
 ### Support
 
-- **Sample Apps**: [iOS AIAgent basic sample](https://github.com/sendbird/sendbird-ai-agent/tree/main/ios/sample)
+- **Sample Apps**: [iOS AIAgent basic sample](https://github.com/sendbird/delight-ai-agent/tree/main/ios/sample)
 - **Technical Support**: [Sendbird Support](https://sendbird.com/support)
 
 ---

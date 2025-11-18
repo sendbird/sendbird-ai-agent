@@ -1,6 +1,6 @@
 export const CODE_SAMPLES = {
   loadScript: `<script type="module">
-  import { loadMessenger } from "https://aiagent.sendbird.com/orgs/default/index.js";
+  import { loadMessenger } from "https://aiagent.delight.ai/orgs/default/index.js";
 </script>`,
 
   initialize: `const messenger = await loadMessenger();
@@ -119,7 +119,7 @@ messenger.updateConfig({
 });
 `,
 
-  unsupported_language: `// Example 2: Add support for a language not provided by Sendbird(Chinese)
+  unsupported_language: `// Example 2: Add support for a language not provided by Delight(Chinese)
 messenger.initialize({
   appId: 'APP_ID',
   aiAgentId: 'AI_AGENT_ID',

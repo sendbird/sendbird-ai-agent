@@ -5,15 +5,15 @@ Unlike traditional chatbots, Delight AI agents understand intent, maintain conte
 
 ## Features
 
-- **Omnichannel Support**: Integrates with SMS, email, WhatsApp, in-app chat, web, and social messaging platforms, ensuring your AI agent is always available where your customers are. ([sendbird.com](https://sendbird.com/ai-agent?utm_source=chatgpt.com))
+- **Omnichannel Support**: Integrates with SMS, email, WhatsApp, in-app chat, web, and social messaging platforms, ensuring your AI agent is always available where your customers are. ([delight.ai](https://delight.ai/ai-agent?utm_source=chatgpt.com))
 
 - **Contextual Understanding**: Maintains conversation context across channels, allowing the AI agent to pick up the conversation exactly where the customer left off.
 
 - **Proactive Engagement**: Anticipates customer needs and initiates conversations on preferred channels before issues arise.
 
-- **Unified Customer Insights**: Transforms omnichannel conversations into unified customer insights to inform smarter business decisions. ([sendbird.com](https://sendbird.com/?utm_source=chatgpt.com))
+- **Unified Customer Insights**: Transforms omnichannel conversations into unified customer insights to inform smarter business decisions. ([delight.ai](https://delight.ai/?utm_source=chatgpt.com))
 
-- **Seamless Integrations**: Connects with customer support software like Salesforce, Zendesk, Notion, and Google Drive, allowing the AI agent to be trained using your existing content. ([sendbird.com](https://sendbird.com/ai-agent/builder?utm_source=chatgpt.com))
+- **Seamless Integrations**: Connects with customer support software like Salesforce, Zendesk, Notion, and Google Drive, allowing the AI agent to be trained using your existing content. ([delight.ai](https://delight.ai/ai-agent/builder?utm_source=chatgpt.com))
 
 ## Getting Started
 
@@ -67,11 +67,11 @@ Each platform-specific directory contains its own README with detailed integrati
 
 ## Documentation
 
-For comprehensive documentation, including API references and advanced configuration options, visit the [Sendbird Documentation](https://sendbird.com/docs).
+For comprehensive documentation, including API references and advanced configuration options, visit the [Delight AI agent documentation](https://delight.ai/docs).
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue in this repository or contact [Sendbird Support](https://sendbird.com/contact).
+If you encounter any issues or have questions, please open an issue in this repository or [Contact Sales](https://delight.ai/contact-sales).
 
 ## License
 
@@ -79,4 +79,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-For more information on Sendbird's AI Agent platform and its capabilities, visit the [official website](https://sendbird.com/ai-agent).
+For more information on Delight's AI Agent platform and its capabilities, visit the [official website](https://delight.ai/ai-agent).

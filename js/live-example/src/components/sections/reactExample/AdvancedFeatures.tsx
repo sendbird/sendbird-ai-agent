@@ -125,14 +125,14 @@ export const AdvancedFeatures = () => {
               Customize specific strings in supported languages or add support for new languages by overriding the
               stringSet.
               <br />
-              Currently, Sendbird messenger supports 10 built-in languages: English (en), Korean (ko), Japanese (ja),
+              Currently, Delight messenger supports 10 built-in languages: English (en), Korean (ko), Japanese (ja),
               Spanish (es), French (fr), German (de), Italian (it), Portuguese (pt), Turkish (tr), and Hindi (hi).
             </>
           }
         >
           <Section
             title="Scenario 1: Customize strings in supported languages"
-            description="Override specific UI strings in a language that Sendbird already supports. This example customizes the input placeholder and conversation list title in Spanish."
+            description="Override specific UI strings in a language that Messenger already supports. This example customizes the input placeholder and conversation list title in Spanish."
           >
             <CodeEditor value={REACT_CODE_SAMPLES.customStringSet} language="tsx" />
             <Button onClick={() => loadLanguageStringSet('es-ES')}>
@@ -146,12 +146,12 @@ export const AdvancedFeatures = () => {
             title="Scenario 2: Add support for unsupported languages"
             description={
               <>
-                Implement full support for a language not included in Sendbird's built-in set. This example adds
+                Implement full support for a language not included in Delight's built-in set. This example adds
                 complete Chinese (zh-CN) localization by providing all required string values. You can find the full
                 list of required string keys{' '}
                 <a
                   className="text-primary underline"
-                  href="https://github.com/sendbird/sendbird-ai-agent/blob/main/react/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk"
+                  href="https://github.com/sendbird/delight-ai-agent/blob/main/react/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -199,7 +199,7 @@ export const AdvancedFeatures = () => {
           description={
             <>
               Customize predefined message layouts using individual message components. This allows you to create custom
-              message displays while leveraging Sendbird's built-in message rendering capabilities.
+              message displays while leveraging Delight's built-in message rendering capabilities.
               <br />
               <em>
                 Note: This feature requires AgentProviderContainer. FixedMessenger does not currently support message
