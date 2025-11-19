@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.9.5 (Nov 19, 2025) with ChatSDK ^4.20.1
+
+
+### Improvements
+
+- Add reconnecting state to input field for network disconnection feedback, showing "Trying to reconnect" instead of silently disabling input
+- Add useConnectionState hook with SSR-safe initial state based on navigator.onLine
+- Add localized reconnecting placeholder strings for all supported languages
+
+### Bug Fixes
+
+- Ensure fresh values by passing directly through context
+
+### Dependencies
+
+- Updated messenger-react to v1.9.5
+
+
+
 ## v1.9.4 (Nov 18, 2025) with ChatSDK ^4.20.1
 
 
