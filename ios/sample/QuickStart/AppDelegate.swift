@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         center.requestAuthorization(options: [.sound, .alert]) { granted, error in
-            DispatchQueue.main.async {
+            Thread.executeOnMain {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }

@@ -86,7 +86,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onTapLoginOut(_ sender: UIButton) {
-        self.checkConnectIfNeeded() ? logout() : login()
+        AIAgentStarterKit.isConnected ? logout() : login()
     }
 
     // MARK: - Authentication
@@ -109,6 +109,7 @@ class ViewController: UIViewController {
             }
         } else {
             // If you only use AIAgent, there is no need to use this function because connect is handled internally when necessary.
+            AIAgentStarterKit.isConnected = true
             self.attachLauncherIfNeeded()
             self.updateAllButtonStates()
         }
@@ -149,7 +150,7 @@ class ViewController: UIViewController {
 
     // Enable/disable buttons based on connection status
     private func updateConnectedStatus() {
-        let isConnected = self.checkConnectIfNeeded()
+        let isConnected = AIAgentStarterKit.isConnected
         chatBotItemView.isEnabled = isConnected
         toggleColorSchemeButton.isEnabled = isConnected
         loginOutButton.setTitle(isConnected ? "Logout" : "Login", for: .normal)
@@ -166,15 +167,8 @@ class ViewController: UIViewController {
     // MARK: - Helpers
     // Attach floating launcher button if connected
     private func attachLauncherIfNeeded() {
-        guard self.checkConnectIfNeeded() else { return }
+        guard AIAgentStarterKit.isConnected else { return }
 
         AIAgentStarterKit.attachLauncher(view: view)
-    }
-    
-    private func checkConnectIfNeeded() -> Bool {
-        let needsConnection = ExtendedSDKBridge.hasUIKit() || ExtendedSDKBridge.hasDeskSDK()
-        if needsConnection && AIAgentStarterKit.isConnected == false { return false }
-        
-        return true
     }
 }

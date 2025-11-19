@@ -68,6 +68,19 @@ extension AIAgentStarterKit {
     /// This function is currently not needed as connection is handled internally.
     static func connect() async throws {
         // There is no need to use this function because connect is handled internally when necessary.
+        return try await withCheckedThrowingContinuation { continuation in
+            AIAgentMessenger.authenticate(
+                aiAgentId: SampleConfiguration.aiAgentId
+            ) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+        
     }
     
     /// Disconnects the AIAgentMessenger.
