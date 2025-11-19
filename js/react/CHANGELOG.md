@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.9.5 (Nov 19, 2025) with ChatSDK ^4.20.1
+
+
+### Features
+
+- Add reconnecting state to input field for network disconnection feedback with "Trying to reconnect" placeholder
+
+### Fixes
+
+- Ensure fresh values by passing directly through context
+
+### Improvements
+
+- Refactor useConnectionState to use NetworkStateAdapter pattern for cross-platform compatibility
+
+
 ## v1.9.4 (Nov 18, 2025) with ChatSDK ^4.20.1
 
 
