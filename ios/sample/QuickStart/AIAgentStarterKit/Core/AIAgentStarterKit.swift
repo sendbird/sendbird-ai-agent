@@ -75,12 +75,12 @@ extension AIAgentStarterKit {
                 }
                 #endif
 
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     completion?(nil)
                 }
             } catch {
                 debugPrint("[Initialize] ❌ Failed - \(error.localizedDescription)")
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     completion?(error)
                 }
             }
@@ -149,13 +149,14 @@ extension AIAgentStarterKit {
                 try await ExtendedSDKBridge.connectIfNeeded()
 
                 // Note: If you only use AIAgent, there is no need to use this function because connect is handled internally when necessary.
+                try await self.connect()
 
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     completion?(nil)
                 }
             } catch {
                 debugPrint("[Connect] ❌ Failed - \(error.localizedDescription)")
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     completion?(error)
                 }
             }
@@ -174,12 +175,12 @@ extension AIAgentStarterKit {
 
                 try await self.disconnect()
 
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     completion?(nil)
                 }
             } catch {
                 debugPrint("[Disconnect] ❌ Failed - \(error.localizedDescription)")
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     completion?(error)
                 }
             }

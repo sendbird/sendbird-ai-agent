@@ -456,8 +456,8 @@ Replace `MockServer` calls in `Core/AIAgentStarterKit+SessionDelegate.swift` wit
 ```swift
 struct SampleConfiguration {
     // MARK: - Application Configuration
-    static var appId = "YOUR_APP_ID"          // From Delight AI Dashboard
-    static var aiAgentId = "YOUR_AI_AGENT_ID" // From Delight AI Dashboard
+    static var appId = "YOUR_APP_ID"          // From Sendbird Dashboard
+    static var aiAgentId = "YOUR_AI_AGENT_ID" // From Sendbird Dashboard
 
     // MARK: - Session Configuration
     static var sessionInfoType: SessionInfoType = .manual  // or .anonymous

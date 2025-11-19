@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.4.1 (Nov 19, 2025) with Chat SDK v4.34.1
+
+### Bugfixes
+  - Fixed issue where the action sheet text color was not visible
+  - Fix thread timing issue in detachLauncher
 ## v1.4.0 (Nov 18, 2025) with Chat SDK v4.34.0
 
 ### Improvements
@@ -285,7 +290,7 @@ AIAgentMessenger.authenticate(aiAgentId: "your_ai_agent_id") { result in
 }
 ```
 
-> **Note**: To use Anonymous Session, app attribute settings must be enabled in the Delight AI dashboard.
+> **Note**: To use Anonymous Session, app attribute settings must be enabled in the Sendbird dashboard.
 
 ---
 
@@ -313,7 +318,7 @@ AIAgentMessenger.authenticate(aiAgentId: "your_ai_agent_id") { result in
 ### Support
 
 - **Sample Apps**: [iOS AIAgent basic sample](https://github.com/sendbird/delight-ai-agent/tree/main/ios/sample)
-- **Technical Support**: [Delight AI Support](https://sendbird.com/support)
+- **Technical Support**: [Sendbird Support](https://sendbird.com/support)
 
 ---
 

@@ -74,7 +74,7 @@ extension AIAgentStarterKit {
             guard _statusStorage != newValue else { return }
             _statusStorage = newValue
             if _statusStorage == .readyToUse {
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     onReadyToUse?()
                 }
             }

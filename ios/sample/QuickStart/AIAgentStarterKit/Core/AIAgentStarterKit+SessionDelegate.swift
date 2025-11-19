@@ -32,12 +32,12 @@ extension AIAgentStarterKit: SessionDelegate {
                 // Persist the refreshed token and notify the SDK via successCompletion
                 // When success completion is called, updateSessionInfo is called internally, which causes the SDK to update the token.
                 AIAgentStarterKit.sessionData.sessionToken = token
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     success(token)
                 }
             case .failure(let error):
                 debugPrint("[SessionDelegate] ❌ Token refresh failed - \(error.localizedDescription)")
-                DispatchQueue.main.async {
+                Thread.executeOnMain {
                     fail()
                 }
             }

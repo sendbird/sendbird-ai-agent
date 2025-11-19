@@ -50,11 +50,11 @@ struct SampleConfiguration {
     // MARK: - Application Configuration
 
     /// Your Sendbird application ID.
-    /// Get this from your Delight AI Dashboard: https://dashboard.delight.ai
+    /// Get this from your Sendbird Dashboard: https://dashboard.sendbird.com
     static var appId = "10306808-B7F3-436F-9F5C-29F431B47B73"
 
     /// The AI agent ID to use for AI-driven conversations.
-    /// Create and manage AI agents in your Delight AI Dashboard.
+    /// Create and manage AI agents in your Sendbird Dashboard.
     static var aiAgentId = "e4c57465-4773-432e-9740-f0284a951494"
 
     // MARK: - User Authentication
