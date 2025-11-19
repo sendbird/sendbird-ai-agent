@@ -359,7 +359,7 @@ There are two ways to display the messenger:
 
 #### 1. Using the launcher button
 
-![Image](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher.png)
+<img width="361" height="642" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher2.png" />
 
 The SDK provides the MessengerLauncher view, which can be easily attached to your application’s root view programmatically without directly adding it to XML layouts.
 
@@ -388,7 +388,7 @@ Use `CONVERSATION` for single AI agent conversations, or `CONVERSATION_LIST` whe
 - `LauncherLayoutParams` allows you to configure the MessengerLauncher's behavior and appearance:
     - **`launchMode`**:
         - `EXPANDED`: Opens the messenger in full-screen mode with predefined margins.
-        - `ANCHORED`: Opens the messenger anchored near the launcher button, with adjustable positioning.
+        - `ANCHORED`: Opens the messenger anchored near the launcher button, with adjustable positioning.ㄴ
 
     - **`margin`**: Defines the margin around the launcher button itself (does not affect the messenger window).
 
@@ -400,7 +400,7 @@ Use `CONVERSATION` for single AI agent conversations, or `CONVERSATION_LIST` whe
 
 #### 2. Opening the conversation channel in full-screen mode
 
-![Image](https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-suggested-replies.png)
+<img width="361" height="642" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-suggested-replies2.png" />
 
 You can open a full-screen conversation by starting an `Activity`.
 

@@ -107,7 +107,7 @@ messenger.initialize({
 
 On mobile devices, the messenger automatically opens in full-screen mode. On the other hand, it displays as a floating mini-window anchored near a small icon called `launcher` on the desktop devices.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-js-launcher.png" />
+<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-web-launcher.png" />
 
 You can configure the launcher's positioning and margin on the screen using the `setPosition()` method. 
 
