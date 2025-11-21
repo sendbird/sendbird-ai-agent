@@ -61,9 +61,9 @@ The SDK provides several main layout categories for customization:
 - **OutgoingMessageLayout**: Controls the rendering of messages sent by the current user
 - **SystemMessageLayout**: Manages system-generated messages like admin messages and CSAT surveys
 - **ConversationLayout**: Orchestrates the overall conversation view structure
-- **ConversationHeaderLayout**: Provides fine-grained control over the conversation header with customizable areas and buttons
+- **ConversationHeaderLayout**: Controls the conversation header with customizable areas and buttons
 - **ConversationListLayout**: Controls the list view of multiple conversations
-- **ConversationListHeaderLayout**: Provides control over the conversation list header section
+- **ConversationListHeaderLayout**: Controls the conversation list header with customizable areas and buttons
 - **PlaceholderLayout**: Handles various placeholder states (loading, error, empty states)
 
 ---
@@ -199,7 +199,7 @@ export const CustomOutgoingMessage = () => {
 
 ### SystemMessageLayout
 
-System messages handle administrative content and surveys:
+The `SystemMessageLayout` manages system-generated messages like admin messages and CSAT surveys:
 
 ```tsx
 SystemMessageLayout.components = {
@@ -246,7 +246,7 @@ export const CustomSystemMessages = () => {
 
 ### ConversationLayout
 
-The conversation layout controls the overall chat interface structure:
+The `ConversationLayout` orchestrates the overall conversation view structure:
 
 ```tsx
 ConversationLayout.components = {
@@ -289,7 +289,7 @@ export const CustomConversation = () => {
 
 ### ConversationHeaderLayout
 
-The conversation header layout provides fine-grained control over the header section with customizable areas and buttons:
+The `ConversationHeaderLayout` controls the conversation header with customizable areas and buttons:
 
 ```tsx
 ConversationHeaderLayout.components = {
@@ -375,7 +375,7 @@ export const CustomConversationHeader = () => {
 
 ### ConversationListHeaderLayout
 
-The conversation list header layout provides control over the conversation list header section:
+The `ConversationListHeaderLayout` controls the conversation list header with customizable areas and buttons:
 
 ```tsx
 ConversationListHeaderLayout.components = {
@@ -448,7 +448,7 @@ export const CustomConversationListHeader = () => {
 
 ### PlaceholderLayout
 
-Placeholder layouts handle different states:
+The `PlaceholderLayout` handles various placeholder states (loading, error, empty states):
 
 ```tsx
 PlaceholderLayout.components = {
