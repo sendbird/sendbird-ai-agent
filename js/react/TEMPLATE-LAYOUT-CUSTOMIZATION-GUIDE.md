@@ -19,6 +19,12 @@
       - [Customization Example](#customization-example-1)
     - [ConversationLayout](#conversationlayout)
       - [Customization Example](#customization-example-2)
+    - [ConversationHeaderLayout](#conversationheaderlayout)
+      - [Customization Example - Updating Title](#customization-example---updating-title)
+      - [Customization Example - Updating Start/End Items](#customization-example---updating-startend-items)
+    - [ConversationListHeaderLayout](#conversationlistheaderlayout)
+      - [Customization Example - Updating Title](#customization-example---updating-title-1)
+      - [Customization Example - Updating Start/End Items](#customization-example---updating-startend-items-1)
     - [PlaceholderLayout](#placeholderlayout)
       - [Customization Example](#customization-example-3)
   - [Putting It All Together](#putting-it-all-together)
@@ -40,7 +46,7 @@ Each layout component in the SDK follows a consistent pattern:
 
 The template system uses React Context to inject custom components, allowing you to:
 - Replace individual sub-components while keeping the rest of the layout intact
-- Hide unwanted components by returning `null`
+- Hide unwanted components by returning `<></>` (or `null`)
 - Maintain the original layout structure while changing specific behaviors
 
 **Note**: All layout customizations must be wrapped within `AgentProviderContainer` along with the `Conversation` component to function properly. The examples below show individual component customizations, but see the [Putting It All Together](#putting-it-all-together) section for the complete integration pattern.
@@ -55,7 +61,9 @@ The SDK provides several main layout categories for customization:
 - **OutgoingMessageLayout**: Controls the rendering of messages sent by the current user
 - **SystemMessageLayout**: Manages system-generated messages like admin messages and CSAT surveys
 - **ConversationLayout**: Orchestrates the overall conversation view structure
+- **ConversationHeaderLayout**: Controls the conversation header with customizable areas and buttons
 - **ConversationListLayout**: Controls the list view of multiple conversations
+- **ConversationListHeaderLayout**: Controls the conversation list header with customizable areas and buttons
 - **PlaceholderLayout**: Handles various placeholder states (loading, error, empty states)
 
 ---
@@ -191,7 +199,7 @@ export const CustomOutgoingMessage = () => {
 
 ### SystemMessageLayout
 
-System messages handle administrative content and surveys:
+The `SystemMessageLayout` manages system-generated messages like admin messages and CSAT surveys:
 
 ```tsx
 SystemMessageLayout.components = {
@@ -238,7 +246,7 @@ export const CustomSystemMessages = () => {
 
 ### ConversationLayout
 
-The conversation layout controls the overall chat interface structure:
+The `ConversationLayout` orchestrates the overall conversation view structure:
 
 ```tsx
 ConversationLayout.components = {
@@ -279,9 +287,168 @@ export const CustomConversation = () => {
 };
 ```
 
+### ConversationHeaderLayout
+
+The `ConversationHeaderLayout` controls the conversation header with customizable areas and buttons:
+
+```tsx
+ConversationHeaderLayout.components = {
+  StartArea,                 // Left section (contains MenuButton by default)
+  TitleArea,                 // Center section (contains Title by default)
+  EndArea,                   // Right section (contains action buttons by default)
+  MenuButton,                // Menu/navigation button
+  Title,                     // Conversation title
+  HandoffButton,             // Agent handoff button
+  ConversationCloseButton,   // Close conversation button
+  ExpandButton,              // Expand/fullscreen button
+  CloseButton,               // Close widget button
+}
+```
+
+The template accepts these props:
+
+```tsx
+interface ConversationHeaderTemplateProps {
+  titleAlign?: 'start' | 'center' | 'end';  // Controls title alignment
+}
+```
+
+#### Customization Example - Updating Title
+
+You can customize the title area and adjust title alignment using the default template:
+
+```tsx
+import { ConversationHeaderLayout } from '@sendbird/ai-agent-messenger-react';
+
+const CustomTitleArea = () => {
+  return (
+    <div style={{ fontWeight: 'bold', fontSize: '18px' }}>
+      {'Custom Support Chat'}
+    </div>
+  );
+};
+
+const CustomTemplate = () => {
+  // Use default template with center-aligned title
+  return <ConversationHeaderLayout.defaults.template titleAlign={'center'} />;
+};
+
+export const CustomConversationHeader = () => {
+  return (
+    <ConversationHeaderLayout.Template template={CustomTemplate}>
+      <ConversationHeaderLayout.TitleArea component={CustomTitleArea} />
+    </ConversationHeaderLayout.Template>
+  );
+};
+```
+
+#### Customization Example - Updating Start/End Items
+
+You can hide specific buttons or customize the start/end areas:
+
+```tsx
+import { ConversationHeaderLayout } from '@sendbird/ai-agent-messenger-react';
+
+// Hide menu button by providing an empty component
+const EmptyComponent = () => <></>;
+
+// Custom end area with selected buttons
+const CustomEndArea = () => {
+  const { components } = ConversationHeaderLayout.useContext();
+  return (
+    <div style={{ display: 'flex', gap: '10px' }}>
+      <components.HandoffButton />
+      <components.CloseButton />
+    </div>
+  );
+};
+
+export const CustomConversationHeader = () => {
+  return (
+    <ConversationHeaderLayout.Template>
+      <ConversationHeaderLayout.MenuButton component={EmptyComponent} />
+      <ConversationHeaderLayout.EndArea component={CustomEndArea} />
+    </ConversationHeaderLayout.Template>
+  );
+};
+```
+
+### ConversationListHeaderLayout
+
+The `ConversationListHeaderLayout` controls the conversation list header with customizable areas and buttons:
+
+```tsx
+ConversationListHeaderLayout.components = {
+  StartArea,   // Left section (empty by default)
+  TitleArea,   // Center section (contains Title by default)
+  EndArea,     // Right section (contains CloseButton by default)
+  Title,       // Conversation list title
+  CloseButton, // Close widget button
+}
+```
+
+The template accepts these props:
+
+```tsx
+interface ConversationListHeaderTemplateProps {
+  titleAlign?: 'start' | 'center' | 'end';  // Controls title alignment
+}
+```
+
+#### Customization Example - Updating Title
+
+```tsx
+import { ConversationListHeaderLayout } from '@sendbird/ai-agent-messenger-react';
+
+const CustomTitle = () => {
+  return (
+    <div style={{ fontWeight: 'bold', fontSize: '20px' }}>
+      {'My Conversations'}
+    </div>
+  );
+};
+
+const CustomTemplate = () => {
+  return <ConversationListHeaderLayout.defaults.template titleAlign={'center'} />;
+};
+
+export const CustomConversationListHeader = () => {
+  return (
+    <ConversationListHeaderLayout.Template template={CustomTemplate}>
+      <ConversationListHeaderLayout.Title component={CustomTitle} />
+    </ConversationListHeaderLayout.Template>
+  );
+};
+```
+
+#### Customization Example - Updating Start/End Items
+
+```tsx
+import { ConversationListHeaderLayout } from '@sendbird/ai-agent-messenger-react';
+
+const EmptyComponent = () => <></>;
+
+const CustomStartArea = () => {
+  return (
+    <button onClick={() => console.log('Menu clicked')}>
+      {'☰'}
+    </button>
+  );
+};
+
+export const CustomConversationListHeader = () => {
+  return (
+    <ConversationListHeaderLayout.Template>
+      <ConversationListHeaderLayout.StartArea component={CustomStartArea} />
+      <ConversationListHeaderLayout.CloseButton component={EmptyComponent} />
+    </ConversationListHeaderLayout.Template>
+  );
+};
+```
+
 ### PlaceholderLayout
 
-Placeholder layouts handle different states:
+The `PlaceholderLayout` handles various placeholder states (loading, error, empty states):
 
 ```tsx
 PlaceholderLayout.components = {
@@ -335,6 +502,7 @@ import {
   OutgoingMessageLayout,
   SystemMessageLayout,
   ConversationLayout,
+  ConversationHeaderLayout,
   IncomingMessageProps,
   OutgoingMessageProps,
   SystemMessageProps,
@@ -345,6 +513,8 @@ const CustomMessageBody = (props: IncomingMessageProps) => { /* ... */ };
 const OutgoingMessageTemplate = (props: OutgoingMessageProps) => { /* ... */ };
 const CustomAdminMessage = (props: SystemMessageProps) => { /* ... */ };
 const CustomFooter = () => { /* ... */ };
+const CustomTitleArea = () => { /* ... */ };
+const EmptyComponent = () => <></>;
 
 export const MyCustomMessenger = () => {
   return (
@@ -361,8 +531,13 @@ export const MyCustomMessenger = () => {
 
       <ConversationLayout.Footer component={CustomFooter} />
 
+      <ConversationHeaderLayout.Template>
+        <ConversationHeaderLayout.TitleArea component={CustomTitleArea} />
+        <ConversationHeaderLayout.MenuButton component={EmptyComponent} />
+      </ConversationHeaderLayout.Template>
+
       {/* Conversation component renders the actual chat UI */}
-      <Conversation channelUrl="your-channel-url" />
+      <Conversation channelUrl={'your-channel-url'} />
     </AgentProviderContainer>
   );
 };
