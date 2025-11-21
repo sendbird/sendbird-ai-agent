@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.10.0 (Nov 21, 2025) with ChatSDK ^4.20.1
+
+
+### Features
+
+- Introduce header layout customization support
+
+### Fixes
+
+- Add overscroll-behavior to prevent scroll chaining to parent page
+
+
 ## v1.9.5 (Nov 19, 2025) with ChatSDK ^4.20.1
 
 
