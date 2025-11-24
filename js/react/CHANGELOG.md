@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.10.1 (Nov 24, 2025) with ChatSDK ^4.20.1
+
+
+### Features
+
+- Add initial channel URL support to messenger components
+
 ## v1.10.0 (Nov 21, 2025) with ChatSDK ^4.20.1
 
 
