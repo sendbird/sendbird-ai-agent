@@ -1,4 +1,5 @@
 # Changelog
+## sync test by sagan (it should be ignored)
 
 ## v1.3.0 (Nov 6, 2025) with Chat SDK `v4.32.0`
 

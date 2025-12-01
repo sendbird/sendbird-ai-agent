@@ -1,5 +1,6 @@
 # Delight AI agent SDK Localization Guide
 
+## sync test by sagan
 This guide explains how to localize the UI strings used in the Delight AI agent SDK for Android to support multiple languages in your application.
 
 ---
