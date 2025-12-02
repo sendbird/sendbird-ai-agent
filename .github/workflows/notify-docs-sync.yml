@@ -17,6 +17,13 @@ jobs:
         run: |
           set -euo pipefail
 
+          echo "=== 0) Who owns this PAT? ==="
+          curl -i \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $PAT" \
+            https://api.github.com/user
+
+          echo
           echo "=== 1) Test that PAT can see the repo ==="
           curl -i \
             -H "Accept: application/vnd.github+json" \
