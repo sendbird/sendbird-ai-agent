@@ -1,12 +1,14 @@
 name: Notify docs repo to sync SDK docs
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - sagan/docs-sync-test
 
 jobs:
   notify-docs:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Call repository_dispatch on delight-ai-docs
