@@ -1,8 +1,7 @@
 name: Notify docs repo to sync SDK docs
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - sagan/docs-sync-test
 
@@ -11,10 +10,20 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Call repository_dispatch on delight-ai-docs
+      - name: Test PAT and call repository_dispatch on delight-ai-docs
         env:
           PAT: ${{ secrets.BOT_TOKEN }}
         run: |
+          set -euo pipefail
+
+          echo "=== 1) Test that PAT can see the repo ==="
+          curl -i \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $PAT" \
+            https://api.github.com/repos/sendbird/delight-ai-docs
+
+          echo
+          echo "=== 2) Trigger repository_dispatch ==="
           curl -L \
             -X POST \
             -H "Accept: application/vnd.github+json" \
