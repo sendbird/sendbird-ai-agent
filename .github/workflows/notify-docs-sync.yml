@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - sagan/docs-sync-test
+      - main
 
 jobs:
   notify-docs:
