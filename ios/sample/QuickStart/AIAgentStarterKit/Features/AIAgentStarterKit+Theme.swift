@@ -36,6 +36,8 @@ extension AIAgentStarterKit {
             self.applyColorScheme(.dark)
         case .dark:
             self.applyColorScheme(.light)
+        @unknown default:
+            break
         }
 
         return AIAgentMessenger.currentColorScheme
