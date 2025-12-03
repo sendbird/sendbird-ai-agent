@@ -1,4 +1,4 @@
-[iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / [JS](https://github.com/sendbird/delight-ai-agent/blob/main/js/)
+[iOS](https://github.com/sendbird/delight-ai-agent/blob/main/ios/README.md) / [Android](https://github.com/sendbird/delight-ai-agent/blob/main/android/README.md) / **JS**
 
 # Delight AI agent Quickstart guide (React-Native)
 
@@ -491,4 +491,4 @@ The SDK supports multiple languages and allows you to customize UI strings. You 
 </AIAgentProviderContainer>
 ```
 
-For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](https://github.com/sendbird/delight-ai-agent/blob/main/js/react-native/MULTILANGUAGE.md).
+For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](./MULTILANGUAGE.md).
