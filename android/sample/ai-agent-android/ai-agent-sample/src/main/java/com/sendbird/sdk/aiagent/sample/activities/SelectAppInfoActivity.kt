@@ -52,8 +52,8 @@ class SelectAppInfoActivity : BaseSampleActivity() {
                 val aiAgentId = etAIAgentId.text.toString()
                 val appId = etAppId.text.toString()
                 val context = this@SelectAppInfoActivity
-                val apiHost = appInfo.region.apiHost()
-                val wsHost = appInfo.region.wsHost()
+                val apiHost = appInfo.region.apiHost() ?: "https://api-$appId.sendbird.com"
+                val wsHost = appInfo.region.wsHost() ?: "wss://ws-$appId.sendbird.com"
 
                 lifecycleScope.launch(Dispatchers.Default) {
                     runCatching {
