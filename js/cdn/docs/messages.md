@@ -1,5 +1,5 @@
 # Messages
-# js-cdn test-sagan test-sagan test-sagan
+# test-sagan sagan
 In Delight AI agent messenger, AI agent and users can exchange various types of messages to enable rich and interactive conversations, including text, images, files, and rich template-based messages. It allows users to have comprehensive and engaging conversations with AI agents across different use cases.
 
 This guide explains:
