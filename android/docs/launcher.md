@@ -4,32 +4,32 @@
 
 The launcher's appearance such as an icon, its color and size can be customized via the Delight AI dashboard as shown below.
 
-<img width="441" height="737" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher2.png" />
+<div align="center"><img src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher2.png" alt="" width="375"></div>
 
 This guide explains the following features of the launcher:
 
-- [Key features](#key-features)
-    - [How to attach](#how-to-attach)
-    - [Start a conversation and customize the entry point](#start-a-conversation-and-customize-the-entry-point)
-    - [Set the launcher position](#set-the-launcher-position)
-    - [Customize the launcher appearance](#customize-the-launchers-appearance)
-- [Usage](#usage)
-    - [Basic](#basic)
-    - [Advanced](#advanced)
-    - [Custom click handler](#custom-click-handler)
-    - [More configuration options](#more-configuration-options)
-- [API reference](#api-references)
+* [Key features](launcher.md#key-features)
+  * [How to attach](launcher.md#how-to-attach)
+  * [Start a conversation and customize the entry point](launcher.md#start-a-conversation-and-customize-the-entry-point)
+  * [Set the launcher position](launcher.md#set-the-launcher-position)
+  * [Customize the launcher appearance](launcher.md#customize-the-launchers-appearance)
+* [Usage](launcher.md#usage)
+  * [Basic](launcher.md#basic)
+  * [Advanced](launcher.md#advanced)
+  * [Custom click handler](launcher.md#custom-click-handler)
+  * [More configuration options](launcher.md#more-configuration-options)
+* [API reference](launcher.md#api-references)
 
----
+***
 
 ## Key features
 
 The core features of `MessengerLauncher` are:
 
-- [Automatic Attachment](#how-to-attach)
-- [Start a conversation and customize the entry point](#start-a-conversation-and-customize-the-entry-point)
-- [Set the launcher position](#set-the-launcher-position)
-- [Customize the launcher appearance](#customize-the-launchers-appearance)
+* [Automatic Attachment](launcher.md#how-to-attach)
+* [Start a conversation and customize the entry point](launcher.md#start-a-conversation-and-customize-the-entry-point)
+* [Set the launcher position](launcher.md#set-the-launcher-position)
+* [Customize the launcher appearance](launcher.md#customize-the-launchers-appearance)
 
 ### How to attach
 
@@ -52,7 +52,7 @@ val launcher = MessengerLauncher(this, "your-ai-agent-id", launcherParams)
 launcher.attach()
 ```
 
-If you wish to display a conversation list first when the user clicks on the launcher, set the `entryPoint` to `CONVERSATION_LIST`. 
+If you wish to display a conversation list first when the user clicks on the launcher, set the `entryPoint` to `CONVERSATION_LIST`.
 
 ```kotlin
 // Direct conversation entry.
@@ -80,12 +80,11 @@ val launcherParams = LauncherSettingsParams(layoutParams = layoutParams)
 
 ### Customize the launcher's appearance
 
-Launcher appearance, such as its icon and color, can be configured through [Delight AI dashboard](https://dashboard.delight.ai) - no code changes required.
-Simply go to **[Build > Channels > Messenger](https://dashboard.delight.ai/ai-agent/{application-id}/channels/messenger/?active_tab=Appearance)** in the dashboard and click on the **Appearance** tab to customize your launcher.
+Launcher appearance, such as its icon and color, can be configured through [Delight AI dashboard](https://dashboard.delight.ai) - no code changes required. Simply go to [**Build > Channels > Messenger**](https://dashboard.delight.ai/ai-agent/%7Bapplication-id%7D/channels/messenger/?active_tab=Appearance) in the dashboard and click on the **Appearance** tab to customize your launcher.
 
-<img width="821" height="909" src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-messenger-appearance.png">
+<figure><img src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-messenger-appearance.png" alt=""><figcaption></figcaption></figure>
 
----
+***
 
 ## Usage
 
@@ -117,11 +116,11 @@ class MainActivity : AppCompatActivity() {
 
 ### Advanced
 
-Once the basic setup is complete, you can move onto customizing the launcher position and entry point. 
+Once the basic setup is complete, you can move onto customizing the launcher position and entry point.
 
 The following snippet demonstrates how to customize your launcher using all the configuration options together, including its position, entry mode, language, and context metadata.
 
->__Note__: To see the full list of parameters, go to the [More configuration options](#more-configuration-options) section.
+> **Note**: To see the full list of parameters, go to the [More configuration options](launcher.md#more-configuration-options) section.
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -181,14 +180,7 @@ This section describes how to configure the parameters and enums that control la
 
 The following table lists the configuration options in `LauncherSettingsParams`, which can be used when initializing the messenger launcher.
 
-| Property | Type | Description | 
-|----------|------|-------------|
-| `entryPoint` | `MessengerEntryPoint` | Determines which screen to show first when the launcher is clicked. Acceptable values are `CONVERSATION` and `CONVERSATION_LIST`. (Default: `CONVERSATION`) |
-| `layoutParams` | `LauncherLayoutParams` | Configures the layout of the launcher, such as its margin and mode.  |
-| `language` | `String` | Sets the language spoken by the user in conversations, in IETF BCP 47 format. (Default: Device language) |
-| `country` | `String?` | Sets the user's country code in ISO 3166 format. |             |
-| `context` | `Map<String, String>` | Contains an additional metadata on the user for more personalized support by AI agent. (Default: empty)    |
-| `shouldUseCurrentActiveChannelUrl` | `Boolean` | Determines whether to use a known channel URL when opening a conversation. (Default: `true`)|
+<table><thead><tr><th width="291.671875">Property</th><th width="191.10546875">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>entryPoint</code></td><td><code>MessengerEntryPoint</code></td><td>Determines which screen to show first when the launcher is clicked. Acceptable values are <code>CONVERSATION</code> and <code>CONVERSATION_LIST</code>. (Default: <code>CONVERSATION</code>)</td></tr><tr><td><code>layoutParams</code></td><td><code>LauncherLayoutParams</code></td><td>Configures the layout of the launcher, such as its margin and mode.</td></tr><tr><td><code>language</code></td><td><code>String</code></td><td>Sets the language spoken by the user in conversations, in IETF BCP 47 format. (Default: Device language)</td></tr><tr><td><code>country</code></td><td><code>String?</code></td><td>Sets the user's country code in ISO 3166 format.</td></tr><tr><td><code>context</code></td><td><code>Map&#x3C;String, String></code></td><td>Contains an additional metadata on the user for more personalized support by AI agent. (Default: empty)</td></tr><tr><td><code>shouldUseCurrentActiveChannelUrl</code></td><td><code>Boolean</code></td><td>Determines whether to use a known channel URL when opening a conversation. (Default: <code>true</code>)</td></tr></tbody></table>
 
 ```kotlin
 val params = LauncherSettingsParams(
@@ -206,12 +198,9 @@ val params = LauncherSettingsParams(
 
 #### MessengerEntryPoint
 
-The following table lists the configuration options in `MessengerEntryPoint`, which can be used when launching the messenger. 
+The following table lists the configuration options in `MessengerEntryPoint`, which can be used when launching the messenger.
 
-| Value | Description |
-|-------|-------------|
-| `CONVERSATION` | Opens a conversation directly after a click on the launcher. |
-| `CONVERSATION_LIST` | Shows the user's conversation list first after a click on the launcher. |
+<table><thead><tr><th width="231.1484375">Value</th><th>Description</th></tr></thead><tbody><tr><td><code>CONVERSATION</code></td><td>Opens a conversation directly after a click on the launcher.</td></tr><tr><td><code>CONVERSATION_LIST</code></td><td>Shows the user's conversation list first after a click on the launcher.</td></tr></tbody></table>
 
 ```kotlin
 // Launch directly into conversation.
@@ -225,11 +214,11 @@ MessengerEntryPoint.CONVERSATION_LIST
 
 The following table lists the configuration options in `LauncherLayoutParams`, which can be used when setting the visual layout and positioning of the launcher.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `location` | [`LauncherLocation`](#launcherlocation) | Sets the position of the launcher in a screen. |
-| `margin` | [`LauncherMargin`](#launchermargin) | Sets its margins from edges. |
-| `launchMode` | [`LaunchMode`](#launchmode) | Sets the messenger behavior following the launcher click. Acceptable values are `EXPANDED` and `ANCHORED`.  |
+| Property     | Type                                               | Description                                                                                                |
+| ------------ | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `location`   | [`LauncherLocation`](launcher.md#launcherlocation) | Sets the position of the launcher in a screen.                                                             |
+| `margin`     | [`LauncherMargin`](launcher.md#launchermargin)     | Sets its margins from edges.                                                                               |
+| `launchMode` | [`LaunchMode`](launcher.md#launchmode)             | Sets the messenger behavior following the launcher click. Acceptable values are `EXPANDED` and `ANCHORED`. |
 
 ```kotlin
 val layoutParams = LauncherLayoutParams(
@@ -243,12 +232,7 @@ val layoutParams = LauncherLayoutParams(
 
 The following table lists the configuration options in `LauncherLocation`, which can be used when setting where the launcher appears on the screen.
 
-| Value | Description |
-|-------|-------------|
-| `TOP_START` | Top-left corner of screen. |
-| `TOP_END` | Top-right corner of screen. |
-| `BOTTOM_START` | Bottom-left corner of screen. |
-| `BOTTOM_END` | Bottom-right corner of screen. |
+<table><thead><tr><th width="229.80078125">Value</th><th>Description</th></tr></thead><tbody><tr><td><code>TOP_START</code></td><td>Top-left corner of screen.</td></tr><tr><td><code>TOP_END</code></td><td>Top-right corner of screen.</td></tr><tr><td><code>BOTTOM_START</code></td><td>Bottom-left corner of screen.</td></tr><tr><td><code>BOTTOM_END</code></td><td>Bottom-right corner of screen.</td></tr></tbody></table>
 
 ```kotlin
 // Position at bottom-right corner
@@ -262,10 +246,7 @@ LauncherLocation.TOP_START
 
 The following table lists the configuration options in `LaunchMode`, which can be used when determining how the conversation screen appears.
 
-| Value | Description |
-|-------|-------------|
-| `EXPANDED` | The messenger opens full-screen. |
-| `ANCHORED` | The messenger opens like an anchored box near the launcher. |
+<table><thead><tr><th width="229.68359375">Value</th><th>Description</th></tr></thead><tbody><tr><td><code>EXPANDED</code></td><td>The messenger opens full-screen.</td></tr><tr><td><code>ANCHORED</code></td><td>The messenger opens like an anchored box near the launcher.</td></tr></tbody></table>
 
 ```kotlin
 // Full screen mode
@@ -279,12 +260,12 @@ LaunchMode.ANCHORED
 
 The following table lists the configuration options in `LauncherMargin`, which can be used to set the spacing around the launcher.
 
-| Property | Type | Description              |
-|----------|------|--------------------------|
-| `start` | `Int` | Start margin in `dp` units. |
-| `top` | `Int` | Top margin in `dp` units.   |
-| `end` | `Int` | End margin in `dp` units.     |
-| `bottom` | `Int` | Bottom margin in `dp` units.  |
+| Property | Type  | Description                  |
+| -------- | ----- | ---------------------------- |
+| `start`  | `Int` | Start margin in `dp` units.  |
+| `top`    | `Int` | Top margin in `dp` units.    |
+| `end`    | `Int` | End margin in `dp` units.    |
+| `bottom` | `Int` | Bottom margin in `dp` units. |
 
 ```kotlin
 // 16dp margins on all sides.
@@ -299,14 +280,8 @@ val customMargin = LauncherMargin(
 )
 ```
 
----
+***
 
 ## API References
 
-| Method Name | Parameters | Description | Return Type |
-|-------------|------------|-------------|-------------|
-| `attach` | None | Attaches the `MessengerLauncher` to the current `FragmentActivity`. This must be called from the main thread. | `Unit` |
-| `detach` | None | Removes the launcher from the current activity. This can be called multiple times.| `Unit` |
-| `openConversation` | `channelUrl: String? = null` | Opens a specific conversation with its channel URL. If `channelUrl` is null, it opens the default channel. | `Unit` |
-| `openConversationList` | None | Opens the conversation list view, showing all user conversations. | `Unit` |
-| `closeMessenger` | None | Closes any open messenger screens and returns to the previous screen. | `Unit` |
+<table><thead><tr><th width="192.90234375">Method Name</th><th width="241.80859375">Parameters</th><th width="316.47265625">Description</th><th>Return Type</th></tr></thead><tbody><tr><td><code>attach</code></td><td>None</td><td>Attaches the <code>MessengerLauncher</code> to the current <code>FragmentActivity</code>. This must be called from the main thread.</td><td><code>Unit</code></td></tr><tr><td><code>detach</code></td><td>None</td><td>Removes the launcher from the current activity. This can be called multiple times.</td><td><code>Unit</code></td></tr><tr><td><code>openConversation</code></td><td><code>channelUrl: String? = null</code></td><td>Opens a specific conversation with its channel URL. If <code>channelUrl</code> is null, it opens the default channel.</td><td><code>Unit</code></td></tr><tr><td><code>openConversationList</code></td><td>None</td><td>Opens the conversation list view, showing all user conversations.</td><td><code>Unit</code></td></tr><tr><td><code>closeMessenger</code></td><td>None</td><td>Closes any open messenger screens and returns to the previous screen.</td><td><code>Unit</code></td></tr></tbody></table>
