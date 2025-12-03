@@ -1,25 +1,89 @@
 # Changelog
 
+## v1.5.0 (Dec 3, 2025) with Chat SDK `v4.32.0`
+
+### Features
+
+- Added scroll mode configuration for message list. The priority of values set in `MessageListComponent.Params` is higher than the priority of values set in `ConversationConfig.List`. If the two are configured differently, the values from `MessageListComponent.Params` will take precedence and be used.
+    - Added `ScrollMode` enum with `AUTO` (default) and `FIX` options
+        - `AUTO`: Normal scroll behavior without position adjustment (default)
+        - `FIX`: Keeps the user message fixed at the top while the bot is responding
+    - Added `scrollMode` property in `ConversationConfig.List`
+    - Added `scrollMode` property in `MessageListComponent.Params`
+```kotlin
+// Example: Configure scroll mode
+AIAgentMessenger.config.conversation.list.scrollMode = ScrollMode.FIX
+```
+
+- Added new message indicator UI
+    - Added `NewMessageIndicatorStyle` interface for theme customization
+
+### Improvements
+
+- Updated string resource "Talk to agent" to "Start a conversation" for improved clarity
+
+---
+
+## v1.4.0 (Nov 18, 2025) with Chat SDK `v4.32.0`
+
+### Features
+
+- Added file attachment upload restrictions
+    - Added `AttachmentRules` for controlling file upload limitations and handling
+    - Added `MimeTypes` object for managing supported file types
+    - Added input configuration to `ConversationConfig` for attachment settings
+```kotlin
+// Example: Configure attachment settings
+AIAgentMessenger.config.conversation.input.camera.enablePhoto = true
+AIAgentMessenger.config.conversation.input.enableFile = true
+AIAgentMessenger.config.conversation.input.gallery.enablePhoto = true
+```
+
+### Improvements
+
+- Improved attachment handling in message input component
+
+- Updated Maven repository path
+    - The Maven repository path in `settings.gradle` has been updated to reflect the new repository location.
+    - **Note:** This update is optional. The previous Maven URL remains supported and fully compatible.
+#### As-is
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        maven { setUrl("https://repo.sendbird.com/public/maven") }
+    }
+}
+```
+#### To-be
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        maven { setUrl("https://repo.delight.ai/public/maven") }
+    }
+}
+```
+---
+
 ## v1.3.0 (Nov 6, 2025) with Chat SDK `v4.32.0`
 
 ### Features
 
 - Added the ability to send feedback on AI agent messages
-  - Added `fun createMessageFeedback(params: AIAgentMessageFeedbackCreateParams, handler: AIAgentMessageFeedbackCreateHandler?)` in `ConversationViewModel`
-  - Added `fun updateMessageFeedback(params: AIAgentMessageFeedbackUpdateParams, handler: AIAgentMessageFeedbackUpdateHandler?)` in `ConversationViewModel`
-  - Added `fun deleteMessageFeedback(params: AIAgentMessageFeedbackDeleteParams, handler: AIAgentMessageFeedbackDeleteHandler?)` in `ConversationViewModel`
-  - Added `suspend fun awaitCreateMessageFeedback(params: AIAgentMessageFeedbackCreateParams)` in `ConversationRepository`
-  - Added `suspend fun awaitUpdateMessageFeedback(params: AIAgentMessageFeedbackUpdateParams)` in `ConversationRepository`
-  - Added `suspend fun awaitDeleteMessageFeedback(params: AIAgentMessageFeedbackDeleteParams)` in `ConversationRepository`
-  - Added `OnMessageFeedbackClickListener` interface for handling feedback clicks
-  - Added `MessageFeedbackView` widget for displaying message feedback UI
-  - Added `MessageFeedbackStyle` and `MessageFeedbackDialogStyle` for theme customization
+    - Added `fun createMessageFeedback(params: AIAgentMessageFeedbackCreateParams, handler: AIAgentMessageFeedbackCreateHandler?)` in `ConversationViewModel`
+    - Added `fun updateMessageFeedback(params: AIAgentMessageFeedbackUpdateParams, handler: AIAgentMessageFeedbackUpdateHandler?)` in `ConversationViewModel`
+    - Added `fun deleteMessageFeedback(params: AIAgentMessageFeedbackDeleteParams, handler: AIAgentMessageFeedbackDeleteHandler?)` in `ConversationViewModel`
+    - Added `suspend fun awaitCreateMessageFeedback(params: AIAgentMessageFeedbackCreateParams)` in `ConversationRepository`
+    - Added `suspend fun awaitUpdateMessageFeedback(params: AIAgentMessageFeedbackUpdateParams)` in `ConversationRepository`
+    - Added `suspend fun awaitDeleteMessageFeedback(params: AIAgentMessageFeedbackDeleteParams)` in `ConversationRepository`
+    - Added `OnMessageFeedbackClickListener` interface for handling feedback clicks
+    - Added `MessageFeedbackView` widget for displaying message feedback UI
+    - Added `MessageFeedbackStyle` and `MessageFeedbackDialogStyle` for theme customization
 
 ### Improvements
 
 - Improved CSAT to support optional Custom Response Elements (CRE)
-  - Added `creOptionalLabelTextAppearance` property in theme styles
-  - Added `csatOptionalLabelTextAppearance` property in theme styles
+    - Added `creOptionalLabelTextAppearance` property in theme styles
+    - Added `csatOptionalLabelTextAppearance` property in theme styles
 
 - Updated Sendbird Chat SDK to 4.32.0
 
@@ -30,7 +94,7 @@
 ### Improvements
 
 - Updated Sendbird Chat SDK to 4.31.1
-  - Fixed a possible binary compatibility issue when using Chat SDK in multiple products
+    - Fixed a possible binary compatibility issue when using Chat SDK in multiple products
 
 ---
 
@@ -39,9 +103,9 @@
 ### Improvements
 
 - Enforced AppCompat theme for consistent UI across different app themes
-  - Applied fixed `Theme.AppCompat.DayNight.NoActionBar` theme to `MessengerLauncher` using `ContextThemeWrapper`
-  - Added explicit theme declarations in `AndroidManifest.xml` for `MessengerActivity` and `PhotoViewActivity`
-  - Ensures consistent UI rendering regardless of host app's theme (Material3, Material2, or AppCompat)
+    - Applied fixed `Theme.AppCompat.DayNight.NoActionBar` theme to `MessengerLauncher` using `ContextThemeWrapper`
+    - Added explicit theme declarations in `AndroidManifest.xml` for `MessengerActivity` and `PhotoViewActivity`
+    - Ensures consistent UI rendering regardless of host app's theme (Material3, Material2, or AppCompat)
 
 - Updated CSAT string resources
 
@@ -54,25 +118,26 @@
 ### Features
 
 - Implemented failed message retry with better UX and disabled retry during AI response
-  - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationViewModel`
-  - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationRepository`
+    - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationViewModel`
+    - Added `fun resendUserMessage(message: UserMessage, handler: UserMessageHandler?)` and `fun resendFileMessage(message: FileMessage, handler: FileMessageHandler?)` in `ConversationRepository`
 
 - Implemented support for closing conversation manually
-  - Added `fun closeConversation(handler: CompletionHandler?)` in `ConversationViewModel`
-  - Added `suspend fun awaitCloseConversation()` in `ConversationRepository`
+    - Added `fun closeConversation(handler: CompletionHandler?)` in `ConversationViewModel`
+    - Added `suspend fun awaitCloseConversation()` in `ConversationRepository`
 
 - An interface has been added to `ConversationHeaderView` that allows you to add and remove a custom view
-  - Added `fun addToRightSlot(view: View)`
-  - Added `fun addToLeftSlot(view: View)`
-  - Added `fun addToCenterSlot(view: View)`
-  - Added `fun removeFromRightSlot(view: View)`
-  - Added `fun removeFromLeftSlot(view: View)`
-  - Added `fun removeFromCenterSlot(view: View)`
+    - Added `fun addToRightSlot(view: View)`
+    - Added `fun addToLeftSlot(view: View)`
+    - Added `fun addToCenterSlot(view: View)`
+    - Added `fun removeFromRightSlot(view: View)`
+    - Added `fun removeFromLeftSlot(view: View)`
+    - Added `fun removeFromCenterSlot(view: View)`
 ---
 
 ## v1.1.0 (Oct 2, 2025) with Chat SDK `v4.29.0`
 
 ### Features
+
 - Custom CSAT support: Dashboard-driven CSAT UI customization with follow-up questions
 
 ---
@@ -120,17 +185,17 @@ MessengerLauncher(context, "your_ai_agent_id").attach()
 ```
 
 - `LauncherLayoutParams` allows you to configure the MessengerLauncher’s behavior and appearance:
-  - **`launchMode`**:
-    - `EXPANDED`: Opens the messenger in full-screen mode with predefined margins.
-    - `ANCHORED`: Opens the messenger anchored near the launcher button, with adjustable positioning.
+    - **`launchMode`**:
+        - `EXPANDED`: Opens the messenger in full-screen mode with predefined margins.
+        - `ANCHORED`: Opens the messenger anchored near the launcher button, with adjustable positioning.
 
-  - **`margin`**: Defines the margin around the launcher button itself (does not affect the messenger window).
+    - **`margin`**: Defines the margin around the launcher button itself (does not affect the messenger window).
 
-  - **`location`**: Determines which corner of the screen the launcher will appear in. Available options are:
-    - `TOP_START`
-    - `TOP_END`
-    - `BOTTOM_START`
-    - `BOTTOM_END`
+    - **`location`**: Determines which corner of the screen the launcher will appear in. Available options are:
+        - `TOP_START`
+        - `TOP_END`
+        - `BOTTOM_START`
+        - `BOTTOM_END`
 
 > Attach the launcher in your activity or view to create a floating entry point for AI chat.
 
