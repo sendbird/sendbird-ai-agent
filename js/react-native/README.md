@@ -76,7 +76,6 @@ npm install react-native-image-picker @react-native-documents/picker react-nativ
 ```
 
 > **Note:** When using `react-native-image-picker`, you must also install `react-native-permissions` for camera access.
-> **Note:** If you don't need file attachment features, you can skip installing these picker modules.
 
 ### Step 2. Configure Native Modules
 
