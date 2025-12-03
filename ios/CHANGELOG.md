@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.4.2 (Dec 03, 2025) with Chat SDK v4.34.1
+
+### Improvements
+  - Streaming Animation Performance Optimization
+  - Prevented Streaming State Synchronization
+  - **Renamed conversation action button label texts**
+    - Standardized action button text to "Start a conversation" across conversation list footer and closed conversation view
+
 ## v1.4.1 (Nov 19, 2025) with Chat SDK v4.34.1
 
 ### Bugfixes

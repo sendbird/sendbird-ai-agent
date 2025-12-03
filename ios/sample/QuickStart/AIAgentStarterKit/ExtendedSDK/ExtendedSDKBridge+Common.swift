@@ -191,6 +191,8 @@ extension SBALogType {
             return .error
         case .none:
             return .none
+        default:
+            return .none
         }
     }
 }

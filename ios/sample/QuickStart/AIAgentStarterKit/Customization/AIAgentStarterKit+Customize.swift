@@ -48,6 +48,8 @@ extension AIAgentStarterKit {
         switch colorScheme {
         case .light: SBUTheme.set(colorScheme: .light)
         case .dark: SBUTheme.set(colorScheme: .dark)
+        @unknown default:
+            break
         }
     
         SBUTheme.channelTheme.leftBarButtonTintColor = colorScheme == .light ? .black : .white
