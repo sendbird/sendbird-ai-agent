@@ -18,7 +18,10 @@ The **Delight AI agent Messenger React-Native** allows seamless integration of c
     - [Entry points](#entry-points)
     - [Manage user sessions](#manage-user-sessions)
       - [Session types](#session-types)
+      - [Authentication](#authentication)
+      - [Deauthentication](#deauthentication)
   - [Advanced Features](#advanced-features)
+    - [Customizing Theme](#customizing-theme)
     - [Display messenger without launcher button](#display-messenger-without-launcher-button)
     - [Passing context object to Agent](#passing-context-object-to-agent)
     - [Localization and Language Support](#localization-and-language-support)
@@ -139,8 +142,8 @@ import { AIAgentProviderContainer, FixedMessenger, AnonymousSessionInfo } from '
 function App() {
   return (
     <AIAgentProviderContainer
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
+      appId={'YOUR_APP_ID'}
+      aiAgentId={'YOUR_AI_AGENT_ID'}
       nativeModules={nativeModules}
       userSessionInfo={new AnonymousSessionInfo()}
     >
@@ -161,8 +164,8 @@ import { View } from 'react-native';
 function App() {
   return (
     <AIAgentProviderContainer
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
+      appId={'YOUR_APP_ID'}
+      aiAgentId={'YOUR_AI_AGENT_ID'}
       nativeModules={nativeModules}
       userSessionInfo={new AnonymousSessionInfo()}
     >
@@ -209,8 +212,8 @@ To launch and display the messenger, implement the code below:
 function App() {
   return (
     <AIAgentProviderContainer
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
+      appId={'YOUR_APP_ID'}
+      aiAgentId={'YOUR_AI_AGENT_ID'}
       nativeModules={nativeModules}
       userSessionInfo={new AnonymousSessionInfo()}
     >
@@ -296,8 +299,8 @@ Use this when you have an authenticated user with a specific user ID and session
 import { ManualSessionInfo } from '@sendbird/ai-agent-messenger-react-native';
 
 <AIAgentProviderContainer
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
   nativeModules={nativeModules}
   userSessionInfo={new ManualSessionInfo({
     userId: 'user_id',
@@ -328,8 +331,8 @@ Use this when you don't have user authentication or want to allow guest access. 
 import { AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react-native';
 
 <AIAgentProviderContainer
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
   nativeModules={nativeModules}
   userSessionInfo={new AnonymousSessionInfo()}
 >
@@ -337,11 +340,75 @@ import { AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react-native'
 </AIAgentProviderContainer>
 ```
 
+#### Authentication
+
+You can manually control user authentication using `useMessengerSessionContext`. Call `authenticate()` before showing the messenger to avoid loading delays.
+
+```tsx
+import { useMessengerSessionContext } from '@sendbird/ai-agent-messenger-react-native';
+
+const App = () => {
+  const { authenticate, sdkUser } = useMessengerSessionContext();
+
+  useEffect(() => {
+    authenticate();
+  }, []);
+
+  return <FixedMessenger />;
+};
+```
+
+#### Deauthentication
+
+To log out the current user, call `deauthenticate()`. This disconnects the user session and clears the authentication state.
+
+```tsx
+import { useMessengerSessionContext } from '@sendbird/ai-agent-messenger-react-native';
+
+const LogoutButton = () => {
+  const { deauthenticate } = useMessengerSessionContext();
+
+  const handleLogout = () => {
+    deauthenticate();
+  };
+
+  return <Button title={'Logout'} onPress={handleLogout} />;
+};
+```
+
 ---
 
 ## Advanced Features
 
 The following are available advanced features.
+
+### Customizing Theme
+
+You can customize the messenger theme by passing a `theme` prop to `AIAgentProviderContainer`.
+
+```tsx
+<AIAgentProviderContainer
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  nativeModules={nativeModules}
+  userSessionInfo={new AnonymousSessionInfo()}
+  theme={{
+    mode: 'dark', // 'light' or 'dark'
+    palette: {
+      primary: '#6200EE',
+      secondary: '#03DAC6',
+      error: '#B00020',
+      background: '#121212',
+    },
+    typography: {
+      h1: { fontSize: 24, fontWeight: '700' },
+      body1: { fontSize: 16, fontWeight: '400' },
+    },
+  }}
+>
+  <FixedMessenger />
+</AIAgentProviderContainer>
+```
 
 ### Display messenger without launcher button
 
@@ -355,8 +422,8 @@ function App() {
   return (
     <View style={{ flex: 1 }}>
       <AIAgentProviderContainer
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
+        appId={'YOUR_APP_ID'}
+        aiAgentId={'YOUR_AI_AGENT_ID'}
         nativeModules={nativeModules}
         userSessionInfo={new AnonymousSessionInfo()}
       >
@@ -377,14 +444,14 @@ This allows for a more personalized and context-aware interaction experience.
 
 ```tsx
 <AIAgentProviderContainer
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
   nativeModules={nativeModules}
   userSessionInfo={new AnonymousSessionInfo()}
   // Language setting (IETF BCP 47 format)
-  language="en-US"
+  language={'en-US'}
   // Country code setting (ISO 3166 format)
-  countryCode="US"
+  countryCode={'US'}
   // Context object for the AI Agent
   context={{
     userPreference: 'technical',
@@ -409,11 +476,11 @@ The SDK supports multiple languages and allows you to customize UI strings. You 
 
 ```tsx
 <AIAgentProviderContainer
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
   nativeModules={nativeModules}
   userSessionInfo={new AnonymousSessionInfo()}
-  language="ko-KR"
+  language={'ko-KR'}
   strings={{
     conversation: {
       input_placeholder: '질문을 입력하세요...',
@@ -424,4 +491,4 @@ The SDK supports multiple languages and allows you to customize UI strings. You 
 </AIAgentProviderContainer>
 ```
 
-For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](./MULTILANGUAGE_REACT_NATIVE.md).
+For detailed information about localization options and full list of available string sets, refer to our [Localization Guide](https://github.com/sendbird/delight-ai-agent/blob/main/js/react-native/MULTILANGUAGE.md).
