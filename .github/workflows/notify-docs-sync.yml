@@ -4,17 +4,23 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - sagan/docs-sync-test
+      - main
 
 jobs:
   notify-docs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Call repository_dispatch on delight-ai-docs
+      - name: Trigger docs sync via repository_dispatch
+        env:
+          PAT: ${{ secrets.BOT_TOKEN }}
         run: |
-          curl -X POST \
+          set -euo pipefail
+
+          curl -L \
+            -X POST \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.BOT_TOKEN }}" \
+            -H "Authorization: Bearer $PAT" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/sendbird/delight-ai-docs/dispatches \
-            -d '{"event_type": "sync-sdk-docs"}'
+            -d '{"event_type":"sync-sdk-docs"}'
