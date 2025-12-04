@@ -48,11 +48,10 @@ import { AIAgentProviderContainer, FixedMessenger } from '@sendbird/ai-agent-mes
 function App() {
   return (
     <AIAgentProviderContainer
-      appId="YOUR_APP_ID"
-      aiAgentId="YOUR_AI_AGENT_ID"
-      nativeModules={nativeModules}
-      language="ko-KR"
-      countryCode="KR"
+      appId={'YOUR_APP_ID'}
+      aiAgentId={'YOUR_AI_AGENT_ID'}
+      language={'ko-KR'}
+      countryCode={'KR'}
     >
       <FixedMessenger />
     </AIAgentProviderContainer>
@@ -66,11 +65,9 @@ function App() {
 
 ```tsx
 <AIAgentProviderContainer
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  userSessionInfo={{ type: 'anonymous' }}
-  nativeModules={nativeModules}
-  language="es-ES"
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  language={'es-ES'}
   // You can still customize certain strings even in supported language
   strings={{
     conversation: {
@@ -89,11 +86,9 @@ function App() {
 
 ```tsx
 <AIAgentProviderContainer
-  appId="YOUR_APP_ID"
-  aiAgentId="YOUR_AI_AGENT_ID"
-  userSessionInfo={{ type: 'anonymous' }}
-  nativeModules={nativeModules}
-  language="zh-CN"
+  appId={'YOUR_APP_ID'}
+  aiAgentId={'YOUR_AI_AGENT_ID'}
+  language={'zh-CN'}
   // All strings for unsupported languages must be provided
   strings={{
     conversation: {
@@ -135,13 +130,11 @@ function App() {
 
   return (
     <>
-      <Button title="Switch to Chinese" onPress={() => switchLanguage('zh-CN')} />
-      <Button title="Switch to English" onPress={() => switchLanguage('en-US')} />
+      <Button title={'Switch to Chinese'} onPress={() => switchLanguage('zh-CN')} />
+      <Button title={'Switch to English'} onPress={() => switchLanguage('en-US')} />
       <AIAgentProviderContainer
-        appId="YOUR_APP_ID"
-        aiAgentId="YOUR_AI_AGENT_ID"
-        userSessionInfo={{ type: 'anonymous' }}
-        nativeModules={nativeModules}
+        appId={'YOUR_APP_ID'}
+        aiAgentId={'YOUR_AI_AGENT_ID'}
         language={language}
         strings={strings}
       >
