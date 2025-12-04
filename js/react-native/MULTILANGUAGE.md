@@ -1,7 +1,5 @@
 # Delight AI agent SDK Localization Guide (React-Native)
 
----
-
 ## Table of Contents
 
 - [Delight AI agent SDK Localization Guide (React-Native)](#delight-ai-agent-sdk-localization-guide-react-native)
@@ -14,7 +12,6 @@
     - [Scenario 2: Adding Support for Unsupported Languages](#scenario-2-adding-support-for-unsupported-languages)
   - [Language Switching with React-Native](#language-switching-with-react-native)
 
----
 
 ## Overview
 
@@ -22,7 +19,6 @@ Delight AI agent SDK for React-Native includes a default set of user-facing stri
 
 The language setting influences both the UI text displayed in the messenger and potentially the AI Agent's responses.
 
----
 
 ## Supported Languages
 
@@ -41,7 +37,6 @@ The SDK currently provides built-in localization for the following languages:
 
 If you need support for a language that is not listed above, you can customize the SDK strings by providing a complete set of string values.
 
----
 
 ## Setting the Language
 
