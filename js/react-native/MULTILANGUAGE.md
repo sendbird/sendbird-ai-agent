@@ -22,8 +22,6 @@ Delight AI agent SDK for React-Native includes a default set of user-facing stri
 
 The language setting influences both the UI text displayed in the messenger and potentially the AI Agent's responses.
 
-**Key Difference from React SDK:** React-Native uses a **nested object structure** for strings (e.g., `conversation.input_placeholder`) rather than the flat SNAKE_CASE format used in React.
-
 ---
 
 ## Supported Languages
