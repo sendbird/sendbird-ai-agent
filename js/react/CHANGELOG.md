@@ -1,5 +1,26 @@
 # Changelog
 
+## v1.10.2 (Dec 04, 2025) with ChatSDK ^4.20.3
+
+
+### Features
+
+- Add ConversationChildren and ConversationListChildren to FixedMessenger
+
+### Fixes
+
+- Reset the conversation context and state when changed url
+- Add defensive logic to special notice
+
+### Improvements
+
+- Update "Talk to agent" string to "Start a conversation"
+
+### Performance
+
+- Optimize streaming text animation and throttle channel change handlers
+
+
 ## v1.10.1 (Nov 24, 2025) with ChatSDK ^4.20.1
 
 
