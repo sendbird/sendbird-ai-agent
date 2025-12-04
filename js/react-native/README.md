@@ -391,12 +391,7 @@ You can customize the messenger theme by passing a `theme` prop to `AIAgentProvi
   userSessionInfo={new AnonymousSessionInfo()}
   theme={{
     mode: 'dark', // 'light' or 'dark'
-    palette: {
-      primary: '#6200EE',
-      secondary: '#03DAC6',
-      error: '#B00020',
-      background: '#121212',
-    },
+    palette,
     typography: {
       h1: { fontSize: 24, fontWeight: '700' },
       body1: { fontSize: 16, fontWeight: '400' },
