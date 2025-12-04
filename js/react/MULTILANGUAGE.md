@@ -1,51 +1,33 @@
-# Delight AI agent SDK Localization Guide (React)
+# Multi-language support
 
----
+### Overview
 
-## Table of Contents
-
-- [Delight AI agent SDK Localization Guide (React)](#delight-ai-agent-sdk-localization-guide-react)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Supported Languages](#supported-languages)
-  - [Setting the Language](#setting-the-language)
-  - [Customizing Strings](#customizing-strings)
-    - [Scenario 1: Customizing Strings in Supported Languages](#scenario-1-customizing-strings-in-supported-languages)
-    - [Scenario 2: Adding Support for Unsupported Languages](#scenario-2-adding-support-for-unsupported-languages)
-  - [Language Switching with React](#language-switching-with-react)
-  - [Organizing \& Loading Language Files](#organizing--loading-language-files)
-  - [Default String Keys Used by the SDK](#default-string-keys-used-by-the-sdk)
-
----
-
-## Overview
-
-Delight AI agent SDK for React includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during component initialization or update it later using the `FixedMessenger` props.
+**Delight AI agent SDK for React** includes a default set of user-facing strings such as button labels, error messages, input hints, and system texts. To support internationalization, you can set the language preference during component initialization or update it later using the `FixedMessenger` props.
 
 The language setting influences both the UI text displayed in the messenger and potentially the AI Agent's responses.
 
----
+***
 
-## Supported Languages
+### Supported languages
 
 The SDK currently provides built-in localization for the following languages:
 
-- English (`en`)
-- German (`de`)
-- Spanish (`es`)
-- French (`fr`)
-- Hindi (`hi`)
-- Italian (`it`)
-- Japanese (`ja`)
-- Korean (`ko`)
-- Portuguese (`pt`)
-- Turkish (`tr`)
+* English (`en`)
+* German (`de`)
+* Spanish (`es`)
+* French (`fr`)
+* Hindi (`hi`)
+* Italian (`it`)
+* Japanese (`ja`)
+* Korean (`ko`)
+* Portuguese (`pt`)
+* Turkish (`tr`)
 
 If you need support for a language that is not listed above, you can customize the SDK strings by providing a complete set of string values.
 
----
+***
 
-## Setting the Language
+### Setting the language
 
 You can set the language during component initialization:
 
@@ -53,13 +35,22 @@ You can set the language during component initialization:
 import { FixedMessenger } from '@sendbird/ai-agent-messenger-react';
 
 function App() {
-  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language="ko-KR" countryCode="KR" />;
+  return (
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+      language="ko-KR"
+      countryCode="KR"
+    />
+  );
 }
 ```
 
-## Customizing Strings
+***
 
-### Scenario 1: Customizing Strings in Supported Languages
+### Customizing strings
+
+#### Scenario 1: Customizing strings in supported languages
 
 ```tsx
 <FixedMessenger
@@ -69,12 +60,12 @@ function App() {
   // You can still customize certain stringSet keys even in supported language
   stringSet={{
     MESSAGE_INPUT__PLACE_HOLDER: '¡Pregúntame cualquier cosa!',
-    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores',
+    CONVERSATION_LIST__HEADER_TITLE: 'Lista de conversaciones anteriores'
   }}
 />
 ```
 
-### Scenario 2: Adding Support for Unsupported Languages
+#### Scenario 2: Adding support for unsupported languages
 
 ```tsx
 <FixedMessenger
@@ -109,7 +100,9 @@ function App() {
 />
 ```
 
-## Language Switching with React
+***
+
+### Language switching with React
 
 ```tsx
 function App() {
@@ -130,13 +123,20 @@ function App() {
     <>
       <button onClick={() => switchLanguage('zh-CN')}>Switch to Chinese</button>
       <button onClick={() => switchLanguage('en-US')}>Switch to English</button>
-      <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language={language} stringSet={stringSet} />
+      <FixedMessenger
+        appId="YOUR_APP_ID"
+        aiAgentId="YOUR_AI_AGENT_ID"
+        language={language}
+        stringSet={stringSet}
+      />
     </>
   );
 }
 ```
 
-## Organizing & Loading Language Files
+***
+
+### Organizing and loading language files
 
 ```tsx
 // languages/zh.ts
@@ -158,7 +158,7 @@ export default {
 };
 ```
 
-**Dynamic Loading Implementation (Recommended):**
+**Dynamic loading implementation (Recommended):**
 
 ```tsx
 function App() {
@@ -187,25 +187,37 @@ function App() {
       <button onClick={() => loadLanguage('ja')}>日本語</button>
       <button onClick={() => loadLanguage('en-US')}>English</button>
 
-      <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language={language} stringSet={stringSet} />
+      <FixedMessenger
+        appId="YOUR_APP_ID"
+        aiAgentId="YOUR_AI_AGENT_ID"
+        language={language}
+        stringSet={stringSet}
+      />
     </>
   );
 }
 ```
 
-**Alternative: Static Import (Not Recommended for Multiple Languages):**
+**Alternative: Static import (Not recommended for multiple languages):**
 
 ```tsx
 // Only use this approach if you need just one additional language
 import { zhStringSet } from './languages/zh';
 
 function App() {
-  return <FixedMessenger appId="YOUR_APP_ID" aiAgentId="YOUR_AI_AGENT_ID" language="zh-CN" stringSet={zhStringSet} />;
+  return (
+    <FixedMessenger
+      appId="YOUR_APP_ID"
+      aiAgentId="YOUR_AI_AGENT_ID"
+      language="zh-CN"
+      stringSet={zhStringSet}
+    />
+  );
 }
 ```
 
----
+***
 
-## Default String Keys Used by the SDK
+### Default SDK strings
 
-The string keys remain the same as the JavaScript version. Please refer to the [JavaScript version's string keys](../js/MULTILANGUAGE.md#default-string-keys-used-by-the-sdk) for the complete list.
+The string keys remain the same as the JavaScript version. Please refer to the [JavaScript version's string keys ](../javascript-cdn/multi-language-support.md#default-sdk-strings)for the complete list.
