@@ -4,7 +4,10 @@
 
 The launcher's appearance such as an icon, its color and size can be customized via the Delight AI dashboard as shown below.
 
-<div align="center"><img src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher2.png" alt="" width="375"></div>
+<figure>
+  <img src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-mobile-launcher2.png" alt="" width="375">
+  <figcaption></figcaption>
+</figure>
 
 This guide explains the following features of the launcher:
 
@@ -82,7 +85,10 @@ val launcherParams = LauncherSettingsParams(layoutParams = layoutParams)
 
 Launcher appearance, such as its icon and color, can be configured through [Delight AI dashboard](https://dashboard.delight.ai) - no code changes required. Simply go to [**Build > Channels > Messenger**](https://dashboard.delight.ai/ai-agent/%7Bapplication-id%7D/channels/messenger/?active_tab=Appearance) in the dashboard and click on the **Appearance** tab to customize your launcher.
 
-<figure><img src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-messenger-appearance.png" alt=""><figcaption></figcaption></figure>
+<figure>
+  <img src="https://sendbird-files.s3.ap-northeast-1.amazonaws.com/docs/da-messenger-appearance.png" alt="" width="375">
+  <figcaption></figcaption>
+</figure>
 
 ***
 
