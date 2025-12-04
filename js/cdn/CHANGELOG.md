@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.10.2 (Dec 04, 2025) with ChatSDK ^4.20.3
+
+
+### Features
+
+- Add initialChannelUrl option to messenger for specifying initial channel
+- Add ConversationChildren and ConversationListChildren props to FixedMessenger
+- Introduce header layout for React messenger
+
+### Improvements
+
+- Optimize streaming text animation and throttle channel change handlers for better performance
+- Update "Talk to agent" string to "Start a conversation"
+
+### Bug Fixes
+
+- Reset conversation context and state when channel URL changes
+- Add defensive logic to special notice to prevent errors
+- Add overscroll-behavior to prevent scroll chaining to parent page
+
+### Dependencies
+
+- Updated messenger-react to v1.10.2
+
+
 ## v1.9.5 (Nov 19, 2025) with ChatSDK ^4.20.1
 
 
