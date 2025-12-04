@@ -55,8 +55,6 @@ Install the package with its peer dependencies using npm or yarn:
 
 ```bash
 npm install @sendbird/ai-agent-messenger-react-native @sendbird/chat react-native-mmkv react-native-safe-area-context date-fns
-# or
-yarn add @sendbird/ai-agent-messenger-react-native @sendbird/chat react-native-mmkv react-native-safe-area-context date-fns
 ```
 
 **(Optional) File attachment support:**
