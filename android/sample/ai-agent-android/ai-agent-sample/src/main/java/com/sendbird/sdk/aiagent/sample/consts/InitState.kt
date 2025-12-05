@@ -1,7 +1,7 @@
 package com.sendbird.sdk.aiagent.sample.consts
 
 /**
- * Used with Delight AIAgent Messenger initialization.
+ * Used with Sendbird AIAgent Messenger initialization.
  */
 enum class InitState {
     /**
