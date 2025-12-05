@@ -96,7 +96,7 @@ Once you have determined which conversation mode to apply, you should also consi
 The launcher's appearance can be customized via the dashboard. For positioning and sizing customization, see the launcher customization sections below.
 
 ```tsx
-import { FixedMessenger } from '@sendbird/ai-agent-messenger-react-native';
+import { FixedMessenger, AnonymousSessionInfo } from '@sendbird/ai-agent-messenger-react-native';
 import { createMMKV } from 'react-native-mmkv';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
@@ -107,7 +107,7 @@ const mmkv = createMMKV();
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
 />
 ```
@@ -121,7 +121,7 @@ By default, the launcher opens a conversation when clicked. You can explicitly c
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   entryPoint={'Conversation'}
 />
@@ -134,7 +134,7 @@ You can also provide additional context, language, and country settings:
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   entryPoint={'Conversation'}
   language={'en-US'}
@@ -155,7 +155,7 @@ You can configure the messenger to show the conversation list first. Simply set 
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   entryPoint={'ConversationList'}
 />
@@ -170,7 +170,7 @@ React Native allows you to control how the messenger window is displayed using t
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   windowMode={'floating'}
 />
@@ -179,7 +179,7 @@ React Native allows you to control how the messenger window is displayed using t
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   windowMode={'fullscreen'}
 />
@@ -192,7 +192,7 @@ You can also configure full-screen insets for safe area handling:
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   windowMode={'fullscreen'}
   fullscreenInsets={{ top: 0, bottom: 0, left: 0, right: 0 }}
@@ -218,7 +218,7 @@ const mmkv = createMMKV();
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   entryPoint={'Conversation'}
   windowMode={'floating'}
@@ -300,7 +300,7 @@ function DirectConversationView() {
     <AIAgentProviderContainer
       appId={'YOUR_APP_ID'}
       aiAgentId={'YOUR_AI_AGENT_ID'}
-      userSessionInfo={{ userId: 'user_123' }}
+      userSessionInfo={new AnonymousSessionInfo()}
       nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
       language={'en-US'}
       context={{ launch_source: 'direct_view' }}
@@ -334,7 +334,7 @@ The `context` object allows you to provide user's information to AI agents for m
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
   language={'en-US'}  // IETF BCP 47 format
   countryCode={'US'}  // ISO 3166 format
@@ -367,7 +367,7 @@ function CustomMessengerView() {
     <AIAgentProviderContainer
       appId={'YOUR_APP_ID'}
       aiAgentId={'YOUR_AI_AGENT_ID'}
-      userSessionInfo={{ userId: 'user_123' }}
+      userSessionInfo={new AnonymousSessionInfo()}
       nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
     >
       <Conversation
@@ -423,7 +423,7 @@ function CreateConversationButton() {
 <FixedMessenger
   appId={'YOUR_APP_ID'}
   aiAgentId={'YOUR_AI_AGENT_ID'}
-  userSessionInfo={{ userId: 'user_123' }}
+  userSessionInfo={new AnonymousSessionInfo()}
   nativeModules={{ mmkv, imagePicker: ImagePicker, documentPicker: DocumentPicker }}
 >
   <CreateConversationButton />
