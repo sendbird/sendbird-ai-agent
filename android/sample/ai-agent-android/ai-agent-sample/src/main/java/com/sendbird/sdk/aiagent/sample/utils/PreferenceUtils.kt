@@ -12,7 +12,7 @@ internal object PreferenceUtils {
     private lateinit var pref: Preference
 
     fun init(context: Context) {
-        pref = Preference(context, "delight-ai-agent-sample")
+        pref = Preference(context, "sendbird-ai-agent-sample")
     }
 
     var manualUserInfo: ManualUserInfo?
