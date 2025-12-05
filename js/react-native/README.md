@@ -82,9 +82,9 @@ The SDK requires native module configuration. Only `mmkv` is required; picker mo
 **Minimal setup (without file attachment):**
 
 ```tsx
-import { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 
-const mmkv = new MMKV();
+const mmkv = createMMKV();
 
 const nativeModules = {
   mmkv,
@@ -94,11 +94,11 @@ const nativeModules = {
 **With file attachment support (Expo modules):**
 
 ```tsx
-import { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
-const mmkv = new MMKV();
+const mmkv = createMMKV();
 
 const nativeModules = {
   mmkv,
@@ -110,12 +110,12 @@ const nativeModules = {
 **With file attachment support (Community modules):**
 
 ```tsx
-import { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 import * as ImagePicker from 'react-native-image-picker';
 import * as DocumentPicker from '@react-native-documents/picker';
 import * as Permissions from 'react-native-permissions';
 
-const mmkv = new MMKV();
+const mmkv = createMMKV();
 
 const nativeModules = {
   mmkv,
