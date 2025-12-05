@@ -1,10 +1,9 @@
 name: Notify docs repo to sync SDK docs
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
-      - sagan/docs-sync-test
+      - sagan/test/docs-sync-test
 
 jobs:
   notify-docs:
